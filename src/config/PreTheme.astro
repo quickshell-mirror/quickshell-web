@@ -1,0 +1,23 @@
+---
+
+---
+
+<script is:inline>
+  function updateTheme() {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }
+
+  // Run on initial load
+  updateTheme();
+
+  // Run on view transitions
+  document.addEventListener("astro:after-swap", updateTheme);
+</script>

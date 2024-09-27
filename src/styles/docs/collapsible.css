@@ -1,0 +1,66 @@
+[data-scope='collapsible'][data-part='root'] {
+  --height: max-content;
+  padding: 0.673rem;
+  background-color: hsl(var(--white) 40 50 / 0.1);
+  border-radius: 0.618rem;
+}
+
+[data-scope='collapsible'][data-part='content'] {
+  transition: all 250ms;
+  padding: 0;
+  margin-left: 0;
+}
+
+[data-scope='collapsible'][data-part='content'][data-state='open'] {
+  animation: slideDown 250ms;
+  display: flex;
+  gap: 1.272rem;
+  flex-direction: column;
+  padding: 0.618em;
+  margin-left: 22px;
+
+  & p {
+    margin-block: 0;
+
+  }
+
+}
+
+[data-scope='collapsible'][data-part='content'][data-state='closed'] {
+  animation: slideUp 200ms;
+  padding: 0;
+  margin-left: 0;
+
+  & svg {
+    animation: rotateOut90 250ms;
+  }
+}
+
+[data-scope='collapsible'][data-part='trigger'] {
+  all: unset;
+  cursor: pointer;
+  font-size: 1.117rem;
+  font-weight: 500;
+  display: flex;
+  gap: 0.272rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.618rem;
+  border-radius: 0.618rem;
+
+  &:hover {
+    background-color: hsl(var(--white) 40 50 / 0.1);
+  }
+
+  &[data-state='open'] {
+    & svg {
+      animation: rotateIn90 250ms forwards;
+    }
+  }
+
+  &[data-state='closed'] {
+    & svg {
+      animation: rotateOut90 250ms forwards;
+    }
+  }
+}

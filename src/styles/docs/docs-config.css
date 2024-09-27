@@ -1,0 +1,13 @@
+.small {
+  opacity: 0.6;
+  transition: opacity 0.5s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  & p {
+    font-size: 0.841rem;
+    margin-top: 1rem;
+  }
+}

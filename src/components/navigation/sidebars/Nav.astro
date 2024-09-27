@@ -1,0 +1,31 @@
+---
+import { generateTypeData } from "@config/io/generateTypeData";
+import { groupRoutes } from "@config/io/helpers";
+import NavComponent from "./nav";
+
+const routes = await generateTypeData();
+const groupedRoutes = groupRoutes(routes);
+
+const url = Astro.url.pathname.split("/");
+const currentRoute = url[2];
+const currentModule = url[3];
+const currentClass = url[4];
+
+const treeProps = {
+  items: groupedRoutes,
+  currentRoute: currentRoute,
+  currentModule: currentModule,
+  currentClass: currentClass,
+};
+
+const { mobile } = Astro.props;
+---
+
+<aside class=`nav-wrapper${mobile ? "-mobile" : ""}`>
+  <NavComponent
+    routes={groupedRoutes}
+    tree={treeProps}
+    mobile={mobile}
+    client:idle
+  />
+</aside>

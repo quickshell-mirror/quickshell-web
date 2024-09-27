@@ -1,0 +1,127 @@
+---
+import {
+  parseMarkdown,
+  getQMLTypeLink,
+} from "@config/io/helpers";
+import { generateTypeData } from "@config/io/generateTypeData";
+import { Flag } from "@icons";
+import DocsLayout from "@layouts/DocsLayout.astro";
+import TOC from "@components/navigation/sidebars/TOC.astro";
+import Properties from "@components/type/Properties.astro";
+import Functions from "@components/type/Functions.astro";
+import Signals from "@components/type/Signals.astro";
+import Variants from "@components/type/Variants.astro";
+import TransformMDCodeblocks from "@components/hooks/TransformMDCodeblocks.astro";
+import TransformLinks from "@components/hooks/TransformLinks.astro";
+
+export async function getStaticPaths() {
+  const routes = await generateTypeData();
+
+  return routes
+    .filter(route => route.name !== "index")
+    .map(route => ({
+      params: { type: route.type, name: route.name },
+      props: { route },
+    }));
+}
+
+const { route } = Astro.props;
+
+const data = route.data;
+
+const sidebarFunctions =
+  data.functions?.map(item => item.name) || null;
+
+const propsKeys = data.properties
+  ? Object.keys(data.properties)
+  : null;
+const signalKeys = data.signals
+  ? Object.keys(data.signals)
+  : null;
+const variantKeys = data.variants
+  ? Object.keys(data.variants)
+  : null;
+
+const sidebarData = {
+  properties: propsKeys,
+  functions: sidebarFunctions,
+  signals: signalKeys,
+  variants: variantKeys,
+};
+
+const superLink = data.super ? getQMLTypeLink(data.super) : null;
+
+const details = parseMarkdown(data.details, route.name);
+---
+<TransformLinks/>
+<TransformMDCodeblocks/>
+
+<DocsLayout title={`${route.name} - ${route.type}`} description={data?.description ?? ""}>
+  <div class="docs">
+    <div class="typedocs-content">
+      <hr />
+      <h2 class="typedocs-title">
+        {route.name}:
+          {data.super ? (
+            <a
+              target="_blank"
+              href={superLink!}
+            >
+            {data.super.name}
+            </a>
+          ):(
+            <span class="type-datatype">{data.type}</span>
+          )
+          }
+      </h2>
+      {
+        route && data ? (
+          <section class="typedocs-data typedata">
+            <subheading class="typedocs-subheading">
+              <code class="type-module">import {data.module}</code>
+              {data.flags ? (
+                <div class="type-flags">{data.flags.map(flag => (
+                  <span class="type-flag">
+                    <Flag client:idle/>
+                    {flag}
+                  </span>
+                ))}</div>
+              ):null}
+              <span id="injectedMd" set:html={details}/>
+              {!details ? (<span class="toparse">{data.description}</span>):null}
+            </subheading>
+            { data.properties && propsKeys ? (
+              <Properties
+                propsData={data.properties}
+                propsKeys={propsKeys!}
+                title={route.name}
+              />
+            ): null}
+            { data.functions && data.functions.length > 0 ? (
+              <Functions
+                funcData={data.functions}
+                title={route.name}
+              />
+            ): null}
+            { data.signals && signalKeys ? (
+              <Signals
+                signalsData={data.signals}
+                signalKeys={signalKeys}
+                title={route.name}
+              />
+            ):null}
+            { data.variants && variantKeys ? (
+              <Variants
+                variantsData={data.variants}
+                variantKeys={variantKeys}
+                title={route.name}
+              />
+            ):null}
+          </section>
+        ) : null
+      }
+    </div>
+    <TOC mobile={false} types={sidebarData}/>
+  </div>
+</DocsLayout>
+

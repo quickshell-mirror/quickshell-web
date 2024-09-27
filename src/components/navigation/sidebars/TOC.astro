@@ -1,0 +1,21 @@
+---
+import TableOfContents from "./toc";
+import type { ConfigHeading, TypeTOC } from "./types.d.ts";
+
+export interface Props {
+  headings?: ConfigHeading[];
+  types?: TypeTOC;
+  mobile: boolean;
+}
+
+const { headings, types, mobile } = Astro.props;
+---
+
+<div class=`toc-wrapper${mobile ? "-mobile":""}`>
+  <TableOfContents
+    config={headings}
+    type={types}
+    mobile={mobile}
+    client:idle
+  />
+</div>

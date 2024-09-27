@@ -1,0 +1,83 @@
+---
+import {
+  parseMarkdown,
+  getQMLTypeLink,
+} from "@config/io/helpers";
+import type {
+  QMLTypeLinkObject,
+  QuickshellProps,
+} from "@config/io/types";
+import { Tag, Flag } from "@icons";
+
+export interface Props {
+  propsKeys: string[];
+  propsData: QuickshellProps;
+  title: string;
+}
+
+const { propsKeys, propsData, title } = Astro.props;
+---
+<ul class="typedata typeprops">
+  {
+    propsKeys.map(item => {
+      const propData = propsData[item]
+      let typeLink:string;
+      let linkText:string;
+      const gadget = propData.type.gadget;
+      if (gadget) {
+        typeLink = "#"
+        linkText = `[${Object.keys(gadget).toString()}]`
+      } else {
+        typeLink = getQMLTypeLink(propData.type as unknown as QMLTypeLinkObject)
+        linkText = propData.type.name || propData.type.type
+      }
+      return (
+        <li id={ item } class="typedata-root typeprop-root">
+          <p class="typedata-name typeprop-name">
+            <Tag client:idle/>
+            { item }<span class="type-datatype">:&nbsp;<a
+              href={typeLink}
+              target="_blank"
+              >{ linkText }</a></span>
+          </p>
+          {
+            propData.flags && propData.flags.length > 0 ? (
+              <p class="type-flags">
+                {
+                  propData.flags.map((flag) => {
+                    return (
+                      <span class="type-flag">
+                        <Flag client:idle/>
+                        {flag}
+                      </span>
+                    )
+                  })
+                }
+              </p>
+            ) : null
+          }
+          {
+            gadget ? (
+              <p class="typedata-params typefunc-params">
+                {
+                  Object.keys(gadget).map((key) => {
+                    const gadgetData = gadget[key]
+                    return (
+                      <span class="typedata-param typefunc-param">
+                        <Tag client:idle/>
+                        {key}:<span><a href=`${getQMLTypeLink(gadgetData as unknown as QMLTypeLinkObject)}`>{gadgetData.name}</a></span>
+                      </span>
+                    )
+                  })
+                }
+              </p>
+            ):null
+          }
+          <section class="typedata-details">
+            <div id="injectedMd" class="typedata-detailsdata" set:html={parseMarkdown(propData.details, title)} />
+          </section>
+        </li>
+      )
+    })
+  }
+</ul>

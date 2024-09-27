@@ -1,0 +1,45 @@
+---
+import type { QuickshellVariant } from "@config/io/types";
+import { FourDiamonds } from "../icons";
+import { parseMarkdown } from "@src/config/io/helpers";
+
+export interface Props {
+  variantKeys: string[];
+  variantsData: QuickshellVariant;
+  title: string;
+}
+
+const { variantKeys, variantsData, title } = Astro.props;
+---
+<ul class="typedata typevariants">
+  {
+    variantKeys.map(item => {
+      const variantData = variantsData[item];
+      const paramKeys = variantData.params && variantData.params.length > 0
+        ? variantData.params.map(param => param.name)
+        : [];
+      return (
+        <li id={ item } class="typedata-root typevariant-root">
+          <p class="typedata-name typevariant-name">
+            <FourDiamonds client:idle/>
+          { item }
+          </p>
+          {
+            paramKeys ? (
+              <div class="typedata-params typevariant-params">
+                {paramKeys.map(paramKey => (
+                  <span class="typedata-param typevariant-param">{paramKey}</span>
+                ))}
+              </div>
+            )
+            :null
+          }
+          <section class="typedata-details">
+            <div class="typedata-detailsdata" set:html={parseMarkdown(variantData.details, title)} />
+          </section>
+        </li>
+      )
+    })
+  }
+</ul>
+

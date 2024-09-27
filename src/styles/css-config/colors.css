@@ -1,0 +1,31 @@
+.typeprop-link {
+  color: hsl(var(--prop-link-color));
+
+  & a {
+    color: hsl(var(--prop-link-color)) !important;
+  }
+}
+
+.typesignal-link {
+  color: hsl(var(--signal-link-color));
+
+  & a {
+    color: hsl(var(--signal-link-color)) !important;
+  }
+}
+
+.typefunc-link {
+  color: hsl(var(--func-link-color));
+
+  & a {
+    color: hsl(var(--func-link-color)) !important;
+  }
+}
+
+.typevar-link {
+  color: hsl(var(--var-link-color));
+
+  & a {
+    color: hsl(var(--var-link-color)) !important;
+  }
+}

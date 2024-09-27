@@ -1,0 +1,407 @@
+.root-nav {
+  margin-left: 1em;
+  display: flex;
+  flex-direction: column;
+
+  & .root-nav-entry {
+    margin-block: 1em;
+  }
+}
+
+.types-nav {
+  display: none;
+}
+
+.typedocs-title {
+  & a {
+    opacity: 0.6;
+    transition: opacity 0.5s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+#injectedMd {
+  &>p:not(:first-child) {
+    margin-block: 0.724rem;
+  }
+
+}
+
+.type-module {
+  color: hsl(var(--blue) 75 60);
+}
+
+.typedocs-subheading {
+  margin-bottom: 1rem;
+}
+
+.typedocs-content {
+
+  &>p {
+    margin-block: 0.618rem;
+  }
+
+  & hr {
+    margin-top: 0;
+    margin-bottom: 0.318rem;
+  }
+}
+
+
+.typedocs-data {
+  & subheading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.618rem;
+  }
+}
+
+.typedata {
+  list-style: none;
+  margin: 0;
+
+  & .typedata-root {
+    margin-bottom: 0.618rem;
+    border-radius: 12px;
+    padding: 1.272rem;
+    transition: border 0.3s;
+
+
+    &>.typedata-name {
+      display: flex;
+      align-items: center;
+      font-size: 1.272rem;
+      margin: 0;
+      margin-top: 0.272rem;
+
+      &>svg {
+        width: 27px;
+        height: 27px;
+        margin-right: 6px;
+      }
+    }
+  }
+
+  & .typedata-details {
+    margin-top: 1.618rem;
+  }
+
+  & .typedata-params {
+    & .typedata-param {
+      margin-top: 0.272rem;
+      display: flex;
+      align-items: center;
+      gap: 0.117rem;
+
+      &>svg {
+        height: 1.272rem;
+        width: 1.272rem;
+      }
+    }
+  }
+
+  & .typedata-detailsdata,
+  .typedocs-subheading {
+    &>p {
+      margin-top: 0.618rem;
+    }
+
+    & .typeprop-link {
+      color: hsl(var(--prop-link-color));
+
+      & a {
+        color: hsl(var(--prop-link-color));
+      }
+    }
+
+    & .typesignal-link {
+      color: hsl(var(--signal-link-color));
+
+      & a {
+        color: hsl(var(--signal-link-color));
+      }
+    }
+
+    & .typefunc-link {
+      color: hsl(var(--func-link-color));
+
+      & a {
+        color: hsl(var(--func-link-color));
+      }
+    }
+
+    & .typevar-link {
+      color: hsl(var(--var-link-color));
+
+      & a {
+        color: hsl(var(--var-link-color))
+      }
+    }
+  }
+}
+
+
+.typedata-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+
+  & svg {
+    width: 18px;
+    height: 18px;
+    align-self: center;
+  }
+}
+
+
+.typedata-param {
+  color: hsla(var(--prop-link-color) / 1);
+}
+
+.type-datatype {
+  color: #808080;
+  opacity: 0.8;
+  width: max-content;
+  transition: opacity 0.5s;
+
+  &>a {
+    opacity: inherit;
+  }
+}
+
+.type-flags {
+  & .type-flag {
+    margin: 0;
+    margin-top: 0.272rem;
+    display: flex;
+    align-items: center;
+    gap: 0.117rem;
+    color: hsl(var(--inner-param-color))
+  }
+}
+
+.typeprops {
+  & .typeprop-root {
+    border: 1px solid hsla(var(--prop-color) / 0.3);
+
+    &:hover {
+      border: 1px solid hsla(var(--prop-color) / 0.6);
+
+      & .type-datatype {
+        opacity: 1;
+      }
+    }
+
+    & .typeprop-name {
+      color: hsl(var(--prop-link-color));
+    }
+
+  }
+}
+
+.typefuncs {
+  & .typefunc-root {
+    border: 1px solid hsla(var(--func-color) / 0.3);
+
+    &:hover {
+      border: 1px solid hsla(var(--func-color) / 0.6);
+
+      & .type-datatype {
+        opacity: 1;
+      }
+    }
+
+    & .typefunc-name {
+      color: hsl(var(--func-link-color));
+    }
+
+    & .typefunc-params {
+
+      & .typefunc-param {
+        margin-top: 0.272rem;
+        display: flex;
+        align-items: center;
+        gap: 0.117rem;
+
+        &>svg {
+          height: 1.272rem;
+          width: 1.272rem;
+        }
+      }
+
+    }
+
+  }
+}
+
+
+.typesignals {
+  & .typesignal-root {
+    border: 1px solid hsla(var(--signal-color) / 0.3);
+
+    &:hover {
+      border: 1px solid hsla(var(--signal-color) / 0.6);
+
+      & .typesignal-doclink {
+        opacity: 1;
+      }
+    }
+
+    & .typesignal-name {
+      position: relative;
+      width: max-content;
+      color: hsl(var(--signal-link-color));
+
+      & .typesignal-doclink {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        opacity: 0.8;
+        scale: 75%;
+      }
+    }
+
+    & .typesignal-params {
+      & .typesignal-param {
+        margin-top: 0.272rem;
+        display: flex;
+        align-items: center;
+        gap: 0.117rem;
+
+        &>svg {
+          height: 1.272rem;
+          width: 1.272rem;
+        }
+      }
+    }
+  }
+}
+
+.typevariants {
+  & .typevariant-root {
+    border: 1px solid hsla(var(--var-color) / 0.3);
+
+    &:hover {
+      border: 1px solid hsla(var(--var-color) / 0.6);
+
+      & .typevariant-doclink {
+        opacity: 1;
+      }
+    }
+
+    & .typevariant-name {
+      position: relative;
+      width: max-content;
+      color: hsl(var(--var-link-color));
+
+      & .typevariant-doclink {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        opacity: 0.8;
+        scale: 75%;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .typedocs-content {
+    margin-inline: 1.272rem;
+
+    & section {
+      min-width: 30svw;
+    }
+
+    &>p {
+      margin-block: 1.217rem;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .typedata {
+    max-width: 47svw;
+  }
+
+  .typedata-detailsdata,
+  .typedocs-subheading {
+    max-width: 42svw;
+
+  }
+
+  .root-nav {
+    min-width: 45svw;
+  }
+
+  .types-nav {
+    display: block;
+    position: fixed;
+    top: 5rem;
+    right: 10svw;
+    width: 250px;
+    max-height: 90svh;
+    overflow-y: scroll;
+    z-index: 10;
+
+    & .props-list {
+      color: hsl(var(--prop-color));
+
+      & a {
+        color: hsl(var(--prop-link-color));
+      }
+    }
+
+    & .funcs-list {
+      color: hsl(var(--func-color));
+
+      & a {
+        color: hsl(var(--func-link-color));
+      }
+    }
+
+    & .signals-list {
+      color: hsl(var(--signal-color));
+
+      & a {
+        color: hsl(var(--signal-link-color));
+      }
+    }
+
+    & .vars-list {
+      color: hsl(var(--var-color));
+
+      & a {
+        color: hsl(var(--var-link-color));
+      }
+    }
+
+    & .types-list {
+      list-style: none;
+
+      & .types-item {
+        margin-block: 10px;
+        display: flex;
+        align-items: center;
+        gap: 0.478rem;
+
+        & svg {
+          opacity: 0.6;
+          width: 24px;
+          height: 24px;
+          transition: opacity 0.5s;
+        }
+
+        &:hover {
+          & svg {
+            opacity: 1;
+          }
+        }
+      }
+
+    }
+  }
+}

@@ -1,0 +1,52 @@
+import { createSignal, type Component } from "solid-js";
+
+import { Article } from "@icons";
+import { Table } from "./Table";
+import type {
+  TOCProps,
+  TypeTOC,
+  ConfigHeading,
+} from "../types";
+import { buildHierarchy } from "@config/io/helpers";
+
+const TableOfContents: Component<TOCProps> = props => {
+  const [open, setOpen] = createSignal<boolean>(false);
+  const [typeProps] = createSignal<TypeTOC | undefined>(
+    props.type
+  );
+  const [configProps] = createSignal<
+    ConfigHeading[] | undefined
+  >(props.config);
+
+  function toggle(e: MouseEvent) {
+    e.preventDefault();
+    setOpen(!open());
+  }
+
+  if (!props.mobile) {
+    return typeProps() ? (
+      <Table typeTOC={typeProps()} />
+    ) : (
+      <Table configTOC={buildHierarchy(configProps()!)} />
+    );
+  }
+
+  return (
+    <div class="menu-toggle">
+      <div onclick={e => toggle(e)}>
+        <Article />
+      </div>
+      <div class={`menu-items ${open() ? "shown" : ""}`}>
+        {typeProps() ? (
+          <Table typeTOC={typeProps()} />
+        ) : (
+          <Table
+            configTOC={buildHierarchy(configProps()!)}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default TableOfContents;

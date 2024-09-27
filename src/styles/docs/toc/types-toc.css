@@ -1,0 +1,63 @@
+.toc-content {
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  padding: 6px;
+
+  & .props-list {
+    color: hsl(var(--prop-color));
+
+    & a {
+      color: hsl(var(--prop-link-color));
+    }
+  }
+
+  & .funcs-list {
+    color: hsl(var(--func-color));
+
+    & a {
+      color: hsl(var(--func-link-color));
+    }
+  }
+
+  & .signals-list {
+    color: hsl(var(--signal-color));
+
+    & a {
+      color: hsl(var(--signal-link-color));
+    }
+  }
+
+  & .vars-list {
+    color: hsl(var(--var-color));
+
+    & a {
+      color: hsl(var(--var-link-color));
+    }
+  }
+}
+
+.types-list {
+  list-style: none;
+  z-index: 21;
+
+  & .types-item {
+    margin-block: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.478rem;
+
+    & svg {
+      opacity: 0.6;
+      width: 24px;
+      height: 24px;
+      transition: opacity 0.5s;
+    }
+
+    &:hover {
+      & svg {
+        opacity: 1;
+      }
+    }
+  }
+}

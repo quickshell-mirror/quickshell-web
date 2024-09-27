@@ -1,0 +1,42 @@
+:where(p, li):has(>code) code {
+  padding-inline: 0.272rem;
+  border-radius: 0.272rem;
+  color: hsl(var(--blue) 100 69);
+  background-color: hsl(var(--blue) 85 35 / 0.1);
+}
+
+pre {
+  padding: 1rem;
+  margin: 0.618rem;
+  border-radius: 0.618rem;
+  overflow: auto;
+  text-wrap: wrap;
+
+  &>button {
+    all: unset;
+    width: 3svh;
+    height: 3svh;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.618rem;
+    font-weight: 500;
+    border-radius: 0.272rem;
+    padding: 0.418rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(var(--blue) 100 69);
+    background-color: hsl(var(--blue) 85 35 / 0.1);
+    cursor: pointer;
+    transition: color 0.25s;
+
+    &:hover {
+      color: hsl(var(--blue) 100 75);
+    }
+
+    &.copied {
+      animation: pulseGreen 0.5s cubic-bezier(0, 1, 0.6, 1);
+    }
+  }
+}

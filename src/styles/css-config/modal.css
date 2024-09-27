@@ -1,0 +1,41 @@
+.search-output {
+  position: fixed;
+  inset: 0 25svw;
+  top: 3.6rem;
+  z-index: 33;
+  max-height: 100svw;
+  max-width: 50svw;
+
+  overflow: scroll;
+  overflow-x: show;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: max-content;
+  row-gap: 0.618rem;
+  padding: 1rem;
+}
+
+.search-output::before {
+  content: "";
+  position: fixed;
+  inset: -4rem;
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+  background-color: hsla(0 0 0 / 0.3);
+}
+
+.search-output_item {
+  height: max-content;
+  padding: 1rem;
+  border: 2px solid rgba(200, 200, 200, 0.23);
+  border-radius: 12px;
+  background-color: hsl(0 0 0);
+  overflow: hidden;
+
+  & mark {
+    all: unset;
+    background: hsla(53 800 34 / 0.5);
+    padding-inline: 3px;
+  }
+}

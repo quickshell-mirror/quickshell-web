@@ -1,0 +1,21 @@
+---
+---
+<script>
+  import { codeToHtml } from "shiki";
+  const injectedMd = document.getElementById("injectedMd");
+  if (injectedMd) {
+    const preElements = document.getElementsByTagName("pre");
+    for (const pre of preElements) {
+      if (pre.textContent){
+        const innerText = pre.innerText;
+        pre.outerHTML =
+          await codeToHtml(
+            innerText,
+            {
+              lang: "qml", "theme":"material-theme-ocean"
+            }
+          );
+      }
+    }
+  }
+</script>

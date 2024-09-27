@@ -1,0 +1,27 @@
+---
+import DocsLayout from "@layouts/DocsLayout.astro";
+import { generateTypeData } from "@config/io/generateTypeData";
+
+export async function getStaticPaths() {
+  const routes = await generateTypeData();
+
+  return routes.map(route => ({
+    params: { type: route.type, name: route.type },
+    props: { route },
+  }));
+}
+const { route } = Astro.props;
+---
+
+<DocsLayout
+  title={route.type + " Type Documentation"}
+  description="Quickshell Type Documentation"
+>
+  <hr />
+  <h2>{route.type[0].toUpperCase() + route.type.slice(1)} Definitions</h2>
+  <div class="root-nav">
+    {route.data.contains!.map((item:string) => {
+    return (<div><a class="root-nav-entry" href={`/docs/types/${route.data.module === "index"? route.data.name : route.data.module}/${item}`}>{item}</a></div>)
+    })}
+  </div>
+</DocsLayout>

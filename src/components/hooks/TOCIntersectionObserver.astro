@@ -1,0 +1,29 @@
+---
+---
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const heading = entry.target.querySelector('h2, h3, h4, h5, h6')
+        if(heading) {
+          const id = heading.id
+          if (entry.intersectionRatio > 0) {
+            const desktopElement = document.querySelector(`.toc-wrapper li a[href="#${id}"]`);
+            const mobileElement = document.querySelector(`.toc-wrapper-mobile li a[href="#${id}"]`);
+            const element = mobileElement?.checkVisibility() ? mobileElement : desktopElement;
+            element?.parentElement?.classList.add('active')
+          } else {
+            const desktopElement = document.querySelector(`.toc-wrapper li a[href="#${id}"]`);
+            const mobileElement = document.querySelector(`.toc-wrapper-mobile li a[href="#${id}"]`);
+            const element = mobileElement?.checkVisibility() ? mobileElement : desktopElement;
+            element?.parentElement?.classList.remove('active')
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll('section[data-heading-rank]').forEach((section) => {
+      observer.observe(section);
+    });
+});
+</script>

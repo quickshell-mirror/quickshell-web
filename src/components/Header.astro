@@ -1,0 +1,66 @@
+---
+import { ThemeSelect } from "@components/hooks/ThemeSwitch";
+import { generateTypeData } from "@config/io/generateTypeData";
+import Nav from "@components/navigation/sidebars/Nav.astro";
+import TOC from "@components/navigation/sidebars/TOC.astro";
+import type { TypeTOC } from "./navigation/sidebars/types";
+import Search from "./navigation/Search.astro";
+
+const routes = await generateTypeData();
+
+const url = Astro.url.pathname.split("/");
+const currentClass = url[4];
+const currentData = routes.find(
+  item => item.name === currentClass
+);
+
+const data = currentData?.data;
+const tocFunctions =
+  data?.functions?.map(item => item.name) || null;
+
+const propsKeys = data?.properties
+  ? Object.keys(data.properties)
+  : null;
+const signalKeys = data?.signals
+  ? Object.keys(data.signals)
+  : null;
+const variantKeys = data?.variants
+  ? Object.keys(data.variants)
+  : null;
+
+let sidebarData: TypeTOC | undefined = {
+  properties: propsKeys,
+  functions: tocFunctions,
+  signals: signalKeys,
+  variants: variantKeys,
+};
+
+if (!data) {
+  sidebarData = undefined;
+}
+
+const { headings } = Astro.props;
+---
+<div class="header">
+  <div class="header-item header-left">
+    <h3 class="header-title">
+      <a href="/">Quickshell</a>
+    </h3>
+    {url.length > 2 ?
+      <Nav mobile={true}/>
+    : null}
+    <div class="spacer-mobile">|</div>
+    <h3 class="header-title mobile">
+      <a href="/">Quickshell</a>
+    </h3>
+  </div>
+  <div class="header-item header-right">
+    <Search/>
+    <div class="spacer-desktop">|</div>
+    <ThemeSelect client:load />
+    <div class="spacer-mobile">|</div>
+    {url.length > 2 ?
+      <TOC headings={headings} types={sidebarData} mobile={true}/>
+    : null}
+  </div>
+</div>

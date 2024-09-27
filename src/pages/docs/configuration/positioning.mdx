@@ -1,0 +1,117 @@
+---
+layout: "@layouts/ConfigLayout.astro"
+title: "Positioning"
+---
+import MD_Title from "@components/MD_Title.tsx"
+
+# <MD_Title titleVar={1}> {frontmatter.title} </MD_Title>
+
+QtQuick has multiple ways to position components. This page has instructions for where and how
+to use them.
+
+## <MD_Title titleVar={2}> Anchors </MD_Title>
+
+Anchors can be used to position components relative to another neighboring component.
+It is faster than [manual positioning](#manual-positioning) and covers a lot of simple
+use cases.
+
+The [Qt Documentation: Positioning with Anchors](https://doc.qt.io/qt-6/qtquick-positioning-anchors.html)
+page has comprehensive documentation of anchors.
+
+## <MD_Title titleVar={2}> Layouts </MD_Title>
+
+Layouts are useful when you have many components that need to be positioned relative to
+eachother such as a list.
+
+The [Qt Documentation: Layouts Overview](https://doc.qt.io/qt-6/qtquicklayouts-overview.html)
+page has good documentation of the basic layout types and how to use them.
+
+> [!note/Note:]
+> Layouts by default have a nonzero spacing.
+
+## <MD_Title titleVar={2}> Manual Positioning </MD_Title>
+
+If layouts and anchors can't easily fulfill your usecase, you can also manually position and size
+components by setting their `x`, `y`, `width` and `height` properties, which are relative to
+the parent component.
+
+This example puts a 100x100px blue rectangle at x=20,y=40 in the parent item. Ensure the size
+of the parent is large enough for its content or positioning based on them will break.
+
+```qml
+QT__Item {
+  // make sure the component is large enough to fit its children
+  implicitWidth: childrenRect.width
+  implicitHeight: childrenRect.height
+
+  QT__Rectangle {
+    color: "blue"
+    x: 20
+    y: 40
+    width: 100
+    height: 100
+  }
+}
+```
+
+## <MD_Title titleVar={2}> Notes </MD_Title>
+
+### <MD_Title titleVar={3}> Component Size </MD_Title>
+
+The [Item.implicitHeight] and [Item.implicitWidth] properties control the _base size_ of a
+component, before layouts are applied. These properties are _not_ the same as
+[Item.height] and [Item.width] which are the final size of the component.
+You should nearly always use the implicit size properties when creating a component,
+however using the normal width and height properties is fine if you know an
+item will never go in a layout.
+
+[Item.height]: https://doc.qt.io/qt-6/qml-qtquick-item.html#height-prop
+[Item.width]: https://doc.qt.io/qt-6/qml-qtquick-item.html#width-prop
+[Item.implicitHeight]: https://doc.qt.io/qt-6/qml-qtquick-item.html#implicitHeight-prop
+[Item.implicitWidth]: https://doc.qt.io/qt-6/qml-qtquick-item.html#implicitWidth-prop
+
+This example component puts a colored rectangle behind some text, and will act the same
+way in a layout as the text by itself.
+
+```qml {filename="TextWithBkgColor.qml"}
+QT__Rectangle {
+  implicitWidth: text.implicitWidth
+  implicitHeight: text.implicitHeight
+
+  QT__Text {
+    id: text
+    text: "hello!"
+  }
+}
+```
+
+If you want to size your component based on multiple others or use any other math you can.
+
+```qml {filename="PaddedTexts.qml"}
+QT__Item {
+  // width of both texts plus 5
+  implicitWidth: text1.implicitWidth + text2.implicitWidth + 5
+  // max height of both texts plus 5
+  implicitHeight: Math.min(text1.implicitHeight, text2.implicitHeight) + 5
+
+  QT__Text {
+    id: text1
+    text: "text1"
+  }
+
+  QT__Text {
+    id: text2
+    anchors.left: text1.left
+    text: "text2"
+  }
+}
+```
+
+### <MD_Title titleVar={3}> Coordinate space </MD_Title>
+
+You should always position or size components relative to the closest possible
+parent. Often this is just the `parent` property.
+
+Refrain from using things like the size of your screen to size a component,
+as this will break as soon as anything up the component hierarchy changes, such
+as adding padding to a bar.

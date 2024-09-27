@@ -1,0 +1,29 @@
+---
+import Header from "@components/Header.astro";
+import Head from "@config/Head.astro";
+import PreTheme from "@config/PreTheme.astro";
+import "@styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+}
+const { title, description } = Astro.props;
+---
+
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <Head description={description} title={title} />
+    <link rel="canonical" href={Astro.url} />
+    <PreTheme />
+  </head>
+  <body class="baselayout">
+    <Header />
+    <h1>{title}</h1>
+    <slot />
+  </body>
+</html>

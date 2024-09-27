@@ -1,0 +1,124 @@
+@import "./docs-config.css";
+@import "./docs-types.css";
+
+.docslayout-root {
+  margin: 0.618rem;
+  margin-top: 3.5rem;
+  overflow: hidden;
+}
+
+.docs,
+.docslayout-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.spacer-desktop {
+  display: none;
+}
+
+.c-breadcrumbs {
+  margin-top: 1.056rem;
+  margin-bottom: 0.318rem;
+  max-width: 100svw;
+}
+
+.docs-content {
+  & section {
+    max-width: 95svw;
+    margin-block: 1.618rem;
+  }
+
+  & p {
+    margin-block: 0.618rem;
+  }
+
+  & hr {
+    margin-top: 0;
+    margin-bottom: 0.318rem;
+  }
+}
+
+.heading {
+  & > [id] {
+    width: max-content;
+  }
+
+  & .heading-hashtag {
+    & svg {
+      width: 24px;
+      height: 24px;
+      opacity: 0.5;
+      transition: opacity 0.5s;
+
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+hr {
+  opacity: 0.3;
+}
+
+ul {
+  margin-left: 2.478rem;
+}
+
+.markdown-alert {
+  margin-block: 0.618rem;
+
+  & > *:not(:first-child) {
+    margin-block: 0.724rem;
+  }
+}
+
+.markdown-alert-title {
+  text-transform: lowercase;
+  text-transform: capitalize;
+}
+
+@media (min-width: 768px) {
+  .docs,
+  .docslayout-root {
+    gap: 0.648rem;
+  }
+
+  .docslayout-root {
+    margin-left: calc(1.618rem + 260px);
+  }
+
+  .docslayout-inner {
+    display: block;
+  }
+
+  .docs-content {
+    margin-inline: 1.272rem;
+
+    & section {
+      margin-block: 1.884rem;
+    }
+
+    & p {
+      margin-block: 1.217rem;
+    }
+  }
+
+  .c-breadcrumbs {
+    margin-inline: 1.272rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .docs-content {
+    & section {
+      max-width: 45svw;
+    }
+  }
+
+  .docslayout-root {
+    margin-inline: calc(10svw + 260px);
+  }
+}

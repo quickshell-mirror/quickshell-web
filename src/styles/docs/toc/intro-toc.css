@@ -1,0 +1,29 @@
+.toc-wrapper-mobile .toc-content {
+  & .toc_a {
+    transition: color 0.33s;
+    color: hsl(var(--green) 72 40);
+  }
+
+  & ul {
+    margin: 0;
+  }
+
+  & li {
+    list-style: none;
+
+    &.active {
+      & > .toc_a {
+        color: hsl(var(--green) 72 60);
+      }
+    }
+  }
+
+  & .toc_heading {
+    margin: 0;
+    margin-block: 0.618rem;
+
+    & * {
+      margin-left: 0.348rem;
+    }
+  }
+}

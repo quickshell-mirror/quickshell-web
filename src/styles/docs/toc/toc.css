@@ -1,0 +1,125 @@
+@import "./types-toc.css";
+@import "./intro-toc.css";
+
+.toc-wrapper {
+  display: none;
+}
+
+.toc-wrapper-mobile {
+  display: block;
+}
+
+.toc-toggle {
+  --width: 100svw;
+  display: block;
+  position: unset;
+  height: 24px;
+  font-size: 1.614rem;
+  max-height: 500px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & > svg {
+    height: 100%;
+    width: 24px;
+  }
+
+  & div {
+    width: 100%;
+    height: max-content;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  & .toc-mobile {
+    position: absolute;
+    overflow-y: scroll;
+    top: 2.6rem;
+    right: -1rem;
+    width: 0;
+    height: 0;
+    font-size: 0.745rem;
+    font-weight: 600;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    transition:
+      width 0.3s ease,
+      height 0.3s ease,
+      background-color 0.3s ease,
+      backdrop-filter 0.3s ease,
+      padding 0.3s ease;
+
+    &.shown {
+      padding: 0.3rem;
+      width: var(--width);
+      height: 50svh;
+      background-color: hsl(var(--bg-900) / 0.6);
+      backdrop-filter: blur(3px) saturate(180%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .toc-toggle {
+    --width: 70svw;
+  }
+}
+
+@media (min-width: 1280px) {
+  .toc-wrapper-mobile {
+    display: none;
+  }
+
+  .toc-wrapper {
+    display: block;
+    position: fixed;
+    top: 5rem;
+    right: 10svw;
+    width: 250px;
+    max-height: 90svh;
+    overflow-y: scroll;
+    z-index: 10;
+
+    & .toc_a {
+      transition: color 0.33s;
+      color: hsl(var(--green) 72 40);
+    }
+
+    & ul {
+      margin: 0;
+    }
+
+    & li {
+      list-style: none;
+
+      &.active {
+        & > .toc_a {
+          color: hsl(var(--green) 72 60);
+        }
+      }
+    }
+
+    & .toc_heading {
+      margin: 0;
+      margin-block: 0.618rem;
+
+      & * {
+        margin-left: 0.348rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,142 @@
+@import "remark-github-blockquote-alert/alert.css";
+@import "./css-config/base.css";
+@import "./css-config/animations.css";
+@import "./css-config/code.css";
+@import "./css-config/search.css";
+@import "./css-config/colors.css";
+@import "./docs/nav/nav.css";
+@import "./docs/toc/toc.css";
+@import "./docs/docs.css";
+@import "./docs/collapsible.css";
+
+/* color styling */
+.header {
+  background-color: hsl(var(--blue) 100 88);
+  box-shadow: 0 3px 3px 3px hsla(var(--white) 100 0 / 0.3);
+}
+
+.baselayout,
+.docslayout {
+  background-color: hsl(var(--bg-500));
+  color: hsl(var(--secondary-900));
+}
+
+a {
+  color: hsla(var(--accent-600));
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+html.dark {
+  & .header {
+    background-color: hsl(var(--secondary-900));
+    color: hsl(var(--secondary-500));
+  }
+
+  & .baselayout,
+  .docslayout {
+    background-color: hsl(var(--bg-900));
+    color: hsl(var(--secondary-400));
+  }
+
+  & a {
+    color: hsl(var(--accent-500));
+  }
+}
+
+/* layout and positioning */
+.unset {
+  all: unset;
+}
+
+.search {
+  display: none;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  height: 3.5rem;
+}
+
+.header-title {
+  display: none;
+  font-size: 1.614em;
+  font-weight: 700;
+  line-height: 1.272;
+}
+
+.header-title.mobile {
+  display: block;
+}
+
+.header-item {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.header-left {
+  justify-content: flex-start;
+  padding-left: 1rem;
+}
+
+.header-right {
+  justify-content: flex-end;
+  padding-right: 1rem;
+}
+
+.spacer-mobile {
+  font-size: 1.374rem;
+  color: hsla(var(--white) 40 50 / 0.3);
+}
+
+.theme-toggle {
+  height: 24px;
+  font-size: 1.614rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  .header-title {
+    display: block;
+  }
+
+  .header-title.mobile {
+    display: none;
+  }
+
+  .menu-toggle,
+  .spacer-mobile {
+    display: none;
+  }
+
+  .search {
+    display: block;
+  }
+
+  .spacer-desktop {
+    display: block;
+    font-size: 1.374rem;
+    color: hsla(var(--white) 40 50 / 0.3);
+  }
+}
+
+@media (min-width: 1280px) {}

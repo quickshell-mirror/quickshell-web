@@ -1,0 +1,103 @@
+---
+import { Breadcrumbs } from "astro-breadcrumbs";
+import "astro-breadcrumbs/breadcrumbs.css";
+
+import CreateCopyButtons from "@components/hooks/CreateCopyButtons.astro";
+import PreTheme from "@config/PreTheme.astro";
+import Header from "@components/Header.astro";
+import Head from "@config/Head.astro";
+import Nav from "@components/navigation/sidebars/Nav.astro";
+import CreateQMLCodeButtons from "@components/hooks/CreateQMLCodeButtons.astro";
+import "@styles/global.css";
+import type { ConfigHeading } from "@src/components/navigation/sidebars/types";
+
+interface Props {
+  title: string;
+  description: string;
+  headings?: ConfigHeading[];
+}
+
+const { title, description, headings } = Astro.props;
+const url = Astro.url.pathname.split("/");
+
+const customBreadcrumbs = [
+  {
+    index: 0,
+    text: "custom",
+    href: "/",
+  },
+  {
+    text: url[1].slice(0, 1)[0].toUpperCase() + url[1].slice(1),
+    href: `/${url[1]}`,
+  },
+];
+
+if (url[2]) {
+  customBreadcrumbs.push({
+    text: url[2].slice(0, 1)[0].toUpperCase() + url[2].slice(1),
+    href: `/${url[1]}/${url[2]}`,
+  });
+  if (url[3]) {
+    customBreadcrumbs.push({
+      text: url[3].slice(0, 1)[0].toUpperCase() + url[3].slice(1),
+      href: `/${url[1]}/${url[2]}/${url[3]}`,
+    });
+    if (url[4]) {
+      customBreadcrumbs.filter((_, index) => index !== 4);
+      customBreadcrumbs.push({
+        text: url[4],
+        href: `/${url[1]}/${url[2]}/${url[3]}/${url[4]}`,
+      });
+    }
+  }
+}
+---
+
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <Head description={description} title={title} />
+    <link rel="canonical" href={Astro.url} />
+    <PreTheme />
+    <CreateCopyButtons />
+    <CreateQMLCodeButtons/>
+  </head>
+  <body class="docslayout">
+    <Header headings={headings}/>
+    <div class="docslayout-root">
+      <Nav mobile={false}/>
+      <div class="docslayout-inner">
+        <Breadcrumbs  crumbs={customBreadcrumbs} linkTextFormat="sentence" truncated={true}>
+          <svg
+            slot="index"
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            viewBox="0 0 256 256"
+          >
+            <title>Home</title>
+            <path
+              fill="currentColor"
+              d="m219.31 108.68l-80-80a16 16 0 0 0-22.62 0l-80 80A15.87 15.87 0 0 0 32 120v96a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-56h32v56a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-96a15.87 15.87 0 0 0-4.69-11.32M208 208h-48v-56a8 8 0 0 0-8-8h-48a8 8 0 0 0-8 8v56H48v-88l80-80l80 80Z"
+            ></path></svg
+          >
+          <svg
+            slot="separator"
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            viewBox="0 0 256 256"
+            ><path
+              fill="currentColor"
+              d="m181.66 133.66l-80 80a8 8 0 0 1-11.32-11.32L164.69 128L90.34 53.66a8 8 0 0 1 11.32-11.32l80 80a8 8 0 0 1 0 11.32"
+            ></path></svg
+          >
+        </Breadcrumbs>
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,54 @@
+---
+import type { QuickshellSignal } from "@config/io/types";
+import { Tag, PowerCord } from "@icons";
+import { parseMarkdown } from "@config/io/helpers";
+
+export interface Props {
+  signalKeys: string[];
+  signalsData: QuickshellSignal;
+  title: string;
+}
+
+const { signalKeys, signalsData, title } = Astro.props;
+---
+<ul class="typedata typesignals">
+  {
+    signalKeys.map(item => {
+      const signalData = signalsData[item];
+      const paramKeys = signalData.params.length > 0 ? signalData.params.map((param,index) => `${param.name}${index !== signalData.params.length -1 ? ", ":""}`) : []
+      return (
+        <li id={ item } class="typedata-root typesignal-root">
+          <p class="typedata-name typesignal-name">
+            <PowerCord client:idle/>
+              { item }(<span class="typedata-param">{paramKeys}</span>)<span class="typesignal-doclink"><a
+              href="/docs/configuration/qml-overview#-signals"
+              target="_blank"
+            >?</a></span>
+          </p>
+          {
+            signalData.params && signalData.params.length > 0 ? (
+              <p class="typesignal-params">
+                {
+                  signalData.params.map((param, _) => {
+                    return (
+                    <span class="typesignal-param typedata-param">
+                      <Tag client:idle/>
+                      {param.name}<span class="type-datatype">:&nbsp;<a
+                        href=""
+                        target="_blank"
+                      >{param.type.name}</a></span>
+                    </span>
+                    )
+                  })
+                }
+              </p>
+            ) : null
+          }
+          <section class="typedata-details">
+            <div class="typedata-detailsdata" set:html={parseMarkdown(signalData.details, title)} />
+          </section>
+        </li>
+      )
+    })
+  }
+</ul>

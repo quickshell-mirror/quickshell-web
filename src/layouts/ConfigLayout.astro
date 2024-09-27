@@ -1,0 +1,39 @@
+---
+import DocsLayout from "@layouts/DocsLayout.astro";
+import TOCIntersectionObserver from "@src/components/hooks/TOCIntersectionObserver.astro";
+import TOC from "@components/navigation/sidebars/TOC.astro";
+
+export interface Headings {
+  slug: string;
+  text: string;
+  depth: number;
+}
+
+export interface Props {
+  content: {
+    title: string;
+  };
+  headings: Headings[];
+  frontmatter?: {
+    title: string;
+    description: string;
+  };
+}
+
+const { headings, frontmatter } = Astro.props;
+---
+<DocsLayout
+  title={frontmatter!.title}
+  description={frontmatter!.description}
+  headings={headings}
+>
+  <div class="docs">
+    <div class="docs-content">
+      <hr />
+      <slot />
+    </div>
+  </div>
+  <TOC mobile={false} headings={headings}/>
+</DocsLayout>
+
+<TOCIntersectionObserver/>

@@ -1,0 +1,37 @@
+{
+  "name": "quickshell-docs",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@ark-ui/solid": "^3.5.0",
+    "@astrojs/check": "^0.9.3",
+    "@astrojs/mdx": "^3.1.4",
+    "@astrojs/solid-js": "^4.4.1",
+    "@types/node": "^20.14.11",
+    "astro": "^4.14.5",
+    "astro-breadcrumbs": "^2.3.1",
+    "astro-pagefind": "^1.6.0",
+    "marked": "^14.1.0",
+    "marked-alert": "^2.0.2",
+    "node": "npm:22.7.0",
+    "remark-github-blockquote-alert": "^1.2.1",
+    "remark-parse": "^11.0.0",
+    "solid-devtools": "^0.30.1",
+    "solid-js": "^1.8.18",
+    "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@astrojs/ts-plugin": "^1.10.1",
+    "@biomejs/biome": "^1.8.3",
+    "@hbsnow/rehype-sectionize": "^1.0.7",
+    "shiki": "^1.11.0"
+  },
+  "packageManager": "yarn@4.5.0"
+}

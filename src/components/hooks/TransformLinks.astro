@@ -1,0 +1,66 @@
+---
+---
+<script>
+  import { getQMLTypeLinkObject, getQMLTypeLink, getIconForLink } from "@config/io/helpers"
+
+  const detailsData = document.getElementsByTagName("p")
+  const innerItems = document.getElementsByClassName("typedata-details")
+  if (detailsData) {
+    for (const details of detailsData) {
+      const linkRegex = /TYPE99(\w+.)99TYPE/g
+      const mtypeExists = details.textContent?.match(linkRegex)
+
+      if (!mtypeExists || !details.textContent) {
+        continue;
+      }
+
+      const linkMatch = [...details.textContent.matchAll(linkRegex)]
+      let textWithLinks = details.textContent;
+      for (const matching of linkMatch) {
+        if (details.textContent.indexOf(matching[0]) === -1){
+          continue
+        }
+        const linkObject = getQMLTypeLinkObject(matching[1]);
+        const link = getQMLTypeLink(linkObject);
+        const icon = linkObject.mtype ? getIconForLink(linkObject.mtype, false) : null;
+
+        // for signal
+        const bracketString = getIconForLink("func", false)
+
+        const newLink = `<span class="type${linkObject.mtype}-link typedata-link">${icon ? icon : ""}<a href=${link}>${linkObject.mname || linkObject.name}</a>${linkObject.mtype === "signal" ? bracketString : ""}</span>`;
+        textWithLinks = textWithLinks.replace(matching[0], newLink)
+      }
+      details.innerHTML = textWithLinks
+    }
+  }
+  if (innerItems){
+    for (const innerItem of innerItems){
+      const linkRegex = /TYPE99(\w+.)99TYPE/g
+      const listItems = innerItem.getElementsByTagName("li")
+
+      for (const li of listItems){
+        const mtypeExists = li.textContent?.match(linkRegex)
+        if (!mtypeExists || !li.textContent){
+          continue
+        }
+        const linkMatch = [...li.textContent.matchAll(linkRegex)]
+        let textWithLinks = li.textContent;
+        for (const matching of linkMatch) {
+          if (li.textContent.indexOf(matching[0]) === -1){
+            continue
+          }
+          const linkObject = getQMLTypeLinkObject(matching[1]);
+          const link = getQMLTypeLink(linkObject);
+          const icon = linkObject.mtype ? getIconForLink(linkObject.mtype, false) : null;
+
+          // for signal
+          const bracketString = getIconForLink("func", false)
+
+          const newLink = `<span class="type${linkObject.mtype}-link typedata-link">${icon ? icon : ""}<a href=${link}>${linkObject.mname || linkObject.name}</a>${linkObject.mtype === "signal" ? bracketString : ""}</span>`;
+          textWithLinks = textWithLinks.replace(matching[0], newLink)
+        }
+        li.innerHTML = textWithLinks
+      }
+    }
+  }
+</script>

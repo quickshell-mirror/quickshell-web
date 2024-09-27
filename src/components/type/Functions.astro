@@ -1,0 +1,67 @@
+---
+import type {
+  QMLTypeLinkObject,
+  QuickshellFunction,
+} from "@config/io/types";
+import {
+  parseMarkdown,
+  getQMLTypeLink,
+} from "@config/io/helpers";
+import { Tag } from "@icons";
+
+export interface Props {
+  funcData: QuickshellFunction[];
+  title: string;
+}
+
+const { funcData, title } = Astro.props;
+---
+<ul class="typedata typefuncs">
+  {
+    funcData.map(item => {
+      const functionParams = item.params.length > 0 ? item.params : null
+      const retTypeLink = getQMLTypeLink(item.ret as unknown as QMLTypeLinkObject)
+      return (
+        <li id={item.name} class="typedata-root typefunc-root">
+          <p class="typedata-name typefunc-name">
+            {item.name}({functionParams
+              ? functionParams.map((itemType, index) => (
+                <span class="typedata-param">{itemType.name}{
+                  index !== functionParams.length - 1
+                    && ", "
+                  }</span>
+                )
+              ) : null})<span class="type-datatype">:&nbsp;<a
+                href={retTypeLink}
+                target="_blank"
+                >{item.ret.name || item.ret.type}</a></span>
+          </p>
+          {
+            item.params.length > 0 ? (
+              <p class="typedata-params typefunc-params">
+                {
+                  item.params.map(param => {
+                    const paramTypeLink = getQMLTypeLink(param.type);
+                    return (
+                      <span class="typedata-param typefunc-param">
+                        <Tag client:idle/>
+                        {param.name}<span class="type-datatype">:&nbsp;<a
+                          href={paramTypeLink}
+                          target="_blank"
+                        >{param.type.name}</a></span>
+                      </span>
+                    )
+                  })
+                }
+              </p>
+            )
+            :null
+          }
+          <section class="typedata-details">
+            <div class="typedata-detailsdata" set:html={parseMarkdown(item.details, title)}/>
+          </section>
+        </li>
+      )
+    })
+  }
+</ul>
