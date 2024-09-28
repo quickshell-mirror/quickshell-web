@@ -42,6 +42,7 @@
         button.onclick = () => {
           let link = window.location.href.split("#")[0];
           link += `#-${heading.textContent?.slice(10).trimEnd().replaceAll(" ", "-").toLowerCase()}`;
+          window.location.href = link
           navigator.clipboard.writeText(link);
           heading.classList.toggle("copied")
           setTimeout(() => heading.classList.remove("copied"), 1000);

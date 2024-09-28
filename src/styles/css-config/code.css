@@ -1,4 +1,4 @@
-:where(p, li):has(>code) code {
+:where(p, li):has(> code) code {
   padding-inline: 0.272rem;
   border-radius: 0.272rem;
   color: hsl(var(--blue) 100 69);
@@ -14,8 +14,8 @@ pre {
 
   &>button {
     all: unset;
-    width: 3svh;
-    height: 3svh;
+    width: 2rem;
+    height: 2rem;
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;

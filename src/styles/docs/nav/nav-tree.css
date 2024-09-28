@@ -8,7 +8,6 @@
 
     & [data-part="item"] {
       padding-right: 0;
-
     }
   }
 }
@@ -39,7 +38,6 @@
       width: max-content;
       padding: 4px;
       overflow: scroll;
-      z-index: 101;
     }
   }
 
@@ -74,7 +72,6 @@
   &:hover {
     background-color: hsl(var(--blue) 30 30);
   }
-
 }
 
 [data-scope="accordion"][data-part="item-indicator"][data-state="open"] {
@@ -121,7 +118,6 @@
       animation: percentToFifty 250ms ease-in-out forwards;
     }
 
-
     &>a {
       padding-top: 1em;
       width: 100%;
@@ -134,11 +130,11 @@
 }
 
 [data-scope="accordion"][data-part="item-content"][data-state="open"] {
-  animation: slideDown 250ms ease-in-out;
+  animation: slideDown 250ms ease;
 }
 
 [data-scope="accordion"][data-part="item-content"][data-state="closed"] {
-  animation: slideUp 200ms ease-in-out;
+  animation: slideUp 200ms ease;
 }
 
 .__current-type-doc {
@@ -146,7 +142,6 @@
 
   & [data-part="item-trigger"] a {
     color: hsl(var(--blue) 100 70) !important;
-
   }
 
   &>a {
@@ -160,12 +155,10 @@
           hsla(var(--accent-400) / 0) 100%);
       animation: percentToZero 250ms ease-in-out forwards;
       width: 100%;
-
     }
 
     &:hover::before {
       animation: percentToFifty 250ms ease-in-out forwards;
     }
-
   }
 }

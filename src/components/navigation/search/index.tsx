@@ -7,6 +7,8 @@ import {
 import type { SearchResult } from "./types";
 import SearchModal from "./SearchModal";
 
+//const pagefindPath = "@dist/pagefind/pagefind.js";
+//const pagefind = await import(pagefindPath);
 const pagefind = await import("@dist/pagefind/pagefind.js");
 pagefind.init();
 
@@ -44,7 +46,7 @@ const SearchComponent: Component = () => {
         value={query()}
         placeholder="Search"
         onChange={e => handleSearch(e.target.value)}
-      //onfocusout={() => setQuery("")}
+        //onfocusout={() => setQuery("")}
       />{" "}
       {!results.loading && results() && results()!.length > 0 ? (
         <SearchModal

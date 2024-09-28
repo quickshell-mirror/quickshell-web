@@ -3,10 +3,28 @@
 
 .toc-wrapper {
   display: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .toc-wrapper-mobile {
   display: block;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  background-color: transparent;
+}
+
+.toc-content {
+  background-color: transparent;
 }
 
 .toc-toggle {
@@ -16,14 +34,8 @@
   height: 24px;
   font-size: 1.614rem;
   max-height: 500px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  & > svg {
+  &>svg {
     height: 100%;
     width: 24px;
   }
@@ -53,12 +65,11 @@
       display: none;
     }
 
-    transition:
-      width 0.3s ease,
-      height 0.3s ease,
-      background-color 0.3s ease,
-      backdrop-filter 0.3s ease,
-      padding 0.3s ease;
+    transition: width 0.3s ease,
+    height 0.3s ease,
+    background-color 0.3s ease,
+    backdrop-filter 0.3s ease,
+    padding 0.3s ease;
 
     &.shown {
       padding: 0.3rem;
@@ -85,6 +96,7 @@
   }
 
   .toc-wrapper {
+    background-color: transparent;
     display: block;
     position: fixed;
     top: 5rem;
@@ -107,7 +119,7 @@
       list-style: none;
 
       &.active {
-        & > .toc_a {
+        &>.toc_a {
           color: hsl(var(--green) 72 60);
         }
       }

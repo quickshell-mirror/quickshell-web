@@ -4,7 +4,6 @@
 .docslayout-root {
   margin: 0.618rem;
   margin-top: 3.5rem;
-  overflow: hidden;
 }
 
 .docs,
@@ -40,7 +39,7 @@
 }
 
 .heading {
-  & > [id] {
+  &>[id] {
     width: max-content;
   }
 
@@ -70,7 +69,7 @@ ul {
 .markdown-alert {
   margin-block: 0.618rem;
 
-  & > *:not(:first-child) {
+  &>*:not(:first-child) {
     margin-block: 0.724rem;
   }
 }
@@ -81,6 +80,7 @@ ul {
 }
 
 @media (min-width: 768px) {
+
   .docs,
   .docslayout-root {
     gap: 0.648rem;
@@ -88,10 +88,6 @@ ul {
 
   .docslayout-root {
     margin-left: calc(1.618rem + 260px);
-  }
-
-  .docslayout-inner {
-    display: block;
   }
 
   .docs-content {
@@ -120,5 +116,9 @@ ul {
 
   .docslayout-root {
     margin-inline: calc(10svw + 260px);
+  }
+
+  .docslayout-inner {
+    min-width: 33.8rem;
   }
 }

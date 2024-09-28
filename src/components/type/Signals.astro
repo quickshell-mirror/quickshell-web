@@ -27,11 +27,11 @@ const { signalKeys, signalsData, title } = Astro.props;
           </p>
           {
             signalData.params && signalData.params.length > 0 ? (
-              <p class="typesignal-params">
+              <p class="typedata-params typesignal-params">
                 {
                   signalData.params.map((param, _) => {
                     return (
-                    <span class="typesignal-param typedata-param">
+                    <span class="typedata-param typesignal-param">
                       <Tag client:idle/>
                       {param.name}<span class="type-datatype">:&nbsp;<a
                         href=""

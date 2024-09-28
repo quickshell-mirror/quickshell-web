@@ -19,19 +19,13 @@ const { funcData, title } = Astro.props;
 <ul class="typedata typefuncs">
   {
     funcData.map(item => {
-      const functionParams = item.params.length > 0 ? item.params : null
+      const functionParams = item.params.length > 0 ? item.params.map((funcparam,index) => `${funcparam.name}${index !== item.params.length -1 ? ", ":""}`) : null
       const retTypeLink = getQMLTypeLink(item.ret as unknown as QMLTypeLinkObject)
       return (
         <li id={item.name} class="typedata-root typefunc-root">
           <p class="typedata-name typefunc-name">
-            {item.name}({functionParams
-              ? functionParams.map((itemType, index) => (
-                <span class="typedata-param">{itemType.name}{
-                  index !== functionParams.length - 1
-                    && ", "
-                  }</span>
-                )
-              ) : null})<span class="type-datatype">:&nbsp;<a
+      {item.name}(<span class="typedata-param">{functionParams}</span>)
+      <span class="type-datatype">:&nbsp;<a
                 href={retTypeLink}
                 target="_blank"
                 >{item.ret.name || item.ret.type}</a></span>
