@@ -1,7 +1,154 @@
 ---
-import SearchComponent from "./search";
+import "@pagefind/default-ui/css/ui.css";
+import { getHTMLIcon } from "../iconsModule";
+
+const magnifier = getHTMLIcon("magnifier");
 ---
 
-<div class="search-wrapper">
-  <SearchComponent client:only={"solid-js"}/>
-</div>
+<site-search class="search-wrapper">
+  <button
+    data-open-modal
+    disabled
+    aria-label="Search"
+    aria-keyshortcuts="Control+K"
+    class="search-button"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d={magnifier}/></svg>
+    <span class="search-label" aria-hidden="true">Search</span>
+    <kbd class="search-kbd">
+      <kbd>Ctrl</kbd><kbd>K</kbd>
+    </kbd>
+  </button>
+  <dialog aria-label="Search" class="search-dialog">
+    <div class="dialog-frame">
+      <button data-close-modal class="search-cancel">
+        Cancel
+      </button>
+      <div class="search-container">
+        <div id="qs_search"/>
+      </div>
+    </div>
+  </dialog>
+</site-search>
+{
+  /**
+   * NOTE: YOINKED FROM STARLIGHT
+	 *  This is intentionally inlined to avoid briefly showing an invalid shortcut.
+	 *  Purposely using the deprecated `navigator.platform` property to detect Apple devices, as the
+	 *  user agent is spoofed by some browsers when opening the devtools.
+	 */
+}
+<script is:inline>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script>
+
+<script>
+import { getQMLTypeLinkObject, getQMLTypeLink, getIconForLink } from '@src/config/io/helpers';
+
+	class SiteSearch extends HTMLElement {
+		constructor() {
+			super();
+			const openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]')!;
+			const closeBtn = this.querySelector<HTMLButtonElement>('button[data-close-modal]')!;
+			const dialog = this.querySelector('dialog')!;
+			const dialogFrame = this.querySelector('.dialog-frame')!;
+
+			/** Close the modal if a user clicks on a link or outside of the modal. */
+			const onClick = (event: MouseEvent) => {
+				const isLink = 'href' in (event.target || {});
+				if (
+					isLink ||
+					(document.body.contains(event.target as Node) &&
+						!dialogFrame.contains(event.target as Node))
+				) {
+					closeModal();
+				}
+			};
+
+			const openModal = (event?: MouseEvent) => {
+				dialog.showModal();
+				document.body.toggleAttribute('data-search-modal-open', true);
+				this.querySelector('input')?.focus();
+				event?.stopPropagation();
+				window.addEventListener('click', onClick);
+			};
+
+			const closeModal = () => dialog.close();
+
+			openBtn.addEventListener('click', openModal);
+			openBtn.disabled = false;
+			closeBtn.addEventListener('click', closeModal);
+
+			dialog.addEventListener('close', () => {
+				document.body.toggleAttribute('data-search-modal-open', false);
+				window.removeEventListener('click', onClick);
+			});
+
+			// Listen for `ctrl + k` and `cmd + k` keyboard shortcuts.
+			window.addEventListener('keydown', (e) => {
+				if ((e.metaKey === true || e.ctrlKey === true) && e.key === 'k') {
+					dialog.open ? closeModal() : openModal();
+					e.preventDefault();
+				}
+			});
+      
+      const processExcerpt = (sub_resultExcerpt:string):string => {
+        const linkRegex = /TYPE99(\w+.)99TYPE/g;
+        let excerpt = sub_resultExcerpt;
+        const match = [...excerpt.matchAll(linkRegex)];
+        if (match.length > 0){
+          for (const matching of match) {
+            const linkObject = getQMLTypeLinkObject(matching[1]);
+            const link = getQMLTypeLink(linkObject);
+            const icon = linkObject.mtype ? getIconForLink(linkObject.mtype, false) : null;
+
+            // for signal
+            const bracketString = getIconForLink("func", false)
+
+            const newLink = `<span class="type${linkObject.mtype}-link typedata-link">${icon ? icon : ""}<a href=${link}>${linkObject.mname || linkObject.name}</a>${linkObject.mtype === "signal" ? bracketString : ""}</span>`;
+            excerpt = excerpt.replace(matching[0], newLink)
+          }
+        }
+        return excerpt
+      }
+
+
+			const formatURL = (path: string) => path;
+
+			window.addEventListener('DOMContentLoaded', () => {
+				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+				onIdle(async () => {
+					// @ts-expect-error — Missing types for @pagefind/default-ui package.
+					const { PagefindUI } = await import('@pagefind/default-ui');
+					new PagefindUI({
+						element: '#qs_search',
+						baseUrl: import.meta.env.BASE_URL,
+						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
+						showImages: false,
+						showSubResults: true,
+            processResult: (result: { url: string; excerpt:string; sub_results: Array<{ url: string, excerpt:string }> }) => {
+							result.url = formatURL(result.url);
+							result.sub_results = result.sub_results.map((sub_result) => {
+								sub_result.url = formatURL(sub_result.url);
+                sub_result.excerpt = processExcerpt(sub_result.excerpt)
+								return sub_result;
+							});
+              result.excerpt = processExcerpt(result.excerpt)
+						},
+					});
+				});
+			});
+		}
+	}
+	customElements.define('site-search', SiteSearch);
+</script>

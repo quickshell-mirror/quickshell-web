@@ -1225,7 +1225,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pagefind/default-ui@npm:^1.0.3":
+"@pagefind/default-ui@npm:^1.1.1":
   version: 1.1.1
   resolution: "@pagefind/default-ui@npm:1.1.1"
   checksum: 10c0/a1069183ae31daa8b71344abd6cdd85b7183b2af4f88fdc89d8c5298ea0e653e7f8a89f95d10ee54053ab55c36dd1142b6768efd1a7c29d589432b432b7a291b
@@ -1257,13 +1257,6 @@ __metadata:
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
   checksum: 10c0/5bd7576bb1b38a47a7fc7b51ac9f38748e772beebc56200450c4a817d712232b8f1d3ef70532c80840243c657d491cf6a6be1e3a214cff907645819fdc34aadd
-  languageName: node
-  linkType: hard
-
-"@polka/url@npm:^1.0.0-next.24":
-  version: 1.0.0-next.28
-  resolution: "@polka/url@npm:1.0.0-next.28"
-  checksum: 10c0/acc5ea62597e4da2fb42dbee02749d07f102ae7d6d2c966bf7e423c79cd65d1621da305af567e6e7c232f3b565e242d1ec932cbb3dcc0db1508d02e9a2cafa2e
   languageName: node
   linkType: hard
 
@@ -2939,19 +2932,6 @@ __metadata:
   peerDependencies:
     astro: ^2.0.0-beta.0 || ^3.0.0 || ^4.0.0
   checksum: 10c0/5381f28a3ab457c36d84e4c65aa821463847c625efddb28bb3d3d30a2417c8a6dd8708c8b7d72d0f90e7090dde6d235e0cc618dd1fdf5d71242bb2fbb9f12f0b
-  languageName: node
-  linkType: hard
-
-"astro-pagefind@npm:^1.6.0":
-  version: 1.6.0
-  resolution: "astro-pagefind@npm:1.6.0"
-  dependencies:
-    "@pagefind/default-ui": "npm:^1.0.3"
-    pagefind: "npm:^1.0.3"
-    sirv: "npm:^2.0.3"
-  peerDependencies:
-    astro: ^2.0.4 || ^3.0.0 || ^4.0.0
-  checksum: 10c0/4ee30b5fdb229351a496a9bc21995b459dfd82091efd9f6e0281695f795fa47689253fefde46695af785d2dd278ba90b3e2b261a3a2ede49f7e27ee7d5070650
   languageName: node
   linkType: hard
 
@@ -6070,7 +6050,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pagefind@npm:^1.0.3":
+"pagefind@npm:^1.1.1":
   version: 1.1.1
   resolution: "pagefind@npm:1.1.1"
   dependencies:
@@ -6345,13 +6325,14 @@ __metadata:
     "@astrojs/ts-plugin": "npm:^1.10.2"
     "@biomejs/biome": "npm:^1.8.3"
     "@hbsnow/rehype-sectionize": "npm:^1.0.7"
+    "@pagefind/default-ui": "npm:^1.1.1"
     "@types/node": "npm:^20.14.11"
     astro: "npm:^4.15.9"
     astro-breadcrumbs: "npm:^2.3.1"
-    astro-pagefind: "npm:^1.6.0"
     marked: "npm:^14.1.0"
     marked-alert: "npm:^2.0.2"
     node: "npm:22.7.0"
+    pagefind: "npm:^1.1.1"
     remark-github-blockquote-alert: "npm:^1.2.1"
     remark-parse: "npm:^11.0.0"
     shiki: "npm:^1.11.0"
@@ -6896,17 +6877,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sirv@npm:^2.0.3":
-  version: 2.0.4
-  resolution: "sirv@npm:2.0.4"
-  dependencies:
-    "@polka/url": "npm:^1.0.0-next.24"
-    mrmime: "npm:^2.0.0"
-    totalist: "npm:^3.0.0"
-  checksum: 10c0/68f8ee857f6a9415e9c07a1f31c7c561df8d5f1b1ba79bee3de583fa37da8718def5309f6b1c6e2c3ef77de45d74f5e49efc7959214443aa92d42e9c99180a4e
-  languageName: node
-  linkType: hard
-
 "sisteransi@npm:^1.0.5":
   version: 1.0.5
   resolution: "sisteransi@npm:1.0.5"
@@ -7216,13 +7186,6 @@ __metadata:
   dependencies:
     is-number: "npm:^7.0.0"
   checksum: 10c0/487988b0a19c654ff3e1961b87f471702e708fa8a8dd02a298ef16da7206692e8552a0250e8b3e8759270f62e9d8314616f6da274734d3b558b1fc7b7724e892
-  languageName: node
-  linkType: hard
-
-"totalist@npm:^3.0.0":
-  version: 3.0.1
-  resolution: "totalist@npm:3.0.1"
-  checksum: 10c0/4bb1fadb69c3edbef91c73ebef9d25b33bbf69afe1e37ce544d5f7d13854cda15e47132f3e0dc4cafe300ddb8578c77c50a65004d8b6e97e77934a69aa924863
   languageName: node
   linkType: hard
 

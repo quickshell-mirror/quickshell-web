@@ -1,4 +1,5 @@
 @import "./nav-tree.css";
+@import "./search.css";
 
 .nav-wrapper {
   display: none;
@@ -44,12 +45,11 @@
       display: none;
     }
 
-    transition:
-      width 0.3s ease,
-      height 0.3s ease,
-      background-color 0.3s ease,
-      backdrop-filter 0.3s ease,
-      padding 0.3s ease;
+    transition: width 0.3s ease,
+    height 0.3s ease,
+    background-color 0.3s ease,
+    backdrop-filter 0.3s ease,
+    padding 0.3s ease;
 
     &.shown {
       padding: 0.3rem;

@@ -14,10 +14,10 @@
     "@astrojs/check": "^0.9.3",
     "@astrojs/mdx": "^3.1.7",
     "@astrojs/solid-js": "^4.4.2",
+    "@pagefind/default-ui": "^1.1.1",
     "@types/node": "^20.14.11",
     "astro": "^4.15.9",
     "astro-breadcrumbs": "^2.3.1",
-    "astro-pagefind": "^1.6.0",
     "marked": "^14.1.0",
     "marked-alert": "^2.0.2",
     "node": "npm:22.7.0",
@@ -31,6 +31,7 @@
     "@astrojs/ts-plugin": "^1.10.2",
     "@biomejs/biome": "^1.8.3",
     "@hbsnow/rehype-sectionize": "^1.0.7",
+    "pagefind": "^1.1.1",
     "shiki": "^1.11.0"
   },
   "packageManager": "yarn@4.5.0"

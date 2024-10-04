@@ -35,7 +35,7 @@
   font-size: 1.614rem;
   max-height: 500px;
 
-  &>svg {
+  & > svg {
     height: 100%;
     width: 24px;
   }
@@ -65,11 +65,12 @@
       display: none;
     }
 
-    transition: width 0.3s ease,
-    height 0.3s ease,
-    background-color 0.3s ease,
-    backdrop-filter 0.3s ease,
-    padding 0.3s ease;
+    transition:
+      width 0.3s ease,
+      height 0.3s ease,
+      background-color 0.3s ease,
+      backdrop-filter 0.3s ease,
+      padding 0.3s ease;
 
     &.shown {
       padding: 0.3rem;
@@ -100,8 +101,8 @@
     display: block;
     position: fixed;
     top: 5rem;
-    right: 10svw;
-    width: 250px;
+    right: 8svw;
+    width: 18rem;
     max-height: 90svh;
     overflow-y: scroll;
     z-index: 10;
@@ -119,7 +120,7 @@
       list-style: none;
 
       &.active {
-        &>.toc_a {
+        & > .toc_a {
           color: hsl(var(--green) 72 60);
         }
       }

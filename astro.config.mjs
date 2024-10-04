@@ -4,7 +4,7 @@ import { remarkAlert } from "remark-github-blockquote-alert";
 import sectionize from "@hbsnow/rehype-sectionize";
 import mdx from "@astrojs/mdx";
 
-import pagefind from "astro-pagefind";
+import pagefind from "./pagefind";
 
 // https://astro.build/config
 export default defineConfig({

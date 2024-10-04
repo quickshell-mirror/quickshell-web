@@ -37,7 +37,10 @@ const NavComponent: Component<NavProps> = props => {
           <XToMenu class="nav-icon" />
         )}
       </div>
-      <div class={`nav-items ${open() ? "shown" : ""}`}>
+      <div
+        id={open() ? "#qs_search" : ""}
+        class={`nav-items ${open() ? "shown" : ""}`}
+      >
         <Tree
           currentRoute={tree.currentRoute}
           currentModule={tree.currentModule}
