@@ -5,12 +5,25 @@ import { generateTypeData } from "@config/io/generateTypeData";
 export async function getStaticPaths() {
   const routes = await generateTypeData();
 
-  return routes.map(route => ({
-    params: { type: route.type, name: route.type },
-    props: { route },
-  }));
+  return routes
+    .filter(route => route.name === "index")
+    .map(route => {
+      const children: { [key: string]: string } = {};
+      route.data.contains?.map(childName =>
+        routes
+          .filter(route => route.name !== "index")
+          .filter(childData => childData.name === childName)
+          .map(childData => {
+            children[childName] = childData.data.description;
+          })
+      );
+      return {
+        params: { type: route.type, name: route.type },
+        props: { route, children },
+      };
+    });
 }
-const { route } = Astro.props;
+const { route, children } = Astro.props;
 ---
 
 <DocsLayout
@@ -18,10 +31,19 @@ const { route } = Astro.props;
   description="Quickshell Type Documentation"
 >
   <hr />
-  <h2>{route.type[0].toUpperCase() + route.type.slice(1)} Definitions</h2>
+  <h2 class="typedocs-title">{route.type[0].toUpperCase() + route.type.slice(1)} Definitions</h2>
   <div class="root-nav">
-    {route.data.contains!.map((item:string) => {
-    return (<div><a class="root-nav-entry" href={`/docs/types/${route.data.module === "index"? route.data.name : route.data.module}/${item}`}>{item}</a></div>)
-    })}
+    {route.data.contains!.map((childName:string) => 
+      (
+      <div class="root-nav-entry">
+        <a class="root-nav-link" href={`/docs/types/${route.data.module === "index"
+        ? route.data.name
+        : route.data.module}/${childName}`}>
+        {childName}
+        </a>
+        <span class="root-nav-desc">{children[childName] || "See Configuration"}</span>
+      </div>
+      )
+    )}
   </div>
 </DocsLayout>

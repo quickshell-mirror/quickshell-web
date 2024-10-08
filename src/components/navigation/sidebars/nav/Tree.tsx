@@ -1,7 +1,7 @@
 import { type Component, Index, For } from "solid-js";
 import { Accordion } from "@ark-ui/solid";
 
-import { ShevronSmallDown } from "@icons";
+import { LinkSimple, ShevronSmallDown } from "@icons";
 import type { TreeProps } from "../types";
 
 export const Tree: Component<TreeProps> = props => {
@@ -117,6 +117,44 @@ export const Tree: Component<TreeProps> = props => {
               }}
             </Index>
           </Accordion.ItemContent>
+        </Accordion.Item>
+        <Accordion.Item
+          value="QtQuick Type Reference"
+          id="qtquick-reference"
+        >
+          <Accordion.ItemTrigger>
+            <Accordion.ItemIndicator>
+              <LinkSimple />
+            </Accordion.ItemIndicator>
+            <span>
+              <a
+                href="https://doc.qt.io/qt-6/qtquick-qmlmodule.html"
+                target="_blank"
+                rel="noreferrer"
+              >
+                QtQuick Type Reference
+              </a>
+            </span>
+          </Accordion.ItemTrigger>
+        </Accordion.Item>
+        <Accordion.Item
+          value="Quickshell Examples"
+          id="quickshell-examples"
+        >
+          <Accordion.ItemTrigger>
+            <Accordion.ItemIndicator>
+              <LinkSimple />
+            </Accordion.ItemIndicator>
+            <span>
+              <a
+                href="https://git.outfoxxed.me/outfoxxed/quickshell-examples"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Quickshell Examples
+              </a>
+            </span>
+          </Accordion.ItemTrigger>
         </Accordion.Item>
       </Accordion.Root>
     </nav>

@@ -2,7 +2,7 @@
 @import "./docs-types.css";
 
 .docslayout-root {
-  margin: 0.618rem;
+  margin-inline: 0.618rem;
   margin-top: 3.5rem;
 }
 
@@ -88,6 +88,7 @@ ul {
 
   .docslayout-root {
     margin-left: calc(1.618rem + 260px);
+    padding-bottom: 3rem;
   }
 
   .docs-content {

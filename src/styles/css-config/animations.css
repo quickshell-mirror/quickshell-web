@@ -1,6 +1,18 @@
 @property --percent {
-  syntax: '<percentage>';
+  syntax: "<percentage>";
   initial-value: 0%;
+  inherits: false;
+}
+
+@property --percent-nav-root_transparent {
+  syntax: "<percentage>";
+  initial-value: 35%;
+  inherits: false;
+}
+
+@property --percent-nav-root_filled {
+  syntax: "<percentage>";
+  initial-value: 65%;
   inherits: false;
 }
 
@@ -85,7 +97,6 @@
   }
 }
 
-
 @keyframes percentToFifty {
   from {
     --percent: 0%;
@@ -103,5 +114,45 @@
 
   to {
     --percent: 0%;
+  }
+}
+
+@keyframes percent35To25 {
+  from {
+    --percent-nav-root_transparent: 35%;
+  }
+
+  to {
+    --percent-nav-root_transparent: 25%;
+  }
+}
+
+@keyframes percent25To35 {
+  from {
+    --percent-nav-root_transparent: 25%;
+  }
+
+  to {
+    --percent-nav-root_transparent: 35%;
+  }
+}
+
+@keyframes percent65To75 {
+  from {
+    --percent-nav-root_filled: 65%;
+  }
+
+  to {
+    --percent-nav-root_filled: 75%;
+  }
+}
+
+@keyframes percent75To65 {
+  from {
+    --percent-nav-root_filled: 75%;
+  }
+
+  to {
+    --percent-nav-root_filled: 65%;
   }
 }

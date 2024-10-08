@@ -1,8 +1,12 @@
 html {
-  font-family: 'Rubik', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Rubik", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
   font-size: 14px;
   line-height: 1.272;
   font-weight: 400;
+
+  height: 100svh;
+  width: 100svw;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -76,4 +80,10 @@ html.dark {
   position: relative;
   margin: 0;
   padding: 0;
+}
+
+body {
+  min-height: 100svh;
+  height: max-content;
+  width: 100%;
 }

@@ -1,0 +1,34 @@
+---
+import { getHTMLIcon } from "./iconsModule";
+
+const gitString = getHTMLIcon("git");
+const matrixString = getHTMLIcon("matrix");
+---
+<footer>
+  <section class="_credits">
+    <span>
+      <a target="_blank" rel="noreferrer" href="https://git.outfoxxed.me/outfoxxed">outfoxxed</a>
+      <em>[Main Developer]</em>
+    </span>
+    <span>
+      <a target="_blank" rel="noreferrer" href="https://github.com/Xanazf">Xanazf</a>
+      <em>[Web Designer & Developer]</em>
+    </span>
+  </section>
+  <section class="_socials">
+    <span class="matrix">
+      <a href="https://matrix.to/#/#quickshell:outfoxxed.me" target="_blank" rel="noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256">
+          <path fill="currentColor" d={matrixString}/>
+        </svg>
+      </a>
+    </span>
+    <span class="git">
+      <a href="https://git.outfoxxed.me/outfoxxed/quickshell" target="_blank" rel="noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 92 92">
+          <path fill="currentColor" d={gitString}/>
+        </svg>
+      </a>
+    </span>
+  </section>
+</footer>
