@@ -13,7 +13,7 @@
 }
 
 [data-scope="accordion"][data-part="item-trigger"] {
-  background-color: hsl(var(--bg-900));
+  background-color: transparent;
   position: relative;
   border: unset;
   border-radius: 6px;
@@ -46,14 +46,15 @@
     position: absolute;
     border-radius: 6px;
     z-index: -1;
-    inset: -1px;
-    background-color: hsla(var(--green) 80 70 / 0.3);
-    transition: background-color 0.3s;
+    inset: -0px;
+    /*border: 1px solid hsla(var(--green) 80 70 / 0.3);*/
+    border: 1px solid hsl(var(--accent-700));
+    transition: border-color 0.3s;
   }
 
   &:hover {
     &::before {
-      background-color: hsla(var(--green) 80 70 / 0.6);
+      border-color: hsla(var(--accent-500));
     }
   }
 }
@@ -70,8 +71,20 @@
   margin-left: 3px;
 
   &:hover {
-    background-color: hsl(var(--blue) 30 30);
+    background-color: hsl(var(--blue) 20 80);
   }
+}
+
+html.dark [data-scope="accordion"][data-part="item-indicator"]:hover {
+  background-color: hsl(var(--blue) 30 30);
+}
+
+.nav-shevron {
+  color: black;
+}
+
+html.dark .nav-shevron {
+  color: white;
 }
 
 [data-scope="accordion"][data-part="item-indicator"][data-state="open"] {

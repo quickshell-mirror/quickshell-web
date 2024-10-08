@@ -216,10 +216,10 @@
 
 .typeprops {
   & .typeprop-root {
-    border: 1px solid hsla(var(--prop-color) / 0.3);
+    border: 1px solid hsla(var(--prop-color) / 0.6);
 
     &:hover {
-      border: 1px solid hsla(var(--prop-color) / 0.6);
+      border: 1px solid hsla(var(--prop-color));
 
       & .type-datatype {
         opacity: 1;
@@ -232,12 +232,22 @@
   }
 }
 
-.typefuncs {
-  & .typefunc-root {
-    border: 1px solid hsla(var(--func-color) / 0.3);
+html.dark .typeprops {
+  & .typeprop-root {
+    border: 1px solid hsla(var(--prop-color) / 0.3);
 
     &:hover {
-      border: 1px solid hsla(var(--func-color) / 0.6);
+      border: 1px solid hsla(var(--prop-color) / 0.6);
+    }
+  }
+}
+
+.typefuncs {
+  & .typefunc-root {
+    border: 1px solid hsla(var(--func-color) / 0.6);
+
+    &:hover {
+      border: 1px solid hsla(var(--func-color));
 
       & .type-datatype {
         opacity: 1;
@@ -264,12 +274,22 @@
   }
 }
 
-.typesignals {
-  & .typesignal-root {
-    border: 1px solid hsla(var(--signal-color) / 0.3);
+html.dark .typefuncs {
+  & .typefunc-root {
+    border: 1px solid hsla(var(--func-color) / 0.3);
 
     &:hover {
-      border: 1px solid hsla(var(--signal-color) / 0.6);
+      border: 1px solid hsla(var(--func-color) / 0.6);
+    }
+  }
+}
+
+.typesignals {
+  & .typesignal-root {
+    border: 1px solid hsla(var(--signal-color) / 0.6);
+
+    &:hover {
+      border: 1px solid hsla(var(--signal-color));
 
       & .typesignal-doclink {
         opacity: 1;
@@ -306,12 +326,22 @@
   }
 }
 
-.typevariants {
-  & .typevariant-root {
-    border: 1px solid hsla(var(--var-color) / 0.3);
+html.dark .typesignals {
+  & .typesignal-root {
+    border: 1px solid hsla(var(--signal-color) / 0.3);
 
     &:hover {
-      border: 1px solid hsla(var(--var-color) / 0.6);
+      border: 1px solid hsla(var(--signal-color) / 0.6);
+    }
+  }
+}
+
+.typevariants {
+  & .typevariant-root {
+    border: 1px solid hsla(var(--var-color) / 0.6);
+
+    &:hover {
+      border: 1px solid hsla(var(--var-color));
 
       & .typevariant-doclink {
         opacity: 1;
@@ -330,6 +360,16 @@
         opacity: 0.8;
         scale: 75%;
       }
+    }
+  }
+}
+
+html.dark .typevariants {
+  & .typevariant-root {
+    border: 1px solid hsla(var(--var-color) / 0.3);
+
+    &:hover {
+      border: 1px solid hsla(var(--var-color) / 0.6);
     }
   }
 }

@@ -16,9 +16,10 @@ html {
   color-scheme: light dark;
   /* accent */
   --green: 141;
-  --accent-400: var(--green) 100 67;
-  --accent-500: var(--green) 100 57;
-  --accent-600: var(--green) 98 50;
+  --accent-400: var(--green) 90 57;
+  --accent-500: var(--green) 90 47;
+  --accent-600: var(--green) 88 40;
+	--accent-700: var(--green) 70 40;
 
   /* secondary */
   --blue: 224;
@@ -37,6 +38,17 @@ html {
   --bg-700: var(--white) 12 56;
   --bg-800: var(--white) 12 36;
   --bg-900: var(--white) 12 16;
+
+  /* docs */
+  --prop-color: 350 78 70;
+  --prop-link-color: 350 78 60;
+  --func-color: 50 68 50;
+  --func-link-color: 50 58 55;
+  --signal-color: 270 78 70;
+  --signal-link-color: 270 85 60;
+  --var-color: 190 78 70;
+  --var-link-color: 190 85 60;
+  --inner-param-color: 215 60 70;
 }
 
 html.dark {
@@ -45,6 +57,7 @@ html.dark {
   --accent-400: var(--green) 100 67;
   --accent-500: var(--green) 95 55;
   --accent-600: var(--green) 90 40;
+  --accent-700: var(--green) 80 30;
 
   /* secondary */
   --white: 194;

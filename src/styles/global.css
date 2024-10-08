@@ -13,8 +13,8 @@
 
 /* color styling */
 .header {
-  background-color: hsl(var(--blue) 100 88);
-  box-shadow: 0 3px 3px 3px hsla(var(--white) 100 0 / 0.3);
+  background-color: hsl(var(--bg-400));
+  box-shadow: 0 3px 3px 3px hsla(var(--white) 100 0 / 0.1);
 }
 
 .baselayout,

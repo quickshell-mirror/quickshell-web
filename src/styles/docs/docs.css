@@ -17,6 +17,7 @@
 }
 
 .c-breadcrumbs {
+  --color-link-breadcrumbs: hsl(var(--accent-600));
   margin-top: 1.056rem;
   margin-bottom: 0.318rem;
   max-width: 100svw;
@@ -80,7 +81,6 @@ ul {
 }
 
 @media (min-width: 768px) {
-
   .docs,
   .docslayout-root {
     gap: 0.648rem;
