@@ -45,21 +45,26 @@
   width: 75%;
   flex-wrap: wrap;
   gap: 2rem;
+  z-index: 0;
 }
 
 .main-page_link-card {
   all: unset;
   position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 9.67rem;
   border-radius: 9px;
-  text-align: center;
   overflow: hidden;
   border: 1px solid transparent;
   transition: border-color 0.3s;
 
   &:hover {
     cursor: pointer;
+    text-decoration: none;
   }
 
   &::before {

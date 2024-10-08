@@ -35,7 +35,7 @@
   font-size: 1.614rem;
   max-height: 500px;
 
-  & > svg {
+  &>svg {
     height: 100%;
     width: 24px;
   }
@@ -51,7 +51,6 @@
 
   & .toc-mobile {
     position: absolute;
-    overflow-y: scroll;
     top: 2.6rem;
     right: -1rem;
     width: 0;
@@ -65,17 +64,17 @@
       display: none;
     }
 
-    transition:
-      width 0.3s ease,
-      height 0.3s ease,
-      background-color 0.3s ease,
-      backdrop-filter 0.3s ease,
-      padding 0.3s ease;
+    transition: width 0.3s ease,
+    height 0.3s ease,
+    background-color 0.3s ease,
+    backdrop-filter 0.3s ease,
+    padding 0.3s ease;
 
     &.shown {
+      overflow-y: scroll;
       padding: 0.3rem;
       width: var(--width);
-      height: 50svh;
+      height: max(min(100svh, 800px), calc(100svh - 8rem));
       background-color: hsl(var(--bg-900) / 0.6);
       backdrop-filter: blur(3px) saturate(180%);
       display: flex;
@@ -86,8 +85,10 @@
 }
 
 @media (max-width: 1280px) {
-  .toc-toggle {
-    --width: 70svw;
+  @media (min-width: 768px) {
+    .toc-toggle {
+      --width: 25svw;
+    }
   }
 }
 
@@ -120,7 +121,7 @@
       list-style: none;
 
       &.active {
-        & > .toc_a {
+        &>.toc_a {
           color: hsl(var(--green) 72 60);
         }
       }

@@ -1,9 +1,5 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-
-function handleCardClick(target: string): void {
-  window.location.href = target;
-}
 ---
 <BaseLayout title="Quickshell" description="A fully user customizable desktop shell" image="/quickshell.png">
   <div class="main-page_hero">
@@ -12,18 +8,18 @@ function handleCardClick(target: string): void {
       <h3>Based on QtQuick</h3>
     </section>
     <section class="main-page_links">
-      <button type="button" class="main-page_link-card" onclick={() => handleCardClick("/docs/configuration")}>
-        <h3><a href="/docs/configuration">Configuration</a></h3>
-      </button>
-      <button class="main-page_link-card">
-        <h3><a href="/docs/types">Type Definitions</a></h3>
-      </button>
-      <button class="main-page_link-card">
-        <h3><a href="https://git.outfoxxed.me/outfoxxed/quickshell-examples">Examples</a></h3>
-      </button>
-      <button class="main-page_link-card">
-        <h3><a href="https://git.outfoxxed.me/outfoxxed/quickshell">Source</a></h3>
-      </button>
+      <a href="/docs/configuration" class="main-page_link-card">
+        <h3>Configuration</h3>
+      </a>
+      <a href="/docs/types" class="main-page_link-card">
+        <h3>Type Definitions</h3>
+      </a>
+      <a href="https://git.outfoxxed.me/outfoxxed/quickshell-examples" class="main-page_link-card">
+        <h3>Examples</h3>
+      </a>
+      <a href="https://git.outfoxxed.me/outfoxxed/quickshell" class="main-page_link-card">
+        <h3>Source</h3>
+      </a>
     </section>
   </div>
 </BaseLayout>

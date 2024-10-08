@@ -132,7 +132,7 @@ export const Tree: Component<TreeProps> = props => {
                 target="_blank"
                 rel="noreferrer"
               >
-                QtQuick Type Reference
+                QtQuick Types
               </a>
             </span>
           </Accordion.ItemTrigger>
