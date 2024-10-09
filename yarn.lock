@@ -4985,24 +4985,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked-alert@npm:^2.0.2":
-  version: 2.1.0
-  resolution: "marked-alert@npm:2.1.0"
-  peerDependencies:
-    marked: ">=7.0.0"
-  checksum: 10c0/36f684c30672f39c819dd7c225dc9841635da1df94cf0724ae84c468044fec1c9d06d55e6f6bb565992331e5ce1fd8dcf119c3ed7897b927fac4f4e884d51816
-  languageName: node
-  linkType: hard
-
-"marked@npm:^14.1.0":
-  version: 14.1.2
-  resolution: "marked@npm:14.1.2"
-  bin:
-    marked: bin/marked.js
-  checksum: 10c0/fb636a97a2f11acf4cca092836020281ff3bc573f3295b4f4639135a6188e4815b910ec8572eb5686e25580c9c383daf605b4a00fcb5e5626e5c65914755e4bd
-  languageName: node
-  linkType: hard
-
 "mdast-util-definitions@npm:^6.0.0":
   version: 6.0.0
   resolution: "mdast-util-definitions@npm:6.0.0"
@@ -6329,16 +6311,17 @@ __metadata:
     "@types/node": "npm:^20.14.11"
     astro: "npm:^4.15.9"
     astro-breadcrumbs: "npm:^2.3.1"
-    marked: "npm:^14.1.0"
-    marked-alert: "npm:^2.0.2"
     node: "npm:22.7.0"
     pagefind: "npm:^1.1.1"
+    rehype-stringify: "npm:^10.0.1"
     remark-github-blockquote-alert: "npm:^1.2.1"
     remark-parse: "npm:^11.0.0"
+    remark-rehype: "npm:^11.1.1"
     shiki: "npm:^1.11.0"
     solid-devtools: "npm:^0.30.1"
     solid-js: "npm:^1.8.18"
     typescript: "npm:^5.5.3"
+    unified: "npm:^11.0.5"
   languageName: unknown
   linkType: soft
 
@@ -6399,7 +6382,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rehype-stringify@npm:^10.0.0":
+"rehype-stringify@npm:^10.0.0, rehype-stringify@npm:^10.0.1":
   version: 10.0.1
   resolution: "rehype-stringify@npm:10.0.1"
   dependencies:
@@ -6490,7 +6473,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remark-rehype@npm:^11.0.0, remark-rehype@npm:^11.1.0":
+"remark-rehype@npm:^11.0.0, remark-rehype@npm:^11.1.0, remark-rehype@npm:^11.1.1":
   version: 11.1.1
   resolution: "remark-rehype@npm:11.1.1"
   dependencies:

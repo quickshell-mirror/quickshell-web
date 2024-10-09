@@ -1,5 +1,8 @@
-import { marked } from "marked";
-import markedAlert from "marked-alert";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
+import { remarkAlert } from "remark-github-blockquote-alert";
 
 import {
   //  Flag,
@@ -77,10 +80,19 @@ export function groupRoutes(routes: RouteData[]): GroupedRoutes {
 
 export function parseMarkdown(text?: string, title?: string) {
   if (!text) {
-    return marked.parse(`${title}`);
+		return unified()
+			.use(remarkParse)
+			.use(remarkRehype)
+			.use(rehypeStringify)
+			.process(title);
   }
 
-  return marked.use(markedAlert()).parse(text);
+	return unified()
+		.use(remarkParse)
+		.use(remarkAlert)
+		.use(remarkRehype)
+		.use(rehypeStringify)
+		.process(text);
 }
 
 export function getQMLTypeLinkObject(unparsed: string) {
