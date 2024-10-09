@@ -1,21 +1,19 @@
 ---
-import {
-  parseMarkdown,
-  getQMLTypeLink,
-} from "@config/io/helpers";
+import { getQMLTypeLink } from "@config/io/helpers";
 import type {
   QMLTypeLinkObject,
   QuickshellProps,
 } from "@config/io/types";
 import { Tag, Flag } from "@icons";
 
+import TypeDetails from "./TypeDetails.astro"
+
 export interface Props {
   propsKeys: string[];
   propsData: QuickshellProps;
-  title: string;
 }
 
-const { propsKeys, propsData, title } = Astro.props;
+const { propsKeys, propsData } = Astro.props;
 ---
 <ul class="typedata typeprops">
   {
@@ -73,9 +71,7 @@ const { propsKeys, propsData, title } = Astro.props;
               </p>
             ):null
           }
-          <section class="typedata-details">
-            <div id="injectedMd" class="typedata-detailsdata" set:html={parseMarkdown(propData.details, title)} />
-          </section>
+          <TypeDetails markdown={propData.details} />
         </li>
       )
     })

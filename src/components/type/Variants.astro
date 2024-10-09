@@ -1,15 +1,14 @@
 ---
 import type { QuickshellVariant } from "@config/io/types";
 import { FourDiamonds } from "../icons";
-import { parseMarkdown } from "@src/config/io/helpers";
+import TypeDetails from "./TypeDetails.astro";
 
 export interface Props {
   variantKeys: string[];
   variantsData: QuickshellVariant;
-  title: string;
 }
 
-const { variantKeys, variantsData, title } = Astro.props;
+const { variantKeys, variantsData } = Astro.props;
 ---
 <ul class="typedata typevariants">
   {
@@ -34,9 +33,7 @@ const { variantKeys, variantsData, title } = Astro.props;
             )
             :null
           }
-          <section class="typedata-details">
-            <div class="typedata-detailsdata" set:html={parseMarkdown(variantData.details, title)} />
-          </section>
+          <TypeDetails markdown={variantData.details} />
         </li>
       )
     })

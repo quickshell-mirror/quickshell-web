@@ -12,28 +12,27 @@
   "dependencies": {
     "@ark-ui/solid": "^3.5.0",
     "@astrojs/check": "^0.9.3",
+    "@astrojs/markdown-remark": "^5.1.0",
     "@astrojs/mdx": "^3.1.7",
     "@astrojs/solid-js": "^4.4.2",
+    "@hbsnow/rehype-sectionize": "^1.0.7",
     "@pagefind/default-ui": "^1.1.1",
     "@types/node": "^20.14.11",
     "astro": "^4.15.9",
     "astro-breadcrumbs": "^2.3.1",
+    "hast-util-from-html": "^2.0.3",
     "node": "npm:22.7.0",
-    "rehype-stringify": "^10.0.1",
     "remark-github-blockquote-alert": "^1.2.1",
-    "remark-parse": "^11.0.0",
-    "remark-rehype": "^11.1.1",
     "solid-devtools": "^0.30.1",
     "solid-js": "^1.8.18",
     "typescript": "^5.5.3",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.2",
     "@biomejs/biome": "^1.8.3",
-    "@hbsnow/rehype-sectionize": "^1.0.7",
-    "pagefind": "^1.1.1",
-    "shiki": "^1.11.0"
+    "pagefind": "^1.1.1"
   },
   "packageManager": "yarn@4.5.0"
 }

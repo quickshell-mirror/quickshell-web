@@ -1,10 +1,9 @@
 import { defineConfig } from "astro/config";
 import solidJs from "@astrojs/solid-js";
-import { remarkAlert } from "remark-github-blockquote-alert";
-import sectionize from "@hbsnow/rehype-sectionize";
 import mdx from "@astrojs/mdx";
 
 import pagefind from "./pagefind";
+import { markdownConfig } from "./src/config/io/markdown.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,27 +14,5 @@ export default defineConfig({
     mdx(),
     pagefind(),
   ],
-  markdown: {
-    syntaxHighlight: "shiki",
-    shikiConfig: {
-      theme: "material-theme-ocean",
-      wrap: true,
-    },
-    remarkPlugins: [
-      [
-        remarkAlert,
-        {
-          legacyTitle: true,
-        },
-      ],
-    ],
-    rehypePlugins: [
-      [
-        sectionize,
-        {
-          idPropertyName: "id",
-        },
-      ],
-    ],
-  },
+  markdown: markdownConfig,
 });

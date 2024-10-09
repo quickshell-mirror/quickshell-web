@@ -3,18 +3,15 @@ import type {
   QMLTypeLinkObject,
   QuickshellFunction,
 } from "@config/io/types";
-import {
-  parseMarkdown,
-  getQMLTypeLink,
-} from "@config/io/helpers";
+import { getQMLTypeLink } from "@config/io/helpers";
 import { Tag } from "@icons";
+import TypeDetails from "./TypeDetails.astro"
 
 export interface Props {
   funcData: QuickshellFunction[];
-  title: string;
 }
 
-const { funcData, title } = Astro.props;
+const { funcData } = Astro.props;
 ---
 <ul class="typedata typefuncs">
   {
@@ -51,9 +48,7 @@ const { funcData, title } = Astro.props;
             )
             :null
           }
-          <section class="typedata-details">
-            <div class="typedata-detailsdata" set:html={parseMarkdown(item.details, title)}/>
-          </section>
+          <TypeDetails markdown={item.details} />
         </li>
       )
     })

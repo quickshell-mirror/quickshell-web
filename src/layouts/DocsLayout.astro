@@ -7,7 +7,6 @@ import PreTheme from "@config/PreTheme.astro";
 import Header from "@components/Header.astro";
 import Head from "@config/Head.astro";
 import Nav from "@components/navigation/sidebars/Nav.astro";
-import CreateQMLCodeButtons from "@components/hooks/CreateQMLCodeButtons.astro";
 import "@styles/global.css";
 import type { ConfigHeading } from "@src/components/navigation/sidebars/types";
 import Footer from "@src/components/Footer.astro";
@@ -63,7 +62,6 @@ if (url[2]) {
     <link rel="canonical" href={Astro.url} />
     <PreTheme />
     <CreateCopyButtons />
-    <CreateQMLCodeButtons/>
   </head>
   <body class="docslayout">
     <Header headings={headings}/>

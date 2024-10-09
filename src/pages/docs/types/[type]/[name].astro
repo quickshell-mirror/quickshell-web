@@ -1,6 +1,6 @@
 ---
 import {
-  parseMarkdown,
+  processQsMarkdown,
   getQMLTypeLink,
 } from "@config/io/helpers";
 import { generateTypeData } from "@config/io/generateTypeData";
@@ -11,8 +11,6 @@ import Properties from "@components/type/Properties.astro";
 import Functions from "@components/type/Functions.astro";
 import Signals from "@components/type/Signals.astro";
 import Variants from "@components/type/Variants.astro";
-import TransformMDCodeblocks from "@components/hooks/TransformMDCodeblocks.astro";
-import TransformLinks from "@components/hooks/TransformLinks.astro";
 
 export async function getStaticPaths() {
   const routes = await generateTypeData();
@@ -51,11 +49,8 @@ const sidebarData = {
 
 const superLink = data.super ? getQMLTypeLink(data.super) : null;
 
-const details = parseMarkdown(data.details, route.name);
+const details = data.details ? await processQsMarkdown(data.details) : null;
 ---
-<TransformLinks/>
-<TransformMDCodeblocks/>
-
 <DocsLayout title={`${route.name} - ${route.type}`} description={data?.description ?? ""}>
   <div class="docs">
     <div class="typedocs-content">
@@ -87,34 +82,30 @@ const details = parseMarkdown(data.details, route.name);
                   </span>
                 ))}</div>
               ):null}
-              <span id="injectedMd" set:html={details}/>
+              {details ? <span set:html={details}/> : null}
               {!details ? (<span class="toparse">{data.description}</span>):null}
             </subheading>
             { data.properties && propsKeys ? (
               <Properties
                 propsData={data.properties}
                 propsKeys={propsKeys!}
-                title={route.name}
               />
             ): null}
             { data.functions && data.functions.length > 0 ? (
               <Functions
                 funcData={data.functions}
-                title={route.name}
               />
             ): null}
             { data.signals && signalKeys ? (
               <Signals
                 signalsData={data.signals}
                 signalKeys={signalKeys}
-                title={route.name}
               />
             ):null}
             { data.variants && variantKeys ? (
               <Variants
                 variantsData={data.variants}
                 variantKeys={variantKeys}
-                title={route.name}
               />
             ):null}
           </section>

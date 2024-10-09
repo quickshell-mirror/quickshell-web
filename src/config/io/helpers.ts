@@ -1,8 +1,4 @@
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import rehypeStringify from "rehype-stringify";
-import { remarkAlert } from "remark-github-blockquote-alert";
+import * as markdownUtils from "./markdown.ts";
 
 import {
   //  Flag,
@@ -10,7 +6,8 @@ import {
   Tag,
   FourDiamonds,
   RoundBrackets,
-} from "@icons";
+  // @icons breaks when imported indirectly from astro.config.mjs
+} from "../../components/icons.tsx";
 import type {
   ConfigHeading,
   ConfigTOC,
@@ -78,21 +75,8 @@ export function groupRoutes(routes: RouteData[]): GroupedRoutes {
   }, defaultValue);
 }
 
-export function parseMarkdown(text?: string, title?: string) {
-  if (!text) {
-		return unified()
-			.use(remarkParse)
-			.use(remarkRehype)
-			.use(rehypeStringify)
-			.process(title);
-  }
-
-	return unified()
-		.use(remarkParse)
-		.use(remarkAlert)
-		.use(remarkRehype)
-		.use(rehypeStringify)
-		.process(text);
+export async function processQsMarkdown(markdown: string): Promise<string> {
+  return await markdownUtils.processMarkdown(markdown);
 }
 
 export function getQMLTypeLinkObject(unparsed: string) {

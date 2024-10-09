@@ -1,15 +1,14 @@
 ---
 import type { QuickshellSignal } from "@config/io/types";
 import { Tag, PowerCord } from "@icons";
-import { parseMarkdown } from "@config/io/helpers";
+import TypeDetails from "./TypeDetails.astro";
 
 export interface Props {
   signalKeys: string[];
   signalsData: QuickshellSignal;
-  title: string;
 }
 
-const { signalKeys, signalsData, title } = Astro.props;
+const { signalKeys, signalsData } = Astro.props;
 ---
 <ul class="typedata typesignals">
   {
@@ -44,9 +43,7 @@ const { signalKeys, signalsData, title } = Astro.props;
               </p>
             ) : null
           }
-          <section class="typedata-details">
-            <div class="typedata-detailsdata" set:html={parseMarkdown(signalData.details, title)} />
-          </section>
+          <TypeDetails markdown={signalData.details} />
         </li>
       )
     })
