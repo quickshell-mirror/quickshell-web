@@ -75,7 +75,9 @@ export function groupRoutes(routes: RouteData[]): GroupedRoutes {
   }, defaultValue);
 }
 
-export async function processQsMarkdown(markdown: string): Promise<string> {
+export async function processQsMarkdown(
+  markdown: string
+): Promise<string> {
   return await markdownUtils.processMarkdown(markdown);
 }
 

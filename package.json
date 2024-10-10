@@ -20,6 +20,7 @@
     "@types/node": "^20.14.11",
     "astro": "^4.15.9",
     "astro-breadcrumbs": "^2.3.1",
+    "hast": "^1.0.0",
     "hast-util-from-html": "^2.0.3",
     "node": "npm:22.7.0",
     "remark-github-blockquote-alert": "^1.2.1",
