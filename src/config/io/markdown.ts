@@ -1,7 +1,7 @@
 import type { Parent, Node } from "unist";
 import { visit, CONTINUE, SKIP } from "unist-util-visit";
 import { fromHtml } from "hast-util-from-html";
-import type { Root, Element } from "hast";
+import type { Root } from "hast";
 import type {
   AstroMarkdownOptions,
   MarkdownProcessor,
@@ -69,34 +69,21 @@ const rehypeRewriteTypelinks: RehypePlugin<[]> = () => {
   };
 };
 
-const shikiRewriteTypelinks = (): ShikiTransformer => {
-  return {
-    name: "rewrite-typelinks",
-    preprocess(code, _options) {
-      const qtRegExp = /QT_(\w+)/g;
-      const qsRegExp = /QS_(\w+)/g;
-      // WARN: need to change the code link identifier to this
-      // const hasTypelinks = code.search(/TYPE99(\w+.)99TYPE/g) !== -1;
-      const hasQTLink = code.search(qtRegExp) !== -1;
-      const hasQSLink = code.search(qsRegExp) !== -1;
+const shikiRewriteTypelinks: ShikiTransformer = {
+  name: "rewrite-typelinks",
+  postprocess(code, _options) {
+    // WARN: need to change the code link identifier to this
+    const regExp = /TYPE99(\w+.)99TYPE/g;
+    const hasTypelinks = code.search(regExp) !== -1;
 
-      if (hasQTLink) {
-        code.replace(qtRegExp, (_full: string, match: string) => {
-          const linkObject = getQMLTypeLinkObject(match);
-          const link = getQMLTypeLink(linkObject);
-          return `<a href=${link}>${linkObject.name ?? ""}</a>`;
-        });
-      }
-
-      if (hasQSLink) {
-        code.replace(qsRegExp, (_full: string, match: string) => {
-          const linkObject = getQMLTypeLinkObject(match);
-          const link = getQMLTypeLink(linkObject);
-          return `<a href=${link}>${linkObject.name ?? ""}</a>`;
-        });
-      }
-    },
-  };
+    if (hasTypelinks) {
+      code.replace(regExp, (_full: string, match: string) => {
+        const linkObject = getQMLTypeLinkObject(match);
+        const link = getQMLTypeLink(linkObject);
+        return `<a href=${link}>${linkObject.name ?? ""}</a>`;
+      });
+    }
+  },
 };
 
 export const markdownConfig: AstroMarkdownOptions = {
@@ -104,7 +91,7 @@ export const markdownConfig: AstroMarkdownOptions = {
   shikiConfig: {
     theme: "material-theme-ocean",
     wrap: true,
-    transformers: [shikiRewriteTypelinks()],
+    transformers: [shikiRewriteTypelinks],
   },
   remarkPlugins: [[remarkAlert, { legacyTitle: true }]],
   rehypePlugins: [

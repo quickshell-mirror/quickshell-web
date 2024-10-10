@@ -7,6 +7,7 @@ import { markdownConfig } from "./src/config/io/markdown.ts";
 
 // https://astro.build/config
 export default defineConfig({
+  markdown: markdownConfig,
   integrations: [
     solidJs({
       devtools: true,
@@ -14,5 +15,4 @@ export default defineConfig({
     mdx(),
     pagefind(),
   ],
-  markdown: markdownConfig,
 });
