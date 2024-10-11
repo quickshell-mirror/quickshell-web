@@ -103,13 +103,12 @@
   .nav-wrapper {
     display: block;
     width: 250px;
-    position: fixed;
-    top: 5rem;
-    bottom: 3rem;
+    position: sticky;
+    top: 4rem;
     left: 1.618rem;
     flex-shrink: 0;
     overflow: scroll;
-    max-height: 90svh;
+    max-height: calc(100svh - 8rem);
     scrollbar-width: none;
     -ms-overflow-style: none;
     z-index: 10;

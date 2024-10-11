@@ -81,6 +81,7 @@ ul {
 }
 
 @media (min-width: 768px) {
+
   .docs,
   .docslayout-root {
     gap: 0.648rem;
@@ -88,7 +89,8 @@ ul {
 
   .docslayout-root {
     margin-left: calc(1.618rem + 260px);
-    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: row;
   }
 
   .docs-content {
@@ -109,6 +111,11 @@ ul {
 }
 
 @media (min-width: 1280px) {
+  .docs {
+    display: flex;
+    flex-direction: row;
+  }
+
   .docs-content {
     & section {
       max-width: 45svw;
@@ -116,7 +123,7 @@ ul {
   }
 
   .docslayout-root {
-    margin-inline: calc(10svw + 260px);
+    margin-inline: 15svw;
   }
 
   .docslayout-inner {

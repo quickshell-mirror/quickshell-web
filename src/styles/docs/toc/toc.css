@@ -100,7 +100,7 @@
   .toc-wrapper {
     background-color: transparent;
     display: block;
-    position: fixed;
+    position: sticky;
     top: 5rem;
     right: 8svw;
     width: 18rem;

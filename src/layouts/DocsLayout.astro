@@ -67,8 +67,8 @@ if (url[2]) {
     <Header headings={headings}/>
     <div class="docslayout-root">
       <Nav mobile={false}/>
-      <div class="docslayout-inner">
-        <Breadcrumbs  crumbs={customBreadcrumbs} linkTextFormat="sentence" truncated={true}>
+      <div class="docslayout-inner" data-pagefind-body>
+        <Breadcrumbs  crumbs={customBreadcrumbs} linkTextFormat="sentence" truncated={true} data-pagefind-ignore>
           <svg
             slot="index"
             xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ if (url[2]) {
             ></path></svg
           >
         </Breadcrumbs>
-        <slot />
+          <slot />
       </div>
     </div>
     <Footer />

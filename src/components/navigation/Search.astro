@@ -138,12 +138,12 @@ import { getQMLTypeLinkObject, getQMLTypeLink, getIconForLink } from '@src/confi
 						showSubResults: true,
             processResult: (result: { url: string; excerpt:string; sub_results: Array<{ url: string, excerpt:string }> }) => {
 							result.url = formatURL(result.url);
+              result.excerpt = processExcerpt(result.excerpt)
 							result.sub_results = result.sub_results.map((sub_result) => {
 								sub_result.url = formatURL(sub_result.url);
                 sub_result.excerpt = processExcerpt(sub_result.excerpt)
 								return sub_result;
 							});
-              result.excerpt = processExcerpt(result.excerpt)
 						},
 					});
 				});

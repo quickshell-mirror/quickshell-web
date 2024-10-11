@@ -1,6 +1,7 @@
 ---
 import DocsLayout from "@layouts/DocsLayout.astro";
 import { generateTypeData } from "@config/io/generateTypeData";
+import { processQsMarkdown } from "@src/config/io/helpers";
 
 export async function getStaticPaths() {
   const routes = await generateTypeData();
@@ -24,6 +25,9 @@ export async function getStaticPaths() {
     });
 }
 const { route, children } = Astro.props;
+const details = route.data.details
+  ? await processQsMarkdown(route.data.details)
+  : null;
 ---
 
 <DocsLayout
@@ -32,7 +36,7 @@ const { route, children } = Astro.props;
 >
   <hr />
   <h2 class="typedocs-title">{route.type[0].toUpperCase() + route.type.slice(1)} Definitions</h2>
-  <div class="root-nav">
+  <div class="root-nav" data-pagefind-ignore>
     {route.data.contains!.map((childName:string) => 
       (
       <div class="root-nav-entry">
@@ -46,4 +50,5 @@ const { route, children } = Astro.props;
       )
     )}
   </div>
+  {details ? <span class="parsedMD" set:html={details}/> : (<span class="toparse">{route.data.description}</span>)}
 </DocsLayout>

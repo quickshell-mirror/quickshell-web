@@ -49,23 +49,26 @@ const sidebarData = {
 
 const superLink = data.super ? getQMLTypeLink(data.super) : null;
 
-const details = data.details ? await processQsMarkdown(data.details) : null;
+const details = data.details
+  ? await processQsMarkdown(data.details)
+  : null;
 ---
 <DocsLayout title={`${route.name} - ${route.type}`} description={data?.description ?? ""}>
   <div class="docs">
     <div class="typedocs-content">
       <hr />
-      <h2 class="typedocs-title">
+      <h2 class="typedocs-title" data-pagefind-weight="10">
         {route.name}:
           {data.super ? (
             <a
               target="_blank"
               href={superLink!}
+              data-pagefind-ignore
             >
             {data.super.name}
             </a>
           ):(
-            <span class="type-datatype">{data.type}</span>
+            <span class="type-datatype" data-pagefind-ignore>{data.type}</span>
           )
           }
       </h2>
@@ -73,17 +76,16 @@ const details = data.details ? await processQsMarkdown(data.details) : null;
         route && data ? (
           <section class="typedocs-data typedata">
             <subheading class="typedocs-subheading">
-              <code class="type-module">import {data.module}</code>
+              <code class="type-module" data-pagefind-ignore>import {data.module}</code>
               {data.flags ? (
-                <div class="type-flags">{data.flags.map(flag => (
+                <div class="type-flags" data-pagefind-ignore>{data.flags.map(flag => (
                   <span class="type-flag">
                     <Flag client:idle/>
                     {flag}
                   </span>
                 ))}</div>
               ):null}
-              {details ? <span set:html={details}/> : null}
-              {!details ? (<span class="toparse">{data.description}</span>):null}
+              {details ? <span class="parsedMD" set:html={details}/> : (<span class="toparse">{data.description}</span>)}
             </subheading>
             { data.properties && propsKeys ? (
               <Properties
@@ -112,7 +114,7 @@ const details = data.details ? await processQsMarkdown(data.details) : null;
         ) : null
       }
     </div>
-    <TOC mobile={false} types={sidebarData}/>
+    <TOC mobile={false} types={sidebarData} data-pagefind-ignore/>
   </div>
 </DocsLayout>
 
