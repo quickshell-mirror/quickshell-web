@@ -74,8 +74,6 @@
 }
 
 .typedocs-content {
-  flex-grow: 1;
-
   &>p {
     margin-block: 0.618rem;
   }

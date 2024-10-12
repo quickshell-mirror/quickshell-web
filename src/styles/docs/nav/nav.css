@@ -31,11 +31,11 @@
   & .nav-items {
     position: absolute;
     z-index: 11;
-    overflow-y: scroll;
-    top: 2.5rem;
+    overflow: hidden;
+    top: 2.6rem;
     left: -1rem;
     width: 0;
-    height: 0;
+    height: calc(100svh - 2.5rem);
     font-size: 0.745rem;
     font-weight: 600;
     scrollbar-width: none;
@@ -52,9 +52,7 @@
     padding 0.3s ease;
 
     &.shown {
-      padding: 0.3rem;
       width: 100svw;
-      height: 50svh;
       background-color: hsl(var(--bg-900) / 0.6);
       backdrop-filter: blur(3px) saturate(180%);
       display: flex;
@@ -63,10 +61,19 @@
     }
 
     & .navtree {
+      padding: 1rem;
       height: 100%;
       width: 100%;
-      overflow: scroll;
-      padding: 6px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      margin-bottom: 4rem;
+      padding-left: 1rem;
+      text-wrap: nowrap;
+
+      & [data-part="item-trigger"] {
+        min-height: 3em;
+        max-width: 80%;
+      }
 
       & [data-part="item"] {
         margin-left: unset;
@@ -77,7 +84,6 @@
 
         & [data-part="item-content"] {
           & [data-part="item-trigger"] {
-            width: 93%;
             margin-left: 1em;
 
             & p {
@@ -86,8 +92,20 @@
           }
 
           & [data-part="item-content"] {
-            width: 80%;
-            margin-left: 24px;
+            max-width: 70%;
+            margin-left: 3.33em;
+
+            &>div {
+              min-height: 4em;
+              display: grid;
+
+              & a {
+                display: grid;
+                justify-items: start;
+                align-items: center;
+                min-height: 100%;
+              }
+            }
           }
         }
       }
@@ -95,7 +113,7 @@
   }
 }
 
-@media (min-width: 65rem) {
+@media (min-width: 85rem) {
   .nav-wrapper-mobile {
     display: none;
   }

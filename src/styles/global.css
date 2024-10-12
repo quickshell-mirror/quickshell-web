@@ -62,7 +62,7 @@ html.dark {
 .header {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100svw;
   z-index: 10;
   display: flex;
   align-items: center;
@@ -184,7 +184,7 @@ footer {
   }
 }
 
-@media (min-width: 65rem) {
+@media (min-width: 85rem) {
   html {
     font-size: 16px;
   }

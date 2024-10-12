@@ -3,29 +3,23 @@
 
 .docslayout-root {
   margin-inline: 0.618rem;
-  margin-top: 3.5rem;
+  margin-top: 4rem;
 }
 
-.docs,
-.docslayout-root {
+.docs {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
-.spacer-desktop {
-  display: none;
-}
-
-.c-breadcrumbs {
-  --color-link-breadcrumbs: hsl(var(--accent-600));
-  margin-top: 1.056rem;
-  margin-bottom: 0.318rem;
-  max-width: 100svw;
+.docslayout-inner {
+  min-height: 100svh;
 }
 
 .docs-content {
+  flex-grow: 1;
+
   & section {
-    max-width: 95svw;
+    max-width: 100svw;
     margin-block: 1.618rem;
   }
 
@@ -37,6 +31,17 @@
     margin-top: 0;
     margin-bottom: 0.318rem;
   }
+}
+
+.spacer-desktop {
+  display: none;
+}
+
+.c-breadcrumbs {
+  --color-link-breadcrumbs: hsl(var(--accent-600));
+  margin-top: 1.056rem;
+  margin-bottom: 0.318rem;
+  max-width: 100svw;
 }
 
 .heading {
@@ -81,17 +86,6 @@ ul {
 }
 
 @media (min-width: 65rem) {
-  .docs,
-  .docslayout-root {
-    gap: 0.648rem;
-  }
-
-  .docslayout-root {
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
-  }
-
   .docs-content {
     margin-inline: 1.272rem;
 
@@ -110,6 +104,12 @@ ul {
 }
 
 @media (min-width: 85rem) {
+  .docslayout-root {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  }
+
   .docs {
     display: flex;
     flex-direction: row;
@@ -124,9 +124,4 @@ ul {
   .docslayout-inner {
     min-width: 33.8rem;
   }
-}
-
-.docslayout-inner {
-  flex-grow: 1;
-  max-width: 100rem;
 }

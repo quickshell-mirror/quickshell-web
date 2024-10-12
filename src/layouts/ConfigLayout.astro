@@ -32,8 +32,8 @@ const { headings, frontmatter } = Astro.props;
       <hr />
       <slot />
     </div>
+    <TOC mobile={false} headings={headings} data-pagefind-ignore/>
   </div>
-  <TOC mobile={false} headings={headings} data-pagefind-ignore/>
 </DocsLayout>
 
 <TOCIntersectionObserver/>

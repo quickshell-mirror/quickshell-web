@@ -84,15 +84,11 @@
   }
 }
 
-@media (max-width: 85rem) {
-  @media (min-width: 65rem) {
-    .toc-toggle {
-      --width: 25svw;
-    }
+@media (min-width: 65rem) {
+  .toc-toggle {
+    --width: 25svw;
   }
-}
 
-@media (min-width: 85rem) {
   .toc-wrapper-mobile {
     display: none;
   }
@@ -101,12 +97,12 @@
     background-color: transparent;
     display: block;
     position: sticky;
-    top: 5rem;
-    width: 19rem;
-    flex-shrink: 0;
-    max-height: 90svh;
+    top: 4rem;
+    min-width: max-content;
+    max-height: calc(100svh - 8rem);
     overflow-y: scroll;
     z-index: 10;
+    margin-right: 1.272rem;
 
     & .toc_a {
       transition: color 0.33s;
