@@ -1,5 +1,5 @@
 ---
-import { processQsMarkdown } from "@config/io/helpers"
+import { processMarkdown } from "@config/io/markdown"
 
 export interface Props {
   markdown?: string,
@@ -7,7 +7,7 @@ export interface Props {
 
 const { markdown } = Astro.props;
 
-const html = markdown ? await processQsMarkdown(markdown) : null;
+const html = markdown ? await processMarkdown(markdown) : null;
 ---
 <section class="typedata-details">
   {html ? <div class="typedata-detailsdata" set:html={html} /> : <em>No details provided</em>}

@@ -1,5 +1,3 @@
-import * as markdownUtils from "./markdown.ts";
-
 import {
   //  Flag,
   PowerCord,
@@ -73,12 +71,6 @@ export function groupRoutes(routes: RouteData[]): GroupedRoutes {
     });
     return acc;
   }, defaultValue);
-}
-
-export async function processQsMarkdown(
-  markdown: string
-): Promise<string> {
-  return await markdownUtils.processMarkdown(markdown);
 }
 
 export function getQMLTypeLinkObject(unparsed: string) {

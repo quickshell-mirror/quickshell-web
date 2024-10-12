@@ -96,7 +96,6 @@ export const markdownConfig: AstroMarkdownOptions = {
   remarkPlugins: [[remarkAlert, { legacyTitle: true }]],
   rehypePlugins: [
     // FIXME: incompatible types between unified/Plugin and Astro/RehypePlugin
-    // @ts-expect-error
     [sectionize as RehypePlugin, { idPropertyName: "id" }],
     rehypeRewriteTypelinks,
   ],

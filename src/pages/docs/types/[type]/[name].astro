@@ -1,8 +1,6 @@
 ---
-import {
-  processQsMarkdown,
-  getQMLTypeLink,
-} from "@config/io/helpers";
+import { getQMLTypeLink } from "@config/io/helpers";
+import { processMarkdown } from "@config/io/markdown";
 import { generateTypeData } from "@config/io/generateTypeData";
 import { Flag } from "@icons";
 import DocsLayout from "@layouts/DocsLayout.astro";
@@ -50,7 +48,7 @@ const sidebarData = {
 const superLink = data.super ? getQMLTypeLink(data.super) : null;
 
 const details = data.details
-  ? await processQsMarkdown(data.details)
+  ? await processMarkdown(data.details)
   : null;
 ---
 <DocsLayout title={`${route.name} - ${route.type}`} description={data?.description ?? ""}>

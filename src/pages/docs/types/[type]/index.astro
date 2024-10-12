@@ -1,7 +1,7 @@
 ---
 import DocsLayout from "@layouts/DocsLayout.astro";
 import { generateTypeData } from "@config/io/generateTypeData";
-import { processQsMarkdown } from "@src/config/io/helpers";
+import { processMarkdown } from "@src/config/io/markdown";
 
 export async function getStaticPaths() {
   const routes = await generateTypeData();
@@ -26,7 +26,7 @@ export async function getStaticPaths() {
 }
 const { route, children } = Astro.props;
 const details = route.data.details
-  ? await processQsMarkdown(route.data.details)
+  ? await processMarkdown(route.data.details)
   : null;
 ---
 
