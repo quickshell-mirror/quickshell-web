@@ -119,9 +119,3 @@
     z-index: 1;
   }
 }
-
-@media (min-width: 1280px) {
-  .nav-wrapper {
-    left: 10svw;
-  }
-}

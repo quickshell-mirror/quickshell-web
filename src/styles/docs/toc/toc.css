@@ -102,8 +102,8 @@
     display: block;
     position: sticky;
     top: 5rem;
-    right: 8svw;
-    width: 18rem;
+    width: 19rem;
+    flex-shrink: 0;
     max-height: 90svh;
     overflow-y: scroll;
     z-index: 10;

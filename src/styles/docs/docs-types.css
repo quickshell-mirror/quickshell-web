@@ -74,6 +74,8 @@
 }
 
 .typedocs-content {
+  flex-grow: 1;
+
   &>p {
     margin-block: 0.618rem;
   }
@@ -426,15 +428,6 @@ html.dark .typevariants {
 }
 
 @media (min-width: 1280px) {
-  .typedata {
-    max-width: 47svw;
-  }
-
-  .typedata-detailsdata,
-  .typedocs-subheading {
-    max-width: 42svw;
-  }
-
   .root-nav {
     min-width: 45svw;
   }

@@ -81,14 +81,13 @@ ul {
 }
 
 @media (min-width: 768px) {
-
   .docs,
   .docslayout-root {
     gap: 0.648rem;
   }
 
   .docslayout-root {
-    margin-left: calc(1.618rem + 260px);
+    justify-content: center;
     display: flex;
     flex-direction: row;
   }
@@ -122,11 +121,12 @@ ul {
     }
   }
 
-  .docslayout-root {
-    margin-inline: 15svw;
-  }
-
   .docslayout-inner {
     min-width: 33.8rem;
   }
+}
+
+.docslayout-inner {
+  flex-grow: 1;
+  max-width: 100rem;
 }
