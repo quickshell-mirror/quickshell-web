@@ -184,7 +184,7 @@ footer {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 65rem) {
   html {
     font-size: 16px;
   }
@@ -212,5 +212,3 @@ footer {
     color: hsla(var(--white) 40 50 / 0.3);
   }
 }
-
-/* @media (min-width: 1280px) {} */

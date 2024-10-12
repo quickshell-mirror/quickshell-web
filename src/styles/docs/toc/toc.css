@@ -84,15 +84,15 @@
   }
 }
 
-@media (max-width: 1280px) {
-  @media (min-width: 768px) {
+@media (max-width: 85rem) {
+  @media (min-width: 65rem) {
     .toc-toggle {
       --width: 25svw;
     }
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 85rem) {
   .toc-wrapper-mobile {
     display: none;
   }

@@ -376,7 +376,7 @@ html.dark .typevariants {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 65rem) {
   .root-nav {
     & .root-nav-entry {
       display: grid;
@@ -427,7 +427,7 @@ html.dark .typevariants {
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 85rem) {
   .root-nav {
     min-width: 45svw;
   }

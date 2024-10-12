@@ -313,7 +313,7 @@ button[data-close-modal] {
   --search-cancel-space: 5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 65rem) {
 
   /* difault styles */
   .search-label {

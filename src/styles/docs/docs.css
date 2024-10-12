@@ -80,7 +80,7 @@ ul {
   text-transform: capitalize;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 65rem) {
   .docs,
   .docslayout-root {
     gap: 0.648rem;
@@ -109,7 +109,7 @@ ul {
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 85rem) {
   .docs {
     display: flex;
     flex-direction: row;

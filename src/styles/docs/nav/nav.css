@@ -95,7 +95,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 65rem) {
   .nav-wrapper-mobile {
     display: none;
   }
