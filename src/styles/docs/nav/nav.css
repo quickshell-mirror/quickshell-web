@@ -102,10 +102,9 @@
 
   .nav-wrapper {
     display: block;
-    width: 250px;
+    width: 21rem;
     position: sticky;
     top: 4rem;
-    left: 1.618rem;
     flex-shrink: 0;
     overflow: scroll;
     max-height: calc(100svh - 8rem);

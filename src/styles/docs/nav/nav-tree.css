@@ -1,14 +1,12 @@
 [data-scope="accordion"][data-part="root"] {
   display: flex;
   flex-direction: column;
-  gap: 0.15em;
+  gap: 0.15rem;
 
   & [data-part="item"] {
-    padding: 6px;
-
-    & [data-part="item"] {
-      padding-right: 0;
-    }
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 0.15rem;
   }
 }
 
@@ -19,43 +17,17 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;
-  font-weight: 600;
   width: 100%;
-  height: 36px;
+  height: 2.2rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 0.15em;
+  gap: 0.25rem;
 
-  & p:has(a) {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    padding-inline: 4px;
-    border-radius: 20px;
-
-    &:hover {
-      position: relative;
-      width: max-content;
-      padding: 4px;
-      overflow: scroll;
-    }
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    border-radius: 6px;
-    z-index: -1;
-    inset: -0px;
-    /*border: 1px solid hsla(var(--green) 80 70 / 0.3);*/
-    border: 1px solid hsl(var(--accent-700));
-    transition: border-color 0.3s;
-  }
+  transition: background-color 0.2s ease;
 
   &:hover {
-    &::before {
-      border-color: hsla(var(--accent-500));
-    }
+    background-color: hsl(var(--blue) 40 10);
   }
 }
 
@@ -101,8 +73,12 @@ html.dark .nav-shevron {
 
   &>.arktree-item,
   [data-part="item"] {
-    margin-left: 21px;
-    margin-block: 0.117rem;
+    margin-left: 1.2rem;
+  }
+
+  &>.arktree-item,
+  & [data-part="item-content"] {
+      margin-left: 1.8rem;
   }
 
   & .arktree-item,
@@ -110,34 +86,32 @@ html.dark .nav-shevron {
     display: flex;
     flex-direction: column;
     gap: 0.15em;
-    margin-left: 24px;
-    margin-top: 0.224em;
+    padding: 0.4rem;
+    margin: 0.4rem 0;
+    border-radius: 6px;
 
-    &::before {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      height: 1px;
-      background: linear-gradient(to right,
-          hsla(var(--accent-400) / 0.5) var(--percent),
-          hsla(var(--accent-400) / 0) 75%);
-      animation: percentToZero 250ms ease-in-out forwards;
-      width: 0;
-      transition: width 0.25s;
-    }
+    transition: background-color 0.2s ease;
 
-    &:hover::before {
-      width: 100%;
-      animation: percentToFifty 250ms ease-in-out forwards;
+    &:hover {
+      background-color: hsl(var(--blue) 40 10)
     }
 
     &>a {
-      padding-top: 1em;
       width: 100%;
+      margin-left: 0.2rem;
 
       &:hover {
         text-decoration: none;
       }
+    }
+  }
+
+  & .arktree-item,
+  [data-part="item-content"]>div.__current-type-doc {
+    background-color: hsl(var(--blue) 40 13);
+
+    &>a {
+      color: hsl(var(--blue) 100 70);
     }
   }
 }
@@ -154,24 +128,10 @@ html.dark .nav-shevron {
   color: hsl(var(--blue) 100 70);
 
   & [data-part="item-trigger"] a {
-    color: hsl(var(--blue) 100 70) !important;
+    color: hsl(var(--blue) 100 70);
   }
 
-  &>a {
-    &::before {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      height: 1px;
-      background: linear-gradient(to right,
-          hsla(var(--accent-400) / 0.5) var(--percent),
-          hsla(var(--accent-400) / 0) 100%);
-      animation: percentToZero 250ms ease-in-out forwards;
-      width: 100%;
-    }
-
-    &:hover::before {
-      animation: percentToFifty 250ms ease-in-out forwards;
-    }
+  & [data-scope="accordion"][data-part="item-trigger"] {
+    background-color: hsl(var(--blue) 40 13);
   }
 }
