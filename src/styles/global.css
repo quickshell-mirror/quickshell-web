@@ -186,12 +186,6 @@ footer {
   }
 }
 
-@media (min-width: 65rem) {
-  .search {
-    display: block;
-  }
-}
-
 @media (min-width: 85rem) {
   html {
     font-size: 16px;
