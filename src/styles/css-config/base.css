@@ -19,7 +19,7 @@ html {
   --accent-400: var(--green) 90 57;
   --accent-500: var(--green) 90 47;
   --accent-600: var(--green) 88 40;
-	--accent-700: var(--green) 70 40;
+  --accent-700: var(--green) 70 40;
 
   /* secondary */
   --blue: 224;
@@ -49,6 +49,10 @@ html {
   --var-color: 190 78 70;
   --var-link-color: 190 85 60;
   --inner-param-color: 215 60 70;
+  --nav-hovered-bkg: var(--blue) 100 93;
+  --nav-selected-bkg: var(--blue) 100 90;
+  --nav-selected-text: var(--blue) 60 60;
+  --nav-indicator-bkg: var(--blue) 45 80;
 }
 
 html.dark {
@@ -86,6 +90,10 @@ html.dark {
   --var-color: 190 78 70;
   --var-link-color: 190 85 60;
   --inner-param-color: 215 60 70;
+  --nav-hovered-bkg: var(--blue) 40 10;
+  --nav-selected-bkg: var(--blue) 40 13;
+  --nav-selected-text: var(--blue) 100 70;
+  --nav-indicator-bkg: var(--blue) 30 30;
 }
 
 * {
