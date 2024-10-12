@@ -35,7 +35,7 @@
   font-size: 1.614rem;
   max-height: 500px;
 
-  &>svg {
+  & > svg {
     height: 100%;
     width: 24px;
   }
@@ -54,7 +54,7 @@
     top: 2.6rem;
     right: -1rem;
     width: 0;
-    height: 0;
+    height: max(min(100svh, 800px), calc(100svh - 8rem));
     font-size: 0.745rem;
     font-weight: 600;
     scrollbar-width: none;
@@ -64,11 +64,12 @@
       display: none;
     }
 
-    transition: width 0.3s ease,
-    height 0.3s ease,
-    background-color 0.3s ease,
-    backdrop-filter 0.3s ease,
-    padding 0.3s ease;
+    transition:
+      width 0.3s ease,
+      height 0.3s ease,
+      background-color 0.3s ease,
+      backdrop-filter 0.3s ease,
+      padding 0.3s ease;
 
     &.shown {
       overflow-y: scroll;
@@ -84,16 +85,23 @@
   }
 }
 
-@media (min-width: 65rem) {
+@media (max-width: 55rem) {
   .toc-toggle {
     --width: 25svw;
   }
 
+  .toc-wrapper {
+    display: none;
+  }
+}
+
+@media (min-width: 65rem) {
   .toc-wrapper-mobile {
     display: none;
   }
 
   .toc-wrapper {
+    --width: 25svw;
     background-color: transparent;
     display: block;
     position: sticky;
@@ -117,7 +125,7 @@
       list-style: none;
 
       &.active {
-        &>.toc_a {
+        & > .toc_a {
           color: hsl(var(--green) 72 60);
         }
       }
@@ -131,5 +139,11 @@
         margin-left: 0.348rem;
       }
     }
+  }
+}
+
+@media (min-width: 85rem) {
+  .toc-wrapper {
+    width: max-content;
   }
 }

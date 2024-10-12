@@ -45,7 +45,7 @@
 }
 
 .heading {
-  &>[id] {
+  & > [id] {
     width: max-content;
   }
 
@@ -75,7 +75,7 @@ ul {
 .markdown-alert {
   margin-block: 0.618rem;
 
-  &>*:not(:first-child) {
+  & > *:not(:first-child) {
     margin-block: 0.724rem;
   }
 }
@@ -83,6 +83,7 @@ ul {
 .markdown-alert-title {
   text-transform: lowercase;
   text-transform: capitalize;
+  margin-block: 0 !important;
 }
 
 @media (min-width: 65rem) {
@@ -110,15 +111,14 @@ ul {
     flex-direction: row;
   }
 
+  .docslayout-inner {
+    flex-grow: 1;
+    max-width: 80rem;
+  }
+
   .docs {
     display: flex;
     flex-direction: row;
-  }
-
-  .docs-content {
-    & section {
-      max-width: 45svw;
-    }
   }
 
   .docslayout-inner {

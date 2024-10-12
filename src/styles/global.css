@@ -122,11 +122,13 @@ footer {
   display: flex;
   justify-content: space-between;
   padding-inline: 1rem;
-  background: linear-gradient(150deg,
-      hsla(var(--blue) 60 5 / 1) 10%,
-      hsla(var(--blue) 75 6 / 1) 25%,
-      hsla(var(--blue) 80 8 / 1) 55%,
-      hsla(var(--blue) 77 7 / 1) 80%);
+  background: linear-gradient(
+    150deg,
+    hsla(var(--blue) 60 5 / 1) 10%,
+    hsla(var(--blue) 75 6 / 1) 25%,
+    hsla(var(--blue) 80 8 / 1) 55%,
+    hsla(var(--blue) 77 7 / 1) 80%
+  );
 
   & ._credits {
     display: flex;
@@ -184,6 +186,12 @@ footer {
   }
 }
 
+@media (min-width: 65rem) {
+  .search {
+    display: block;
+  }
+}
+
 @media (min-width: 85rem) {
   html {
     font-size: 16px;
@@ -200,10 +208,6 @@ footer {
   .menu-toggle,
   .spacer-mobile {
     display: none;
-  }
-
-  .search {
-    display: block;
   }
 
   .spacer-desktop {

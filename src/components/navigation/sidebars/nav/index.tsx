@@ -1,4 +1,4 @@
-import { createSignal, type Component } from "solid-js";
+import { createSignal, onMount, type Component } from "solid-js";
 
 import { LoadingSpinner, MenuToX, XToMenu } from "@icons";
 import { Tree } from "./Tree";
@@ -7,6 +7,7 @@ import type { NavProps } from "../types";
 const NavComponent: Component<NavProps> = props => {
   const [open, setOpen] = createSignal<boolean>(false);
   const { tree, mobile, routes } = props;
+  let navRef: HTMLDivElement;
 
   if (!tree) {
     return <LoadingSpinner />;
@@ -28,8 +29,29 @@ const NavComponent: Component<NavProps> = props => {
     );
   }
 
+  const handleClickOutside = (event: MouseEvent) => {
+    const isLink = "href" in (event.target || {});
+    if (
+      isLink ||
+      (document.body.contains(event.target as Node) &&
+        !navRef.contains(event.target as Node))
+    ) {
+      setOpen(false);
+    }
+  };
+
+  onMount(() => {
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  });
+
   return (
-    <div class="nav-toggle">
+    <div
+      class="nav-toggle"
+      ref={navRef!}
+    >
       <div onclick={e => toggle(e)}>
         {open() ? (
           <MenuToX class="nav-icon" />
