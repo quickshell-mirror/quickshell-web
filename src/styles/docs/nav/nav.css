@@ -13,14 +13,13 @@
   max-height: 500px;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  --width: 30rem;
+  --width: 25rem;
 
   &::-webkit-scrollbar {
     display: none;
   }
 
-  & svg,
-  div {
+  & div {
     height: max-content;
     width: 100%;
   }
@@ -37,8 +36,7 @@
     left: -1rem;
     width: 0;
     height: calc(100svh - 2.5rem);
-    font-size: 0.745rem;
-    font-weight: 600;
+    font-size: 1rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
 
@@ -73,8 +71,7 @@
       text-wrap: nowrap;
 
       & [data-part="item-trigger"] {
-        min-height: 3em;
-        max-width: 80%;
+        max-width: 90%;
       }
 
       & [data-part="item"] {
@@ -94,11 +91,10 @@
           }
 
           & [data-part="item-content"] {
-            max-width: 70%;
+            max-width: 80%;
             margin-left: 3.33em;
 
             & > div {
-              min-height: 4em;
               display: grid;
 
               & a {
@@ -115,15 +111,24 @@
   }
 }
 
-@media (max-width: 55rem) {
-  .nav-toggle {
-    --width: 45svw;
-  }
-}
-
-@media (max-width: 38rem) {
+@media (max-width: 40rem) {
   .nav-toggle {
     --width: 100svw;
+
+    & svg {
+      height: max-content;
+      width: 100%;
+    }
+
+    & .navtree {
+      & [data-part="item-trigger"] {
+        min-height: 3em;
+      }
+
+      & [data-part="item-content"] > div {
+        min-height: 4em;
+      }
+    }
   }
 }
 

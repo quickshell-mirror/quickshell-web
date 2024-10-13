@@ -387,7 +387,7 @@ button[data-close-modal] {
   --search-cancel-space: 5rem;
 }
 
-@media (min-width: 85rem) {
+@media (min-width: 40rem) {
   /* difault styles */
   .search-label {
     display: block;

@@ -85,9 +85,9 @@
   }
 }
 
-@media (max-width: 55rem) {
+@media (min-width: 40rem) {
   .toc-toggle {
-    --width: 25svw;
+    --width: 19rem;
   }
 
   .toc-wrapper {
@@ -101,12 +101,12 @@
   }
 
   .toc-wrapper {
-    --width: 25svw;
+    --width: 19rem;
     background-color: transparent;
     display: block;
     position: sticky;
     top: 4rem;
-    min-width: max-content;
+    width: max-content;
     max-height: calc(100svh - 8rem);
     overflow-y: scroll;
     z-index: 10;
@@ -144,6 +144,6 @@
 
 @media (min-width: 85rem) {
   .toc-wrapper {
-    width: max-content;
+    width: 19rem;
   }
 }

@@ -96,7 +96,7 @@ html.dark .nav-shevron {
   [data-part="item-content"]>div.__current-type-doc {
     background-color: hsl(var(--nav-selected-bkg));
 
-    &>a {
+    & a {
       color: hsl(var(--nav-selected-text));
     }
   }

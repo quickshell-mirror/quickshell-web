@@ -86,7 +86,7 @@ ul {
   margin-block: 0 !important;
 }
 
-@media (min-width: 65rem) {
+@media (min-width: 40rem) {
   .docs-content {
     margin-inline: 1.272rem;
 
