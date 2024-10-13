@@ -1,11 +1,14 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+
+const title = "Quickshell";
 ---
-<BaseLayout title="Quickshell" description="A fully user customizable desktop shell" image="/quickshell.png">
+<BaseLayout title={title} description="A fully user customizable desktop shell" image="/quickshell.png">
   <div class="main-page_hero" data-pagefind-ignore>
+    <h1>Quick<em>shell</em></h1>
     <section class="main-page_hero-text">
-      <h2>A fully <em>user-customizable</em> desktop <em>shell</em></h2>
-      <h3>Based on QtQuick</h3>
+      <h2>A fully <em class="green">user-customizable</em> desktop <em class="navy">shell</em></h2>
+      <h3>Based on <em class="green">QtQuick</em></h3>
     </section>
     <section class="main-page_links">
       <a href="/docs/configuration" class="main-page_link-card">
