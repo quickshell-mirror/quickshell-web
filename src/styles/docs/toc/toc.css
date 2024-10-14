@@ -35,7 +35,7 @@
   font-size: 1.614rem;
   max-height: 500px;
 
-  & > svg {
+  &>svg {
     height: 100%;
     width: 24px;
   }
@@ -64,12 +64,11 @@
       display: none;
     }
 
-    transition:
-      width 0.3s ease,
-      height 0.3s ease,
-      background-color 0.3s ease,
-      backdrop-filter 0.3s ease,
-      padding 0.3s ease;
+    transition: width 0.3s ease,
+    height 0.3s ease,
+    background-color 0.3s ease,
+    backdrop-filter 0.3s ease,
+    padding 0.3s ease;
 
     &.shown {
       overflow-y: scroll;
@@ -109,7 +108,7 @@
     width: max-content;
     max-height: calc(100svh - 8rem);
     overflow-y: scroll;
-    z-index: 10;
+    z-index: 9;
     margin-right: 1.272rem;
 
     & .toc_a {
@@ -125,7 +124,7 @@
       list-style: none;
 
       &.active {
-        & > .toc_a {
+        &>.toc_a {
           color: hsl(var(--green) 72 60);
         }
       }
