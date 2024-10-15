@@ -119,20 +119,22 @@ footer {
   padding: 1rem;
   overflow: hidden;
   flex-shrink: 0;
+  background: hsla(var(--blue) 66 5);
 
+  /*border-top: 1px solid hsl(var(--bg-800));*/
   &::before {
     content: "";
     position: absolute;
-    inset: 0;
-    background: hsl(var(--overlay-bkg));
+    top: 0;
+    left: -1rem;
+    height: 1px;
+    width: calc(100% + 1rem);
     background: linear-gradient(
-      180deg,
-      hsla(var(--overlay-bkg-2) / 1) 30%,
-      hsla(var(--overlay-bkg-1) / 1) 66%,
-      hsla(var(--overlay-bkg-2) / 1) 100%
+      90deg,
+      transparent 0%,
+      hsl(var(--blue) 75 21) 50%,
+      transparent 100%
     );
-    filter: blur(4rem);
-    /* border-top: solid hsl(var(--overlay-bkg-border)) 1px; */
   }
 
   & a {
@@ -173,6 +175,7 @@ footer {
 
     & > p {
       margin-bottom: 0.2rem;
+      color: hsl(0 0 40);
     }
 
     & > a {

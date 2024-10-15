@@ -32,20 +32,8 @@
     scrollbar-width: none;
     font-size: 1.2rem;
     -ms-overflow-style: none;
-    background: hsl(var(--bg-900));
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        135deg,
-        hsla(var(--secondary-900) / 1) 36%,
-        hsla(var(--overlay-bkg-1) / 1) 100%
-      );
-      filter: blur(21px);
-      /* border-top: solid hsl(var(--overlay-bkg-border)) 1px; */
-    }
+    background: hsla(var(--blue) 75 5);
+    border-right: 1px solid hsl(var(--blue) 45 15);
 
     &::-webkit-scrollbar {
       display: none;
