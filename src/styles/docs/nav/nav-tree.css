@@ -40,9 +40,14 @@
   height: 24px;
   border-radius: 50%;
   margin-left: 3px;
+  transition: transform 250ms ease-in-out;
 
   &:hover {
     background-color: hsl(var(--nav-indicator-bkg));
+  }
+
+  &[data-state="open"] {
+    transform: rotate(180deg);
   }
 }
 
@@ -54,18 +59,10 @@ html.dark .nav-shevron {
   color: white;
 }
 
-[data-scope="accordion"][data-part="item-indicator"][data-state="open"] {
-  animation: rotateIn 250ms ease-in-out forwards;
-}
-
-[data-scope="accordion"][data-part="item-indicator"][data-state="closed"] {
-  animation: rotateOut 250ms ease-in-out;
-}
-
 [data-scope="accordion"][data-part="item-content"] {
   --height: 709;
   margin-block: 0.175rem;
-  margin-left: 1.4rem;
+  margin-left: 1.6rem;
 
   & .arktree-item,
   [data-part="item-content"]>div {

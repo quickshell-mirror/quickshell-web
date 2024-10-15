@@ -43,23 +43,19 @@ const { headings } = Astro.props;
 ---
 <div class="header">
   <div class="header-item header-left">
-    <h3 class="header-title">
-      <a href="/">Quickshell</a>
-    </h3>
     {url.length > 2 ?
       <Nav mobile={true}/>
+      <div class="nav-collapsed-spacer header-spacer"/>
     : null}
-    <div class="spacer-mobile">|</div>
-    <h3 class="header-title mobile">
+    <h3 class="header-title">
       <a href="/">Quickshell</a>
     </h3>
   </div>
   <div class="header-item header-right">
     <Search/>
-    <div class="spacer-mobile">|</div>
-    <div class="spacer-desktop">|</div>
+    <div class="header-spacer"/>
     <ThemeSelect client:load />
-    <div class="spacer-mobile">|</div>
+    <div class="toc-collapsed-spacer header-spacer"/>
     {url.length > 2 ?
       <TOC headings={headings} types={sidebarData} mobile={true}/>
     : null}

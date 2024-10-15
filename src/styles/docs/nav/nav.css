@@ -13,15 +13,9 @@
   max-height: 500px;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  --width: 25rem;
 
   &::-webkit-scrollbar {
     display: none;
-  }
-
-  & div {
-    height: max-content;
-    width: 100%;
   }
 
   &:hover {
@@ -33,100 +27,110 @@
     z-index: 11;
     overflow: hidden;
     top: 2.6rem;
-    left: -1rem;
-    width: 0;
+    left: calc(-3rem + -80svw);
     height: calc(100svh - 2.5rem);
-    font-size: 1rem;
     scrollbar-width: none;
+    font-size: 1.2rem;
     -ms-overflow-style: none;
+    background-color: hsl(var(--overlay-bkg));
+    border-right: solid hsl(var(--overlay-bkg-border)) 1px;
 
     &::-webkit-scrollbar {
       display: none;
     }
 
     transition:
-      width 0.3s ease,
-      height 0.3s ease,
-      background-color 0.3s ease,
-      backdrop-filter 0.3s ease,
+      left 0.3s ease,
       padding 0.3s ease;
 
     &.shown {
-      width: var(--width);
-      background-color: hsl(var(--bg-900) / 0.6);
-      backdrop-filter: blur(3px) saturate(180%);
       display: flex;
       flex-direction: column;
-      align-items: center;
+      left: -1rem;
     }
 
     & .navtree {
-      padding: 1rem;
+      /* lines up with non overlay nav */
+      padding: 0.5rem 0.618rem;
+
       height: 100%;
-      width: 100%;
-      overflow-x: hidden;
+      width: 80svw;
+      box-sizing: content-box;
       overflow-y: scroll;
-      margin-bottom: 4rem;
-      padding-left: 1rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      margin-bottom: 1rem;
       text-wrap: nowrap;
 
+      & [data-part="item-indicator"] {
+        margin-left: 1rem;
+        margin-right: 0.8rem;
+        height: 2rem;
+        width: 2rem;
+
+        & svg {
+          height: max-content;
+          width: 100%;
+        }
+      }
+
       & [data-part="item-trigger"] {
-        max-width: 90%;
+        min-height: 3em;
+        font-size: 1.2rem;
+      }
+
+      & [data-part="item-content"] {
+        margin-left: 3.7rem;
       }
 
       & [data-part="item"] {
-        margin-left: unset;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding-right: 0;
-
-        & [data-part="item-content"] {
-          & [data-part="item-trigger"] {
-            margin-left: 1em;
-
-            & p {
-              text-align: left;
-            }
-          }
-
-          & [data-part="item-content"] {
-            max-width: 80%;
-            margin-left: 3.33em;
-
-            & > div {
-              display: grid;
-
-              & a {
-                display: grid;
-                justify-items: start;
-                align-items: center;
-                min-height: 100%;
-              }
-            }
-          }
+        & [data-part="item-content"] > div {
+            min-height: 3em;
+            & > p { margin: auto 0; }
         }
       }
     }
   }
 }
 
-@media (max-width: 40rem) {
+@media (min-width: 40rem) {
   .nav-toggle {
-    --width: 100svw;
+    .nav-items {
+      font-size: 1rem;
+      top: 2.5rem;
+      left: -24rem;
 
-    & svg {
-      height: max-content;
-      width: 100%;
-    }
-
-    & .navtree {
-      & [data-part="item-trigger"] {
-        min-height: 3em;
+      & .navtree {
+        width: 21rem;
       }
 
-      & [data-part="item-content"] > div {
-        min-height: 4em;
+      & .navtree {
+        & [data-part="item-indicator"] {
+          margin-left: 0.2rem;
+          margin-right: 0rem;
+          height: 1.5rem;
+          width: 1.5rem;
+
+          & svg {
+            height: unset;
+            width: unset;
+          }
+        }
+
+        & [data-part="item-trigger"] {
+          min-height: 2.2rem;
+          font-size: 1rem;
+        }
+
+        & [data-part="item-content"] {
+          margin-left: 1.6rem;
+        }
+
+        & [data-part="item"] {
+          & [data-part="item-content"] > div {
+            min-height: 2.2rem;
+          }
+        }
       }
     }
   }
@@ -141,10 +145,10 @@
     display: block;
     width: 21rem;
     position: sticky;
-    top: 4rem;
+    top: 3.5rem;
     flex-shrink: 0;
-    overflow: scroll;
-    max-height: calc(100svh - 8rem);
+    overflow-y: scroll;
+    max-height: calc(100svh - 4rem);
     scrollbar-width: none;
     -ms-overflow-style: none;
     z-index: 10;
@@ -153,5 +157,6 @@
   .navtree {
     width: 100%;
     z-index: 1;
+    margin: 0.5rem 0;
   }
 }

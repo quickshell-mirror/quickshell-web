@@ -52,6 +52,8 @@ html {
   --nav-selected-bkg: var(--blue) 100 90;
   --nav-selected-text: var(--blue) 60 60;
   --nav-indicator-bkg: var(--blue) 45 80;
+  --overlay-bkg: var(--blue) 10 93;
+  --overlay-bkg-border: var(--blue) 10 75;
 }
 
 html.dark {
@@ -93,6 +95,8 @@ html.dark {
   --nav-selected-bkg: var(--blue) 40 13;
   --nav-selected-text: var(--blue) 100 70;
   --nav-indicator-bkg: var(--blue) 30 30;
+  --overlay-bkg: var(--blue) 41 4;
+  --overlay-bkg-border: var(--blue) 17 13;
 }
 
 * {
@@ -103,7 +107,8 @@ html.dark {
 }
 
 body {
-  min-height: 100svh;
-  height: max-content;
+  height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
