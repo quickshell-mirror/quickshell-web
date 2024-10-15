@@ -111,20 +111,56 @@ html.dark {
 }
 
 footer {
+  position: relative;
   width: 100%;
   font-size: 0.9rem;
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  background-color: hsl(var(--overlay-bkg));
-  border-top: solid hsl(var(--overlay-bkg-border)) 1px;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: hsl(var(--overlay-bkg));
+    background: linear-gradient(
+      180deg,
+      hsla(var(--overlay-bkg-2) / 1) 30%,
+      hsla(var(--overlay-bkg-1) / 1) 66%,
+      hsla(var(--overlay-bkg-2) / 1) 100%
+    );
+    filter: blur(4rem);
+    /* border-top: solid hsl(var(--overlay-bkg-border)) 1px; */
+  }
 
   & a {
     color: hsl(var(--text-dark));
     transition: color 0.3s ease;
 
+    & .hint {
+      transition: color 0.3s ease;
+    }
+
+    &:nth-child(2) .hint {
+      color: hsl(var(--green) 30 45);
+    }
+
+    &:nth-child(3) .hint {
+      color: hsl(var(--blue) 30 45);
+    }
+
     &:hover {
       color: hsl(var(--text));
+
+      &:nth-child(2) .hint {
+        color: hsl(var(--green) 60 60);
+      }
+
+      &:nth-child(3) .hint {
+        color: hsl(var(--blue) 60 66);
+      }
     }
   }
 
@@ -135,16 +171,18 @@ footer {
     gap: 0.127rem;
     color: hsl(var(--text-dark));
 
-    & > p { margin-bottom: 0.2rem }
+    & > p {
+      margin-bottom: 0.2rem;
+    }
 
-    & > a { text-decoration: none }
-
-    & .hint {
-      color: hsl(var(--text-darker));
+    & > a {
+      text-decoration: none;
     }
   }
 
-  & .links { justify-self: flex-end }
+  & .links {
+    justify-self: flex-end;
+  }
 
   & .socials {
     display: flex;
@@ -152,7 +190,9 @@ footer {
     align-items: flex-start;
     font-size: 2.5rem;
 
-    & a { display: flex }
+    & a {
+      display: flex;
+    }
   }
 }
 
@@ -163,9 +203,13 @@ footer {
 }
 
 @media (min-width: 65rem) {
-  .toc-collapsed-spacer { display: none }
+  .toc-collapsed-spacer {
+    display: none;
+  }
 }
 
 @media (min-width: 85rem) {
-  .nav-collapsed-spacer { display: none }
+  .nav-collapsed-spacer {
+    display: none;
+  }
 }

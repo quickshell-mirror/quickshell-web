@@ -6,7 +6,7 @@ import type {
 } from "@config/io/types";
 import { Tag, Flag } from "@icons";
 
-import TypeDetails from "./TypeDetails.astro"
+import TypeDetails from "./TypeDetails.astro";
 
 export interface Props {
   propsKeys: string[];
@@ -21,13 +21,19 @@ const { propsKeys, propsData } = Astro.props;
       const propData = propsData[item]
       let typeLink:string;
       let linkText:string;
+      let genericType:string|undefined;
+      let genericTypeLink:string|undefined;
       const gadget = propData.type.gadget;
       if (gadget) {
         typeLink = "#"
         linkText = `[${Object.keys(gadget).toString()}]`
       } else {
-        typeLink = getQMLTypeLink(propData.type as unknown as QMLTypeLinkObject)
+        typeLink = getQMLTypeLink(propData.type)
         linkText = propData.type.name || propData.type.type
+      }
+      if (propData.type.of) {
+        genericType = propData.type.of.name;
+        genericTypeLink = getQMLTypeLink(propData.type.of)
       }
       return (
         <li id={ item } class="typedata-root typeprop-root">
@@ -36,7 +42,7 @@ const { propsKeys, propsData } = Astro.props;
             { item }<span class="type-datatype">:&nbsp;<a
               href={typeLink}
               target="_blank"
-              >{ linkText }</a></span>
+            >{ linkText }</a>{genericType && (<a href={genericTypeLink} class="type-datatype generic-type">&lt;{genericType}&gt;</a>)}</span>
           </p>
           {
             propData.flags && propData.flags.length > 0 ? (

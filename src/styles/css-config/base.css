@@ -103,7 +103,12 @@ html.dark {
   --nav-selected-bkg: var(--blue) 40 13;
   --nav-selected-text: var(--blue) 100 70;
   --nav-indicator-bkg: var(--blue) 30 30;
-  --overlay-bkg: var(--blue) 41 4;
+  --overlay-bkg: var(--blue) 66 7;
+  --overlay-bkg-1: var(--blue) 66 9;
+  --overlay-bkg-2: var(--blue) 60 12;
+  --overlay-bkg-green: var(--green) 66 7;
+  --overlay-bkg-green-1: var(--green) 66 9;
+  --overlay-bkg-green-2: var(--green) 45 21;
   --overlay-bkg-border: var(--blue) 17 13;
 }
 
