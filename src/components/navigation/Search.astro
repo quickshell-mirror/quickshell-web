@@ -1,8 +1,6 @@
 ---
 import "@pagefind/default-ui/css/ui.css";
-import { getHTMLIcon } from "../iconsModule";
-
-const magnifier = getHTMLIcon("magnifier");
+import magnifierIcon from "@icons/magnifier.svg?raw"
 ---
 
 <site-search class="search-wrapper">
@@ -13,7 +11,7 @@ const magnifier = getHTMLIcon("magnifier");
     aria-keyshortcuts="Control+K"
     class="search-button"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d={magnifier}/></svg>
+    <Fragment set:html={magnifierIcon}/>
     <span class="search-label" aria-hidden="true">Search</span>
     <kbd class="search-kbd">
       <kbd>Ctrl</kbd><kbd>K</kbd>

@@ -22,7 +22,7 @@ export const XToMenu: VoidComponent<{
           <animate
             fill="freeze"
             attributeName="d"
-            dur="0.4s"
+            dur="0.3s"
             values="M5 5L12 12L19 5;M5 5L12 5L19 5"
           />
         </path>
@@ -30,7 +30,7 @@ export const XToMenu: VoidComponent<{
           <animate
             fill="freeze"
             attributeName="d"
-            dur="0.4s"
+            dur="0.3s"
             values="M12 12H12;M5 12H19"
           />
         </path>
@@ -38,7 +38,7 @@ export const XToMenu: VoidComponent<{
           <animate
             fill="freeze"
             attributeName="d"
-            dur="0.4s"
+            dur="0.3s"
             values="M5 19L12 12L19 19;M5 19L12 19L19 19"
           />
         </path>
@@ -69,7 +69,7 @@ export const MenuToX: VoidComponent<{
           <animate
             fill="freeze"
             attributeName="d"
-            dur="0.4s"
+            dur="0.3s"
             values="M5 5L12 5L19 5;M5 5L12 12L19 5"
           />
         </path>
@@ -77,7 +77,7 @@ export const MenuToX: VoidComponent<{
           <animate
             fill="freeze"
             attributeName="d"
-            dur="0.4s"
+            dur="0.3s"
             values="M5 12H19;M12 12H12"
           />
         </path>
@@ -85,51 +85,11 @@ export const MenuToX: VoidComponent<{
           <animate
             fill="freeze"
             attributeName="d"
-            dur="0.4s"
+            dur="0.3s"
             values="M5 19L12 19L19 19;M5 19L12 12L19 19"
           />
         </path>
       </g>
-    </svg>
-  );
-};
-
-export const Sun: VoidComponent<{
-  class?: string;
-}> = props => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
-      viewBox="0 0 256 256"
-      class={props.class}
-    >
-      <title>Light</title>
-      <path
-        fill="currentColor"
-        d="M120 40V16a8 8 0 0 1 16 0v24a8 8 0 0 1-16 0m72 88a64 64 0 1 1-64-64a64.07 64.07 0 0 1 64 64m-16 0a48 48 0 1 0-48 48a48.05 48.05 0 0 0 48-48M58.34 69.66a8 8 0 0 0 11.32-11.32l-16-16a8 8 0 0 0-11.32 11.32Zm0 116.68l-16 16a8 8 0 0 0 11.32 11.32l16-16a8 8 0 0 0-11.32-11.32M192 72a8 8 0 0 0 5.66-2.34l16-16a8 8 0 0 0-11.32-11.32l-16 16A8 8 0 0 0 192 72m5.66 114.34a8 8 0 0 0-11.32 11.32l16 16a8 8 0 0 0 11.32-11.32ZM48 128a8 8 0 0 0-8-8H16a8 8 0 0 0 0 16h24a8 8 0 0 0 8-8m80 80a8 8 0 0 0-8 8v24a8 8 0 0 0 16 0v-24a8 8 0 0 0-8-8m112-88h-24a8 8 0 0 0 0 16h24a8 8 0 0 0 0-16"
-      />
-    </svg>
-  );
-};
-
-export const Moon: VoidComponent<{
-  class?: string;
-}> = props => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
-      viewBox="0 0 256 256"
-      class={props.class}
-    >
-      <title>Dark</title>
-      <path
-        fill="currentColor"
-        d="M233.54 142.23a8 8 0 0 0-8-2a88.08 88.08 0 0 1-109.8-109.8a8 8 0 0 0-10-10a104.84 104.84 0 0 0-52.91 37A104 104 0 0 0 136 224a103.1 103.1 0 0 0 62.52-20.88a104.84 104.84 0 0 0 37-52.91a8 8 0 0 0-1.98-7.98m-44.64 48.11A88 88 0 0 1 65.66 67.11a89 89 0 0 1 31.4-26A106 106 0 0 0 96 56a104.11 104.11 0 0 0 104 104a106 106 0 0 0 14.92-1.06a89 89 0 0 1-26.02 31.4"
-      />
     </svg>
   );
 };
@@ -150,18 +110,12 @@ export const ShevronSmallDown: VoidComponent<{
         <path
           stroke="currentColor"
           stroke-dasharray="8"
-          stroke-dashoffset="8"
+          stroke-dashoffset="0"
           stroke-linecap="round"
           stroke-width="2"
           d="M9 12L14 7M9 12L14 17"
           fill="currentColor"
         >
-          <animate
-            fill="freeze"
-            attributeName="stroke-dashoffset"
-            dur="0.3s"
-            values="8;0"
-          />
         </path>
       </g>
     </svg>
@@ -239,7 +193,6 @@ export const Tag: VoidComponent<{
       viewBox="0 0 256 256"
       class={props.class}
     >
-      <title>Go to</title>
       <path
         fill="currentColor"
         d="M246.66 123.56L201 55.13A15.94 15.94 0 0 0 187.72 48H40a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h147.72a16 16 0 0 0 13.28-7.12l45.63-68.44a8 8 0 0 0 .03-8.88M187.72 192H40V64h147.72l42.66 64Z"
@@ -259,7 +212,6 @@ export const Subtitles: VoidComponent<{
       viewBox="0 0 256 256"
       class={props.class}
     >
-      <title>Go to</title>
       <path
         fill="currentColor"
         d="M224 48H32a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h192a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16m0 144H32V64h192zM48 136a8 8 0 0 1 8-8h16a8 8 0 0 1 0 16H56a8 8 0 0 1-8-8m160 0a8 8 0 0 1-8 8h-96a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8m-48 32a8 8 0 0 1-8 8H56a8 8 0 0 1 0-16h96a8 8 0 0 1 8 8m48 0a8 8 0 0 1-8 8h-16a8 8 0 0 1 0-16h16a8 8 0 0 1 8 8"
@@ -279,7 +231,6 @@ export const Ruler: VoidComponent<{
       viewBox="0 0 256 256"
       class={props.class}
     >
-      <title>Go to</title>
       <path
         fill="currentColor"
         d="m235.32 73.37l-52.69-52.68a16 16 0 0 0-22.63 0L20.68 160a16 16 0 0 0 0 22.63l52.69 52.68a16 16 0 0 0 22.63 0L235.32 96a16 16 0 0 0 0-22.63M84.68 224L32 171.31l32-32l26.34 26.35a8 8 0 0 0 11.32-11.32L75.31 128L96 107.31l26.34 26.35a8 8 0 0 0 11.32-11.32L107.31 96L128 75.31l26.34 26.35a8 8 0 0 0 11.32-11.32L139.31 64l32-32L224 84.69Z"
@@ -299,7 +250,6 @@ export const RoundBrackets: VoidComponent<{
       viewBox="0 0 256 256"
       class={props.class}
     >
-      <title>Go to</title>
       <path
         fill="currentColor"
         d="M40 128c0 58.29 34.67 80.25 36.15 81.16a8 8 0 0 1-8.27 13.7C66.09 221.78 24 195.75 24 128s42.09-93.78 43.88-94.86a8 8 0 0 1 8.26 13.7C74.54 47.83 40 69.82 40 128m148.12-94.86a8 8 0 0 0-8.27 13.7C181.33 47.75 216 69.71 216 128s-34.67 80.25-36.12 81.14a8 8 0 0 0 8.24 13.72C189.91 221.78 232 195.75 232 128s-42.09-93.78-43.88-94.86"
@@ -319,7 +269,6 @@ export const PowerCord: VoidComponent<{
       viewBox="0 0 256 256"
       class={props.class}
     >
-      <title>Go to</title>
       <path
         fill="currentColor"
         d="M149.66 138.34a8 8 0 0 0-11.32 0L120 156.69L99.31 136l18.35-18.34a8 8 0 0 0-11.32-11.32L88 124.69l-18.34-18.35a8 8 0 0 0-11.32 11.32l6.35 6.34l-23.32 23.31a32 32 0 0 0 0 45.26l5.38 5.37l-28.41 28.4a8 8 0 0 0 11.32 11.32l28.4-28.41l5.37 5.38a32 32 0 0 0 45.26 0L132 191.31l6.34 6.35a8 8 0 0 0 11.32-11.32L131.31 168l18.35-18.34a8 8 0 0 0 0-11.32m-52.29 65a16 16 0 0 1-22.62 0l-22.06-22.09a16 16 0 0 1 0-22.62L76 135.31L120.69 180Zm140.29-185a8 8 0 0 0-11.32 0l-28.4 28.41l-5.37-5.38a32.05 32.05 0 0 0-45.26 0L124 64.69l-6.34-6.35a8 8 0 0 0-11.32 11.32l80 80a8 8 0 0 0 11.32-11.32l-6.35-6.34l23.32-23.31a32 32 0 0 0 0-45.26l-5.38-5.37l28.41-28.4a8 8 0 0 0 0-11.32m-34.35 79L180 120.69L135.31 76l23.32-23.31a16 16 0 0 1 22.62 0l22.06 22a16 16 0 0 1 0 22.68Z"
@@ -339,7 +288,6 @@ export const FourDiamonds: VoidComponent<{
       viewBox="0 0 256 256"
       class={props.class}
     >
-      <title>Go to</title>
       <path
         fill="currentColor"
         d="M122.34 109.66a8 8 0 0 0 11.32 0l40-40a8 8 0 0 0 0-11.32l-40-40a8 8 0 0 0-11.32 0l-40 40a8 8 0 0 0 0 11.32ZM128 35.31L156.69 64L128 92.69L99.31 64Zm5.66 111a8 8 0 0 0-11.32 0l-40 40a8 8 0 0 0 0 11.32l40 40a8 8 0 0 0 11.32 0l40-40a8 8 0 0 0 0-11.32ZM128 220.69L99.31 192L128 163.31L156.69 192Zm109.66-98.35l-40-40a8 8 0 0 0-11.32 0l-40 40a8 8 0 0 0 0 11.32l40 40a8 8 0 0 0 11.32 0l40-40a8 8 0 0 0 0-11.32M192 156.69L163.31 128L192 99.31L220.69 128Zm-82.34-34.35l-40-40a8 8 0 0 0-11.32 0l-40 40a8 8 0 0 0 0 11.32l40 40a8 8 0 0 0 11.32 0l40-40a8 8 0 0 0 0-11.32M64 156.69L35.31 128L64 99.31L92.69 128Z"
@@ -487,7 +435,6 @@ export const LinkSimple: VoidComponent<{
       viewBox="0 0 256 256"
       class={props.class}
     >
-      <title>Go to</title>
       <path
         fill="currentColor"
         d="M165.66 90.34a8 8 0 0 1 0 11.32l-64 64a8 8 0 0 1-11.32-11.32l64-64a8 8 0 0 1 11.32 0M215.6 40.4a56 56 0 0 0-79.2 0l-30.06 30.05a8 8 0 0 0 11.32 11.32l30.06-30a40 40 0 0 1 56.57 56.56l-30.07 30.06a8 8 0 0 0 11.31 11.32l30.07-30.11a56 56 0 0 0 0-79.2m-77.26 133.82l-30.06 30.06a40 40 0 1 1-56.56-56.57l30.05-30.05a8 8 0 0 0-11.32-11.32L40.4 136.4a56 56 0 0 0 79.2 79.2l30.06-30.07a8 8 0 0 0-11.32-11.31"

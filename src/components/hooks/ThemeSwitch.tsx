@@ -5,7 +5,9 @@ import {
   onMount,
   type VoidComponent,
 } from "solid-js";
-import { Sun, Moon } from "@icons";
+
+import Sun from "@icons/sun.svg?raw";
+import Moon from "@icons/moon.svg?raw";
 
 interface ThemeProps {
   theme: "light" | "dark";
@@ -89,13 +91,10 @@ export const ThemeSelect: VoidComponent = () => {
   });
 
   return (
-    <div onclick={toggleTheme} class="theme-toggle">
-      {(mounted() && currentTheme().theme === "light") ||
-        currentTheme().system === "light" ? (
-        <Sun class="theme-sun" />
-      ) : (
-        <Moon class="theme-moon" />
-      )}
-    </div>
+    <div
+      onclick={toggleTheme}
+      class="theme-toggle"
+      innerHTML={(mounted() && currentTheme().theme === "light") || currentTheme().system === "light" ? Sun : Moon}
+    />
   );
 };
