@@ -24,7 +24,7 @@
 }
 
 a {
-  color: hsla(var(--accent-600));
+  color: hsl(var(--link));
   text-decoration: none;
 
   &:hover {
@@ -43,10 +43,6 @@ html.dark {
   .docslayout {
     background-color: hsl(var(--bg-900));
     color: hsl(var(--secondary-400));
-  }
-
-  & a {
-    color: hsl(var(--accent-500));
   }
 }
 
@@ -115,73 +111,48 @@ html.dark {
 }
 
 footer {
-  position: sticky;
-  bottom: -3.5rem;
   width: 100%;
-  height: 3.5rem;
-  font-size: min(1.112rem, max(1svw, 0.8rem));
+  font-size: 0.9rem;
   display: flex;
   justify-content: space-between;
-  padding-inline: 1rem;
-  background: linear-gradient(150deg,
-      hsla(var(--blue) 60 5 / 1) 10%,
-      hsla(var(--blue) 75 6 / 1) 25%,
-      hsla(var(--blue) 80 8 / 1) 55%,
-      hsla(var(--blue) 77 7 / 1) 80%);
+  padding: 1rem;
+  background-color: hsl(var(--overlay-bkg));
+  border-top: solid hsl(var(--overlay-bkg-border)) 1px;
 
-  & ._credits {
+  & a {
+    color: hsl(var(--text-dark));
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: hsl(var(--text));
+    }
+  }
+
+  & .credits {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 0.127rem;
-    color: hsl(var(--blue) 10 55);
+    color: hsl(var(--text-dark));
 
-    & a {
-      all: unset;
+    & > p { margin-bottom: 0.2rem }
 
-      &:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-    }
+    & > a { text-decoration: none }
 
-    & em {
-      all: unset;
-    }
-
-    & span:first-child {
-      & em {
-        color: hsl(var(--green) 44 60);
-      }
-    }
-
-    & span:last-child {
-      & em {
-        color: hsl(var(--blue) 44 60);
-      }
+    & .hint {
+      color: hsl(var(--text-darker));
     }
   }
 
-  & ._socials {
-    height: 100%;
-    width: max-content;
+  & .links { justify-self: flex-end }
+
+  & .socials {
     display: flex;
     gap: 0.373rem;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    font-size: 2.5rem;
 
-    & span {
-      font-size: 2rem;
-
-      & a {
-        all: unset;
-        display: flex;
-        height: 100%;
-        width: 100%;
-        justify-self: center;
-        align-self: center;
-      }
-    }
+    & a { display: flex }
   }
 }
 

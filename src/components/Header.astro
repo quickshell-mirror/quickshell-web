@@ -55,8 +55,8 @@ const { headings } = Astro.props;
     <Search/>
     <div class="header-spacer"/>
     <ThemeSelect client:load />
-    <div class="toc-collapsed-spacer header-spacer"/>
     {url.length > 2 ?
+			<div class="toc-collapsed-spacer header-spacer"/>
       <TOC headings={headings} types={sidebarData} mobile={true}/>
     : null}
   </div>

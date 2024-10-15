@@ -23,6 +23,9 @@
       "@icons": [
         "./src/components/icons.tsx"
       ],
+      "@icons/*": [
+        "./src/icons/*"
+      ],
       "@components/*": [
         "./src/components/*"
       ],
