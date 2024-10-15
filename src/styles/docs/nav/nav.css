@@ -148,7 +148,7 @@
     top: 3.5rem;
     flex-shrink: 0;
     overflow-y: scroll;
-    max-height: calc(100svh - 4rem);
+    max-height: calc(100svh - 3.5rem);
     scrollbar-width: none;
     -ms-overflow-style: none;
     z-index: 10;

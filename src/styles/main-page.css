@@ -1,10 +1,9 @@
 .main-page_hero {
   position: relative;
-  height: 100%;
   margin-block: 5rem;
   margin-inline: 0.612rem;
-  min-height: calc(100svh - 3.5rem);
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
