@@ -104,12 +104,12 @@ export function getQMLTypeLinkObject(unparsed: string) {
         : linkSplit[0];
       const linkObj: QMLTypeLinkObject = {
         type: "qt",
-        module: linkModule,
+        module: linkModule.replace("_", "-"),
         name: linkSplit[1].slice(1),
       };
       if (linkSplit.length > 2) {
-        linkObj.mname = linkSplit[3];
-        linkObj.mtype = linkSplit[4];
+        linkObj.mname = linkSplit[2].slice(1);
+        linkObj.mtype = linkSplit[3].slice(1);
       }
       return linkObj;
     },

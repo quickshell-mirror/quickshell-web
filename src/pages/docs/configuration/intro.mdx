@@ -26,7 +26,7 @@ Each shell file starts with the shell root object. Only one may exist per config
 ```qml {filename="~/.config/quickshell/shell.qml"}
 import Quickshell
 
-QS_Quickshell_ShellRoot {
+@@Quickshell.ShellRoot {
   // ...
 }
 ```
@@ -82,8 +82,8 @@ We'll start with an example:
 import Quickshell // for ShellRoot and PanelWindow
 import QtQuick // for Text
 
-QS_Quickshell_ShellRoot {
-  QS_Quickshell_PanelWindow {
+@@Quickshell.ShellRoot {
+  @@Quickshell.PanelWindow {
     anchors {
       top: true
       left: true
@@ -92,7 +92,7 @@ QS_Quickshell_ShellRoot {
 
     height: 30
 
-    QT__Text {
+    @@QtQuick.Text {
       // center the bar in its parent component (the window)
       anchors.centerIn: parent
 
@@ -115,9 +115,8 @@ To start with lets make a clock. To get the time we'll use the `date` command.
 We can use a [Process](/docs/types/quickshell.io/process) object to run commands
 and return their results.
 
-We'll listen to the [DataStreamParser.read](/docs/types/quickshell.io/datastreamparser/#signal.read)
-[signal](/docs/configuration/qml-overview/#signals) emitted by
-[SplitParser](/docs/types/quickshell.io/splitparser/) using a
+We'll listen to the @@Quickshell.Io.DataStreamParser.read(s) emitted by
+@@Quickshell.Io.SplitParser using a
 [signal handler](/docs/configuration/qml-overview/#signal-handlers)
 to update the text on the clock.
 
@@ -130,8 +129,8 @@ import Quickshell
 import Quickshell.Io // for Process
 import QtQuick
 
-QS_Quickshell_ShellRoot {
-  QS_Quickshell_PanelWindow {
+@@Quickshell.ShellRoot {
+  @@Quickshell.PanelWindow {
     anchors {
       top: true
       left: true
@@ -140,14 +139,14 @@ QS_Quickshell_ShellRoot {
 
     height: 30
 
-    QT__Text {
+    @@QtQuick.Text {
       // give the text an ID we can refer to elsewhere in the file
       id: clock
 
       anchors.centerIn: parent
 
       // create a process management object
-      QS_Quickshell00Io_Process {
+      @@Quickshell.Io.Process {
         // the command it will run, every argument is its own string
         command: ["date"]
 
@@ -156,7 +155,7 @@ QS_Quickshell_ShellRoot {
 
         // process the stdout stream using a SplitParser
         // which returns chunks of output after a delimiter
-        stdout: QS_Quickshell00Io_SplitParser {
+        stdout: @@Quickshell.Io.SplitParser {
           // listen for the read signal, which returns the data that was read
           // from stdout, then write that data to the clock's text property
           onRead: data => clock.text = data
@@ -170,15 +169,15 @@ QS_Quickshell_ShellRoot {
 ## <MD_Title titleVar={2}> Running code at an interval </MD_Title>
 
 With the above example, your bar should now display the time, but it isn't updating!
-Let's use a [Timer](https://doc.qt.io/qt-6/qml-qtqml-timer.html) fix that.
+Let's use a @@QtQml.Timer to fix that.
 
 ```qml
 import Quickshell
 import Quickshell.Io
 import QtQuick
 
-QS_Quickshell_ShellRoot {
-  QS_Quickshell_PanelWindow {
+@@Quickshell.ShellRoot {
+  @@Quickshell.PanelWindow {
     anchors {
       top: true
       left: true
@@ -187,11 +186,11 @@ QS_Quickshell_ShellRoot {
 
     height: 30
 
-    QT__Text {
+    @@QtQuick.Text {
       id: clock
       anchors.centerIn: parent
 
-      QS_Quickshell00Io_Process {
+      @@Quickshell.Io.Process {
         // give the process object an id so we can talk
         // about it from the timer
         id: dateProc
@@ -199,13 +198,13 @@ QS_Quickshell_ShellRoot {
         command: ["date"]
         running: true
 
-        stdout: QS_Quickshell00Io_SplitParser {
+        stdout: @@Quickshell.Io.SplitParser {
           onRead: data => clock.text = data
         }
       }
 
       // use a timer to rerun the process at an interval
-      QT_qtqml_Timer {
+      @@QtQml.Timer {
         // 1000 milliseconds is 1 second
         interval: 1000
 
@@ -230,34 +229,31 @@ If you have multiple monitors you might have noticed that your bar
 is only on one of them. If not, you'll still want to **follow this section
 to make sure your bar doesn't disappear if your monitor disconnects**.
 
-We can use a [Variants](/docs/types/quickshell/variants)
-object to create instances of _non widget items_.
-(See [Repeater](https://doc.qt.io/qt-6/qml-qtquick-repeater.html) for doing
+We can use a @@Quickshell.Variants object to create instances of _non widget items_.
+(See @@QtQuick.Repeater for doing
 something similar with visual items.)
 
-The `Variants` type creates instances of a
-[Component](https://doc.qt.io/qt-6/qml-qtqml-component.html) based on a data model
-you supply. (A component is a re-usable tree of objects.)
+The @@Quickshell.Variants type creates instances of a @@QtQml.Component based on
+a data model you supply. (A component is a re-usable tree of objects.)
 
-The most common use of `Variants` in a shell is to create instances of
+The most common use of @@Quickshell.Variants in a shell is to create instances of
 a window (your bar) based on your monitor list (the data model).
 
-Variants will inject the values in the data model into each new
+@@Quickshell.Variants will inject the values in the data model into each new
 component's `modelData` property, which means we can easily pass each screen
-to its own component.
-(See [Window.screen](/docs/types/quickshell/qswindow/#prop.screen).)
+to its own component. (See @@Quickshell.QsWindow.screen.)
 
 ```qml
 import Quickshell
 import Quickshell.Io
 import QtQuick
 
-QS_Quickshell_ShellRoot {
-  QS_Quickshell_Variants {
+@@Quickshell.ShellRoot {
+  @@Quickshell.Variants {
     model: Quickshell.screens;
 
-    delegate: QT_qtqml_Component {
-      QS_Quickshell_PanelWindow {
+    delegate: @@QtQml.Component {
+      @@Quickshell.PanelWindow {
         // the screen from the screens list will be injected into this
         // property
         property var modelData
@@ -273,21 +269,21 @@ QS_Quickshell_ShellRoot {
 
         height: 30
 
-        QT__Text {
+        @@QtQuick.Text {
           id: clock
           anchors.centerIn: parent
 
-          QS_Quickshell00Io_Process {
+          @@Quickshell.Io.Process {
             id: dateProc
             command: ["date"]
             running: true
 
-            stdout: QS_Quickshell00Io_SplitParser {
+            stdout: @@Quickshell.Io.SplitParser {
               onRead: data => clock.text = data
             }
           }
 
-          QT_qtqml_Timer {
+          @@QtQml.Timer {
             interval: 1000
             running: true
             repeat: true
@@ -301,16 +297,13 @@ QS_Quickshell_ShellRoot {
 ```
 
 <span class="small">
-  See also: [Property
-  Bindings](/docs/configuration/qml-overview/#property-bindings),
-  [Variants.component](/docs/types/quickshell/variants/#prop.component),
-  [Quickshell.screens](/docs/types/quickshell/quickshell/#prop.screens),
+  See also: [Property Bindings](/docs/configuration/qml-overview/#property-bindings),
   [Array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 </span>
 
 With this example, bars will be created and destroyed as you plug and unplug them,
 due to the reactive nature of the
-[Quickshell.screens](/docs/types/quickshell/quickshell/#prop.screens) property.
+@@Quickshell.Quickshell.screens property.
 (See: [Reactive Bindings](/docs/configuration/qml-overview/#reactive-bindings).)
 
 Now there's an important problem you might have noticed: when the window
@@ -325,12 +318,12 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-QS_Quickshell_ShellRoot {
-  QS_Quickshell_Variants {
+@@Quickshell.ShellRoot {
+  @@Quickshell.Variants {
     model: Quickshell.screens
 
-    delegate: QT_qtqml_Component {
-      QS_Quickshell_PanelWindow {
+    delegate: @@QtQml.Component {
+      @@Quickshell.PanelWindow {
         property var modelData
         screen: modelData
 
@@ -342,7 +335,7 @@ QS_Quickshell_ShellRoot {
 
         height: 30
 
-        QT__Text {
+        @@QtQuick.Text {
           id: clock
           anchors.centerIn: parent
         }
@@ -350,17 +343,17 @@ QS_Quickshell_ShellRoot {
     }
   }
 
-  QS_Quickshell00Io_Process {
+  @@Quickshell.Io.Process {
     id: dateProc
     command: ["date"]
     running: true
 
-    stdout: QS_Quickshell00Io_SplitParser {
+    stdout: @@Quickshell.Io.SplitParser {
       onRead: data => clock.text = data
     }
   }
 
-  QT_qtqml_Timer {
+  @@QtQml.Timer {
     interval: 1000
     running: true
     repeat: true
@@ -400,17 +393,17 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-QS_Quickshell_ShellRoot {
+@@Quickshell.ShellRoot {
   id: root
 
   // add a property in the root
   property string time;
 
-  QS_Quickshell_Variants {
+  @@Quickshell.Variants {
     model: Quickshell.screens
 
-    delegate: QT_qtqml_Component {
-      QS_Quickshell_PanelWindow {
+    delegate: @@QtQml.Component {
+      @@Quickshell.PanelWindow {
         property var modelData
         screen: modelData
 
@@ -422,7 +415,7 @@ QS_Quickshell_ShellRoot {
 
         height: 30
 
-        QT__Text {
+        @@QtQuick.Text {
           // remove the id as we don't need it anymore
 
           anchors.centerIn: parent
@@ -434,18 +427,18 @@ QS_Quickshell_ShellRoot {
     }
   }
 
-  QS_Quickshell00Io_Process {
+  @@Quickshell.Io.Process {
     id: dateProc
     command: ["date"]
     running: true
 
-    stdout: QS_Quickshell00Io_SplitParser {
+    stdout: @@Quickshell.Io.SplitParser {
       // update the property instead of the clock directly
       onRead: data => root.time = data
     }
   }
 
-  QT_qtqml_Timer {
+  @@QtQml.Timer {
     interval: 1000
     running: true
     repeat: true
@@ -460,12 +453,11 @@ above code, but we can make it more concise:
 1. `Component`s can be defined implicitly, meaning we can remove the
    component wrapping the window and place the window directly into the
    `delegate` property.
-2. The [Variants.delegate](/docs/types/quickshell/variants/#prop.delegate)
-   property is a [Default Property](/docs/configuration/qml-overview/#the-default-property),
+2. The @@Quickshell.Variants.delegate property is a
+   [Default Property](/docs/configuration/qml-overview/#the-default-property),
    which means we can skip the `delegate:` part of the assignment.
-   We're already using [ShellRoot](/docs/types/quickshell/shellroot/)'s
-   default property to store our Variants, Process, and Timer components
-   among other things.
+   We're already using the default property of @@Quickshell.ShellRoot to store our
+   Variants, Process, and Timer components among other things.
 3. The ShellRoot doesn't actually need an `id` property to talk about
    the time property, as it is the outermost object in the file which
    has [special scoping rules](/docs/configuration/qml-overview/#property-access-scopes).
@@ -477,13 +469,13 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-QS_Quickshell_ShellRoot {
+@@Quickshell.ShellRoot {
   property string time;
 
-  QS_Quickshell_Variants {
+  @@Quickshell.Variants {
     model: Quickshell.screens
 
-    QS_Quickshell_PanelWindow {
+    @@Quickshell.PanelWindow {
       property var modelData
       screen: modelData
 
@@ -495,7 +487,7 @@ QS_Quickshell_ShellRoot {
 
       height: 30
 
-      QT__Text {
+      @@QtQuick.Text {
         anchors.centerIn: parent
 
         // now just time instead of root.time
@@ -504,18 +496,18 @@ QS_Quickshell_ShellRoot {
     }
   }
 
-  QS_Quickshell00Io_Process {
+  @@Quickshell.Io.Process {
     id: dateProc
     command: ["date"]
     running: true
 
-    stdout: QS_Quickshell00Io_SplitParser {
+    stdout: @@Quickshell.Io.SplitParser {
       // now just time instead of root.time
       onRead: data => time = data
     }
   }
 
-  QT_qtqml_Timer {
+  @@QtQml.Timer {
     interval: 1000
     running: true
     repeat: true
@@ -534,7 +526,7 @@ To start with, let's move the entire bar into a new file.
 ```qml {filename="shell.qml"}
 import Quickshell
 
-QS_Quickshell_ShellRoot {
+@@Quickshell.ShellRoot {
   Bar {}
 }
 ```
@@ -544,13 +536,13 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-QS_Quickshell_Scope {
+@@Quickshell.Scope {
   property string time;
 
-  QS_Quickshell_Variants {
+  @@Quickshell.Variants {
     model: Quickshell.screens
 
-    QS_Quickshell_PanelWindow {
+    @@Quickshell.PanelWindow {
       property var modelData
       screen: modelData
 
@@ -562,7 +554,7 @@ QS_Quickshell_Scope {
 
       height: 30
 
-      QT__Text {
+      @@QtQuick.Text {
         anchors.centerIn: parent
 
         // now just time instead of root.time
@@ -571,18 +563,18 @@ QS_Quickshell_Scope {
     }
   }
 
-  QS_Quickshell00Io_Process {
+  @@Quickshell.Io.Process {
     id: dateProc
     command: ["date"]
     running: true
 
-    stdout: QS_Quickshell00Io_SplitParser {
+    stdout: @@Quickshell.Io.SplitParser {
       // now just time instead of root.time
       onRead: data => time = data
     }
   }
 
-  QT_qtqml_Timer {
+  @@QtQml.Timer {
     interval: 1000
     running: true
     repeat: true
@@ -602,12 +594,12 @@ the clock component in the bar, as well as the process and timer that
 make up the actual clock, need to be dealt with.
 
 To start with, we can move the clock widget to a new file. For now it's just a
-single `Text` object but the same concepts apply regardless of complexity.
+single @@QtQuick.Text object but the same concepts apply regardless of complexity.
 
 ```qml {filename="ClockWidget.qml"}
 import QtQuick
 
-QT__Text {
+@@QtQuick.Text {
   // A property the creator of this type is required to set.
   // Note that we could just set `text` instead, but don't because your
   // clock probably will not be this simple.
@@ -622,14 +614,14 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-QS_Quickshell_Scope {
+@@Quickshell.Scope {
   id: root
   property string time;
 
-  QS_Quickshell_Variants {
+  @@Quickshell.Variants {
     model: Quickshell.screens
 
-    QS_Quickshell_PanelWindow {
+    @@Quickshell.PanelWindow {
       property var modelData
       screen: modelData
 
@@ -650,17 +642,17 @@ QS_Quickshell_Scope {
     }
   }
 
-  QS_Quickshell00Io_Process {
+  @@Quickshell.Io.Process {
     id: dateProc
     command: ["date"]
     running: true
 
-    stdout: QS_Quickshell00Io_SplitParser {
+    stdout: @@Quickshell.Io.SplitParser {
       onRead: data => time = data
     }
   }
 
-  QT_qtqml_Timer {
+  @@QtQml.Timer {
     interval: 1000
     running: true
     repeat: true
@@ -679,20 +671,20 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-QS_Quickshell_Scope {
+@@Quickshell.Scope {
   property string time;
 
-  QS_Quickshell00Io_Process {
+  @@Quickshell.Io.Process {
     id: dateProc
     command: ["date"]
     running: true
 
-    stdout: QS_Quickshell00Io_SplitParser {
+    stdout: @@Quickshell.Io.SplitParser {
       onRead: data => time = data
     }
   }
 
-  QT_qtqml_Timer {
+  @@QtQml.Timer {
     interval: 1000
     running: true
     repeat: true
@@ -704,14 +696,14 @@ QS_Quickshell_Scope {
 ```qml {filename="Bar.qml"}
 import Quickshell
 
-QS_Quickshell_Scope {
+@@Quickshell.Scope {
   // the Time type we just created
   Time { id: timeSource }
 
-  QS_Quickshell_Variants {
+  @@Quickshell.Variants {
     model: Quickshell.screens
 
-    QS_Quickshell_PanelWindow {
+    @@Quickshell.PanelWindow {
       property var modelData
       screen: modelData
 
@@ -751,20 +743,20 @@ import Quickshell.Io
 import QtQuick
 
 // your singletons should always have Singleton as the type
-QS_Quickshell_Singleton {
+@@Quickshell.Singleton {
   property string time
 
-  QS_Quickshell00Io_Process {
+  @@Quickshell.Io.Process {
     id: dateProc
     command: ["date"]
     running: true
 
-    stdout: QS_Quickshell00Io_SplitParser {
+    stdout: @@Quickshell.Io.SplitParser {
       onRead: data => time = data
     }
   }
 
-  QT_qtqml_Timer {
+  @@QtQml.Timer {
     interval: 1000
     running: true
     repeat: true
@@ -776,7 +768,7 @@ QS_Quickshell_Singleton {
 ```qml {filename="ClockWidget.qml"}
 import QtQuick
 
-QT__Text {
+@@QtQuick.Text {
   // we no longer need time as an input
 
   // directly access the time property from the Time singleton
@@ -787,13 +779,13 @@ QT__Text {
 ```qml {filename="Bar.qml"}
 import Quickshell
 
-QS_Quickshell_Scope {
+@@Quickshell.Scope {
   // no more time object
 
-  QS_Quickshell_Variants {
+  @@Quickshell.Variants {
     model: Quickshell.screens
 
-    QS_Quickshell_PanelWindow {
+    @@Quickshell.PanelWindow {
       property var modelData
       screen: modelData
 
@@ -830,11 +822,11 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-QS_Quickshell_Singleton {
+@@Quickshell.Singleton {
   property var date: new Date()
   property string time: date.toLocaleString(Qt.locale())
 
-  QT_qtqml_Timer {
+  @@QtQml.Timer {
     interval: 1000
     running: true
     repeat: true

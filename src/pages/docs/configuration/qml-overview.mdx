@@ -35,7 +35,7 @@ import QtQuick 6.0
 import "myjs.js" as MyJs
 
 // Root Object
-QT__Item {
+@@QtQuick.Item {
   // Id assignment
 
   id: root
@@ -202,7 +202,7 @@ Expressions are snippets of javascript code assigned to a property. The last (or
 can be the return value, or an explicit return statement (multiline expressions only) can be used.
 
 ```qml
-QT__Item {
+@@QtQuick.Item {
   // simple expression
   property: 5
 
@@ -252,7 +252,7 @@ Properties can be defined inside of objects with the following syntax:
 - `binding` is the property binding. See [Property bindings](#property-bindings) for details.
 
 ```qml
-QT__Item {
+@@QtQuick.Item {
   // normal property
   property int foo: 3
 
@@ -274,12 +274,12 @@ Types can have a _default property_ which must accept either an object or a list
 The default property will allow you to assign a value to it without using the name of the property:
 
 ```qml
-QT__Item {
+@@QtQuick.Item {
   // normal property
   foo: 3
 
   // this item is assigned to the outer object's default property
-  QT__Item {
+  @@QtQuick.Item {
   }
 }
 ```
@@ -288,16 +288,16 @@ If the default property is a list, you can put multiple objects into it the same
 would put a single object in:
 
 ```qml
-QT__Item {
+@@QtQuick.Item {
   // normal property
   foo: 3
 
   // this item is assigned to the outer object's default property
-  QT__Item {
+  @@QtQuick.Item {
   }
 
   // this one is too
-  QT__Item {
+  @@QtQuick.Item {
   }
 }
 ```
@@ -308,13 +308,13 @@ Every object has a special property called `id` that can be assigned to give
 the object a name it can be referred to throughout the current file. The id must be lowercase.
 
 ```qml
-QT_qtquick11layouts_ColumnLayout {
-  QT__Text {
+@@QtQuick.Layouts.ColumnLayout {
+  @@QtQuick.Text {
     id: text
     text: "Hello World!"
   }
 
-  QT_qtquick11controls_Button {
+  @@QtQuick.Controls.Button {
     text: "Make the text red";
     onClicked: text.color = "red";
   }
@@ -344,14 +344,14 @@ The `parent` property is also defined for all objects, but may not always point 
 looks like it should. Use the `id` property if `parent` does not do what you want.
 
 ```qml
-QT__Item {
+@@QtQuick.Item {
   property string rootDefinition
 
-  QT__Item {
+  @@QtQuick.Item {
     id: mid
     property string midDefinition
 
-    QT__Text {
+    @@QtQuick.Text {
       property string innerDefinition
 
       // legal - innerDefinition is defined on the current object
@@ -402,19 +402,19 @@ functions, meaning if one of the properties a function depends on is re-evaluate
 every expression depending on the function is also re-evaluated.
 
 ```qml
-QT_qtquick11layouts_ColumnLayout {
+@@QtQuick.Layouts.ColumnLayout {
   property int clicks: 0
 
   function makeClicksLabel(): string {
     return "the button has been clicked " + clicks + " times!";
   }
 
-  QT_qtquick11controls_Button {
+  @@QtQuick.Controls.Button {
     text: "click me"
     onClicked: clicks += 1
   }
 
-  QT__Text {
+  @@QtQuick.Text {
     text: makeClicksLabel()
   }
 }
@@ -450,7 +450,7 @@ Lambda syntax:
 Assigning functions to properties:
 
 ```qml
-QT__Item {
+@@QtQuick.Item {
   // using functions
   function dub(number: int): int { return number * 2; }
   property var operation: dub
@@ -463,7 +463,7 @@ QT__Item {
 An overcomplicated click counter using a lambda callback:
 
 ```qml
-QT_qtquick11layouts_ColumnLayout {
+@@QtQuick.Layouts.ColumnLayout {
   property int clicks: 0
 
   function incrementAndCall(callback) {
@@ -471,14 +471,14 @@ QT_qtquick11layouts_ColumnLayout {
     callback(clicks);
   }
 
-  QT_qtquick11controls_Button {
+  @@QtQuick.Controls.Button {
     text: "click me"
     onClicked: incrementAndCall(clicks => {
         label.text = `the button was clicked ${clicks} time(s)!`;
     })
   }
 
-  QT__Text {
+  @@QtQuick.Text {
     id: label
     text: "the button has not been clicked"
   }
@@ -510,7 +510,7 @@ Signals all have a `connect(<function>)` method which invokes the given function
 or signal when the signal is emitted.
 
 ```qml
-QT_qtquick11layouts_ColumnLayout {
+@@QtQuick.Layouts.ColumnLayout {
   property int clicks: 0
 
   function updateText() {
@@ -518,12 +518,12 @@ QT_qtquick11layouts_ColumnLayout {
     label.text = `the button has been clicked ${clicks} times!`;
   }
 
-  QT_qtquick11controls_Button {
+  @@QtQuick.Controls.Button {
     id: button
     text: "click me"
   }
 
-  QT__Text {
+  @@QtQuick.Text {
     id: label
     text: "the button has not been clicked"
   }
@@ -540,9 +540,9 @@ QT_qtquick11layouts_ColumnLayout {
   immediately once the object is fully initialized.
 </span>
 
-When the button is clicked, the button emits the `clicked` signal which we connected to
-`updateText`. The signal then invokes `updateText` which updates the counter and the
-text on the label.
+When the button is clicked, the button emits the @@QtQuick.Controls.Button.clicked(s)
+signal which we connected to `updateText`. The signal then invokes `updateText`
+which updates the counter and the text on the label.
 
 ##### <MD_Title titleVar={5}> Signal handlers </MD_Title>
 
@@ -553,10 +553,10 @@ property implicitly defined which can be set to a function. (Note that the first
 signal's name it capitalized.)
 
 Below is the same example as in [Making Connections](#making-connections),
-this time using the implicit signal handler property to handle `button.clicked`.
+this time using the implicit signal handler property to handle @@QtQuick.Controls.Button.clicked(s).
 
 ```qml
-QT_qtquick11layouts_ColumnLayout {
+@@QtQuick.Layouts.ColumnLayout {
   property int clicks: 0
 
   function updateText() {
@@ -564,12 +564,12 @@ QT_qtquick11layouts_ColumnLayout {
     label.text = `the button has been clicked ${clicks} times!`;
   }
 
-  QT_qtquick11controls_Button {
+  @@QtQuick.Controls.Button {
     text: "click me"
     onClicked: updateText()
   }
 
-  QT__Text {
+  @@QtQuick.Text {
     id: label
     text: "the button has not been clicked"
   }
@@ -579,18 +579,18 @@ QT_qtquick11layouts_ColumnLayout {
 ##### <MD_Title titleVar={5}> Indirect signal handlers </MD_Title>
 
 When it is not possible or not convenient to directly define a signal handler, before resorting
-to `.connect`ing the properties, a [Connections] object can be used to access them.
+to `.connect`ing the properties, a @@QtQml.Connections object can be used to access them.
 
 This is especially useful to connect to signals of singletons.
 
 ```qml
-QT__Item {
-  QT_qtquick11controls_Button {
+@@QtQuick.Item {
+  @@QtQuick.Controls.Button {
     id: myButton
     text "click me"
   }
 
-  QT_qtqml_Connections {
+  @@QtQml.Connections {
     target: myButton
 
     function onClicked() {
@@ -609,8 +609,8 @@ Whenever the property is re-evaluated, its change signal is emitted. This is use
 to update dependent properties, but can be directly used, usually with a signal handler.
 
 ```qml
-QT_qtquick11layouts_ColumnLayout {
-  CheckBox {
+@@QtQuick.Layouts.ColumnLayout {
+  @@QtQuick.Controls.CheckBox {
     text: "check me"
 
     onCheckStateChanged: {
@@ -618,7 +618,7 @@ QT_qtquick11layouts_ColumnLayout {
     }
   }
 
-  QT__Text {
+  @@QtQuick.Text {
     id: label
     text: labelText(false)
   }
@@ -629,19 +629,19 @@ QT_qtquick11layouts_ColumnLayout {
 }
 ```
 
-In this example we listen for the `checkState` property of the CheckBox changing
+In this example we listen for changes to the @@QtQuick.Controls.CheckBox.checkState property of the CheckBox
 using its change signal, `checkStateChanged` with the signal handler `onCheckStateChanged`.
 
 Since text is also a property we can do the same thing more concisely:
 
 ```qml
-QT_qtquick11layouts_ColumnLayout {
-  CheckBox {
+@@QtQuick.Layouts.ColumnLayout {
+  @@QtQuick.Controls.CheckBox {
     id: checkbox
     text: "check me"
   }
 
-  QT__Text {
+  @@QtQuick.Text {
     id: label
     text: labelText(checkbox.checkState == Qt.Checked)
   }
@@ -655,13 +655,13 @@ QT_qtquick11layouts_ColumnLayout {
 And the function can also be inlined to an expression:
 
 ```qml
-QT_qtquick11layouts_ColumnLayout {
-  CheckBox {
+@@QtQuick.Layouts.ColumnLayout {
+  @@QtQuick.Controls.CheckBox {
     id: checkbox
     text: "check me"
   }
 
-  QT__Text {
+  @@QtQuick.Text {
     id: label
     text: {
       const checked = checkbox.checkState == Qt.Checked;
@@ -682,11 +682,11 @@ tell you if it can be used as an attached object and how.
 Attached objects are accessed in the form `<Typename>.<member>` and can have
 properties, functions and signals.
 
-A good example is the [Component](https://doc.qt.io/qt-6/qml-qtqml-component.html) type,
+A good example is the @@QtQml.Component type,
 which is attached to every object and often used to run code when an object initializes.
 
 ```qml
-QT__Text {
+@@QtQuick.Text {
   Component.onCompleted: {
     text = "hello!"
   }
@@ -706,14 +706,14 @@ are not visible outside the file.
 
 ```qml
 // MyText.qml
-QT__Rectangle {
+@@QtQuick.Rectangle {
   required property string text
 
   color: "red"
   implicitWidth: textObj.implicitWidth
   implicitHeight: textObj.implicitHeight
 
-  QT__Text {
+  @@QtQuick.Text {
     id: textObj
     anchors.fill: parent
     text: parent.text
@@ -721,7 +721,7 @@ QT__Rectangle {
 }
 
 // AnotherComponent.qml
-QT__Item {
+@@QtQuick.Item {
   MyText {
     // The `text` property of `MyText` is required, so we must set it.
     text: "Hello World!"
@@ -748,13 +748,13 @@ of the type.
 
 To make a type a singleton, put `pragma Singleton` at the top of the file.
 To ensure it behaves correctly with quickshell you should also make
-[Singleton](/docs/types/quickshell/singleton) the root item of your type.
+@@Quickshell.Singleton the root item of your type.
 
 ```qml
 pragma Singleton
 import ...
 
-QS_Quickshell_Singleton {
+@@Quickshell.Singleton {
   ...
 }
 ```
@@ -785,18 +785,18 @@ A reactive binding occurs automatically when you use one or more properties in t
 of another property. .
 
 ```qml
-QT__Item {
+@@QtQuick.Item {
   property int clicks: 0
 
-  QT_qtquick11controls_Button {
+  @@QtQuick.Controls.Button {
     text: `clicks: ${clicks}`
     onClicked: clicks += 1
   }
 }
 ```
 
-In this example, the button's `text` property is re-evaluated every time the button is clicked, because
-the `clicks` property has changed.
+In this example, the button's @@QtQuick.Controls.Button.text property is re-evaluated
+every time the button is clicked, because the `clicks` property has changed.
 
 ###### <MD_Title titleVar={6}> Avoiding creation </MD_Title>
 
@@ -806,10 +806,10 @@ You can use the `Component.onCompleted` signal to set a value using a property w
 as assignments to properties do not create binding.
 
 ```qml
-QT__Item {
+@@QtQuick.Item {
   property string theProperty: "initial value"
 
-  QT__Text {
+  @@QtQuick.Text {
     // text: "Right now, theProperty is: " + theProperty
     Component.onCompleted: text = "At creation time, theProperty is: " + theProperty
   }
@@ -826,13 +826,13 @@ The `Qt.binding` function takes another function as an argument, and when assign
 the property will use that function as its binding expression.
 
 ```qml
-QT__Item {
-  QT__Text {
+@@QtQuick.Item {
+  @@QtQuick.Text {
     id: boundText
     text: "not bound to anything"
   }
 
-  QT_qtquick11controls_Button {
+  @@QtQuick.Controls.Button {
     text: "bind the above text"
     onClicked: {
       if (boundText.text == "not bound to anything") {
@@ -853,13 +853,13 @@ be updated.
 To remove a binding, just assign a new value to the property without using `Qt.binding`.
 
 ```qml
-QT__Item {
-  QT__Text {
+@@QtQuick.Item {
+  @@QtQuick.Text {
     id: boundText
     text: `button is pressed: ${theButton.pressed}`
   }
 
-  QT_qtquick11controls_Button {
+  @@QtQuick.Controls.Button {
     id: theButton
     text: "break the binding"
     onClicked: boundText.text = `button was pressed at the time the binding was broken: ${pressed}`
@@ -876,13 +876,11 @@ it will not be updated further by the binding.
 Often not all of your interface needs to load immediately. By default the QML
 engine initializes every object in the scene before showing anything onscreen.
 For parts of the interface you don't need to be immediately visible, load them
-asynchronously using a [LazyLoader](/docs/types/quickshell/lazyloader).
+asynchronously using a @@Quickshell.LazyLoader.
 See its documentation for more information.
 
 #### <MD_Title titleVar={4}> Components </MD_Title>
 
-Another delayed loading mechanism is the [Component](https://doc.qt.io/qt-6/qml-qtqml-component.html) type.
+Another delayed loading mechanism is the @@QtQml.Component type.
 This type can be used to create multiple instances of objects or lazily load them. It's used by types such
-as [Repeater](https://doc.qt.io/qt-6/qml-qtquick-repeater.html)
-and [Quickshell.Variants](/docs/types/quickshell/variants)
-to create instances of a component at runtime.
+as @@QtQuick.Repeater and @@Quickshell.Variants to create instances of a component at runtime.

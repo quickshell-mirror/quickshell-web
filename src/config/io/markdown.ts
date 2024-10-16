@@ -1,10 +1,12 @@
-import type { Parent, Node } from "unist";
 import { visit, CONTINUE, SKIP } from "unist-util-visit";
 import { fromHtml } from "hast-util-from-html";
-import type { Root } from "hast";
+import type * as Unist from "unist";
+import type * as Html from "hast";
+import type * as Md from "mdast";
 import type {
   AstroMarkdownOptions,
   MarkdownProcessor,
+  RemarkPlugin,
   RehypePlugin,
 } from "@astrojs/markdown-remark";
 import { createMarkdownProcessor } from "@astrojs/markdown-remark";
@@ -18,19 +20,52 @@ import {
   getIconForLink,
 } from "./helpers.ts";
 
-// couldn't find the actual type to use
-interface HtmlNode extends Node {
-  value: string;
-  type: string;
-  tagName: string;
-}
+const remarkParseAtTypes: RemarkPlugin<[]> = () => {
+  return (root: Md.Root): Md.Root => {
+    visit(
+      root as Unist.Parent,
+      (rawNode: Unist.Node) => {
+        if (rawNode.type === "text" || (rawNode.type === "code" && (rawNode as Md.Code).lang === "qml")) {
+          const node = rawNode as Md.Literal;
+
+          node.value = node.value.replace(
+            /@@((?<module>([A-Z]\w*\.)*)(?<type>([A-Z]\w*))\.?)?((?<member>[a-z]\w*)((?<function>\(\))|(?<signal>\(s\)))?)?(?=[$.,;:\s]|$)/g,
+            (_full, ...args) => {
+              type Capture = {
+                module: string | undefined;
+                type: string | undefined;
+                member: string | undefined;
+                function: string | undefined;
+                signal: string | undefined;
+              }
+
+              const groups = args.pop() as Capture;
+
+              if (groups.module) {
+                groups.module = groups.module.substring(0, groups.module.length - 1);
+                const isQs = groups.module.startsWith("Quickshell");
+                groups.module = `99M${isQs ? "QS" : "QT_qml"}_${groups.module.replace(".", "_")}`;
+              } else groups.module = ""; // WARNING: rehype parser can't currently handle intra-module links
+
+              groups.type = groups.type ? `99N${groups.type}` : "";
+              groups.member = groups.member ? `99V${groups.member}` : "";
+              const type = groups.member ? `99T${groups.function ? "func" : groups.signal ? "signal" : "prop"}` : "";
+              return `TYPE${groups.module}${groups.type}${groups.member}${type}99TYPE`;
+            }
+          );
+        }
+      }
+    );
+    return root;
+  };
+};
 
 const rehypeRewriteTypelinks: RehypePlugin<[]> = () => {
-  return (root: Node): Root => {
+  return (root: Html.Root): Html.Root => {
     visit(
-      root,
+      root as Unist.Parent,
       "text",
-      (node: HtmlNode, index: number, parent: Parent) => {
+      (node: Html.Text, index: number, parent: Html.Parent) => {
         let changed = false;
 
         node.value = node.value.replace(
@@ -65,7 +100,7 @@ const rehypeRewriteTypelinks: RehypePlugin<[]> = () => {
       }
     );
 
-    return root as Root;
+    return root;
   };
 };
 
@@ -93,7 +128,7 @@ export const markdownConfig: AstroMarkdownOptions = {
     wrap: true,
     transformers: [shikiRewriteTypelinks],
   },
-  remarkPlugins: [[remarkAlert, { legacyTitle: true }]],
+  remarkPlugins: [remarkParseAtTypes, [remarkAlert, { legacyTitle: true }]],
   rehypePlugins: [
     // FIXME: incompatible types between unified/Plugin and Astro/RehypePlugin
     [sectionize as RehypePlugin, { idPropertyName: "id" }],
