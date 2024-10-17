@@ -1,8 +1,25 @@
 ---
 import DocsLayout from "@layouts/DocsLayout.astro";
+import { generateTypeData } from "@config/io/generateTypeData";
+
+const routes = await generateTypeData();
+
+const modules = [...new Set(routes.map(route => route.type))];
 ---
 <DocsLayout title="Quickshell Type Definitions" description="Quickshell Type Documentation">
   <h2>Type Definitions</h2>
   <div class="root-nav">
+    {modules.map(moduleEntry => {
+      const indexData = routes.filter(route => route.name === "index")
+      const indexSingled = indexData.filter(indexEntry => indexEntry.type === moduleEntry)[0]
+      const description = indexSingled.data.description
+      return (
+      <div class="root-nav-entry">
+        <a class="root-nav-link" href={`/docs/types/${moduleEntry}`}>
+          {moduleEntry}
+        </a>
+        <span class="root-nav-desc">{description}</span>
+      </div>)
+    })}
   </div>
 </DocsLayout>

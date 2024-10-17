@@ -8,6 +8,7 @@
   justify-content: center;
   flex-direction: row;
   flex-grow: 1;
+  transition: filter 0.3s;
 }
 
 .docslayout-inner {
@@ -17,6 +18,10 @@
 .docs {
   display: flex;
   flex-direction: row;
+}
+
+.dim-content .docslayout-root {
+  filter: brightness(50%);
 }
 
 .docs-content {
@@ -44,7 +49,7 @@
 }
 
 .heading {
-  & > [id] {
+  &>[id] {
     width: max-content;
   }
 
@@ -82,7 +87,7 @@ ul {
 .markdown-alert {
   margin-block: 0.618rem;
 
-  & > *:not(:first-child) {
+  &>*:not(:first-child) {
     margin-block: 0.724rem;
   }
 }

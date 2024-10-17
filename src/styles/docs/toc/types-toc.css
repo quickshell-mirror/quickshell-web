@@ -63,6 +63,8 @@
     }
 
     &:hover {
+      cursor: pointer;
+
       & svg {
         opacity: 1;
       }

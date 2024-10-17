@@ -11,7 +11,7 @@ export interface Props {
 const { headings, types, mobile } = Astro.props;
 ---
 
-<div class=`toc-wrapper${mobile ? "-mobile":""}`>
+<div id="toc" aria-mobile={mobile} class=`toc-wrapper${mobile ? "-mobile":""}`>
   <TableOfContents
     config={headings}
     type={types}

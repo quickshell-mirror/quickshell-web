@@ -39,7 +39,8 @@
       display: none;
     }
 
-    transition: left 0.3s ease, padding 0.3s ease;
+    transition: left 0.3s ease,
+    padding 0.3s ease;
 
     &.shown {
       display: flex;
@@ -82,16 +83,22 @@
       }
 
       & [data-part="item"] {
-        & [data-part="item-content"] > div {
+        & [data-part="item-content"]>div {
           min-height: 3em;
 
-          & > a {
+          &>a {
             margin: auto 0;
           }
         }
       }
     }
   }
+}
+
+.link-outside {
+  width: 100%;
+  height: 100%;
+  text-align: start;
 }
 
 @media (min-width: 40rem) {
@@ -128,7 +135,7 @@
         }
 
         & [data-part="item"] {
-          & [data-part="item-content"] > div {
+          & [data-part="item-content"]>div {
             min-height: 2.2rem;
           }
         }

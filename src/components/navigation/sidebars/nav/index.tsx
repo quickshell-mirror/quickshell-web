@@ -1,4 +1,10 @@
-import { createSignal, onMount, type Component } from "solid-js";
+import {
+  createSignal,
+  createEffect,
+  onMount,
+  onCleanup,
+  type Component,
+} from "solid-js";
 
 import { LoadingSpinner, MenuToX, XToMenu } from "@icons";
 import { Tree } from "./Tree";
@@ -41,10 +47,21 @@ const NavComponent: Component<NavProps> = props => {
   };
 
   onMount(() => {
-    window.addEventListener("click", handleClickOutside);
-    return () => {
+    onCleanup(() => {
       window.removeEventListener("click", handleClickOutside);
-    };
+    });
+  });
+
+  createEffect(() => {
+    if (open()) {
+      window.addEventListener("click", handleClickOutside);
+      document.body.style.overflow = "hidden";
+      document.body.classList.add("dim-content");
+    } else {
+      window.removeEventListener("click", handleClickOutside);
+      document.body.style.overflow = "auto";
+      document.body.classList.remove("dim-content");
+    }
   });
 
   return (

@@ -126,7 +126,14 @@ export const Tree: Component<TreeProps> = props => {
             <Accordion.ItemIndicator>
               <LinkSimple />
             </Accordion.ItemIndicator>
-            <span>
+            <span
+              class="link-outside"
+              onMouseDown={() =>
+                window.open(
+                  "https://doc.qt.io/qt-6/qtquick-qmlmodule.html"
+                )
+              }
+            >
               <a
                 href="https://doc.qt.io/qt-6/qtquick-qmlmodule.html"
                 target="_blank"
@@ -145,7 +152,14 @@ export const Tree: Component<TreeProps> = props => {
             <Accordion.ItemIndicator>
               <LinkSimple />
             </Accordion.ItemIndicator>
-            <span>
+            <span
+              class="link-outside"
+              onMouseDown={() =>
+                window.open(
+                  "https://git.outfoxxed.me/outfoxxed/quickshell-examples"
+                )
+              }
+            >
               <a
                 href="https://git.outfoxxed.me/outfoxxed/quickshell-examples"
                 target="_blank"

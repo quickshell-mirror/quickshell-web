@@ -1,4 +1,10 @@
-import { createSignal, onMount, type Component } from "solid-js";
+import {
+  createEffect,
+  createSignal,
+  onMount,
+  onCleanup,
+  type Component,
+} from "solid-js";
 
 import { Article } from "@icons";
 import { Table } from "./Table";
@@ -24,20 +30,33 @@ const TableOfContents: Component<TOCProps> = props => {
   }
   const handleClickOutside = (event: MouseEvent) => {
     const isLink = "href" in (event.target || {});
+    const isInBody = document.body.contains(event.target as Node);
     if (
       isLink ||
-      (document.body.contains(event.target as Node) &&
-        !tocRef.contains(event.target as Node))
+      !isInBody ||
+      (isInBody && !tocRef.contains(event.target as Node))
     ) {
       setOpen(false);
     }
   };
 
   onMount(() => {
-    window.addEventListener("click", handleClickOutside);
-    return () => {
+    onCleanup(() => {
       window.removeEventListener("click", handleClickOutside);
-    };
+    });
+  });
+
+  createEffect(() => {
+    const tocRoot = document.getElementById("toc")!;
+    if (open()) {
+      window.addEventListener("click", handleClickOutside);
+      document.body.style.overflow = "hidden";
+      document.body.classList.add("dim-content");
+    } else {
+      window.removeEventListener("click", handleClickOutside);
+      document.body.style.overflow = "auto";
+      document.body.classList.remove("dim-content");
+    }
   });
 
   return (
