@@ -131,7 +131,7 @@ export function getQMLTypeLink({
   type,
   module,
   name,
-  //mtype,
+  mtype,
   mname,
 }: QMLTypeLinkObject) {
   if (type === "unknown") {
@@ -139,15 +139,16 @@ export function getQMLTypeLink({
   }
   const qtStart = "https://doc.qt.io/qt-6/";
   const localStart = "/docs/types";
-  const isSpecific = mname ? `#${mname}` : "";
 
   const hashMap = {
     local: () => {
+      const isSpecific = mname ? `#${mname}` : "";
       const localLink = `${localStart}/${module}/${name}${isSpecific}`;
       return localLink;
     },
     qt: () => {
-      const qtLink = `${qtStart}${module!.toLowerCase().replace(".", "-")}-${name!.toLowerCase()}${isSpecific.toLowerCase()}.html`;
+      const isSpecific = mname ? `#${mname}-${mtype === "func" ? "method" : mtype}` : "";
+      const qtLink = `${qtStart}${module!.toLowerCase().replace(".", "-")}-${name!.toLowerCase()}.html${isSpecific}`;
       return qtLink;
     },
     self: () => {
