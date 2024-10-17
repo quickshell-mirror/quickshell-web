@@ -56,6 +56,11 @@ html.dark {
   all: unset;
 }
 
+.overflow-nav,
+.overflow-toc {
+  overflow: hidden;
+}
+
 .search {
   display: none;
 }
@@ -133,12 +138,10 @@ footer {
     left: -1rem;
     height: 1px;
     width: calc(100% + 1rem);
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      hsl(var(--footer-bkg-border)) 50%,
-      transparent 100%
-    );
+    background: linear-gradient(90deg,
+        transparent 0%,
+        hsl(var(--footer-bkg-border)) 50%,
+        transparent 100%);
   }
 
   & a {
@@ -177,12 +180,12 @@ footer {
     gap: 0.127rem;
     color: hsl(var(--text-dark));
 
-    & > p {
+    &>p {
       margin-bottom: 0.2rem;
       color: hsl(0 0 40);
     }
 
-    & > a {
+    &>a {
       text-decoration: none;
     }
   }
