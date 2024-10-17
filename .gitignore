@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 modules/
 modules_old/
+
+# env
+.env*

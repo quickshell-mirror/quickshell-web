@@ -31,7 +31,8 @@ async function readSubdir(subdir: string): Promise<dirData[]> {
 }
 
 export async function generateTypeData(): Promise<RouteData[]> {
-  const mainDir = path.join(process.cwd(), "modules");
+  const mainDir = import.meta.env.SECRET_MODULES_PATH;
+
   const subdirs = await fs.readdir(mainDir, {
     withFileTypes: true,
   });
