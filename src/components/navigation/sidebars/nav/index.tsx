@@ -37,10 +37,11 @@ const NavComponent: Component<NavProps> = props => {
 
   const handleClickOutside = (event: MouseEvent) => {
     const isLink = "href" in (event.target || {});
+    const isInBody = document.body.contains(event.target as Node);
     if (
       isLink ||
-      (document.body.contains(event.target as Node) &&
-        !navRef.contains(event.target as Node))
+      !isInBody ||
+      (isInBody && !navRef.contains(event.target as Node))
     ) {
       setOpen(false);
     }
@@ -70,11 +71,8 @@ const NavComponent: Component<NavProps> = props => {
       ref={navRef!}
     >
       <div onclick={e => toggle(e)}>
-        {open() ? (
-          <MenuToX class="nav-icon" />
-        ) : (
-          <XToMenu class="nav-icon" />
-        )}
+        <MenuToX class={`nav-icon ${open() ? "active" : ""}`} />
+        <XToMenu class={`nav-icon ${!open() ? "active" : ""}`} />
       </div>
       <div
         id={open() ? "#qs_search" : ""}

@@ -47,7 +47,6 @@ const TableOfContents: Component<TOCProps> = props => {
   });
 
   createEffect(() => {
-    const tocRoot = document.getElementById("toc")!;
     if (open()) {
       window.addEventListener("click", handleClickOutside);
       document.body.style.overflow = "hidden";
