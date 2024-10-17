@@ -56,11 +56,11 @@ const NavComponent: Component<NavProps> = props => {
     if (open()) {
       window.addEventListener("click", handleClickOutside);
       document.body.style.overflow = "hidden";
-      document.body.classList.add("dim-content");
+      document.body.classList.add("dim-content-nav");
     } else {
       window.removeEventListener("click", handleClickOutside);
       document.body.style.overflow = "auto";
-      document.body.classList.remove("dim-content");
+      document.body.classList.remove("dim-content-nav");
     }
   });
 

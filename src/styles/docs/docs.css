@@ -20,8 +20,10 @@
   flex-direction: row;
 }
 
-.dim-content .docslayout-root {
+.dim-content-toc .docslayout-root,
+.dim-content-nav .docslayout-root {
   filter: brightness(50%);
+  pointer-events: none;
 }
 
 .docs-content {
