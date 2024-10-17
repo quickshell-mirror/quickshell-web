@@ -82,10 +82,6 @@ html.dark .nav-shevron {
     &>a {
       width: 100%;
       margin-left: 0.2rem;
-
-      &:hover {
-        text-decoration: none;
-      }
     }
   }
 

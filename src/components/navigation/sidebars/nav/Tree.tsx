@@ -102,13 +102,11 @@ export const Tree: Component<TreeProps> = props => {
                                   : ""
                               }
                             >
-                              <p>
-                                <a
-                                  href={`/docs/types/${submodule.type}/${submodule.name}`}
-                                >
-                                  {submodule.name}
-                                </a>
-                              </p>
+                              <a
+                                href={`/docs/types/${submodule.type}/${submodule.name}`}
+                              >
+                                {submodule.name}
+                              </a>
                             </div>
                           )}
                         </For>

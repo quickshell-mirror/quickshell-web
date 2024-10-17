@@ -41,8 +41,11 @@ const { propsKeys, propsData } = Astro.props;
             <Tag client:idle/>
             { item }<span class="type-datatype">:&nbsp;<a
               href={typeLink}
-              target="_blank"
-            >{ linkText }</a>{genericType && (<a href={genericTypeLink} class="type-datatype generic-type">&lt;{genericType}&gt;</a>)}</span>
+            >{ linkText }</a>{genericType &&
+            (<span class="type-datatype">&lt;</span><a
+              href={genericTypeLink}>{genericType}</a
+              ><span class="type-datatype">&gt;</span>
+            )}</span>
           </p>
           {
             propData.flags && propData.flags.length > 0 ? (

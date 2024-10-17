@@ -32,8 +32,8 @@
     scrollbar-width: none;
     font-size: 1.2rem;
     -ms-overflow-style: none;
-    background: hsla(var(--blue) 75 5);
-    border-right: 1px solid hsl(var(--blue) 45 15);
+    background: hsla(var(--overlay-bkg));
+    border-right: 1px solid hsl(var(--overlay-bkg-border));
 
     &::-webkit-scrollbar {
       display: none;

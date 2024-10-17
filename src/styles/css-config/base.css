@@ -56,8 +56,10 @@ html {
   --nav-selected-bkg: var(--blue) 100 90;
   --nav-selected-text: var(--blue) 60 60;
   --nav-indicator-bkg: var(--blue) 45 80;
-  --overlay-bkg: var(--blue) 10 93;
+  --overlay-bkg: var(--blue) 25 93;
   --overlay-bkg-border: var(--blue) 10 75;
+  --footer-bkg: var(--blue) 32 92;
+  --footer-bkg-border: var(--blue) 32 84;
 }
 
 html.dark {
@@ -103,13 +105,10 @@ html.dark {
   --nav-selected-bkg: var(--blue) 40 13;
   --nav-selected-text: var(--blue) 100 70;
   --nav-indicator-bkg: var(--blue) 30 30;
-  --overlay-bkg: var(--blue) 66 7;
-  --overlay-bkg-1: var(--blue) 66 9;
-  --overlay-bkg-2: var(--blue) 60 12;
-  --overlay-bkg-green: var(--green) 66 7;
-  --overlay-bkg-green-1: var(--green) 66 9;
-  --overlay-bkg-green-2: var(--green) 45 21;
-  --overlay-bkg-border: var(--blue) 17 13;
+  --overlay-bkg: var(--blue) 75 5;
+  --overlay-bkg-border: var(--blue) 45 15;
+  --footer-bkg: var(--blue) 66 5;
+  --footer-bkg-border: var(--blue) 75 21;
 }
 
 * {

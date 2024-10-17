@@ -33,6 +33,11 @@ a {
   }
 }
 
+[id] {
+  /*offset for header*/
+  scroll-margin-top: 4rem;
+}
+
 html.dark {
   & .header {
     background-color: hsl(var(--secondary-900));
@@ -119,9 +124,8 @@ footer {
   padding: 1rem;
   overflow: hidden;
   flex-shrink: 0;
-  background: hsla(var(--blue) 66 5);
+  background: hsl(var(--footer-bkg));
 
-  /*border-top: 1px solid hsl(var(--bg-800));*/
   &::before {
     content: "";
     position: absolute;
@@ -132,7 +136,7 @@ footer {
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(var(--blue) 75 21) 50%,
+      hsl(var(--footer-bkg-border)) 50%,
       transparent 100%
     );
   }

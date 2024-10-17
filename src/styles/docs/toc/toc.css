@@ -59,7 +59,7 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     background-color: hsl(var(--overlay-bkg));
-    border-left: solid hsl(var(--overlay-bkg-border)) 1px;
+    border-left: 1px solid hsl(var(--overlay-bkg-border));
 
     &::-webkit-scrollbar {
       display: none;

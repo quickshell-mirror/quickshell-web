@@ -5,16 +5,13 @@
   border-radius: 6px;
   border: 1px solid hsla(var(--blue) 10 15 / 0.6);
   margin-top: 1rem;
-  margin-inline: 1.272rem;
 
   & .root-nav-entry {
     position: relative;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 42px;
     text-wrap: pretty;
     padding: 0.5rem 1rem;
-    padding-top: 1.5rem;
 
     &:not(:last-child) {
       border-bottom: 1px solid hsla(var(--blue) 10 15 / 0.6);
@@ -239,7 +236,7 @@ html.dark .typeprops {
   & .typeprop-root {
     border: 1px solid hsla(var(--prop-color) / 0.3);
 
-    &:hover {
+    &:hover, &:target {
       border: 1px solid hsla(var(--prop-color) / 0.6);
     }
   }
@@ -281,7 +278,7 @@ html.dark .typefuncs {
   & .typefunc-root {
     border: 1px solid hsla(var(--func-color) / 0.3);
 
-    &:hover {
+    &:hover, &:target {
       border: 1px solid hsla(var(--func-color) / 0.6);
     }
   }
@@ -333,7 +330,7 @@ html.dark .typesignals {
   & .typesignal-root {
     border: 1px solid hsla(var(--signal-color) / 0.3);
 
-    &:hover {
+    &:hover, &:target {
       border: 1px solid hsla(var(--signal-color) / 0.6);
     }
   }
@@ -371,7 +368,7 @@ html.dark .typevariants {
   & .typevariant-root {
     border: 1px solid hsla(var(--var-color) / 0.3);
 
-    &:hover {
+    &:hover, &:target {
       border: 1px solid hsla(var(--var-color) / 0.6);
     }
   }
@@ -381,7 +378,7 @@ html.dark .typevariants {
   .root-nav {
     & .root-nav-entry {
       display: grid;
-      grid-template-columns: 0.70fr 1.30fr;
+      grid-template-columns: 0.60fr 1.40fr;
 
       & .root-nav-link {
         justify-self: start;
@@ -406,13 +403,7 @@ html.dark .typevariants {
 
       & .root-nav-desc {
         padding-left: 1rem;
-
-        &::before {
-          content: "";
-          position: absolute;
-          inset: -1rem 0 0 0;
-          border-left: 1px solid hsla(var(--blue) 10 15 / 0.6);
-        }
+        border-left: 1px solid hsl(var(--blue) 10 15 / 0.6);
       }
     }
   }
@@ -431,10 +422,6 @@ html.dark .typevariants {
 }
 
 @media (min-width: 85rem) {
-  .root-nav {
-    min-width: 45svw;
-  }
-
   .types-nav {
     display: block;
     position: fixed;
