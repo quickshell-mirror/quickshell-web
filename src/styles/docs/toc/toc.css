@@ -84,6 +84,11 @@
 }
 
 @media (min-width: 65rem) {
+  .dim-content-toc .docslayout-root {
+    filter: unset !important;
+    pointer-events: initial !important;
+  }
+
   .toc-wrapper {
     width: 19rem;
     flex-shrink: 0;

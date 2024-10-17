@@ -156,6 +156,11 @@
 }
 
 @media (min-width: 85rem) {
+  .dim-content-nav .docslayout-root {
+    filter: brightness(100%) !important;
+    pointer-events: initial !important;
+  }
+
   .nav-wrapper-mobile {
     display: none;
   }

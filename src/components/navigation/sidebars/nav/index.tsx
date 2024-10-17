@@ -56,7 +56,6 @@ const NavComponent: Component<NavProps> = props => {
   createEffect(() => {
     if (open()) {
       window.addEventListener("click", handleClickOutside);
-      document.body.style.overflow = "hidden";
       document.body.classList.add("overflow-nav");
       document.body.classList.add("dim-content-nav");
     } else {

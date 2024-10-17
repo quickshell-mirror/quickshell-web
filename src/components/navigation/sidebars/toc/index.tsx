@@ -53,7 +53,6 @@ const TableOfContents: Component<TOCProps> = props => {
       document.body.classList.add("dim-content-toc");
     } else {
       window.removeEventListener("click", handleClickOutside);
-      document.body.style.overflow = "auto";
       document.body.classList.remove("overflow-toc");
       document.body.classList.remove("dim-content-toc");
     }

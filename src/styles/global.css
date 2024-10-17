@@ -56,8 +56,12 @@ html.dark {
   all: unset;
 }
 
-.overflow-nav,
-.overflow-toc {
+body {
+  overflow: auto;
+}
+
+body.overflow-nav,
+body.overflow-toc {
   overflow: hidden;
 }
 
