@@ -99,7 +99,7 @@
   & .typedata-root {
     margin-bottom: 0.618rem;
     border-radius: 12px;
-    padding: 1.272rem;
+    padding: 0.8rem;
     transition: border 0.3s;
 
     & > .typedata-name {
@@ -107,18 +107,17 @@
       align-items: center;
       font-size: 1.272rem;
       margin: 0;
-      margin-top: 0.272rem;
 
       & svg {
-        width: 27px;
-        height: 27px;
-        margin-right: 3px;
+        width: 1.2em;
+        height: 1.2em;
+        margin-right: 0.3em;
       }
     }
   }
 
   & .typedata-details {
-    margin-top: 1.618rem;
+    margin: 0;
   }
 
   & .typedata-params {
@@ -140,6 +139,10 @@
   .typedocs-subheading {
     & > p {
       margin-top: 0.618rem;
+    }
+
+    & > p:last-child {
+      margin-bottom: 0;
     }
 
     & .typeprop-link {

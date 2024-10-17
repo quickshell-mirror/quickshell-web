@@ -7,7 +7,6 @@
 
 pre {
   padding: 1rem;
-  margin: 0.618rem;
   border-radius: 0.618rem;
   overflow: auto;
   text-wrap: wrap;
@@ -22,7 +21,7 @@ pre {
     font-size: 1.618rem;
     font-weight: 500;
     border-radius: 0.272rem;
-    padding: 0.418rem;
+    padding: 0.10rem;
     display: flex;
     align-items: center;
     justify-content: center;

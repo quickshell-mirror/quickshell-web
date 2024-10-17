@@ -85,7 +85,7 @@
         & [data-part="item-content"] > div {
           min-height: 3em;
 
-          & > p {
+          & > a {
             margin: auto 0;
           }
         }

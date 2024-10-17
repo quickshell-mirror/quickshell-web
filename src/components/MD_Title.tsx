@@ -21,7 +21,7 @@ const MD_Title: ParentComponent<{ titleVar: number }> = props => {
       <span class="heading-hashtag">
         <Hashtag />
       </span>
-      {props.children}
+      <span class="heading-text">{props.children}</span>
       <hr />
     </div>
   );

@@ -21,10 +21,8 @@
 
 .docs-content {
   flex-grow: 1;
-  margin-bottom: 2.3rem;
 
   & section {
-    max-width: 100svw;
     margin-block: 1.618rem;
   }
 
@@ -51,9 +49,12 @@
   }
 
   & .heading-hashtag {
+    display: inline-block;
+    margin-right: 0.1rem;
+
     & svg {
-      width: 24px;
-      height: 24px;
+      width: 1.2em;
+      height: 1.2em;
       opacity: 0.5;
       transition: opacity 0.5s;
 
@@ -62,6 +63,11 @@
         cursor: pointer;
       }
     }
+  }
+
+  & .heading-text {
+    display: inline-block;
+    vertical-align: top;
   }
 }
 
@@ -90,10 +96,6 @@ ul {
 @media (min-width: 40rem) {
   .docs-content {
     margin-inline: 1.272rem;
-
-    & section {
-      margin-block: 1.884rem;
-    }
 
     & p {
       margin-block: 1.217rem;
