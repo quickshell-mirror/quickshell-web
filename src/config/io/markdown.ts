@@ -11,6 +11,7 @@ import type {
 } from "@astrojs/markdown-remark";
 import { createMarkdownProcessor } from "@astrojs/markdown-remark";
 import { remarkAlert } from "remark-github-blockquote-alert";
+import rehypeShiki from "@shikijs/rehype";
 import sectionize from "@hbsnow/rehype-sectionize";
 import type { ShikiTransformer } from "shiki";
 
@@ -122,14 +123,28 @@ const shikiRewriteTypelinks: ShikiTransformer = {
 };
 
 export const markdownConfig: AstroMarkdownOptions = {
-  syntaxHighlight: "shiki",
-  shikiConfig: {
-    theme: "material-theme-ocean",
-    wrap: true,
-    transformers: [shikiRewriteTypelinks],
-  },
+  syntaxHighlight: false,
   remarkPlugins: [remarkParseAtTypes, [remarkAlert, { legacyTitle: true }]],
   rehypePlugins: [
+    [rehypeShiki, {
+      themes: {
+        light: "slack-ochin",
+        dark: "slack-dark",
+      },
+      colorReplacements: {
+        "slack-ochin": {
+          "#357b42": "#989eb9", // comments
+          "#b1108e": "#224bbb", // fields
+        },
+        "slack-dark": {
+          "#222222": "#0f111a", // bg
+          "#6a9955": "#525666", // comments
+        },
+      },
+      defaultColor: false,
+      wrap: true,
+      transformers: [shikiRewriteTypelinks],
+    }],
     // FIXME: incompatible types between unified/Plugin and Astro/RehypePlugin
     [sectionize as RehypePlugin, { idPropertyName: "id" }],
     rehypeRewriteTypelinks,

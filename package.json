@@ -17,6 +17,7 @@
     "@astrojs/solid-js": "^4.4.2",
     "@hbsnow/rehype-sectionize": "^1.0.7",
     "@pagefind/default-ui": "^1.1.1",
+    "@shikijs/rehype": "^1.22.0",
     "@types/node": "^20.14.11",
     "astro": "^4.15.9",
     "astro-breadcrumbs": "^2.3.1",
