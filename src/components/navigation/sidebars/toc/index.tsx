@@ -40,9 +40,10 @@ const TableOfContents: Component<TOCProps> = props => {
     }
   };
 
-  onMount(() => {});
-  onCleanup(() => {
-    window.removeEventListener("click", handleClickOutside);
+  onMount(() => {
+    onCleanup(() => {
+      window.removeEventListener("click", handleClickOutside);
+    });
   });
 
   createEffect(() => {

@@ -31,12 +31,10 @@
         left: 0;
         width: 100%;
         height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent 25%,
-          hsla(var(--accent-500) / 0.88) 50%,
-          transparent 75%
-        );
+        background: linear-gradient(90deg,
+            transparent 25%,
+            hsla(var(--accent-500) / 0.88) 50%,
+            transparent 75%);
       }
     }
   }
@@ -60,7 +58,7 @@
 }
 
 #injectedMd {
-  & > p:not(:first-child) {
+  &>p:not(:first-child) {
     margin-block: 0.724rem;
   }
 }
@@ -74,7 +72,7 @@
 }
 
 .typedocs-content {
-  & > p {
+  &>p {
     margin-block: 0.618rem;
   }
 
@@ -102,16 +100,39 @@
     padding: 0.8rem;
     transition: border 0.3s;
 
-    & > .typedata-name {
-      display: flex;
-      align-items: center;
-      font-size: 1.272rem;
-      margin: 0;
+    & .typedata-title {
+      margin-bottom: 1.618rem;
 
-      & svg {
-        width: 1.2em;
-        height: 1.2em;
-        margin-right: 0.3em;
+      & .typedata-name {
+        font-size: 1.272rem;
+        display: flex;
+        align-items: center;
+        margin: 0;
+
+        & svg {
+          width: 1.2em;
+          height: 1.2em;
+          margin-right: 0.3em;
+        }
+      }
+
+      & .type-flags {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 0.517rem;
+        font-size: 0.815rem;
+        margin: 0;
+
+        & .type-flag {
+          padding-inline: 6px;
+          padding-block: 3px;
+          display: flex;
+          align-items: center;
+          gap: 0.117rem;
+          color: hsl(var(--inner-param-color));
+          border: 1px solid hsl(var(--inner-param-color));
+          border-radius: 5px;
+        }
       }
     }
   }
@@ -137,11 +158,11 @@
 
   & .typedata-detailsdata,
   .typedocs-subheading {
-    & > p {
+    &>p {
       margin-top: 0.618rem;
     }
 
-    & > p:last-child {
+    &>p:last-child {
       margin-bottom: 0;
     }
 
@@ -201,19 +222,8 @@
   width: max-content;
   transition: opacity 0.5s;
 
-  & > a {
+  &>a {
     opacity: inherit;
-  }
-}
-
-.type-flags {
-  & .type-flag {
-    margin: 0;
-    margin-top: 0.272rem;
-    display: flex;
-    align-items: center;
-    gap: 0.117rem;
-    color: hsl(var(--inner-param-color));
   }
 }
 
@@ -239,7 +249,8 @@ html.dark .typeprops {
   & .typeprop-root {
     border: 1px solid hsla(var(--prop-color) / 0.3);
 
-    &:hover, &:target {
+    &:hover,
+    &:target {
       border: 1px solid hsla(var(--prop-color) / 0.6);
     }
   }
@@ -268,7 +279,7 @@ html.dark .typeprops {
         align-items: center;
         gap: 0.117rem;
 
-        & > svg {
+        &>svg {
           height: 1.272rem;
           width: 1.272rem;
         }
@@ -281,7 +292,8 @@ html.dark .typefuncs {
   & .typefunc-root {
     border: 1px solid hsla(var(--func-color) / 0.3);
 
-    &:hover, &:target {
+    &:hover,
+    &:target {
       border: 1px solid hsla(var(--func-color) / 0.6);
     }
   }
@@ -320,7 +332,7 @@ html.dark .typefuncs {
         align-items: center;
         gap: 0.117rem;
 
-        & > svg {
+        &>svg {
           height: 1.272rem;
           width: 1.272rem;
         }
@@ -333,7 +345,8 @@ html.dark .typesignals {
   & .typesignal-root {
     border: 1px solid hsla(var(--signal-color) / 0.3);
 
-    &:hover, &:target {
+    &:hover,
+    &:target {
       border: 1px solid hsla(var(--signal-color) / 0.6);
     }
   }
@@ -371,7 +384,8 @@ html.dark .typevariants {
   & .typevariant-root {
     border: 1px solid hsla(var(--var-color) / 0.3);
 
-    &:hover, &:target {
+    &:hover,
+    &:target {
       border: 1px solid hsla(var(--var-color) / 0.6);
     }
   }
@@ -389,11 +403,9 @@ html.dark .typevariants {
 
         &::before {
           width: 0;
-          background: linear-gradient(
-            to right,
-            hsla(var(--accent-400) / 0.5) var(--percent),
-            hsla(var(--accent-400) / 0) 100%
-          );
+          background: linear-gradient(to right,
+              hsla(var(--accent-400) / 0.5) var(--percent),
+              hsla(var(--accent-400) / 0) 100%);
           animation: percentToZero 250ms ease-in-out forwards;
           transition: width 0.25s ease-in-out;
         }
@@ -414,11 +426,16 @@ html.dark .typevariants {
   .typedocs-content {
     margin-inline: 1.272rem;
 
+    & .typedata-title {
+      display: flex;
+      justify-content: space-between;
+    }
+
     & section {
       min-width: 30svw;
     }
 
-    & > p {
+    &>p {
       margin-block: 1.217rem;
     }
   }

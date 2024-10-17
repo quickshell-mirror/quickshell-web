@@ -47,9 +47,10 @@ const NavComponent: Component<NavProps> = props => {
     }
   };
 
-  onMount(() => {});
-  onCleanup(() => {
-    window.removeEventListener("click", handleClickOutside);
+  onMount(() => {
+    onCleanup(() => {
+      window.removeEventListener("click", handleClickOutside);
+    });
   });
 
   createEffect(() => {

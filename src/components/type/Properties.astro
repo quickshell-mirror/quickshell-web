@@ -37,7 +37,8 @@ const { propsKeys, propsData } = Astro.props;
       }
       return (
         <li id={ item } class="typedata-root typeprop-root">
-          <p class="typedata-name typeprop-name">
+          <div class="typedata-title typeprop-title">
+            <section class="typedata-name typeprop-name">
             <Tag client:idle/>
             { item }<span class="type-datatype">:&nbsp;<a
               href={typeLink}
@@ -46,23 +47,24 @@ const { propsKeys, propsData } = Astro.props;
               href={genericTypeLink}>{genericType}</a
               ><span class="type-datatype">&gt;</span>
             )}</span>
-          </p>
-          {
-            propData.flags && propData.flags.length > 0 ? (
-              <p class="type-flags">
-                {
-                  propData.flags.map((flag) => {
-                    return (
-                      <span class="type-flag">
-                        <Flag client:idle/>
-                        {flag}
-                      </span>
-                    )
-                  })
-                }
-              </p>
-            ) : null
-          }
+            </section>
+            {
+              propData.flags && propData.flags.length > 0 ? (
+                <p class="type-flags">
+                  {
+                    propData.flags.map((flag) => {
+                      return (
+                        <span class="type-flag">
+                          <Flag client:idle/>
+                          {flag}
+                        </span>
+                      )
+                    })
+                  }
+                </p>
+              ) : null
+            }
+          </div>
           {
             gadget ? (
               <p class="typedata-params typefunc-params">
