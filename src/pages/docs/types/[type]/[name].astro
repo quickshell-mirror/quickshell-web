@@ -55,7 +55,8 @@ const details = data.details
   <div class="docs">
     <div class="docs-content typedocs-content">
       <hr />
-      <h2 class="typedocs-title" data-pagefind-weight="10">
+      <section class="typedocs-title">
+      <h2 class="typedocs-title-text" data-pagefind-weight="10">
         {route.name}:
           {data.super?.name ? (
             <a
@@ -69,16 +70,17 @@ const details = data.details
           )
           }
       </h2>
+      {data && data.flags ? (
+        <div class="type-flags" data-pagefind-ignore>{data.flags.map(flag => (
+          <Badge badgeText={flag}/>
+        ))}</div>
+      ):null}
+      </section>
       <code class="type-module" data-pagefind-ignore>import {data.module}</code>
       {
         route && data ? (
           <section class="typedocs-data typedata">
             <subheading class="typedocs-subheading">
-              {data.flags ? (
-                <div class="type-flags" data-pagefind-ignore>{data.flags.map(flag => (
-                  <Badge badgeText={flag}/>
-                ))}</div>
-              ):null}
               {details ? <span class="parsedMD" set:html={details}/> : (<span class="toparse">{data.description}</span>)}
             </subheading>
             { data.properties && propsKeys ? (

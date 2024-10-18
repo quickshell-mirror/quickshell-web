@@ -47,19 +47,6 @@
   display: none;
 }
 
-.typedocs-title {
-  letter-spacing: 0.012rem;
-
-  & a {
-    opacity: 0.6;
-    transition: opacity 0.5s;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-}
-
 #injectedMd {
   &>p:not(:first-child) {
     margin-block: 0.724rem;
