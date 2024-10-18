@@ -11,6 +11,10 @@
 @import "./docs/docs.css";
 @import "./docs/collapsible.css";
 
+.changing-theme * {
+  transition: none !important;
+}
+
 /* color styling */
 .header {
   background-color: hsl(var(--bg-400));
