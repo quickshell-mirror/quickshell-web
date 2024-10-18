@@ -42,7 +42,7 @@ html {
   --text: var(--white) 0 0;
   --text-dark: var(--white) 0 18;
   --text-darker: var(--white) 0 30;
-  --link: var(--accent-600);
+  --link: var(--green) 74 39;
   --prop-color: 350 78 70;
   --prop-link-color: 350 78 60;
   --func-color: 50 68 50;
@@ -93,7 +93,7 @@ html.dark {
   --text: var(--white) 0 100;
   --text-dark: var(--white) 0 70;
   --text-darker: var(--white) 0 40;
-  --link: var(--accent-500);
+  --link: var(--green) 76 54;
   --prop-color: 350 78 70;
   --prop-link-color: 350 78 60;
   --func-color: 50 78 70;
