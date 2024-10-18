@@ -2,6 +2,7 @@
 import type { QuickshellVariant } from "@config/io/types";
 import { FourDiamonds } from "../icons";
 import TypeDetails from "./TypeDetails.astro";
+import TypeTitle from "./TypeTitle.astro";
 
 export interface Props {
   variantKeys: string[];
@@ -19,10 +20,12 @@ const { variantKeys, variantsData } = Astro.props;
         : [];
       return (
         <li id={ item } class="typedata-root typevariant-root">
-          <p class="typedata-name typevariant-name">
-            <FourDiamonds client:idle/>
-          { item }
-          </p>
+          <TypeTitle 
+            typekind="variant"
+            typename={item}
+            typelink=""
+            typelink_text=""
+          />
           {
             paramKeys ? (
               <div class="typedata-params typevariant-params">

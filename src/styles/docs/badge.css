@@ -1,0 +1,21 @@
+.type-badges {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.517rem;
+  font-size: 0.815rem;
+  margin: 0 !important;
+  max-width: 10rem;
+  justify-content: flex-end;
+}
+
+.badge {
+  padding-inline: 6px;
+  padding-block: 3px;
+  display: flex;
+  align-items: center;
+  gap: 0.117rem;
+  color: hsl(var(--inner-param-color));
+  border: 1px solid hsl(var(--inner-param-color));
+  border-radius: 5px;
+  width: max-content;
+}

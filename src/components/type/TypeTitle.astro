@@ -1,0 +1,57 @@
+---
+import { Icon } from "astro-icon/components";
+import Badge from "@components/Badge.astro";
+
+export interface Props {
+  typekind: string;
+  typename: string;
+  typelink: string;
+  typelink_text: string;
+  typename_generic?: string;
+  typelink_generic?: string;
+  badges?: string[];
+  typedata_params?: string[];
+}
+
+const {
+  typekind,
+  typename,
+  typelink,
+  typelink_text,
+  typename_generic,
+  typelink_generic,
+  badges,
+  typedata_params,
+} = Astro.props;
+
+const iconSelector: { [key: string]: string } = {
+  prop: "tag",
+  func: "roundbrackets",
+  signal: "powercord",
+  variant: "fourdiamonds",
+};
+---
+<div class={`typedata-title type${typekind}-title`}>
+  <section class={`typedata-name type${typekind}-name`}>
+    {typekind !== "func" && <Icon name={iconSelector[typekind]}/>}
+    <span>{ typename }{ (typekind === "func" || typekind === "signal") ?
+      (<span>(</span><span class="typedata-param">{typedata_params}</span><span>)</span>)
+      :""}
+    </span>
+    { typekind !== "variant" &&
+    <span class=`type-datatype ${typekind === "signal" && "typesignal-doclink"}`>{typekind !== "signal" &&":"}&nbsp;
+      <a href={typelink}>{ typelink_text }</a>
+      {typename_generic &&
+        (
+          <span class="type-datatype">&lt;</span><a href={typelink_generic}>{typename_generic}</a><span class="type-datatype">&gt;</span>
+        )
+      }
+    </span>
+    }
+  </section>
+  <section class="type-badges">
+    {badges && badges.length > 0 ? (
+      badges.map(badgeText => <Badge badgeText={badgeText}/>)
+    ) : null}
+  </section>
+</div>

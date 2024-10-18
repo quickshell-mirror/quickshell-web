@@ -2,6 +2,7 @@
 import type { QuickshellSignal } from "@config/io/types";
 import { Tag, PowerCord } from "@icons";
 import TypeDetails from "./TypeDetails.astro";
+import TypeTitle from "./TypeTitle.astro";
 
 export interface Props {
   signalKeys: string[];
@@ -15,15 +16,19 @@ const { signalKeys, signalsData } = Astro.props;
     signalKeys.map(item => {
       const signalData = signalsData[item];
       const paramKeys = signalData.params.length > 0 ? signalData.params.map((param,index) => `${param.name}${index !== signalData.params.length -1 ? ", ":""}`) : []
+      let genericType:string|undefined;
+      let genericTypeLink:string|undefined;
       return (
         <li id={ item } class="typedata-root typesignal-root">
-          <p class="typedata-name typesignal-name">
-            <PowerCord client:idle/>
-              { item }(<span class="typedata-param">{paramKeys}</span>)<span class="typesignal-doclink"><a
-              href="/docs/configuration/qml-overview#-signals"
-              target="_blank"
-            >?</a></span>
-          </p>
+          <TypeTitle
+            typekind="signal"
+            typename={item}
+            typelink="/docs/configuration/qml-overview#-signals"
+            typelink_text={"?"}
+            typename_generic={genericType}
+            typelink_generic={genericTypeLink}
+            typedata_params={paramKeys}
+          />
           {
             signalData.params && signalData.params.length > 0 ? (
               <p class="typedata-params typesignal-params">

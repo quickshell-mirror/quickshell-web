@@ -2,13 +2,13 @@
 import { getQMLTypeLink } from "@config/io/helpers";
 import { processMarkdown } from "@config/io/markdown";
 import { generateTypeData } from "@config/io/generateTypeData";
-import { Flag } from "@icons";
 import DocsLayout from "@layouts/DocsLayout.astro";
 import TOC from "@components/navigation/sidebars/TOC.astro";
 import Properties from "@components/type/Properties.astro";
 import Functions from "@components/type/Functions.astro";
 import Signals from "@components/type/Signals.astro";
 import Variants from "@components/type/Variants.astro";
+import Badge from "@components/Badge.astro";
 
 export async function getStaticPaths() {
   const routes = await generateTypeData();
@@ -76,10 +76,7 @@ const details = data.details
             <subheading class="typedocs-subheading">
               {data.flags ? (
                 <div class="type-flags" data-pagefind-ignore>{data.flags.map(flag => (
-                  <span class="type-flag">
-                    <Flag client:idle/>
-                    {flag}
-                  </span>
+                  <Badge badgeText={flag}/>
                 ))}</div>
               ):null}
               {details ? <span class="parsedMD" set:html={details}/> : (<span class="toparse">{data.description}</span>)}

@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import solidJs from "@astrojs/solid-js";
 import mdx from "@astrojs/mdx";
+import icon from "astro-icon";
 
 import pagefind from "./pagefind";
 import { markdownConfig } from "./src/config/io/markdown.ts";
@@ -14,5 +15,6 @@ export default defineConfig({
     }),
     mdx(),
     pagefind(),
+    icon(),
   ],
 });

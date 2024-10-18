@@ -1,3 +1,6 @@
+@import "./type-title.css";
+@import "./badge.css";
+
 .root-nav {
   position: relative;
   display: flex;
@@ -99,42 +102,6 @@
     border-radius: 12px;
     padding: 0.8rem;
     transition: border 0.3s;
-
-    & .typedata-title {
-      margin-bottom: 0.8rem;
-
-      & .typedata-name {
-        font-size: 1.272rem;
-        display: flex;
-        align-items: center;
-        margin: 0;
-
-        & svg {
-          width: 1.2em;
-          height: 1.2em;
-          margin-right: 0.3em;
-        }
-      }
-
-      & .type-flags {
-        display: flex;
-        flex-flow: row nowrap;
-        gap: 0.517rem;
-        font-size: 0.815rem;
-        margin: 0;
-
-        & .type-flag {
-          padding-inline: 6px;
-          padding-block: 3px;
-          display: flex;
-          align-items: center;
-          gap: 0.117rem;
-          color: hsl(var(--inner-param-color));
-          border: 1px solid hsl(var(--inner-param-border-color));
-          border-radius: 6px;
-        }
-      }
-    }
   }
 
   & .typedata-details {
@@ -317,9 +284,8 @@ html.dark .typefuncs {
       color: hsl(var(--signal-link-color));
 
       & .typesignal-doclink {
-        position: absolute;
         top: -12px;
-        right: -12px;
+        left: -6px;
         opacity: 0.8;
         scale: 75%;
       }
@@ -388,13 +354,6 @@ html.dark .typevariants {
     &:target {
       border: 1px solid hsla(var(--var-color) / 0.6);
     }
-  }
-}
-
-@media (min-width: 40rem) {
-  .typedocs-content .typedata-title {
-    display: flex;
-    justify-content: space-between;
   }
 }
 

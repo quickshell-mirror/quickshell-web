@@ -5,7 +5,8 @@ import type {
 } from "@config/io/types";
 import { getQMLTypeLink } from "@config/io/helpers";
 import { Tag } from "@icons";
-import TypeDetails from "./TypeDetails.astro"
+import TypeDetails from "./TypeDetails.astro";
+import TypeTitle from "./TypeTitle.astro";
 
 export interface Props {
   funcData: QuickshellFunction[];
@@ -16,17 +17,21 @@ const { funcData } = Astro.props;
 <ul class="typedata typefuncs">
   {
     funcData.map(item => {
-      const functionParams = item.params.length > 0 ? item.params.map((funcparam,index) => `${funcparam.name}${index !== item.params.length -1 ? ", ":""}`) : null
+      const functionParams = item.params.length > 0 ? item.params.map((funcparam,index) => `${funcparam.name}${index !== item.params.length -1 ? ", ":""}`) : undefined
       const retTypeLink = getQMLTypeLink(item.ret as unknown as QMLTypeLinkObject)
+      let genericType:string|undefined;
+      let genericTypeLink:string|undefined;
       return (
         <li id={item.name} class="typedata-root typefunc-root">
-          <p class="typedata-name typefunc-name">
-      {item.name}(<span class="typedata-param">{functionParams}</span>)
-      <span class="type-datatype">:&nbsp;<a
-                href={retTypeLink}
-                target="_blank"
-                >{item.ret.name || item.ret.type}</a></span>
-          </p>
+          <TypeTitle
+            typekind="func"
+            typename={item.name}
+            typelink={retTypeLink}
+            typelink_text={item.ret.name || item.ret.type.toString()}
+            typename_generic={genericType}
+            typelink_generic={genericTypeLink}
+            typedata_params={functionParams}
+          />
           {
             item.params.length > 0 ? (
               <p class="typedata-params typefunc-params">

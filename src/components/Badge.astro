@@ -1,0 +1,21 @@
+---
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  badgeText: string;
+  withIcon?: boolean;
+  badgeIconName?: string;
+}
+
+const { badgeText, withIcon = true, badgeIconName } = Astro.props;
+---
+<span class="badge">
+  {withIcon &&
+    (
+      badgeIconName ?
+        <Icon name={badgeIconName}/>
+      : <Icon name={"flag"}/>
+    )
+  }
+  <span class="badge-text">{badgeText}</span>
+</span>

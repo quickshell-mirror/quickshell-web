@@ -11,16 +11,17 @@
   },
   "dependencies": {
     "@ark-ui/solid": "^3.5.0",
-    "@astrojs/check": "^0.9.3",
-    "@astrojs/markdown-remark": "^5.1.0",
-    "@astrojs/mdx": "^3.1.7",
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/markdown-remark": "^5.3.0",
+    "@astrojs/mdx": "^3.1.8",
     "@astrojs/solid-js": "^4.4.2",
     "@hbsnow/rehype-sectionize": "^1.0.7",
     "@pagefind/default-ui": "^1.1.1",
     "@shikijs/rehype": "^1.22.0",
     "@types/node": "^20.14.11",
-    "astro": "^4.15.9",
+    "astro": "^4.16.6",
     "astro-breadcrumbs": "^2.3.1",
+    "astro-icon": "^1.1.1",
     "hast": "^1.0.0",
     "hast-util-from-html": "^2.0.3",
     "node": "npm:22.7.0",
@@ -32,7 +33,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@astrojs/ts-plugin": "^1.10.2",
+    "@astrojs/ts-plugin": "^1.10.3",
     "@biomejs/biome": "^1.8.3",
     "pagefind": "^1.1.1"
   },
