@@ -69,7 +69,6 @@ html.dark .nav-shevron {
     display: flex;
     flex-direction: column;
     gap: 0.15em;
-    padding: 0.4rem;
     margin: 0.4rem 0;
     border-radius: 6px;
 
@@ -80,8 +79,10 @@ html.dark .nav-shevron {
     }
 
     &>a {
+      padding: 0.4rem;
+      padding-left: 0.6rem;
       width: 100%;
-      margin-left: 0.2rem;
+      text-decoration: none;
     }
   }
 

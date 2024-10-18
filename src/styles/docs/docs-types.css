@@ -101,7 +101,7 @@
     transition: border 0.3s;
 
     & .typedata-title {
-      margin-bottom: 1.618rem;
+      margin-bottom: 0.8rem;
 
       & .typedata-name {
         font-size: 1.272rem;
@@ -130,8 +130,8 @@
           align-items: center;
           gap: 0.117rem;
           color: hsl(var(--inner-param-color));
-          border: 1px solid hsl(var(--inner-param-color));
-          border-radius: 5px;
+          border: 1px solid hsl(var(--inner-param-border-color));
+          border-radius: 6px;
         }
       }
     }
@@ -391,6 +391,13 @@ html.dark .typevariants {
   }
 }
 
+@media (min-width: 40rem) {
+  .typedocs-content .typedata-title {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 @media (min-width: 65rem) {
   .root-nav {
     & .root-nav-entry {
@@ -425,11 +432,6 @@ html.dark .typevariants {
 
   .typedocs-content {
     margin-inline: 1.272rem;
-
-    & .typedata-title {
-      display: flex;
-      justify-content: space-between;
-    }
 
     & section {
       min-width: 30svw;
