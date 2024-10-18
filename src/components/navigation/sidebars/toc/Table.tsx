@@ -43,11 +43,11 @@ export const Table: Component<{
           <For each={typeTOC.properties}>
             {prop => (
               <li class="types-item props-item">
-                <Tag />
                 <a
                   class="type-anchor"
                   href={`#${prop}`}
                 >
+                  <Tag />
                   {prop}
                 </a>
               </li>
@@ -60,11 +60,11 @@ export const Table: Component<{
           <For each={typeTOC.functions}>
             {func => (
               <li class="types-item func-item">
-                <RoundBrackets />
                 <a
                   class="type-anchor"
                   href={`#${func}`}
                 >
+                  <RoundBrackets />
                   {func}
                 </a>
               </li>
@@ -77,11 +77,11 @@ export const Table: Component<{
           <For each={typeTOC.signals}>
             {signal => (
               <li class="types-item signals-item">
-                <PowerCord />
                 <a
                   class="type-anchor"
                   href={`#${signal}`}
                 >
+                  <PowerCord />
                   {signal}
                 </a>
               </li>
@@ -94,11 +94,11 @@ export const Table: Component<{
           <For each={typeTOC.variants}>
             {variant => (
               <li class="types-item vars-item">
-                <FourDiamonds />
                 <a
                   class="type-anchor"
                   href={`#${variant}`}
                 >
+                  <FourDiamonds />
                   {variant}
                 </a>
               </li>
