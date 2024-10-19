@@ -1,0 +1,16 @@
+---
+import Accordion from "./Accordion.astro"
+import collapsibleMarker from "@icons/collapsible-marker.svg?raw"
+
+interface Props {
+  title: string
+}
+const { title } = Astro.props;
+---
+<Accordion class="docs-collapsible">
+  <div slot="header">
+    <Fragment set:html={collapsibleMarker}/>
+    {title}
+  </div>
+  <slot>
+</Accordion>

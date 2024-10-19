@@ -1,0 +1,55 @@
+---
+import "@styles/components/accordion.css"
+---
+<details class=`accordion ${Astro.props.class ?? ""}` {...Astro.props}>
+  <summary>
+    <slot name="header"/>
+  </summary>
+  <div class="accordion-container">
+    <div>
+      <slot/>
+    </div>
+  </div>
+</details>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".accordion").forEach(element => {
+      const accordion = element as HTMLDetailsElement;
+      const summary = accordion.querySelector("summary")!;
+      const body = accordion.querySelector(".accordion-container") as HTMLDivElement;
+
+      summary.addEventListener("click", event => {
+        event.preventDefault();
+        body.classList.toggle("animate", true);
+
+        if (!accordion.open || accordion.classList.contains("closing")) {
+          accordion.classList.toggle("closing", false);
+          body.style.setProperty("--height", "0px");
+
+          requestAnimationFrame(() => {
+            accordion.open = true;
+            body.style.setProperty("--height", body.scrollHeight + "px");
+          });
+        } else {
+          body.style.setProperty("--height", body.scrollHeight + "px");
+
+          requestAnimationFrame(() => {
+            accordion.classList.toggle("closing", true);
+            body.style.setProperty("--height", "0px");
+          });
+        }
+      });
+
+      body.addEventListener("transitionend", event => {
+        if ((event as TransitionEvent).propertyName == "max-height") {
+          body.classList.toggle("animate", false);
+
+          if (accordion.classList.contains("closing")) {
+            accordion.classList.toggle("closing", false);
+            accordion.open = false;
+          }
+        }
+      });
+    });
+  });
+</script>

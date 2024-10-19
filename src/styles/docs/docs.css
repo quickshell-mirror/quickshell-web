@@ -142,3 +142,41 @@ ul {
     min-width: 33.8rem;
   }
 }
+
+.docs-collapsible {
+  background-color: hsl(var(--white) 40 50 / 0.1);
+  border-radius: 0.618rem;
+  overflow: hidden;
+
+  & summary {
+    padding: 1.2rem;
+    user-select: none;
+
+    & > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.1em;
+      font-size: 1.117rem;
+      font-weight: 500;
+
+      & svg {
+        transition: transform 0.3s ease;
+        font-size: 1.1em;
+      }
+    }
+  }
+
+  & .accordion-container > div {
+    padding: 0 1.2rem;
+
+    & p:first-child {
+      padding-top: 0;
+      margin-top: 0;
+    }
+  }
+}
+
+.docs-collapsible[open]:not(.closing) > summary > div > svg {
+  transform: rotate(90deg);
+}

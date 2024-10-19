@@ -3,7 +3,7 @@ layout: "@layouts/ConfigLayout.astro"
 title: "Introduction"
 ---
 
-import { DocsCollapsible } from "@components/Collapsible.tsx";
+import Collapsible from "@components/Collapsible.astro";
 import MD_Title from "@components/MD_Title.tsx"
 
 # {frontmatter.title}
@@ -35,7 +35,7 @@ The shell root is not a visual element but instead contains all of the visual
 and non visual objects in your shell. You can have multiple different shells
 with shared components and different shell roots.
 
-<DocsCollapsible title="Shell search paths and manifests" client:visible>
+<Collapsible title="Shell search paths and manifests">
 Quickshell can be launched with configurations in locations other than the default one.
 
 The `-p` or `--path` option will launch the shell root at the given path.
@@ -68,7 +68,7 @@ myconf4 = ~/.config/quickshell/myconf
 You can use `quickshell --current` to print the current values of any of these
 options and what set them.
 
-</DocsCollapsible>
+</Collapsible>
 
 ## <MD_Title titleVar={2}> Creating Windows </MD_Title>
 

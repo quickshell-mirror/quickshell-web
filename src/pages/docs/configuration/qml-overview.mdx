@@ -3,7 +3,7 @@ layout: "@layouts/ConfigLayout.astro"
 title: "QML Overview"
 ---
 import MD_Title from "@components/MD_Title.tsx"
-import { DocsCollapsible } from "@components/Collapsible.tsx";
+import Collapsible from "@components/Collapsible.astro";
 
 # {frontmatter.title}
 
@@ -140,7 +140,7 @@ import QtQuick.Layouts 6.0 as L
 import "jsfile.js" as JsFile
 ```
 
-<DocsCollapsible title="When no module version" client:visible>
+<Collapsible title="When no module version">
 
 By default, when no module version is requested, the QML engine will pick
 the latest available version of the module. Requesting a specific version
@@ -151,7 +151,7 @@ While Qt's types usually don't majorly change across versions, quickshell's
 are much more likely to break. To put off dealing with the breakage we suggest
 specifying a version at least when importing quickshell modules.
 
-</DocsCollapsible>
+</Collapsible>
 
 <span class="small">
   [Qt Documentation: Import
@@ -321,14 +321,14 @@ the object a name it can be referred to throughout the current file. The id must
 }
 ```
 
-<DocsCollapsible title="The `id` property compared to normal properties" client:visible>
+<Collapsible title="The `id` property compared to normal properties">
 
 The `id` property isn't really a property, and doesn't do anything other than
 expose the object to the current file. It is only called a property because it
 uses very similar syntax to one, and is the only exception to standard property
 definition rules. The name `id` is always reserved for the id property.
 
-</DocsCollapsible>
+</Collapsible>
 
 ##### <MD_Title titleVar={5}> Property access scopes </MD_Title>
 

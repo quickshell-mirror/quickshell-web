@@ -1,0 +1,17 @@
+.accordion {
+  & summary {
+    list-style: none;
+  }
+
+  & .accordion-container {
+    /* fixes jumps due to margins on inline items */
+    display: flex;
+  }
+
+  & .accordion-container.animate {
+    /* this somehow breaks if both min AND max aren't animated */
+    transition: min-height 0.3s ease, max-height 0.3s ease;
+    min-height: var(--height);
+    max-height: var(--height);
+  }
+}
