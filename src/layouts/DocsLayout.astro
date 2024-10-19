@@ -7,7 +7,6 @@ import PreTheme from "@config/PreTheme.astro";
 import Header from "@components/Header.astro";
 import Head from "@config/Head.astro";
 import Nav from "@components/navigation/sidebars/Nav.astro";
-import "@styles/global.css";
 import type { ConfigHeading } from "@src/components/navigation/sidebars/types";
 import Footer from "@src/components/Footer.astro";
 
@@ -55,11 +54,7 @@ if (url[2]) {
 
 <html lang="en" class="dark">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
     <Head description={description} title={title} />
-    <link rel="canonical" href={Astro.url} />
     <PreTheme />
     <CreateCopyButtons />
   </head>

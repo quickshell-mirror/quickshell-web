@@ -15,6 +15,7 @@
     "@astrojs/markdown-remark": "^5.3.0",
     "@astrojs/mdx": "^3.1.8",
     "@astrojs/solid-js": "^4.4.2",
+    "@fontsource-variable/rubik": "^5.1.0",
     "@hbsnow/rehype-sectionize": "^1.0.7",
     "@pagefind/default-ui": "^1.1.1",
     "@shikijs/rehype": "^1.22.0",
