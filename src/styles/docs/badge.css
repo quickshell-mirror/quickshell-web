@@ -19,3 +19,12 @@
   border-radius: 5px;
   width: max-content;
 }
+
+@media (max-width: 40rem) {
+  .type-badges {
+    max-width: 50%;
+    padding-top: 0.317rem;
+    flex-flow: row wrap;
+    justify-content: initial;
+  }
+}

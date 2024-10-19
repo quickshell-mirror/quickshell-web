@@ -1,6 +1,10 @@
 @import "./docs-config.css";
 @import "./docs-types.css";
 
+.docslayout {
+  transition: background-color 0.3s;
+}
+
 .docslayout-root {
   margin-inline: 0.618rem;
   margin-top: 3.5rem;
@@ -24,6 +28,11 @@
 .dim-content-nav .docslayout-root {
   filter: brightness(50%);
   pointer-events: none;
+}
+
+:not(html.dark) > .dim-content-toc,
+:not(html.dark) > .dim-content-nav {
+  background-color: #909090;
 }
 
 .docs-content {
@@ -51,7 +60,7 @@
 }
 
 .heading {
-  &>[id] {
+  & > [id] {
     width: max-content;
   }
 
@@ -89,7 +98,7 @@ ul {
 .markdown-alert {
   margin-block: 0.618rem;
 
-  &>*:not(:first-child) {
+  & > *:not(:first-child) {
     margin-block: 0.724rem;
   }
 }
