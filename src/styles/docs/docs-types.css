@@ -57,7 +57,8 @@
   color: hsl(var(--blue) 75 60);
 }
 
-.typedocs-subheading {
+.typedocs-subheading > span > p {
+  margin: 0;
   margin-bottom: 1rem;
 }
 
@@ -378,10 +379,6 @@ html.dark .typevariants {
 
   .typedocs-content {
     margin-inline: 1.272rem;
-
-    & section {
-      min-width: 30svw;
-    }
 
     &>p {
       margin-block: 1.217rem;
