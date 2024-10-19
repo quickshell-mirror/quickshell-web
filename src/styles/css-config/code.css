@@ -1,3 +1,7 @@
+pre.shiki {
+  margin-block: 1.618rem;
+}
+
 :where(p, li):has(> code) code {
   padding-inline: 0.272rem;
   border-radius: 0.272rem;

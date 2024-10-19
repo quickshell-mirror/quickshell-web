@@ -1,6 +1,12 @@
 .accordion {
   & summary {
     list-style: none;
+    transition: background-color 0.15s ease-out;
+
+    &:hover {
+      background-color: hsla(250 11 100 / 0.06);
+      cursor: pointer;
+    }
   }
 
   & .accordion-container {
