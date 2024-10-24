@@ -1,31 +1,24 @@
 ---
-import { generateTypeData } from "@config/io/generateTypeData";
-import { groupRoutes } from "@config/io/helpers";
-import NavComponent from "./nav";
-
-const routes = await generateTypeData();
-const groupedRoutes = groupRoutes(routes);
+import SidebarWrapper from "./nav/SidebarWrapper.tsx";
+import RootNav from "./nav/RootNav.astro";
 
 const url = Astro.url.pathname.split("/");
 const currentRoute = url[2];
 const currentModule = url[3];
 const currentClass = url[4];
 
-const treeProps = {
-  items: groupedRoutes,
-  currentRoute: currentRoute,
-  currentModule: currentModule,
-  currentClass: currentClass,
-};
+export interface Props {
+  mobile: boolean;
+}
 
 const { mobile } = Astro.props;
 ---
-
 <aside class=`nav-wrapper${mobile ? "-mobile" : ""}`>
-  <NavComponent
-    routes={groupedRoutes}
-    tree={treeProps}
-    mobile={mobile}
-    client:idle
-  />
+  { mobile ? (
+    <SidebarWrapper client:load>
+      <RootNav currentRoute={currentRoute} currentModule={currentModule} currentClass={currentClass}/>
+    </SidebarWrapper>
+  ) : (
+    <RootNav currentRoute={currentRoute} currentModule={currentModule} currentClass={currentClass}/>
+  )}
 </aside>

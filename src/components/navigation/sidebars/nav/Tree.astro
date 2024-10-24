@@ -1,0 +1,23 @@
+---
+import NavCollapsible from "@components/NavCollapsible.astro";
+import Self from "./Tree.astro";
+import Link from "./Link.astro";
+
+interface TreeEntry {
+  title: string;
+  link: string;
+  current?: boolean;
+  entries?: TreeEntry[];
+}
+
+interface Props extends TreeEntry {}
+
+const { title, link, entries, current } = Astro.props;
+---
+<NavCollapsible title={title} link={link} current={current ?? false}>
+  {entries?.map(entry => entry.entries ? (
+    <Self {...entry}/>
+  ) : (
+    <Link title={entry.title} link={entry.link} current={entry.current}/>
+  ))}
+</NavCollapsible>

@@ -37,11 +37,11 @@
     position: absolute;
     z-index: 11;
     overflow: hidden;
-    top: 2.6rem;
-    left: calc(-3rem + -80svw);
+    top: 2.5rem;
+    left: -24rem;
     height: calc(100svh - 2.5rem);
+    font-size: 1rem;
     scrollbar-width: none;
-    font-size: 1.2rem;
     -ms-overflow-style: none;
     background: hsla(var(--overlay-bkg));
     border-right: 1px solid hsl(var(--overlay-bkg-border));
@@ -50,8 +50,7 @@
       display: none;
     }
 
-    transition: left 0.3s ease,
-    padding 0.3s ease;
+    transition: left 0.3s ease, padding 0.3s ease;
 
     &.shown {
       display: flex;
@@ -61,47 +60,16 @@
 
     & .navtree {
       /* lines up with non overlay nav */
-      padding: 0.5rem 0.618rem;
+      padding: 0rem 0.618rem;
 
       height: 100%;
-      width: 80svw;
+      width: 21rem;
       box-sizing: content-box;
       overflow-y: scroll;
       scrollbar-width: none;
       -ms-overflow-style: none;
       margin-bottom: 1rem;
       text-wrap: nowrap;
-
-      & [data-part="item-indicator"] {
-        margin-left: 1rem;
-        margin-right: 0.8rem;
-        height: 2rem;
-        width: 2rem;
-
-        & svg {
-          height: max-content;
-          width: 100%;
-        }
-      }
-
-      & [data-part="item-trigger"] {
-        min-height: 3em;
-        font-size: 1.2rem;
-      }
-
-      & [data-part="item-content"] {
-        margin-left: 3.7rem;
-      }
-
-      & [data-part="item"] {
-        & [data-part="item-content"]>div {
-          min-height: 3em;
-
-          &>a {
-            margin: auto 0;
-          }
-        }
-      }
     }
   }
 }
@@ -112,45 +80,14 @@
   text-align: start;
 }
 
-@media (min-width: 40rem) {
-  .nav-toggle {
-    .nav-items {
-      font-size: 1rem;
-      top: 2.5rem;
-      left: -24rem;
+@media not (min-width: 40rem) {
+  .nav-toggle .nav-items {
+    top: 2.6rem;
+    left: calc(-3rem + -80svw);
+    font-size: 1.2rem;
 
-      & .navtree {
-        width: 21rem;
-      }
-
-      & .navtree {
-        & [data-part="item-indicator"] {
-          margin-left: 0.2rem;
-          margin-right: 0rem;
-          height: 1.5rem;
-          width: 1.5rem;
-
-          & svg {
-            height: unset;
-            width: unset;
-          }
-        }
-
-        & [data-part="item-trigger"] {
-          min-height: 2.2rem;
-          font-size: 1rem;
-        }
-
-        & [data-part="item-content"] {
-          margin-left: 1.6rem;
-        }
-
-        & [data-part="item"] {
-          & [data-part="item-content"]>div {
-            min-height: 2.2rem;
-          }
-        }
-      }
+    & .navtree {
+      width: 80svw;
     }
   }
 }

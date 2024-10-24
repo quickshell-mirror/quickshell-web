@@ -1,5 +1,5 @@
 ---
-import "@styles/components/accordion.css"
+import "@styles/components/accordion.css";
 ---
 <details class=`accordion ${Astro.props.class ?? ""}` {...Astro.props}>
   <summary>
@@ -19,12 +19,13 @@ import "@styles/components/accordion.css"
       const body = accordion.querySelector(".accordion-container") as HTMLDivElement;
 
       summary.addEventListener("click", event => {
+        if ((event.target as Element).tagName === "A") return;
         event.preventDefault();
-        body.classList.toggle("animate", true);
 
         if (!accordion.open || accordion.classList.contains("closing")) {
           accordion.classList.toggle("closing", false);
           body.style.setProperty("--height", "0px");
+          body.classList.toggle("animate", true);
 
           requestAnimationFrame(() => {
             accordion.open = true;
@@ -34,8 +35,12 @@ import "@styles/components/accordion.css"
           body.style.setProperty("--height", body.scrollHeight + "px");
 
           requestAnimationFrame(() => {
-            accordion.classList.toggle("closing", true);
-            body.style.setProperty("--height", "0px");
+            body.classList.toggle("animate", true);
+
+            requestAnimationFrame(() => {
+              accordion.classList.toggle("closing", true);
+              body.style.setProperty("--height", "0px");
+            });
           });
         }
       });

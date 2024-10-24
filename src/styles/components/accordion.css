@@ -7,6 +7,7 @@
   & .accordion-container {
     /* fixes jumps due to margins on inline items */
     display: flex;
+    flex-direction: column;
   }
 
   & .accordion-container.animate {

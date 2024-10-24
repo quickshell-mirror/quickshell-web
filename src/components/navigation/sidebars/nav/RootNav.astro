@@ -1,0 +1,51 @@
+---
+export interface Props {
+  currentRoute: string;
+  currentModule: string;
+  currentClass: string;
+}
+
+const { currentRoute, currentModule, currentClass } = Astro.props;
+
+import { generateTypeData } from "@config/io/generateTypeData";
+import { groupRoutes } from "@config/io/helpers";
+import Tree from "./Tree.astro";
+
+const routes = await generateTypeData();
+const groupedRoutes = groupRoutes(routes);
+
+const configuration = {
+  title: "Configuration",
+  link: "/docs/configuration",
+  current: currentRoute.startsWith("configuration"),
+  entries: groupedRoutes.tutorials.configuration.map(
+    ({ name, type }) => ({
+      title: name,
+      link: `/docs/configuration/${type}`,
+      current: currentModule === type,
+    })
+  ),
+};
+
+const types = {
+  title: "Quickshell Types",
+  link: "/docs/types",
+  current: currentRoute.startsWith("types"),
+  entries: Object.entries(groupedRoutes.types).map(
+    ([module, items]) => ({
+      title: module,
+      link: `/docs/types/${module}`,
+      current: currentModule === module,
+      entries: items.map(type => ({
+        title: type.name,
+        link: `/docs/types/${module}/${type.name}`,
+        current: currentClass === type.name,
+      })),
+    })
+  ),
+};
+---
+<nav class="navtree">
+  <Tree {...configuration}/>
+  <Tree {...types}/>
+</nav>

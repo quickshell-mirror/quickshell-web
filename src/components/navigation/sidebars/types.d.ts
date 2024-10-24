@@ -16,12 +16,6 @@ export interface TreeProps {
   currentClass: string | null;
 }
 
-export interface NavProps {
-  routes: GroupedRoutes;
-  tree: TreeProps;
-  mobile: boolean;
-}
-
 // Right
 export interface TOCProps {
   config?: ConfigHeading[];

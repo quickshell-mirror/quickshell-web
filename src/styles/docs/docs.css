@@ -186,6 +186,8 @@ ul {
       cursor: pointer;
     }
 
-    & div > svg { transform: rotate(90deg) }
+    & div > svg {
+      transform: rotate(90deg);
+    }
   }
 }

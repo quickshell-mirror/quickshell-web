@@ -1,0 +1,10 @@
+---
+interface Props {
+  title: string;
+  link: string;
+  current?: boolean;
+}
+
+const { title, link, current } = Astro.props;
+---
+<a class=`nav-component nav-item nav-link ${current ? "nav-current" : ""}` href={link}>{title}</a>

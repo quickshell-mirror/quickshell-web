@@ -1,0 +1,20 @@
+---
+import Accordion from "./Accordion.astro";
+import navMarker from "@icons/nav-marker.svg?raw";
+
+interface Props {
+  title: string;
+  link: string;
+  current?: boolean;
+}
+const { title, link, current } = Astro.props;
+---
+<Accordion class=`nav-component nav-collapsible ${current ? "nav-current" : ""}` {...(current ? { open: "" } : {})}>
+  <div slot="header">
+    <a class=`nav-link ${current ? "nav-current" : ""}` href={link}>{title}</a>
+    <div class="nav-collapse-marker">
+      <Fragment set:html={navMarker}/>
+    </div>
+  </div>
+  <slot>
+</Accordion>

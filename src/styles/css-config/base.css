@@ -53,8 +53,10 @@ html {
   --var-link-color: 190 85 60;
   --inner-param-color: 215 80 27;
   --inner-param-border-color: 215 50 50;
-  --nav-hovered-bkg: var(--blue) 100 93;
+  --nav-hovered-bkg: var(--blue) 100 92;
+  --nav-hovered-weak-bkg: var(--blue) 100 93;
   --nav-selected-bkg: var(--blue) 100 90;
+  --nav-selected-hovered-bkg: var(--blue) 100 85;
   --nav-selected-text: var(--blue) 60 60;
   --nav-indicator-bkg: var(--blue) 45 80;
   --toc-hovered-bkg: 0 0 0 / 0.1;
@@ -106,7 +108,9 @@ html.dark {
   --inner-param-border-color: 215 26 46;
   --inner-param-color: 215 60 70;
   --nav-hovered-bkg: var(--blue) 40 10;
+  --nav-hovered-weak-bkg: var(--blue) 35 8;
   --nav-selected-bkg: var(--blue) 40 13;
+  --nav-selected-hovered-bkg: var(--blue) 40 17;
   --nav-selected-text: var(--blue) 100 70;
   --nav-indicator-bkg: var(--blue) 30 30;
   --toc-hovered-bkg: 0 0 100 / 0.07;

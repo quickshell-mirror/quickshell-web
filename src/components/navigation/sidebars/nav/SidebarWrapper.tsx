@@ -4,35 +4,23 @@ import {
   onMount,
   onCleanup,
   type Component,
+  type JSXElement,
 } from "solid-js";
 
-import { LoadingSpinner, MenuToX, XToMenu } from "@icons";
-import { Tree } from "./Tree";
-import type { NavProps } from "../types";
+import { MenuToX, XToMenu } from "@icons";
 
-const NavComponent: Component<NavProps> = props => {
+export interface SidebarContent {
+  children: JSXElement;
+}
+
+const NavComponent: Component<SidebarContent> = props => {
   const [open, setOpen] = createSignal<boolean>(false);
-  const { tree, mobile, routes } = props;
+  const { children } = props;
   let navRef: HTMLDivElement;
-
-  if (!tree) {
-    return <LoadingSpinner />;
-  }
 
   function toggle(e: MouseEvent) {
     e.preventDefault();
     setOpen(!open());
-  }
-
-  if (!mobile) {
-    return (
-      <Tree
-        currentRoute={tree.currentRoute}
-        currentModule={tree.currentModule || null}
-        currentClass={tree.currentClass || null}
-        items={routes}
-      />
-    );
   }
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -78,12 +66,7 @@ const NavComponent: Component<NavProps> = props => {
         id={open() ? "#qs_search" : ""}
         class={`nav-items ${open() ? "shown" : ""}`}
       >
-        <Tree
-          currentRoute={tree.currentRoute}
-          currentModule={tree.currentModule}
-          currentClass={tree.currentClass}
-          items={routes}
-        />
+        {children}
       </div>
     </div>
   );

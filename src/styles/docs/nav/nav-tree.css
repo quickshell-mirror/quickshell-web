@@ -1,117 +1,108 @@
-[data-scope="accordion"][data-part="root"] {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-
-  & [data-part="item"] {
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
-  }
+.nav-component {
+  margin: 0.35em 0;
 }
 
-[data-scope="accordion"][data-part="item-trigger"] {
-  background-color: transparent;
-  position: relative;
-  border: unset;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  width: 100%;
-  min-height: 2.2rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0.25rem;
+.nav-link {
+  text-decoration: none !important;
+}
 
+.nav-item {
+  display: block;
+  border-radius: 6px;
   transition: background-color 0.2s ease;
+  padding: 0.4em;
 
   &:hover {
     background-color: hsl(var(--nav-hovered-bkg));
   }
-}
 
-[data-scope="accordion"][data-part="item-indicator"] {
-  position: relative;
-  display: flex;
-  flex-shrink: 0;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  margin-left: 3px;
-  transition: transform 250ms ease-in-out;
-
-  &:hover {
-    background-color: hsl(var(--nav-indicator-bkg));
-  }
-
-  &[data-state="open"] {
-    transform: rotate(180deg);
-  }
-}
-
-.nav-shevron {
-  color: black;
-}
-
-html.dark .nav-shevron {
-  color: white;
-}
-
-[data-scope="accordion"][data-part="item-content"] {
-  --height: 709;
-  margin-block: 0.175rem;
-  margin-left: 1.6rem;
-
-  & .arktree-item,
-  [data-part="item-content"]>div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15em;
-    margin: 0.4rem 0;
-    border-radius: 6px;
-
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: hsl(var(--nav-hovered-bkg));
-    }
-
-    &>a {
-      padding: 0.4rem;
-      padding-left: 0.6rem;
-      width: 100%;
-      text-decoration: none;
-    }
-  }
-
-  & .arktree-item.__current-type-doc,
-  [data-part="item-content"]>div.__current-type-doc {
+  &.nav-current {
+    color: hsl(var(--nav-selected-text));
     background-color: hsl(var(--nav-selected-bkg));
+  }
+}
 
-    & a {
+.nav-collapsible {
+  overflow: hidden;
+
+  & > summary {
+    user-select: none;
+
+    & > div {
+      & > .nav-collapse-marker,
+      a {
+        transition: background-color 0.2s ease;
+      }
+
+      & > .nav-collapse-marker {
+        border-radius: 0 6px 6px 0;
+        padding: 0.4em 0.8em;
+        display: flex;
+      }
+
+      & > a {
+        border-radius: 6px 0 0 6px;
+        padding: 0.4em;
+        flex-grow: 1;
+      }
+
+      &:hover {
+        & > .nav-collapse-marker,
+        a {
+          background-color: hsl(var(--nav-hovered-bkg));
+
+          &:not(:hover) {
+            background-color: hsl(var(--nav-hovered-weak-bkg));
+          }
+        }
+      }
+
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 0.1em;
+
+      & svg {
+        transition: transform 0.3s ease;
+        font-size: 1.1em;
+      }
+    }
+  }
+
+  & .accordion-container > div {
+    padding-left: 1.2em;
+
+    & p:first-child {
+      padding-top: 0;
+      margin-top: 0;
+    }
+  }
+}
+
+.nav-collapsible.nav-current {
+  & > summary > div {
+    & > a {
       color: hsl(var(--nav-selected-text));
     }
+
+    & > .nav-collapse-marker,
+    a {
+      background-color: hsl(var(--nav-selected-bkg));
+    }
+
+    &:hover {
+      & > .nav-collapse-marker,
+      a {
+        background-color: hsl(var(--nav-selected-hovered-bkg));
+
+        &:not(:hover) {
+          background-color: hsl(var(--nav-selected-bkg));
+        }
+      }
+    }
   }
 }
 
-[data-scope="accordion"][data-part="item-content"][data-state="open"] {
-  animation: slideDown 250ms ease;
-}
-
-[data-scope="accordion"][data-part="item-content"][data-state="closed"] {
-  animation: slideUp 200ms ease;
-}
-
-.__current-type-doc {
-  color: hsl(var(--nav-selected-text));
-
-  & [data-part="item-trigger"] a {
-    color: hsl(var(--nav-selected-text));
-  }
-
-  & [data-scope="accordion"][data-part="item-trigger"] {
-    background-color: hsl(var(--nav-selected-bkg));
-  }
+.nav-collapsible[open]:not(.closing) > summary > div svg {
+  transform: rotate(180deg);
 }
