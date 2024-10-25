@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://quickshell.outfoxxed.me/sitemap-index.xml
