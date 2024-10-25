@@ -33,6 +33,10 @@ async function readSubdir(subdir: string): Promise<dirData[]> {
 export async function generateTypeData(): Promise<RouteData[]> {
   const mainDir = import.meta.env.SECRET_MODULES_PATH;
 
+  if (!mainDir || mainDir == "") {
+    throw new Error("Cannot generate types, missing SECRET_MODULES_PATH");
+  }
+
   const subdirs = await fs.readdir(mainDir, {
     withFileTypes: true,
   });
