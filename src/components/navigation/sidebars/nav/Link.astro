@@ -1,10 +1,22 @@
 ---
+import { Icon } from "astro-icon/components";
+
 interface Props {
   title: string;
   link: string;
   current?: boolean;
+  showIcon?: boolean;
 }
 
-const { title, link, current } = Astro.props;
+const { title, link, current, showIcon } = Astro.props;
 ---
-<a class=`nav-component nav-item nav-link ${current ? "nav-current" : ""}` href={link}>{title}</a>
+<a class=`nav-component nav-item nav-link ${current ? "nav-current" : ""}` href={link}>
+  { showIcon ? (
+    <div>
+      <Icon name="link"/>
+      {title}
+    </div>
+  ) : (
+    title
+  )}
+</a>

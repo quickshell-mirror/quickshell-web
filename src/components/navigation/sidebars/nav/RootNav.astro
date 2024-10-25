@@ -10,6 +10,7 @@ const { currentRoute, currentModule, currentClass } = Astro.props;
 import { getTypeData } from "@config/io/generateTypeData";
 import { groupRoutes } from "@config/io/helpers";
 import Tree from "./Tree.astro";
+import Link from "./Link.astro";
 
 const routes = await getTypeData();
 const groupedRoutes = groupRoutes(routes);
@@ -48,4 +49,14 @@ const types = {
 <nav class="navtree">
   <Tree {...configuration}/>
   <Tree {...types}/>
+  <Link
+    title="QtQuick Types"
+    link="https://doc.qt.io/qt-6/qtquick-qmlmodule.html"
+    showIcon={true}
+  />
+  <Link
+    title="Quickshell Examples"
+    link="https://git.outfoxxed.me/outfoxxed/quickshell-examples"
+    showIcon={true}
+  />
 </nav>

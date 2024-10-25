@@ -4,6 +4,15 @@
 
 .nav-link {
   text-decoration: none !important;
+
+  & div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3em;
+
+    & svg { color: hsl(var(--text)) }
+  }
 }
 
 .nav-item {
