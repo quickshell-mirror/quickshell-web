@@ -28,6 +28,10 @@
   &.nav-current {
     color: hsl(var(--nav-selected-text));
     background-color: hsl(var(--nav-selected-bkg));
+
+    &:hover {
+      background-color: hsl(var(--nav-selected-hovered-bkg));
+    }
   }
 }
 
@@ -79,11 +83,15 @@
   }
 
   & .accordion-container > div {
-    padding-left: 1.2em;
+    padding-left: 1.3em;
 
     & p:first-child {
       padding-top: 0;
       margin-top: 0;
+    }
+
+    & :last-child {
+      margin-bottom: 0rem;
     }
   }
 }

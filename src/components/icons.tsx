@@ -94,53 +94,6 @@ export const MenuToX: VoidComponent<{
   );
 };
 
-export const ShevronSmallDown: VoidComponent<{
-  class?: string;
-}> = props => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
-      viewBox="0 0 24 24"
-      class={props.class}
-    >
-      <title>Open</title>
-      <g transform="rotate(-90 12 12)">
-        <path
-          stroke="currentColor"
-          stroke-dasharray="8"
-          stroke-dashoffset="0"
-          stroke-linecap="round"
-          stroke-width="2"
-          d="M9 12L14 7M9 12L14 17"
-          fill="currentColor"
-        ></path>
-      </g>
-    </svg>
-  );
-};
-
-export const CaretCircleRight: VoidComponent<{
-  class?: string;
-}> = props => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
-      viewBox="0 0 256 256"
-      class={props.class}
-    >
-      <title>Open</title>
-      <path
-        fill="currentColor"
-        d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m0 192a88 88 0 1 1 88-88a88.1 88.1 0 0 1-88 88m29.66-93.66a8 8 0 0 1 0 11.32l-40 40a8 8 0 0 1-11.32-11.32L140.69 128l-34.35-34.34a8 8 0 0 1 11.32-11.32Z"
-      />
-    </svg>
-  );
-};
-
 export const Clipboard: VoidComponent<{
   class?: string;
 }> = props => {
