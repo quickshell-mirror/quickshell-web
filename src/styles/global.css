@@ -185,15 +185,15 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0.127rem;
+    gap: 0.2rem;
     color: hsl(var(--text-dark));
 
-    &>p {
+    & > p {
       margin-bottom: 0.2rem;
       color: hsl(0 0 40);
     }
 
-    &>a {
+    & > a {
       text-decoration: none;
     }
   }
@@ -211,6 +211,12 @@ footer {
     & a {
       display: flex;
     }
+  }
+}
+
+@media not (min-width: 40rem) {
+  footer .credits > a {
+    padding: 0.2rem;
   }
 }
 

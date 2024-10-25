@@ -380,7 +380,6 @@ button[data-close-modal] {
 #qs_search {
   --pagefind-ui-primary: hsla(var(--accent-400));
   --pagefind-ui-text: hsla(0 0 60);
-  --pagefind-ui-font: Rubik;
   --pagefind-ui-background: hsl(var(--blue) 10 15);
   --pagefind-ui-border: hsl(var(--blue) 30 25);
   --pagefind-ui-border-width: 1px;
