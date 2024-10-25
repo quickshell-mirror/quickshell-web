@@ -8,7 +8,7 @@
     set -x
     yarn install || true
     mkdir -p node_modules/node/bin
-    ln -sf ${pkgs.nodejs}/bin/node node_modules/node/bin/node
+    ln -sf ${pkgs.nodejs_22}/bin/node node_modules/node/bin/node
     yarn install
   '') ];
 

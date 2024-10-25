@@ -4,7 +4,7 @@
   nix-gitignore,
 
   yarn-berry,
-  nodejs,
+  nodejs_22,
   cacert,
 }: stdenv.mkDerivation (final: let
   nodeModules = stdenv.mkDerivation {
@@ -13,7 +13,7 @@
 
     src = final.src;
 
-    nativeBuildInputs = [ nodejs yarn-berry cacert ];
+    nativeBuildInputs = [ nodejs_22 yarn-berry cacert ];
 
     configurePhase = ''
       mkdir garbage-tooling
@@ -33,7 +33,7 @@
       HOME=$(pwd)/garbage-tooling yarn install || true
 
       mkdir -p node_modules/node/bin
-      ln -s ${nodejs}/bin/node node_modules/node/bin/node
+      ln -s ${nodejs_22}/bin/node node_modules/node/bin/node
 
       HOME=$(pwd)/garbage-tooling yarn install
     '';
