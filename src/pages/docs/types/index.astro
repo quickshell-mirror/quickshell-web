@@ -6,20 +6,26 @@ const routes = await getTypeData();
 
 const modules = [...new Set(routes.map(route => route.type))];
 ---
-<DocsLayout title="Quickshell Type Definitions" description="Quickshell Type Documentation">
-  <h2>Type Definitions</h2>
-  <div class="root-nav">
-    {modules.map(moduleEntry => {
-      const indexData = routes.filter(route => route.name === "index")
-      const indexSingled = indexData.filter(indexEntry => indexEntry.type === moduleEntry)[0]
-      const description = indexSingled.data.description
-      return (
-      <div class="root-nav-entry">
-        <a class="root-nav-link" href={`/docs/types/${moduleEntry}`}>
-          {moduleEntry}
-        </a>
-        <span class="root-nav-desc">{description}</span>
-      </div>)
-    })}
+<DocsLayout title="Quickshell Module Listing" description="Quickshell Type Documentation">
+  <div class="docs-content">
+    <hr/>
+    <h2>Module Listing</h2>
+    <section>
+      <span>All modules included with Quickshell</span>
+      <div class="root-nav" data-pagefind-ignore>
+        {modules.map(moduleEntry => {
+          const indexData = routes.filter(route => route.name === "index")
+          const indexSingled = indexData.filter(indexEntry => indexEntry.type === moduleEntry)[0]
+          const description = indexSingled.data.description
+          return (
+          <div class="root-nav-entry">
+            <a class="root-nav-link" href={`/docs/types/${moduleEntry}`}>
+              {moduleEntry}
+            </a>
+            <span class="root-nav-desc">{description}</span>
+          </div>)
+        })}
+      </div>
+    </section>
   </div>
 </DocsLayout>
