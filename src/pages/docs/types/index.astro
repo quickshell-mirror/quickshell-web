@@ -1,8 +1,8 @@
 ---
 import DocsLayout from "@layouts/DocsLayout.astro";
-import { generateTypeData } from "@config/io/generateTypeData";
+import { getTypeData } from "@config/io/generateTypeData";
 
-const routes = await generateTypeData();
+const routes = await getTypeData();
 
 const modules = [...new Set(routes.map(route => route.type))];
 ---

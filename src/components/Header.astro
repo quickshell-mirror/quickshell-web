@@ -1,12 +1,12 @@
 ---
 import { ThemeSelect } from "@components/hooks/ThemeSwitch";
-import { generateTypeData } from "@config/io/generateTypeData";
+import { getTypeData } from "@config/io/generateTypeData";
 import Nav from "@components/navigation/sidebars/Nav.astro";
 import TOC from "@components/navigation/sidebars/TOC.astro";
 import type { TypeTOC } from "./navigation/sidebars/types";
 import Search from "./navigation/Search.astro";
 
-const routes = await generateTypeData();
+const routes = await getTypeData();
 
 const url = Astro.url.pathname.split("/");
 const currentClass = url[4];

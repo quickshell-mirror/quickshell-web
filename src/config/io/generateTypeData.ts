@@ -30,7 +30,7 @@ async function readSubdir(subdir: string): Promise<dirData[]> {
   return data;
 }
 
-export async function generateTypeData(): Promise<RouteData[]> {
+async function generateTypeData(): Promise<RouteData[]> {
   const mainDir = import.meta.env.SECRET_MODULES_PATH;
 
   if (!mainDir || mainDir == "") {
@@ -55,4 +55,14 @@ export async function generateTypeData(): Promise<RouteData[]> {
     routes.push(...returnValue);
   }
   return routes;
+}
+
+let globalTypeData: Promise<RouteData[]>;
+
+export function getTypeData(): Promise<RouteData[]> {
+  if (!globalTypeData) {
+    globalTypeData = generateTypeData();
+  }
+
+  return globalTypeData;
 }

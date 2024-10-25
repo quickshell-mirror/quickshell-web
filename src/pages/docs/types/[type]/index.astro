@@ -1,10 +1,10 @@
 ---
 import DocsLayout from "@layouts/DocsLayout.astro";
-import { generateTypeData } from "@config/io/generateTypeData";
+import { getTypeData } from "@config/io/generateTypeData";
 import { processMarkdown } from "@src/config/io/markdown";
 
 export async function getStaticPaths() {
-  const routes = await generateTypeData();
+  const routes = await getTypeData();
 
   return routes
     .filter(route => route.name === "index")

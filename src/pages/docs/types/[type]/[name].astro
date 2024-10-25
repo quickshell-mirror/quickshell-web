@@ -1,7 +1,7 @@
 ---
 import { getQMLTypeLink } from "@config/io/helpers";
 import { processMarkdown } from "@config/io/markdown";
-import { generateTypeData } from "@config/io/generateTypeData";
+import { getTypeData } from "@config/io/generateTypeData";
 import DocsLayout from "@layouts/DocsLayout.astro";
 import TOC from "@components/navigation/sidebars/TOC.astro";
 import Properties from "@components/type/Properties.astro";
@@ -11,7 +11,7 @@ import Variants from "@components/type/Variants.astro";
 import Badge from "@components/Badge.astro";
 
 export async function getStaticPaths() {
-  const routes = await generateTypeData();
+  const routes = await getTypeData();
 
   return routes
     .filter(route => route.name !== "index")

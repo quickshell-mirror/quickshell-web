@@ -7,11 +7,11 @@ export interface Props {
 
 const { currentRoute, currentModule, currentClass } = Astro.props;
 
-import { generateTypeData } from "@config/io/generateTypeData";
+import { getTypeData } from "@config/io/generateTypeData";
 import { groupRoutes } from "@config/io/helpers";
 import Tree from "./Tree.astro";
 
-const routes = await generateTypeData();
+const routes = await getTypeData();
 const groupedRoutes = groupRoutes(routes);
 
 const configuration = {
