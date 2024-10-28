@@ -146,10 +146,12 @@ footer {
     left: -1rem;
     height: 1px;
     width: calc(100% + 1rem);
-    background: linear-gradient(90deg,
-        transparent 0%,
-        hsl(var(--footer-bkg-border)) 50%,
-        transparent 100%);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--footer-bkg-border)) 50%,
+      transparent 100%
+    );
   }
 
   & a {

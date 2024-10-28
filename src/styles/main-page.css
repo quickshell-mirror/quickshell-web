@@ -176,10 +176,12 @@
   &:nth-child(1),
   &:nth-child(2) {
     &::before {
-      background: linear-gradient(115deg,
-          hsla(var(--green) 20 15 / 0.7) 25%,
-          hsla(var(--green) 25 25 / 0.8) 50%,
-          hsla(var(--green) 60 60 / 0.6) 80%);
+      background: linear-gradient(
+        115deg,
+        hsla(var(--green) 20 15 / 0.7) 25%,
+        hsla(var(--green) 25 25 / 0.8) 50%,
+        hsla(var(--green) 60 60 / 0.6) 80%
+      );
     }
 
     &:hover {
@@ -194,10 +196,12 @@
   &:nth-child(3),
   &:nth-child(4) {
     &::before {
-      background: linear-gradient(115deg,
-          hsla(var(--blue) 10 15 / 0.7) 25%,
-          hsla(var(--blue) 15 25 / 0.8) 50%,
-          hsla(var(--blue) 60 60 / 0.6) 80%);
+      background: linear-gradient(
+        115deg,
+        hsla(var(--blue) 10 15 / 0.7) 25%,
+        hsla(var(--blue) 15 25 / 0.8) 50%,
+        hsla(var(--blue) 60 60 / 0.6) 80%
+      );
     }
 
     &:hover {

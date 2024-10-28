@@ -42,6 +42,18 @@
       "attributePosition": "multiline"
     }
   },
+  "css": {
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space"
+    },
+    "linter": {
+      "enabled": true
+    },
+    "parser": {
+      "cssModules": true
+    }
+  },
   "overrides": [
     {
       "include": [
