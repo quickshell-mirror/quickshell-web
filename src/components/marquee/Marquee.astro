@@ -1,0 +1,93 @@
+---
+
+function placeholders() {
+  const word = "placeholder";
+  let str: string;
+  const arr: string[] = [];
+  for (let i = 0; i < 10; i++) {
+    str = `${word}-${i}`;
+    arr.push(str);
+  }
+  return arr;
+}
+
+const ph = placeholders();
+---
+<div class="marquee-buttons">
+  <button id="button-widget" class="marquee-button marquee-button-widget">widgets</button>
+  <button id="button-panel" class="marquee-button marquee-button-panel">panels</button>
+  <button id="button-overlay" class="marquee-button marquee-button-overlay">overlays</button>
+</div>
+<div class="marquee">
+  <div id="marquee-scroll-left" class="marquee-scroll marquee-scroll-left">left</div>
+  <div id="marquee-scroll-right" class="marquee-scroll marquee-scroll-right">right</div>
+  <div id="marquee-content" class="marquee-content" data-scroll="0">
+    {ph.map(item => <div class="marquee-item">{item}</div>)}
+  </div>
+</div>
+
+<script>
+  // marquee
+  // const dataNum = 10 // number of elements
+  const marquee = document.getElementById("marquee-content")!;
+  marquee.style.setProperty("--scroll", "0")
+
+  // go-to buttons
+  const buttonWidget = document.getElementById("button-widget")!;
+  const buttonPanel = document.getElementById("button-panel")!;
+  const buttonOverlay = document.getElementById("button-overlay")!;
+
+  // left-right buttons
+  const scrollLeft = document.getElementById("marquee-scroll-left")!;
+  const scrollRight = document.getElementById("marquee-scroll-right")!;
+
+  scrollLeft.addEventListener("mousedown", () => {
+    const dataScroll = marquee.getAttribute("data-scroll")!;
+    const hashMap = {
+      "0": () => {
+        const scrollToLast = "-900%" // dataNum
+        marquee.setAttribute("data-scroll", scrollToLast);
+      },
+      "lt0": () => {
+        const oldDataScroll = marquee.getAttribute("data-scroll")!.slice(1, -1);
+        const oldNumScroll = Number(oldDataScroll)
+        const newScroll = oldNumScroll - 100;
+        newScroll <= 900 && newScroll > 0 ?
+          marquee.setAttribute("data-scroll",`-${newScroll.toString()}%`)
+          : marquee.setAttribute("data-scroll", "0")
+      }
+    }
+
+    hashMap[dataScroll === "0" ?
+      "0"
+      : "lt0"
+    ]()
+    const updatedScroll = marquee.getAttribute("data-scroll")!;
+    marquee.style.setProperty("--scroll", updatedScroll)
+  })
+
+  scrollRight.addEventListener("mousedown", () => {
+    const dataScroll = marquee.getAttribute("data-scroll")!;
+    const hashMap = {
+      "900": () => { // dataNum
+        const scrollToFirst = "0";
+        marquee.setAttribute("data-scroll", scrollToFirst);
+      },
+      "mt0": () => {
+        const oldDataScroll = marquee.getAttribute("data-scroll")!.slice(1, -1);
+        const oldNumScroll = Number(oldDataScroll)
+        const newScroll = oldNumScroll + 100;
+        newScroll <= 900 && newScroll < 1000 ?
+          marquee.setAttribute("data-scroll",`-${newScroll.toString()}%`)
+          : marquee.setAttribute("data-scroll", "0")
+      }
+    }
+
+    hashMap[dataScroll === "900" ?
+      "900"
+      : "mt0"
+    ]()
+    const updatedScroll = marquee.getAttribute("data-scroll")!;
+    marquee.style.setProperty("--scroll", updatedScroll)
+  })
+</script>

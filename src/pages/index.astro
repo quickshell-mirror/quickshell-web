@@ -1,14 +1,20 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Marquee from "@components/marquee/Marquee.astro";
 
 const title = "Quickshell";
+const subtitle = "A framework for building fully custom";
 ---
 <BaseLayout title={title} description="A fully user customizable desktop shell" image="/quickshell.png">
   <div class="main-page_hero" data-pagefind-ignore>
     <h1>Quick<em>shell</em></h1>
     <section class="main-page_hero-text">
-      <h2>A fully <em class="green">user-customizable</em> desktop <em class="navy">shell</em></h2>
-      <h3>Based on <em class="green">QtQuick</em></h3>
+      <h2>{subtitle}</h2>
+    </section>
+    <Marquee/>
+    <section class="call-buttons">
+      <span class="call-button call-install"><a href="/docs/intro">Install</a></span>
+      <span class="call-button call-get-started"><a href="/docs/intro">Get Started</a></span>
     </section>
     <section class="main-page_links">
       <a href="/docs/configuration" class="main-page_link-card">

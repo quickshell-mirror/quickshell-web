@@ -37,11 +37,6 @@ a {
   }
 }
 
-[id] {
-  /*offset for header*/
-  scroll-margin-top: 4rem;
-}
-
 html.dark {
   & .header {
     background-color: hsl(var(--secondary-900));
@@ -58,6 +53,11 @@ html.dark {
 /* layout and positioning */
 .unset {
   all: unset;
+}
+
+[id] {
+  /*offset for header*/
+  scroll-margin-top: 4rem;
 }
 
 body {
