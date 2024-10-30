@@ -91,12 +91,6 @@
   aspect-ratio: 16 / 9;
 }
 
-.marquee-item-content {
-  border: 1px solid red;
-  border-radius: 8px;
-  background-color: gray;
-}
-
 .marquee-scroll {
   position: absolute;
   width: 100%;
@@ -108,12 +102,14 @@
   z-index: 10;
   user-select: none;
   align-items: stretch;
+  pointer-events: none;
 }
 
 .marquee-scroll-arrow {
   flex-grow: 1;
   max-width: 8rem;
   font-size: 2rem;
+  pointer-events: all;
 }
 
 .marquee-scroll-arrow > div {

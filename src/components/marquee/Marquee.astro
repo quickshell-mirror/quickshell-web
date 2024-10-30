@@ -31,7 +31,9 @@ const ph = placeholders();
   </div>
   <div id="marquee-content" class="marquee-content" data-scroll="0">
     {ph.map(item => <div class="marquee-item">
-      <div class="marquee-item-spacing marquee-item-content">{item}</div>
+      <video class="marquee-item-spacing marquee-item-content" controls>
+        <source src="/assets/simple-shell-livereload.mp4" type="video/mp4"/>
+      </video>
     </div>)}
   </div>
 </div>
