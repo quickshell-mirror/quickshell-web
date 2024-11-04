@@ -42,6 +42,8 @@ export function groupRoutes(routes: RouteData[]): GroupedRoutes {
     tutorials: {
       configuration: [
         { name: "About", type: "about" },
+        { name: "Installation", type: "installation" },
+        { name: "Getting Started", type: "getting-started" },
         { name: "Intro", type: "intro" },
         { name: "Positioning", type: "positioning" },
         { name: "QML Overview", type: "qml-overview" },
@@ -54,6 +56,8 @@ export function groupRoutes(routes: RouteData[]): GroupedRoutes {
       acc.tutorials = {
         configuration: [
           { name: "About", type: "about" },
+          { name: "Installation", type: "installation" },
+          { name: "Getting Started", type: "getting-started" },
           { name: "Intro", type: "intro" },
           { name: "Positioning", type: "positioning" },
           { name: "QML Overview", type: "qml-overview" },

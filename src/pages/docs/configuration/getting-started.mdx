@@ -1,0 +1,60 @@
+---
+layout: "@layouts/ConfigLayout.astro"
+title: "Getting Started"
+---
+# {frontmatter.title}
+See [Installation](./installation) if Quickshell isn't installed yet.
+
+## Editor configuration
+### Emacs
+Install the [yuja/tree-sitter-qml](https://github.com/yuja/tree-sitter-qmljs) tree-sitter grammar,
+and the [xhcoding/qml-ts-mode](https://github.com/xhcoding/qml-ts-mode) mode.
+
+Both are packaged for nix via [outfoxxed/nix-qml-support](https://git.outfoxxed.me/outfoxxed/nix-qml-support).
+
+Either `lsp-mode` or `eglot` should be usable for LSP ([caveats below](#language-server)).
+
+The author's personal emacs config uses `lsp-mode` and `qml-ts-mode` as follows:
+```elisp
+(use-package qml-ts-mode
+  :after lsp-mode
+  :config
+  (add-to-list 'lsp-language-id-configuration '(qml-ts-mode . "qml-ts"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "qmlls")
+                    :activation-fn (lsp-activate-on "qml-ts")
+                    :server-id 'qmlls))
+  (add-hook 'qml-ts-mode-hook (lambda ()
+                                (setq-local electric-indent-chars '(?\n ?\( ?\) ?{ ?} ?\[ ?\] ?\; ?,))
+                                (lsp-deferred))))
+```
+
+### Neovim
+Neovim has built-in syntax highlighting for QML, however tree-sitter highlighting
+may work better than the built-in highlighting. You can install the grammar
+using `:TSInstall qmljs`.
+
+To use the language server ([caveats below](#language-server)),
+install [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+and call `require("lspconfig").qmlljs.setup({})`.
+
+## Language Server
+The QML language has an associated language server,
+[qmlls](https://doc.qt.io/qt-6/qtqml-tooling-qmlls.html). 
+Please note that the language server, along with quickshell's support of it,
+is in development.
+
+We are aware of the following issues:
+- Qmlls does not work well when a file is not correctly structured.
+  This means that completions and lints won't work unless braces are closed
+  correctly and such.
+- Qmlls cannot handle quickshell's singletons. This means you won't see
+  completions, and usages of singleton members may show a warning.
+  We're still investigating this problem and how to fix it.
+
+Keeping in mind the above caveats, qmlls should be able to guide you towards
+more correct code should you chose to use it.
+
+> [!NOTE]
+> Nix users should note that qmlls will not be able to pick up qml modules
+> that are not in `QML2_IMPORT_PATH`.
