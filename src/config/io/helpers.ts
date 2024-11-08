@@ -41,8 +41,6 @@ export function groupRoutes(routes: RouteData[]): GroupedRoutes {
   const defaultValue = {
     tutorials: {
       configuration: [
-        { name: "About", type: "about" },
-        { name: "Installation", type: "installation" },
         { name: "Getting Started", type: "getting-started" },
         { name: "Intro", type: "intro" },
         { name: "Positioning", type: "positioning" },
@@ -55,8 +53,6 @@ export function groupRoutes(routes: RouteData[]): GroupedRoutes {
     if (!acc.tutorials) {
       acc.tutorials = {
         configuration: [
-          { name: "About", type: "about" },
-          { name: "Installation", type: "installation" },
           { name: "Getting Started", type: "getting-started" },
           { name: "Intro", type: "intro" },
           { name: "Positioning", type: "positioning" },
