@@ -1,0 +1,55 @@
+---
+import { processMarkdown } from "@config/io/markdown";
+
+let codeString = `\`\`\`qml
+// a standard desktop window
+FloatingWindow {
+  Timer {
+    id: timer // give the timer a name to refer to it by
+    property bool invert: false // our custom property
+
+    // change the value of invert every half second
+    running: true; repeat: true
+    interval: 500 // ms
+    onTriggered: timer.invert = !timer.invert
+  }
+
+  // change the window's color when timer.invert changes
+  color: timer.invert ? "purple" : "green"
+}
+\`\`\`
+`;
+
+const codeHTML = await processMarkdown(codeString);
+---
+<ul class="featurelist">
+  <li class="featurelist-item hot-reloading left">
+    <section class="feature-text">
+      <h3 class="feature-title">See your changes in real time</h3>
+      <span class="feature-subtitle">Quickshell loads changes as soon as they're saved; you can iterate as fast as you can type.</span>
+    </section>
+    <section class="feature-showcase">
+      <span>
+        hot reloading video
+      </span>
+    </section>
+  </li>
+  <li class="featurelist-item qml right">
+    <section class="feature-text">
+      <h3 class="feature-title">Easy to use language</h3>
+      <span class="feature-subtitle">Quickshell is configured in QML, a language that reacts to changes as they happen.</span>
+    </section>
+    <section class="feature-showcase" id="qml-showcase">
+      <Fragment set:html={codeHTML}/>
+    </section>
+  </li>
+  <li class="featurelist-item cloud left">
+    <section class="feature-text">
+      <h3 class="feature-title">Fully featured</h3>
+      <span class="feature-subtitle">Everything you need to build your desktop, right out of the box.</span>
+    </section>
+    <section class="feature-showcase">
+      <span>tag cloud</span>
+    </section>
+  </li>
+</ul>

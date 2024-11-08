@@ -50,9 +50,12 @@ h1.gradient-text {
 
 .marquee-buttons {
   display: flex;
-  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.217rem;
   font-size: 1.874rem;
   font-weight: 600;
+  margin-inline: 0.618rem;
 }
 
 .marquee-button {
@@ -75,7 +78,7 @@ h1.gradient-text {
 .marquee {
   position: relative;
   width: 100%;
-  margin-block: 1.817rem;
+  margin-block: 1.618rem;
 }
 
 .marquee-content {
@@ -94,7 +97,7 @@ h1.gradient-text {
 }
 
 .marquee-item-spacing {
-  width: 75%;
+  width: 75svw;
   max-width: 80rem;
   aspect-ratio: 16 / 9;
 }
@@ -146,8 +149,11 @@ h1.gradient-text {
 }*/
 
 .call-buttons {
-  margin-bottom: 1.618rem;
+  margin-bottom: 1rem;
+  margin-inline: 0.618rem;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 3rem;
 }
 

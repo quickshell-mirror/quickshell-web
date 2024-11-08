@@ -9,28 +9,31 @@ import {
 import Sun from "@icons/sun.svg?raw";
 import Moon from "@icons/moon.svg?raw";
 
-interface ThemeProps {
+export interface ThemeProps {
   theme: "light" | "dark";
   system: "light" | "dark";
 }
 
-const getCurrentTheme = (): ThemeProps => {
+export const getCurrentTheme = (): ThemeProps => {
   if (
     typeof localStorage !== "undefined" &&
     (localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches))
+        window.matchMedia("(prefers-color-scheme: dark)")
+          .matches))
   ) {
     return {
       theme: "dark",
-      system: window.matchMedia("(prefers-color-scheme: dark)").matches
+      system: window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
         ? "dark"
         : "light",
     };
   }
   return {
     theme: "light",
-    system: window.matchMedia("(prefers-color-scheme: dark)").matches
+    system: window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
       ? "dark"
       : "light",
   };
@@ -55,10 +58,11 @@ const updateTheme = () => {
 };
 
 export const ThemeSelect: VoidComponent = () => {
-  const [currentTheme, setCurrentTheme] = createSignal<ThemeProps>({
-    theme: "dark",
-    system: "dark",
-  });
+  const [currentTheme, setCurrentTheme] =
+    createSignal<ThemeProps>({
+      theme: "dark",
+      system: "dark",
+    });
   const [mounted, setMounted] = createSignal(false);
 
   const toggleTheme = () => {
@@ -67,7 +71,8 @@ export const ThemeSelect: VoidComponent = () => {
     if (currentTheme()!.theme !== currentTheme()!.system) {
       localStorage.removeItem("theme");
     } else {
-      localStorage.theme = currentTheme()!.theme === "dark" ? "light" : "dark";
+      localStorage.theme =
+        currentTheme()!.theme === "dark" ? "light" : "dark";
     }
     updateTheme();
     setCurrentTheme(getCurrentTheme());
@@ -79,7 +84,9 @@ export const ThemeSelect: VoidComponent = () => {
   });
 
   createEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const mediaQuery = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    );
     mediaQuery.addEventListener("change", updateTheme);
     window.addEventListener("storage", updateTheme);
 
@@ -94,7 +101,12 @@ export const ThemeSelect: VoidComponent = () => {
     <div
       onclick={toggleTheme}
       class="theme-toggle"
-      innerHTML={(mounted() && currentTheme().theme === "light") || currentTheme().system === "light" ? Sun : Moon}
+      innerHTML={
+        (mounted() && currentTheme().theme === "light") ||
+          currentTheme().system === "light"
+          ? Sun
+          : Moon
+      }
     />
   );
 };

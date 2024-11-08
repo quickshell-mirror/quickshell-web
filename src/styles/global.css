@@ -11,6 +11,8 @@
 @import "./docs/docs.css";
 @import "./docs/collapsible.css";
 
+@import "./components/featurelist.css";
+
 .changing-theme * {
   transition: none !important;
 }
@@ -51,6 +53,17 @@ html.dark {
 }
 
 /* layout and positioning */
+.separator-el {
+  width: 75%;
+  height: 1px;
+  margin-block: 0.618rem;
+  background: linear-gradient(
+    to right,
+    transparent,
+    hsl(var(--blue) 100 59),
+    transparent
+  );
+}
 .unset {
   all: unset;
 }

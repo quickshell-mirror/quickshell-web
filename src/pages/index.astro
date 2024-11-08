@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Marquee from "@components/marquee/Marquee.astro";
+import FeatureList from "@src/components/featurelist/FeatureList.astro";
 
 const title = "Quickshell";
 const subtitle = "A framework for building fully custom";
@@ -16,6 +17,11 @@ const subtitle = "A framework for building fully custom";
       <span class="call-button call-install"><a href="/docs/intro">Install</a></span>
       <span class="call-button call-get-started"><a href="/docs/intro">Get Started</a></span>
     </section>
+    <div class="separator-el"/>
+    <section class="featurelist-section">
+      <FeatureList/>
+    </section>
+    <div class="separator-el"/>
     <section class="main-page_links">
       <a href="/docs/configuration" class="main-page_link-card">
         <h3>Configuration</h3>
