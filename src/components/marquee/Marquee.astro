@@ -1,18 +1,24 @@
 ---
 import { Icon } from "astro-icon/components";
 
-function placeholders() {
-  const word = "placeholder";
-  let str: string;
-  const arr: string[] = [];
-  for (let i = 0; i < 10; i++) {
-    str = `${word}-${i}`;
-    arr.push(str);
-  }
-  return arr;
-}
+const videos = [
+  {
+    author: "outfoxxed",
+    authorlink: "https://outfoxxed.me",
+    path: "/assets/showcase/outfoxxed.mp4",
+  },
+  {
+    author: "flicko",
+    authorlink: "https://github.com/flick0",
+    path: "/assets/showcase/flicko.mp4",
+  },
+  {
+    author: "vaxry",
+    authorlink: "https://vaxry.net",
+    path: "/assets/showcase/vaxry.mp4",
+  },
+];
 
-const ph = placeholders();
 ---
 <div class="marquee">
   <div class="marquee-scroll">
@@ -25,10 +31,13 @@ const ph = placeholders();
     </div>
   </div>
   <div id="marquee-content" class="marquee-content" data-scroll="0">
-    {ph.map(_ => <div class="marquee-item">
-      <video class="marquee-item-spacing marquee-item-content" controls>
-        <source src="/assets/simple-shell-livereload.mp4" type="video/mp4"/>
-      </video>
+    {videos.map(({ author, authorlink, path }, index) => <div class="marquee-item">
+      <div>
+        <video class="marquee-item-spacing marquee-item-content" muted controls {...(index == 0 ? {autoplay: ""} : {})}>
+          <source src={path} type="video/mp4"/>
+        </video>
+        <p>Configuration by <a href={authorlink}>{author}</a></p>
+      </div>
     </div>)}
   </div>
 </div>
