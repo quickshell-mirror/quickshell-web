@@ -4,37 +4,34 @@ import Marquee from "@components/marquee/Marquee.astro";
 import FeatureList from "@src/components/featurelist/FeatureList.astro";
 
 const title = "Quickshell";
-const subtitle = "A framework for building fully custom";
 ---
 <BaseLayout title={title} description="A fully user customizable desktop shell" image="/quickshell.png">
   <div class="main-page_hero" data-pagefind-ignore>
     <h1 class="gradient-text">Quickshell</h1>
     <section class="main-page_hero-text">
-      <h2>{subtitle}</h2>
+      <h2>building blocks for your desktop</h2>
     </section>
     <Marquee/>
-    <section class="call-buttons">
-      <span class="call-button call-install"><a href="/docs/intro">Install</a></span>
-      <span class="call-button call-get-started"><a href="/docs/intro">Get Started</a></span>
+    <section class="main-page_links">
+      <section class="main-page_links_set">
+        <a href="/docs/configuration/getting-started" class="main-page_link-card">
+          <h3>Get started</h3>
+        </a>
+        <a href="/docs/types" class="main-page_link-card">
+          <h3>Documentation</h3>
+        </a>
+      </section>
+      <section class="main-page_links_set">
+        <a href="https://git.outfoxxed.me/quickshell/quickshell-examples" class="main-page_link-card main-page_bluecard">
+          <h3>Examples</h3>
+        </a>
+        <a href="https://git.outfoxxed.me/quickshell/quickshell" class="main-page_link-card main-page_bluecard">
+          <h3>Source Code</h3>
+        </a>
+      </section>
     </section>
-    <div class="separator-el"/>
     <section class="featurelist-section">
       <FeatureList/>
-    </section>
-    <div class="separator-el"/>
-    <section class="main-page_links">
-      <a href="/docs/configuration" class="main-page_link-card">
-        <h3>Configuration</h3>
-      </a>
-      <a href="/docs/types" class="main-page_link-card">
-        <h3>Type Definitions</h3>
-      </a>
-      <a href="https://git.outfoxxed.me/outfoxxed/quickshell-examples" class="main-page_link-card">
-        <h3>Examples</h3>
-      </a>
-      <a href="https://git.outfoxxed.me/outfoxxed/quickshell" class="main-page_link-card">
-        <h3>Source</h3>
-      </a>
     </section>
   </div>
 </BaseLayout>

@@ -1,13 +1,11 @@
 .featurelist-section {
   position: relative;
-  margin-block: 1rem;
 }
 
 .featurelist {
-  max-width: 100%;
+  max-width: 40rem;
   list-style: none;
-  margin: unset;
-  margin-inline: 0.618rem;
+  margin: 1rem 1.618rem;
   display: flex;
   flex-direction: column;
 }
@@ -18,7 +16,6 @@
   gap: 0.618rem;
   flex-direction: column;
   align-items: center;
-  min-height: 330px;
   margin-block: 0.618rem;
   border-radius: 9px;
   background-color: hsla(var(--blue) 100 81 / 0.05);
@@ -44,8 +41,9 @@
 
 .feature-text {
   text-align: center;
+  font-size: 1.2rem;
   & .feature-title {
-    margin-bottom: 0.217rem;
+    margin-bottom: 0.517rem;
   }
   & .feature-subtitle {
     color: #afafaf;
@@ -53,18 +51,22 @@
 }
 
 .feature-showcase {
-  width: max-content;
+  height: 21rem;
   aspect-ratio: 16 / 9;
 }
 
-@media (min-width: 65rem) {
+.feature-video {
+  border-radius: 0.681rem;
+}
+
+@media (min-width: 68rem) {
   .featurelist {
+    max-width: 75rem;
     width: auto;
     align-items: center;
   }
   .feature-text {
-    margin-left: 2.218rem;
-    width: 30rem;
+    margin: 0 2.218rem;
   }
   .featurelist-item {
     width: 100%;
@@ -75,11 +77,6 @@
   }
   .featurelist-item.right {
     flex-direction: row-reverse;
-    & .feature-text {
-      margin-right: 2.118rem;
-      margin-left: unset;
-      text-align: right;
-    }
   }
   .feature-text {
     text-align: left;

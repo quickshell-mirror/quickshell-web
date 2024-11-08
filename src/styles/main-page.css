@@ -1,6 +1,5 @@
 .main-page_hero {
   position: relative;
-  margin-block: 1.618rem;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -10,6 +9,7 @@
   & h1 {
     position: relative;
     font-size: 4.618rem;
+    margin-top: 1rem;
   }
 
   & .navy {
@@ -98,7 +98,7 @@ h1.gradient-text {
 
 .marquee-item-spacing {
   width: 75svw;
-  max-width: 80rem;
+  max-width: 75rem;
   aspect-ratio: 16 / 9;
 }
 
@@ -140,39 +140,22 @@ h1.gradient-text {
   }
 }
 
-/*.marquee-scroll-left {
-  left: 3.117rem;
-}
-
-.marquee-scroll-right {
-  right: 3.117rem;
-}*/
-
-.call-buttons {
-  margin-bottom: 1rem;
-  margin-inline: 0.618rem;
+.main-page_links {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 3rem;
-}
-
-.call-button {
-  width: 15rem;
-  font-size: 1.874rem;
-  font-weight: 600;
-  border: 1px solid hsl(var(--accent-400));
-  border-radius: 4px;
-  text-align: center;
-}
-
-.main-page_links {
-  position: relative;
-  display: flex;
-  width: 75%;
-  flex-wrap: wrap;
-  gap: 2rem;
   z-index: 0;
+  max-width: 75%;
+  gap: 1rem;
+  margin: 0 1rem;
+}
+
+.main-page_links_set {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 1rem;
 }
 
 .main-page_link-card {
@@ -183,7 +166,8 @@ h1.gradient-text {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 9.67rem;
+  min-width: 15rem;
+  height: 3.67rem;
   border-radius: 9px;
   overflow: hidden;
   border: 1px solid transparent;
@@ -203,28 +187,22 @@ h1.gradient-text {
     z-index: 1;
   }
 
-  &:nth-child(1),
-  &:nth-child(2) {
+  &::before {
+    background: linear-gradient(
+      115deg,
+      hsla(var(--green) 20 15 / 0.7) 25%,
+      hsla(var(--green) 25 25 / 0.8) 50%,
+      hsla(var(--green) 60 60 / 0.6) 80%
+    );
+  }
+
+  &:hover {
     &::before {
-      background: linear-gradient(
-        115deg,
-        hsla(var(--green) 20 15 / 0.7) 25%,
-        hsla(var(--green) 25 25 / 0.8) 50%,
-        hsla(var(--green) 60 60 / 0.6) 80%
-      );
-    }
-
-    &:hover {
-      border-color: hsl(var(--accent-600));
-
-      &::before {
-        filter: blur(0.9rem) saturate(200%);
-      }
+      filter: blur(0.9rem) saturate(200%);
     }
   }
 
-  &:nth-child(3),
-  &:nth-child(4) {
+  &.main-page_bluecard {
     &::before {
       background: linear-gradient(
         115deg,
@@ -235,8 +213,6 @@ h1.gradient-text {
     }
 
     &:hover {
-      border-color: hsl(var(--blue) 90 40);
-
       &::before {
         filter: blur(0.9rem) saturate(200%);
       }
@@ -252,20 +228,14 @@ h1.gradient-text {
   bottom: 0;
 }
 
-@media (min-width: 65rem) {
-  .main-page_hero-text {
-    text-align: end;
-
-    & h2 {
-      display: block;
-    }
+@media (min-width: 40rem) {
+  .main-page_links_set {
+    flex-wrap: nowrap;
   }
+}
 
+@media (min-width: 86rem) {
   .main-page_links {
-    justify-content: center;
-  }
-
-  .main-page_link-card {
-    max-width: 21.33rem;
+    flex-wrap: nowrap;
   }
 }

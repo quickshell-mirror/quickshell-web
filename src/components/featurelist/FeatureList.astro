@@ -26,18 +26,23 @@ const codeHTML = await processMarkdown(codeString);
   <li class="featurelist-item hot-reloading left">
     <section class="feature-text">
       <h3 class="feature-title">See your changes in real time</h3>
-      <span class="feature-subtitle">Quickshell loads changes as soon as they're saved; you can iterate as fast as you can type.</span>
+      <span class="feature-subtitle">
+        Quickshell loads changes as soon as they're saved, letting you iterate as fast as you can type.
+      </span>
     </section>
     <section class="feature-showcase">
-      <span>
-        hot reloading video
-      </span>
+      <video class="feature-video" style="height: 21rem" preload="metadata" controls>
+        <source src="/assets/simple-shell-livereload.mp4" type="video/mp4"/>
+      </video>
     </section>
   </li>
   <li class="featurelist-item qml right">
     <section class="feature-text">
       <h3 class="feature-title">Easy to use language</h3>
-      <span class="feature-subtitle">Quickshell is configured in QML, a language that reacts to changes as they happen.</span>
+      <span class="feature-subtitle">
+        Quickshell is configured in QML, a simple language designed for creating flexible user interfaces.
+        It also has LSP support.
+      </span>
     </section>
     <section class="feature-showcase" id="qml-showcase">
       <Fragment set:html={codeHTML}/>
@@ -45,11 +50,13 @@ const codeHTML = await processMarkdown(codeString);
   </li>
   <li class="featurelist-item cloud left">
     <section class="feature-text">
-      <h3 class="feature-title">Fully featured</h3>
-      <span class="feature-subtitle">Everything you need to build your desktop, right out of the box.</span>
+      <h3 class="feature-title">Extensive integrations</h3>
+      <span class="feature-subtitle">
+        Quickshell comes with a large set of integrations, with new ones arriving all the time.
+      </span>
     </section>
     <section class="feature-showcase">
-      <span>tag cloud</span>
+      <span>image</span>
     </section>
   </li>
 </ul>
