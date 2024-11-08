@@ -1,5 +1,8 @@
 ---
 import { processMarkdown } from "@config/io/markdown";
+import PipewireLogoSmall from "@public/assets/pipewire-logo-small.svg?raw";
+import XOrgLogo from "@public/assets/x-org-logo.svg?raw";
+import SwayLogo from "@public/assets/sway-logo.svg?raw";
 
 let codeString = `\`\`\`qml
 // a standard desktop window
@@ -56,12 +59,23 @@ const codeHTML = await processMarkdown(codeString);
       </span>
     </section>
     <section class="feature-showcase cloud">
+      <section class="feature-cloud">
       <span class="cloud-item hyprland">
         <img src={"/assets/hyprland-logo.ico"}/>
       </span>
       <span class="cloud-item wayland">
         <img src={"/assets/wayland-logo.png"}/>
       </span>
+      <span class="cloud-item pipewire">
+        <Fragment set:html={PipewireLogoSmall}/>
+      </span>
+      <span class="cloud-item x-org">
+        <Fragment set:html={XOrgLogo}/>
+      </span>
+      <span class="cloud-item sway">
+        <Fragment set:html={SwayLogo}/>
+      </span>
+      </section>
     </section>
   </li>
 </ul>

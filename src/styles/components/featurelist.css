@@ -53,26 +53,30 @@
 .feature-showcase {
   height: 21rem;
   aspect-ratio: 16 / 9;
+  border: 1px solid yellow;
 }
 
 .feature-video {
   border-radius: 0.681rem;
 }
 
-.feature-showcase.cloud {
+.feature-cloud {
   position: relative;
-  max-width: 345.717px;
+  margin: auto;
+  max-width: 21.5rem;
+  height: 100%;
   border-radius: 100vh;
   animation: spin 40s linear infinite;
+  border: 1px solid red;
 
   & .cloud-item {
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: counter-spin 40s linear infinite;
     width: 60px;
     height: 60px;
-    animation: counter-spin 40s linear infinite;
     &.hyprland {
       left: 60px;
       top: 60px;
@@ -81,9 +85,26 @@
       right: 60px;
       top: 60px;
     }
+    &.pipewire {
+      left: 60px;
+      bottom: 60px;
+    }
+    &.x-org {
+      right: 60px;
+      bottom: 60px;
+      scale: 0.9;
+    }
+    &.sway {
+      left: 140px;
+      bottom: 30px;
+      scale: 0.7;
+    }
     & img {
       width: 60px;
       height: 60px;
+    }
+    & svg {
+      scale: 1.5;
     }
   }
 }
