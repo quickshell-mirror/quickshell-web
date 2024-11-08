@@ -12,6 +12,7 @@
 @import "./docs/collapsible.css";
 
 @import "./components/featurelist.css";
+@import "./components/marquee.css";
 
 .changing-theme * {
   transition: none !important;

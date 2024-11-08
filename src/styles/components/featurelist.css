@@ -59,6 +59,53 @@
   border-radius: 0.681rem;
 }
 
+.feature-showcase.cloud {
+  position: relative;
+  max-width: 345.717px;
+  border-radius: 100vh;
+  animation: spin 40s linear infinite;
+
+  & .cloud-item {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    animation: counter-spin 40s linear infinite;
+    &.hyprland {
+      left: 60px;
+      top: 60px;
+    }
+    &.wayland {
+      right: 60px;
+      top: 60px;
+    }
+    & img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counter-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
 @media (min-width: 68rem) {
   .featurelist {
     max-width: 75rem;

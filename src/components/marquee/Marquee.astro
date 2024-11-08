@@ -18,7 +18,6 @@ const videos = [
     path: "/assets/showcase/vaxry.mp4",
   },
 ];
-
 ---
 <div class="marquee">
   <div class="marquee-scroll">
@@ -30,10 +29,18 @@ const videos = [
       <div><Icon name="caret-right"/></div>
     </div>
   </div>
-  <div id="marquee-content" class="marquee-content" data-scroll="0">
+  <div id="marquee-content" class="marquee-content" data-scroll="0" data-media-index="0">
     {videos.map(({ author, authorlink, path }, index) => <div class="marquee-item">
       <div>
-        <video class="marquee-item-spacing marquee-item-content" muted controls {...(index == 0 ? {autoplay: ""} : {})}>
+        <video
+          data-media-index={index}
+          data-media-author={author}
+          id="showcase-video"
+          class="marquee-item-spacing marquee-item-content"
+          muted
+          controls
+          playsinline
+        >
           <source src={path} type="video/mp4"/>
         </video>
         <p>Configuration by <a href={authorlink}>{author}</a></p>
@@ -44,43 +51,105 @@ const videos = [
 
 <script>
   // marquee
-  // const dataNum = 10 // number of elements
+  const dataNum = 2; // last array index
   const marquee = document.getElementById("marquee-content")!;
   marquee.style.setProperty("--scroll", "0")
+
+  // autoplay
+  window.addEventListener("load", autoplayInit,false);
+  const videos = document.getElementsByClassName("marquee-item-content") as HTMLCollectionOf<HTMLVideoElement>;
+
+  function autoplayInit() {
+    videos[0].play();
+    videos[0].setAttribute("data-active", "");
+  };
+
+  const intersectionOptions = {
+    root: marquee,
+    rootMargin: "0px",
+    threshold: 1.0,
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        //@ts-expect-error
+        entry.target.pause();
+        entry.target.removeAttribute("autoplay")
+        entry.target.removeAttribute("data-active")
+      } else {
+        //@ts-expect-error
+        entry.target.play();
+        entry.target.setAttribute("data-active","")
+      }
+    });
+  },intersectionOptions);
+
+  for (const video of videos) {
+    observer.observe(video);
+    video.addEventListener("ended", onVideoEnded)
+  }
+
+  const onVisibilityChange = () => {
+    for(const video of videos){
+      if(document.hidden){
+        video.pause();
+      } else {
+        video.play();
+      }
+    }
+  }
+  document.addEventListener("visibilitychange", onVisibilityChange);
+
+
+  function onVideoEnded() {
+    const currentIndex = marquee.getAttribute("data-media-index");
+    const currentIndexNum = Number(currentIndex);
+    if(currentIndexNum !== dataNum){
+      const newIndex = currentIndexNum + 1;
+      marquee.setAttribute("data-media-index", `${newIndex}`);
+      marquee.style.setProperty("--scroll", `-${newIndex*100}%`)
+    } else {
+      marquee.setAttribute("data-media-index", "0");
+      marquee.style.setProperty("--scroll", "0")
+    }
+  }
 
   // left-right buttons
   const scrollLeft = document.getElementById("marquee-scroll-left")!;
   const scrollRight = document.getElementById("marquee-scroll-right")!;
+  const scrollMaxPercent = dataNum*100;
 
   scrollLeft.addEventListener("mousedown", () => {
     const dataScroll = marquee.getAttribute("data-scroll")!;
     const hashMap = {
-      "0": () => {
-        const scrollToLast = "-900%" // dataNum
+      "first": () => {
+        const scrollToLast = `-${scrollMaxPercent}%`;
         marquee.setAttribute("data-scroll", scrollToLast);
       },
       "lt0": () => {
         const oldDataScroll = marquee.getAttribute("data-scroll")!.slice(1, -1);
         const oldNumScroll = Number(oldDataScroll)
         const newScroll = oldNumScroll - 100;
-        newScroll <= 900 && newScroll > 0 ?
+        newScroll <= scrollMaxPercent && newScroll > 0 ?
           marquee.setAttribute("data-scroll",`-${newScroll.toString()}%`)
           : marquee.setAttribute("data-scroll", "0")
       }
     }
 
     hashMap[dataScroll === "0" ?
-      "0"
+      "first"
       : "lt0"
     ]()
     const updatedScroll = marquee.getAttribute("data-scroll")!;
+    const mediaIndex = updatedScroll.indexOf("%") !== -1 ? updatedScroll.slice(1, -3) : "0";
+    marquee.setAttribute("data-media-index", mediaIndex);
     marquee.style.setProperty("--scroll", updatedScroll)
   })
 
   scrollRight.addEventListener("mousedown", () => {
     const dataScroll = marquee.getAttribute("data-scroll")!;
     const hashMap = {
-      "900": () => { // dataNum
+      "last": () => {
         const scrollToFirst = "0";
         marquee.setAttribute("data-scroll", scrollToFirst);
       },
@@ -88,17 +157,19 @@ const videos = [
         const oldDataScroll = marquee.getAttribute("data-scroll")!.slice(1, -1);
         const oldNumScroll = Number(oldDataScroll)
         const newScroll = oldNumScroll + 100;
-        newScroll <= 900 && newScroll < 1000 ?
+        newScroll <= scrollMaxPercent ?
           marquee.setAttribute("data-scroll",`-${newScroll.toString()}%`)
           : marquee.setAttribute("data-scroll", "0")
       }
     }
 
-    hashMap[dataScroll === "900" ?
-      "900"
+    hashMap[dataScroll === `${scrollMaxPercent}` ?
+      "last"
       : "mt0"
     ]()
     const updatedScroll = marquee.getAttribute("data-scroll")!;
-    marquee.style.setProperty("--scroll", updatedScroll)
+    const mediaIndex = updatedScroll.indexOf("%") !== -1 ? updatedScroll.slice(1, -3) : "0";
+    marquee.setAttribute("data-media-index", mediaIndex);
+    marquee.style.setProperty("--scroll", updatedScroll);
   })
 </script>
