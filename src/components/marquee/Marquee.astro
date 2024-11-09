@@ -67,19 +67,20 @@ const videos = [
   const intersectionOptions = {
     root: marquee,
     rootMargin: "0px",
-    threshold: 1.0,
+    threshold: 0.0,
   };
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+      const video = entry.target as HTMLVideoElement;
       if (!entry.isIntersecting) {
-        //@ts-expect-error
-        entry.target.pause();
-        entry.target.removeAttribute("autoplay")
-        entry.target.removeAttribute("data-active")
+        video.pause();
+        video.removeAttribute("autoplay")
+        video.removeAttribute("data-active")
+        video.currentTime = 0;
       } else {
-        //@ts-expect-error
-        entry.target.play();
-        entry.target.setAttribute("data-active","")
+        video.play();
+        video.setAttribute("data-active","")
       }
     });
   },intersectionOptions);
