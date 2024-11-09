@@ -13,8 +13,8 @@ export default function pagefind(): AstroIntegration {
         const relativeDir = relative(cwd, targetDir);
         return new Promise<void>(resolve => {
           spawn(
-            "yarn dlx",
-            ["-q", "pagefind", "--site", relativeDir],
+            "yarn",
+            ["pagefind", "--site", relativeDir],
             {
               stdio: "inherit",
               shell: true,

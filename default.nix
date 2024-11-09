@@ -6,6 +6,7 @@
   yarn-berry,
   nodejs_22,
   cacert,
+  quickshell-types ? null,
 }: stdenv.mkDerivation (final: let
   nodeModules = stdenv.mkDerivation {
     pname = "${final.pname}-node_modules";
@@ -50,7 +51,7 @@
 
     outputHashMode = "recursive";
     outputHashAlgo = "sha256";
-    outputHash = "rKoDjvG5t+aQRrzAz0eTifPtL3zmWAu/emxXWd1ocxM=";
+    outputHash = "tZ4xuA7uNnMIEpSUmQ5TAWPdvRGFJWIgWyBa1QFFWWU=";
   };
 in {
   pname = "quickshell-web";
@@ -72,9 +73,12 @@ in {
     EOF
 
     cp -r ${nodeModules} node_modules
+    chmod +rw -R node_modules
   '';
 
   buildPhase = ''
+    ${if quickshell-types != null then "export SECRET_MODULES_PATH=${quickshell-types}" else ""}
+    echo SECRET_MODULES_PATH: $SECRET_MODULES_PATH
     HOME=$(pwd)/garbage-tooling yarn build
   '';
 

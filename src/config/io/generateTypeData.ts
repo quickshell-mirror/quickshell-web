@@ -3,8 +3,20 @@ import path from "node:path";
 
 import type { RouteData, dirData } from "./types";
 
+function modulesPath() {
+  const modulesPath = import.meta.env.SECRET_MODULES_PATH;
+
+  if (!modulesPath || modulesPath === "") {
+    throw new Error(
+      "Cannot generate types, missing SECRET_MODULES_PATH"
+    );
+  }
+
+  return modulesPath;
+}
+
 async function readSubdir(subdir: string): Promise<dirData[]> {
-  const fullpath = path.join(process.cwd(), "modules", subdir);
+  const fullpath = path.join(modulesPath(), subdir);
   const filenames = await fs.readdir(fullpath);
 
   const data = await Promise.all(
@@ -31,13 +43,7 @@ async function readSubdir(subdir: string): Promise<dirData[]> {
 }
 
 async function generateTypeData(): Promise<RouteData[]> {
-  const mainDir = import.meta.env.SECRET_MODULES_PATH;
-
-  if (!mainDir || mainDir === "") {
-    throw new Error(
-      "Cannot generate types, missing SECRET_MODULES_PATH"
-    );
-  }
+  const mainDir = modulesPath();
 
   const subdirs = await fs.readdir(mainDir, {
     withFileTypes: true,

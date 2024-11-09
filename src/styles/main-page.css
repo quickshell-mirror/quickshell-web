@@ -121,7 +121,7 @@ html.dark .main-page_hero-text {
   }
 }
 
-html.dark .main-page_link-card {
+/*html.dark .main-page_link-card {
   background-color: transparent;
   border-color: transparent;
 
@@ -166,6 +166,23 @@ html.dark .main-page_link-card {
       &::before {
         filter: blur(0.9rem) saturate(200%);
       }
+    }
+  }
+}*/
+
+html.dark .main-page_link-card {
+  background-color: hsl(var(--green) 38 25);
+  color: hsl(194 0 100);
+
+  &:hover {
+    background-color: hsl(var(--green) 48 35);
+  }
+
+  &.main-page_bluecard {
+    background-color: hsl(var(--blue) 38 25);
+
+    &:hover {
+      background-color: hsl(var(--blue) 48 35);
     }
   }
 }
