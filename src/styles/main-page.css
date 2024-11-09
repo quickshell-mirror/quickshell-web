@@ -180,7 +180,7 @@ html.dark .main-page_link-card {
   }
 }
 
-@media (min-width: 68rem) {
+@media (min-width: 63rem) {
   .main-page_links {
     flex-wrap: nowrap;
     max-width: 78rem;

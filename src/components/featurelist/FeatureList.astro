@@ -1,12 +1,14 @@
 ---
 import { processMarkdown } from "@config/io/markdown";
 
-let codeString = `\`\`\`qml
+const codeDesktop = await processMarkdown(`\`\`\`qml
 // a standard desktop window
 FloatingWindow {
   Timer {
-    id: timer // give the timer a name to refer to it by
-    property bool invert: false // our custom property
+    // assign an id to the object, which can be
+    // used to reference it
+    id: timer
+    property bool invert: false // a custom property
 
     // change the value of invert every half second
     running: true; repeat: true
@@ -17,10 +19,35 @@ FloatingWindow {
   // change the window's color when timer.invert changes
   color: timer.invert ? "purple" : "green"
 }
-\`\`\`
-`;
+\`\`\``);
 
-const codeHTML = await processMarkdown(codeString);
+const codeMobile = await processMarkdown(`\`\`\`qml
+// a standard desktop window
+FloatingWindow {
+  Timer {
+    // assign an id to the
+    // object, which can be
+    // used to reference it
+    id: timer
+    // a custom property
+    property bool invert: false
+
+    // change the value of invert
+    // every half second
+    running: true; repeat: true
+    interval: 500 // ms
+    onTriggered: {
+      timer.invert = !timer.invert
+    }
+  }
+
+  // change the window's color
+  // when timer.invert changes
+  color: timer.invert
+    ? "purple"
+    : "green"
+}
+\`\`\``);
 ---
 <ul class="featurelist">
   <li class="featurelist-item hot-reloading left">
@@ -45,7 +72,12 @@ const codeHTML = await processMarkdown(codeString);
       </span>
     </section>
     <section class="feature-showcase" id="qml-showcase">
-      <Fragment set:html={codeHTML}/>
+      <div class="showcase-desktop">
+        <Fragment set:html={codeDesktop}/>
+      </div>
+      <div class="showcase-mobile">
+        <Fragment set:html={codeMobile}/>
+      </div>
     </section>
   </li>
   <li class="featurelist-item cloud-li left">

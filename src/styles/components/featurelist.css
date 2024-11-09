@@ -18,8 +18,7 @@
   margin-block: 0.618rem;
   border-radius: 9px;
   background-color: hsl(var(--blue) 60 98);
-  padding-inline: 0.618rem;
-  padding-block: 1.217rem;
+  padding: 0.618rem;
   border: 1px solid hsl(var(--blue) 9 75);
   &::before {
     content: "";
@@ -47,6 +46,7 @@ html.dark .featurelist-item {
 }
 
 .feature-text {
+  margin: 1rem 0;
   text-align: center;
   font-size: 1.2rem;
   & .feature-title {
@@ -64,21 +64,37 @@ html.dark .feature-text {
 }
 
 .feature-showcase {
-  max-width: 75svw;
+  width: 100%;
   max-height: min-content;
-  height: 15rem;
   display: flex;
   justify-content: center;
 
   & video {
-    scale: 0.85;
+    width: 100%;
     aspect-ratio: 16 / 9;
     border-radius: 0.681rem;
   }
 
   & .shiki {
     margin-block: unset;
-    font-size: 0.55rem;
+    width: 100%;
+    height: 100%;
+    /*font-size: 0.55rem;*/
+  }
+
+  & .showcase-desktop {
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+
+  & .showcase-mobile {
+    width: 100%;
+    height: 100%;
+  }
+
+  &.cloud {
+    overflow: clip;
   }
 }
 
@@ -92,11 +108,12 @@ html:not(.dark) .feature-showcase .shiki span {
   margin: auto;
   max-width: 21.5rem;
   height: 100%;
+  min-height: 20rem;
+  margin-bottom: 1rem;
   animation: spin 40s linear infinite;
 
   & .cloud-item {
     position: absolute;
-    scale: 0.8;
     &.wayland {
       transform: translate(-50%, 0);
     }
@@ -127,8 +144,8 @@ html:not(.dark) .feature-showcase .shiki span {
     & img,
     svg {
       animation: counter-spin 40s linear infinite;
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
     }
     left: 50%;
     height: 100%;
@@ -153,13 +170,19 @@ html:not(.dark) .feature-showcase .shiki span {
   }
 }
 
-@media (min-width: 40rem) {
+@media (min-width: 34rem) {
   .feature-showcase {
-    height: 21rem;
+    & .showcase-desktop {
+      display: unset;
+    }
+
+    & .showcase-mobile {
+      display: none;
+    }
   }
 }
 
-@media (min-width: 68rem) {
+@media (min-width: 63rem) {
   .featurelist {
     max-width: 75rem;
     margin: 1rem 1.618rem;
@@ -179,6 +202,9 @@ html:not(.dark) .feature-showcase .shiki span {
   .featurelist-item.right {
     flex-direction: row-reverse;
   }
+  .feature-showcase {
+    height: 22rem;
+  }
   .feature-text {
     text-align: left;
   }
@@ -189,15 +215,10 @@ html:not(.dark) .feature-showcase .shiki span {
       scale: 1;
     }
     & .shiki {
-      font-size: 1rem;
+      font-size: 0.93rem;
     }
-    & .cloud-item {
-      scale: 1;
-      & img,
-      svg {
-        width: 80px;
-        height: 80px;
-      }
+    .feature-cloud {
+      margin-bottom: 0;
     }
   }
 }

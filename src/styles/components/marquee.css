@@ -47,7 +47,7 @@
 }
 
 .marquee-item-spacing {
-  width: 75svw;
+  width: calc(100svw - 12rem);
   max-width: 75rem;
   aspect-ratio: 16 / 9;
   display: flex;
