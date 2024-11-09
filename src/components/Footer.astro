@@ -1,8 +1,14 @@
 ---
 import matrixLogo from "@icons/matrix-logo.svg?raw";
 import gitLogo from "@icons/git-logo.svg?raw";
+
+interface Props {
+  class?: string;
+}
+
+const props = Astro.props;
 ---
-<footer>
+<footer class=`${props.class ?? ""}`>
   <section class="credits">
     <p class="hint">Brought to you by:</p>
     <a href="https://outfoxxed.me" target="_blank">outfoxxed - <span class="hint">Lead Developer</span></a>
@@ -15,7 +21,7 @@ import gitLogo from "@icons/git-logo.svg?raw";
     <a href="https://matrix.to/#/#quickshell:outfoxxed.me" target="_blank" aria-label="Join our matrix space">
       <Fragment set:html={matrixLogo}/>
     </a>
-    <a href="https://git.outfoxxed.me/outfoxxed/quickshell" target="_blank" aria-label="Visit our git server">
+    <a href="https://git.outfoxxed.me/quickshell/quickshell" target="_blank" aria-label="Visit our git server">
       <Fragment set:html={gitLogo}/>
     </a>
   </section>

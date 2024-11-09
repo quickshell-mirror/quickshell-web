@@ -191,6 +191,10 @@ html.dark .main-page_link-card {
   bottom: 0;
 }
 
+.frontpage-footer {
+  padding-inline: 0.75rem;
+}
+
 @media (min-width: 40rem) {
   .main-page_links_set {
     flex-wrap: nowrap;
@@ -198,6 +202,10 @@ html.dark .main-page_link-card {
 }
 
 @media (min-width: 63rem) {
+  .frontpage-footer {
+    padding-inline: 1.5rem;
+  }
+
   .main-page_links {
     flex-wrap: nowrap;
     max-width: 78rem;

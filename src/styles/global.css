@@ -148,7 +148,7 @@ footer {
   font-size: 0.9rem;
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 1rem 2rem;
   overflow: hidden;
   flex-shrink: 0;
   background: hsl(var(--footer-bkg));
@@ -231,8 +231,12 @@ footer {
 }
 
 @media not (min-width: 40rem) {
-  footer .credits > a {
-    padding: 0.2rem;
+  footer {
+    padding-inline: 0.75rem;
+
+    & .credits > a {
+      padding: 0.2rem 0;
+    }
   }
 }
 
