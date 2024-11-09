@@ -24,7 +24,7 @@ html.dark .shiki span {
 pre {
   padding: 1rem;
   border-radius: 0.618rem;
-  overflow: auto;
+  overflow: hidden;
   text-wrap: wrap;
 
   & > button {

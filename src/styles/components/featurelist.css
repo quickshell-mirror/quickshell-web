@@ -32,9 +32,6 @@
     background-position: 50% 50%;
     background-size: 1.1rem 1.1rem;
   }
-  & .shiki {
-    margin-block: unset;
-  }
 }
 
 html.dark .featurelist-item {
@@ -67,16 +64,21 @@ html.dark .feature-text {
 }
 
 .feature-showcase {
-  max-height: 21rem;
-  aspect-ratio: 16 / 9;
-  width: 100%;
+  max-width: 75svw;
+  max-height: min-content;
+  height: 15rem;
   display: flex;
   justify-content: center;
 
   & video {
-    height: 100%;
+    scale: 0.85;
     aspect-ratio: 16 / 9;
     border-radius: 0.681rem;
+  }
+
+  & .shiki {
+    margin-block: unset;
+    font-size: 0.55rem;
   }
 }
 
@@ -94,29 +96,39 @@ html:not(.dark) .feature-showcase .shiki span {
 
   & .cloud-item {
     position: absolute;
+    scale: 0.8;
     &.wayland {
       transform: translate(-50%, 0);
     }
     &.hyprland {
       transform: translate(-50%, 0) rotate(72deg);
-      & > div { transform: rotate(-72deg) }
+      & > div {
+        transform: rotate(-72deg);
+      }
     }
     &.pipewire {
       transform: translate(-50%, 0) rotate(144deg);
-      & > div { transform: rotate(-144deg) }
+      & > div {
+        transform: rotate(-144deg);
+      }
     }
     &.x-org {
       transform: translate(-50%, 0) rotate(216deg);
-      & > div { transform: rotate(-216deg) }
+      & > div {
+        transform: rotate(-216deg);
+      }
     }
     &.sway {
       transform: translate(-50%, 0) rotate(288deg);
-      & > div { transform: rotate(-288deg) }
+      & > div {
+        transform: rotate(-288deg);
+      }
     }
-    & img, svg {
+    & img,
+    svg {
       animation: counter-spin 40s linear infinite;
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
     }
     left: 50%;
     height: 100%;
@@ -125,7 +137,7 @@ html:not(.dark) .feature-showcase .shiki span {
 
 @keyframes spin {
   from {
-    transform:rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
@@ -172,5 +184,20 @@ html:not(.dark) .feature-showcase .shiki span {
   }
   .feature-showcase {
     width: auto;
+    aspect-ratio: 16 / 9;
+    & video {
+      scale: 1;
+    }
+    & .shiki {
+      font-size: 1rem;
+    }
+    & .cloud-item {
+      scale: 1;
+      & img,
+      svg {
+        width: 80px;
+        height: 80px;
+      }
+    }
   }
 }
