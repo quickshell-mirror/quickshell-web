@@ -111,7 +111,7 @@
 
     & .toc_a {
       transition: color 0.33s;
-      color: hsl(var(--green) 72 40);
+      color: hsl(var(--toc-link));
     }
 
     & ul {
@@ -123,7 +123,7 @@
 
       &.active {
         & > .toc_a {
-          color: hsl(var(--green) 72 60);
+          color: hsl(var(--toc-link-active));
         }
       }
     }

@@ -43,6 +43,8 @@ html {
   --text-dark: var(--white) 0 18;
   --text-darker: var(--white) 0 30;
   --link: var(--green) 74 39;
+  --toc-link: var(--green) 74 30;
+  --toc-link-active: var(--green) 74 40;
   --prop-color: 350 78 70;
   --prop-link-color: 350 78 60;
   --func-color: 50 68 50;
@@ -96,6 +98,8 @@ html.dark {
   --text-dark: var(--white) 0 70;
   --text-darker: var(--white) 0 40;
   --link: var(--green) 76 54;
+  --toc-link: var(--green) 74 40;
+  --toc-link-active: var(--green) 74 50;
   --prop-color: 350 78 70;
   --prop-link-color: 350 78 60;
   --func-color: 50 78 70;
