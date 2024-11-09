@@ -43,12 +43,15 @@
   transform: translateX(var(--scroll));
   display: flex;
   justify-content: center;
+  padding-inline: 1rem;
 }
 
 .marquee-item-spacing {
   width: 75svw;
   max-width: 75rem;
   aspect-ratio: 16 / 9;
+  display: flex;
+  justify-content: space-between;
 }
 
 .marquee-item-content {
@@ -58,7 +61,6 @@
 .marquee-scroll {
   position: absolute;
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,25 +69,61 @@
   user-select: none;
   align-items: stretch;
   pointer-events: none;
+  padding-inline: 1rem;
 }
 
 .marquee-scroll-arrow {
-  flex-grow: 1;
   max-width: 8rem;
   font-size: 2rem;
   pointer-events: all;
-}
-
-.marquee-scroll-arrow > div {
-  height: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
+  align-items: center;
+
+  & > div {
+    width: 2.5rem;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
 
   &:hover {
-    opacity: 0.9;
     cursor: pointer;
+    & > div { opacity: 0.9 }
+  }
+}
+
+#marquee-scroll-left {
+  left: -4rem;
+}
+
+#marquee-scroll-right {
+  right: -4rem;
+}
+
+@media not (min-width: 40rem) {
+  .marquee-item-spacing {
+    width: 100%;
+    align-items: center;
+  }
+
+  .marquee-scroll-arrow {
+    height: unset;
+    & > div {
+      background-color: #55555580;
+      border-radius: 0.2rem;
+    }
+  }
+
+  #marquee-scroll-left {
+    left: 2rem;
+  }
+
+  #marquee-scroll-right {
+    right: 2rem;
   }
 }
