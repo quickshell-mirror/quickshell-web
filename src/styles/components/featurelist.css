@@ -18,17 +18,16 @@
   align-items: center;
   margin-block: 0.618rem;
   border-radius: 9px;
-  background-color: hsla(var(--blue) 60 98 / 0.6);
+  background-color: hsl(var(--blue) 60 98);
   padding-inline: 0.618rem;
   padding-block: 1.217rem;
-  border: 1px solid hsla(0 0 0 / 0.1);
+  border: 1px solid hsl(var(--blue) 9 75);
   &::before {
     content: "";
     position: absolute;
     inset: 0.618rem;
-    z-index: -1;
     background-image: radial-gradient(
-      hsla(0 0 0 / 0.4) 1px,
+      hsl(var(--blue) 9 75) 1px,
       transparent 1px
     );
     background-position: 50% 50%;
@@ -71,6 +70,11 @@ html.dark .feature-text {
 .feature-showcase {
   height: 21rem;
   aspect-ratio: 16 / 9;
+}
+
+html:not(.dark) .feature-showcase .shiki,
+html:not(.dark) .feature-showcase .shiki span {
+  background-color: #ffffff;
 }
 
 .feature-video {

@@ -21,7 +21,7 @@
 /* color styling */
 .header {
   background-color: hsl(var(--bg-400));
-  box-shadow: 0 3px 3px 3px hsla(var(--white) 100 0 / 0.1);
+  box-shadow: 0 1px 1px 1px hsla(var(--white) 100 0 / 0.1);
 }
 
 .baselayout,

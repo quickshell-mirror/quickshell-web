@@ -57,7 +57,7 @@
 }
 
 .c-breadcrumbs {
-  --color-link-breadcrumbs: hsl(var(--accent-600));
+  --color-link-breadcrumbs: hsl(var(--link));
   margin-top: 0.5rem;
   margin-bottom: 0.318rem;
   max-width: 100svw;

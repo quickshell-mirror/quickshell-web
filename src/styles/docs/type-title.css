@@ -4,19 +4,6 @@
   margin-block: 0 !important;
 }
 
-.typedocs-title-text {
-  letter-spacing: 0.012rem;
-
-  & a {
-    opacity: 0.6;
-    transition: opacity 0.5s;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-}
-
 .typedata-title {
   margin-bottom: 1.618rem;
 

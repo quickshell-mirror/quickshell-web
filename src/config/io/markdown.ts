@@ -146,6 +146,7 @@ export const markdownConfig: AstroMarkdownOptions = {
         },
         colorReplacements: {
           "slack-ochin": {
+            "#fff": "#f1f3f4", // bg
             "#357b42": "#989eb9", // comments
             "#b1108e": "#224bbb", // fields
           },

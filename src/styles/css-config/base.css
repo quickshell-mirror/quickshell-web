@@ -31,20 +31,20 @@ html {
 
   /* primary */
   --white: 194;
-  --bg-400: var(--white) 33 100;
-  --bg-500: var(--white) 12 96;
-  --bg-600: var(--white) 12 76;
-  --bg-700: var(--white) 12 56;
-  --bg-800: var(--white) 12 36;
-  --bg-900: var(--white) 12 16;
+  --bg-400: var(--white) 10 95;
+  --bg-500: var(--white) 5 90;
+  --bg-600: var(--white) 5 76;
+  --bg-700: var(--white) 5 56;
+  --bg-800: var(--white) 5 36;
+  --bg-900: var(--white) 5 16;
 
   /* docs */
   --text: var(--white) 0 0;
   --text-dark: var(--white) 0 18;
   --text-darker: var(--white) 0 30;
-  --link: var(--green) 74 39;
+  --link: var(--green) 48 40;
   --toc-link: var(--green) 74 30;
-  --toc-link-active: var(--green) 74 40;
+  --toc-link-active: var(--green) 80 38;
   --prop-color: 350 78 70;
   --prop-link-color: 350 78 60;
   --func-color: 50 68 50;
@@ -55,8 +55,8 @@ html {
   --var-link-color: 190 85 60;
   --inner-param-color: 215 80 27;
   --inner-param-border-color: 215 50 50;
-  --nav-hovered-bkg: var(--blue) 100 92;
-  --nav-hovered-weak-bkg: var(--blue) 100 93;
+  --nav-hovered-bkg: var(--blue) 100 87;
+  --nav-hovered-weak-bkg: var(--blue) 100 91;
   --nav-selected-bkg: var(--blue) 100 90;
   --nav-selected-hovered-bkg: var(--blue) 100 85;
   --nav-selected-text: var(--blue) 60 60;
@@ -64,7 +64,7 @@ html {
   --toc-hovered-bkg: 0 0 0 / 0.1;
   --overlay-bkg: var(--blue) 25 93;
   --overlay-bkg-border: var(--blue) 10 75;
-  --footer-bkg: var(--blue) 32 92;
+  --footer-bkg: var(--blue) 8 87;
   --footer-bkg-border: var(--blue) 32 84;
 }
 
@@ -97,9 +97,9 @@ html.dark {
   --text: var(--white) 0 100;
   --text-dark: var(--white) 0 70;
   --text-darker: var(--white) 0 40;
-  --link: var(--green) 76 54;
+  --link: var(--green) 60 44;
   --toc-link: var(--green) 74 40;
-  --toc-link-active: var(--green) 74 50;
+  --toc-link-active: var(--green) 80 60;
   --prop-color: 350 78 70;
   --prop-link-color: 350 78 60;
   --func-color: 50 78 70;

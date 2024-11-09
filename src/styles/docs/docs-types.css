@@ -152,13 +152,7 @@
 
 .type-datatype {
   color: #808080;
-  opacity: 0.8;
   width: max-content;
-  transition: opacity 0.5s;
-
-  & > a {
-    opacity: inherit;
-  }
 }
 
 .typeprops {
