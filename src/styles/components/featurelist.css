@@ -3,9 +3,8 @@
 }
 
 .featurelist {
-  max-width: 40rem;
   list-style: none;
-  margin: 1rem 1.618rem;
+  margin: 0.25rem 0.5rem;
   display: flex;
   flex-direction: column;
 }
@@ -68,17 +67,22 @@ html.dark .feature-text {
 }
 
 .feature-showcase {
-  height: 21rem;
+  max-height: 21rem;
   aspect-ratio: 16 / 9;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  & video {
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 0.681rem;
+  }
 }
 
 html:not(.dark) .feature-showcase .shiki,
 html:not(.dark) .feature-showcase .shiki span {
   background-color: #ffffff;
-}
-
-.feature-video {
-  border-radius: 0.681rem;
 }
 
 .feature-cloud {
@@ -137,9 +141,16 @@ html:not(.dark) .feature-showcase .shiki span {
   }
 }
 
+@media (min-width: 40rem) {
+  .feature-showcase {
+    height: 21rem;
+  }
+}
+
 @media (min-width: 68rem) {
   .featurelist {
     max-width: 75rem;
+    margin: 1rem 1.618rem;
     width: auto;
     align-items: center;
   }

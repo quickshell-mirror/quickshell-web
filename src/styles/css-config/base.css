@@ -39,6 +39,7 @@ html {
   --bg-900: var(--white) 5 16;
 
   /* docs */
+  --background: var(--bg-500);
   --text: var(--white) 0 0;
   --text-dark: var(--white) 0 18;
   --text-darker: var(--white) 0 30;
@@ -94,6 +95,7 @@ html.dark {
   --bg-900: var(--blue) 82 3;
 
   /* docs */
+  --background: var(--bg-900);
   --text: var(--white) 0 100;
   --text-dark: var(--white) 0 70;
   --text-darker: var(--white) 0 40;

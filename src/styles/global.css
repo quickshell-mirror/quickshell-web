@@ -26,7 +26,7 @@
 
 .baselayout,
 .docslayout {
-  background-color: hsl(var(--bg-500));
+  background-color: hsl(var(--background));
   color: hsl(var(--secondary-900));
 }
 
