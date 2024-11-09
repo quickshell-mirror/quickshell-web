@@ -152,7 +152,12 @@
 
 .type-datatype {
   color: #808080;
-  width: max-content;
+}
+
+.type-generic {
+  position: absolute;
+  left: 0.845rem;
+  top: 1.217rem;
 }
 
 .typeprops {
@@ -319,6 +324,9 @@ html.dark .typevariants {
 }
 
 @media (min-width: 65rem) {
+  .type-datatype {
+    width: max-content;
+  }
   .root-nav {
     & .root-nav-entry {
       display: grid;

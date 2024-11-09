@@ -22,6 +22,7 @@
   border-radius: 6px;
   transition: background-color 0.2s ease;
   padding: 0.4em;
+  font-size: 1rem;
 
   &:hover {
     background-color: hsl(var(--nav-hovered-bkg));
@@ -35,6 +36,14 @@
       background-color: hsl(var(--nav-selected-hovered-bkg));
     }
   }
+}
+
+.fade {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 80%,
+    transparent
+  );
 }
 
 .nav-collapsible {
@@ -56,9 +65,14 @@
       }
 
       & > a {
+        font-size: 1rem;
         border-radius: 6px 0 0 6px;
         padding: 0.4em;
         flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        overflow: hidden;
       }
 
       &:hover {
@@ -75,6 +89,7 @@
       display: flex;
       flex-direction: row;
       align-items: stretch;
+      justify-content: center;
       gap: 0.1em;
 
       & svg {

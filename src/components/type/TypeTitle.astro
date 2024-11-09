@@ -43,7 +43,7 @@ const iconSelector: { [key: string]: string } = {
       <a href={typelink}>{ typelink_text }</a>
       {typename_generic &&
         (
-          <span class="type-datatype">&lt;</span><a href={typelink_generic}>{typename_generic}</a><span class="type-datatype">&gt;</span>
+          <span class="type-generic"><span class="type-datatype">&lt;</span><a href={typelink_generic}>{typename_generic}</a><span class="type-datatype">&gt;</span></span>
         )
       }
     </span>
