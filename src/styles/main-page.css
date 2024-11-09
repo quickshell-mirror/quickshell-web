@@ -70,16 +70,16 @@ html.dark .main-page_hero-text {
   flex-wrap: wrap;
   justify-content: center;
   z-index: 0;
-  max-width: 75%;
-  gap: 1rem;
-  margin: 0 1rem;
+  gap: 0.5rem;
+  width: 100%;
+  padding-inline: 0.5rem;
 }
 
 .main-page_links_set {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .main-page_link-card {
@@ -90,7 +90,6 @@ html.dark .main-page_hero-text {
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-width: 15rem;
   height: 3.67rem;
   border-radius: 9px;
   overflow: hidden;
@@ -181,8 +180,10 @@ html.dark .main-page_link-card {
   }
 }
 
-@media (min-width: 86rem) {
+@media (min-width: 68rem) {
   .main-page_links {
     flex-wrap: nowrap;
+    max-width: 78rem;
+    padding-inline: 1.5rem;
   }
 }

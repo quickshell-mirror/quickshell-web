@@ -43,7 +43,7 @@
   transform: translateX(var(--scroll));
   display: flex;
   justify-content: center;
-  padding-inline: 1rem;
+  padding-inline: 0.5rem;
 }
 
 .marquee-item-spacing {
@@ -120,10 +120,10 @@
   }
 
   #marquee-scroll-left {
-    left: 2rem;
+    left: 1rem;
   }
 
   #marquee-scroll-right {
-    right: 2rem;
+    right: 1rem;
   }
 }
