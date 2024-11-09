@@ -2,6 +2,7 @@
 import "@styles/global.css";
 import "@fontsource-variable/rubik";
 import "@fontsource-variable/rubik/wght-italic.css";
+import Analytics from "@components/Analytics.astro";
 
 interface Props {
   title: string;
@@ -36,3 +37,5 @@ const { title, description } = Astro.props;
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <!-- <meta name="twitter:image" content={image} /> -->
+
+<Analytics/>

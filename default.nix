@@ -76,9 +76,10 @@ in {
     chmod +rw -R node_modules
   '';
 
+  PRODUCTION = true;
+  SECRET_MODULES_PATH = if quickshell-types == null then "" else quickshell-types;
+
   buildPhase = ''
-    ${if quickshell-types != null then "export SECRET_MODULES_PATH=${quickshell-types}" else ""}
-    echo SECRET_MODULES_PATH: $SECRET_MODULES_PATH
     HOME=$(pwd)/garbage-tooling yarn build
   '';
 
