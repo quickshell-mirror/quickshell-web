@@ -327,6 +327,11 @@ html.dark .typevariants {
   .type-datatype {
     width: max-content;
   }
+  .type-generic {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
   .root-nav {
     & .root-nav-entry {
       display: grid;
