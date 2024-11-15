@@ -3,18 +3,19 @@ import { Icon } from "astro-icon/components";
 
 const videos = [
   {
-    author: "outfoxxed",
-    authorlink: "https://outfoxxed.me",
+    author: '<a href="https://outfoxxed.me">outfoxxed</a>',
     path: "/assets/showcase/outfoxxed.mp4",
   },
   {
-    author: "flicko",
-    authorlink: "https://github.com/flick0",
+    author: '<a href="https://github.com/pfaj/">pfaj</a> and <a href="https://github.com/bdebiase">bdebiase</a>',
+    path: "/assets/showcase/pfaj-bdeblase.mp4",
+  },
+  {
+    author: '<a href="https://github.com/flick0">flicko</a>',
     path: "/assets/showcase/flicko.mp4",
   },
   {
-    author: "vaxry",
-    authorlink: "https://vaxry.net",
+    author: '<a href="https://vaxry.net">vaxry</a>',
     path: "/assets/showcase/vaxry.mp4",
   },
 ];
@@ -31,7 +32,7 @@ const videos = [
     </div>
   </div>
   <div id="marquee-content" class="marquee-content" data-scroll="0" data-media-index="0">
-    {videos.map(({ author, authorlink, path }, index) => <div class="marquee-item">
+    {videos.map(({ author, path }, index) => <div class="marquee-item">
       <div>
         <video
           data-media-index={index}
@@ -44,7 +45,7 @@ const videos = [
         >
           <source src={path} type="video/mp4"/>
         </video>
-        <p>Configuration by <a href={authorlink}>{author}</a></p>
+        <p>Configuration by <Fragment set:html={author}/></p>
       </div>
     </div>)}
   </div>
@@ -52,7 +53,7 @@ const videos = [
 
 <script>
   // marquee
-  const dataNum = 2; // last array index
+  const dataNum = 3; // last array index
   const marquee = document.getElementById("marquee-content")!;
   marquee.style.setProperty("--scroll", "0")
 
