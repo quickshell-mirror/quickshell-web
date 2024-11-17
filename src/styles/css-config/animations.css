@@ -18,18 +18,18 @@
 
 @keyframes pulseGreen {
   0% {
-    background-color: hsl(var(--blue) 85 35 / 0.1);
-    color: hsl(var(--blue) 100 69 / 1.0);
+    background-color: hsl(var(--blue) 85% 35% / 0.1);
+    color: hsl(var(--blue) 100% 69% / 1);
   }
 
   50% {
-    background-color: hsl(var(--green) 85 35 / 0.5);
-    color: hsl(var(--green) 100 69 / 1.0);
+    background-color: hsl(var(--green) 85% 35% / 0.5);
+    color: hsl(var(--green) 100% 69% / 1);
   }
 
   100% {
-    background-color: hsl(var(--blue) 85 35 / 0.1);
-    color: hsl(var(--blue) 100 69 / 1.0);
+    background-color: hsl(var(--blue) 85% 35% / 0.1);
+    color: hsl(var(--blue) 100% 69% / 1);
   }
 }
 

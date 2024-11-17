@@ -1,6 +1,6 @@
 [data-scope="collapsible"][data-part="root"] {
   padding: 0.673rem;
-  background-color: hsl(var(--white) 40 50 / 0.1);
+  background-color: hsl(var(--white) 40% 50% / 0.1);
   border-radius: 0.618rem;
 }
 
@@ -48,7 +48,7 @@
   }
 
   &:hover {
-    background-color: hsl(var(--white) 40 50 / 0.1);
+    background-color: hsl(var(--white) 40% 50% / 0.1);
   }
 
   &[data-state="open"] {

@@ -17,15 +17,15 @@
   align-items: center;
   margin-block: 0.618rem;
   border-radius: 9px;
-  background-color: hsl(var(--blue) 60 98);
+  background-color: hsl(var(--blue) 60% 98%);
   padding: 0.618rem;
-  border: 1px solid hsl(var(--blue) 9 75);
+  border: 1px solid hsl(var(--blue) 9% 75%);
   &::before {
     content: "";
     position: absolute;
     inset: 0.618rem;
     background-image: radial-gradient(
-      hsl(var(--blue) 9 75) 1px,
+      hsl(var(--blue) 9% 75%) 1px,
       transparent 1px
     );
     background-position: 50% 50%;
@@ -34,12 +34,12 @@
 }
 
 html.dark .featurelist-item {
-  background-color: hsla(var(--blue) 100 81 / 0.05);
-  border-color: hsla(0 0 100 / 0.05);
+  background-color: hsl(var(--blue) 100% 81% / 0.05);
+  border-color: hsl(0deg 0% 100% / 0.05);
 
   &::before {
     background-image: radial-gradient(
-      hsla(0 0 100 / 0.1) 1px,
+      hsl(0deg 0% 100% / 0.1) 1px,
       transparent 1px
     );
   }

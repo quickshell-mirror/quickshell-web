@@ -20,7 +20,7 @@
     left: 2px;
     right: 2px;
     height: 3px;
-    background-color: hsla(var(--accent-400) / 0.3);
+    background-color: hsl(var(--accent-400) / 0.3);
     z-index: -1;
   }
 }
@@ -64,7 +64,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.3s, opacity 0.3s;
+  transition:
+    background-color 0.3s,
+    opacity 0.3s;
   z-index: 10;
   user-select: none;
   align-items: stretch;
@@ -93,7 +95,9 @@
 
   &:hover {
     cursor: pointer;
-    & > div { opacity: 0.9 }
+    & > div {
+      opacity: 0.9;
+    }
   }
 }
 

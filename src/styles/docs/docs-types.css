@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 6px;
-  border: 1px solid hsla(var(--blue) 10 15 / 0.6);
+  border: 1px solid hsl(var(--blue) 10% 15% / 0.6);
   margin-top: 1rem;
 
   & .root-nav-entry {
@@ -17,7 +17,7 @@
     padding: 0.5rem 1rem;
 
     &:not(:last-child) {
-      border-bottom: 1px solid hsla(var(--blue) 10 15 / 0.6);
+      border-bottom: 1px solid hsl(var(--blue) 10% 15% / 0.6);
     }
   }
 }
@@ -33,7 +33,7 @@
 }
 
 .type-module {
-  color: hsl(var(--blue) 75 60);
+  color: hsl(var(--blue) 75% 60%);
 }
 
 .typedocs-subheading > span > p {
@@ -147,7 +147,7 @@
 }
 
 .typedata-param {
-  color: hsla(var(--prop-link-color) / 1);
+  color: hsl(var(--prop-link-color) / 1);
 }
 
 .type-datatype {
@@ -162,10 +162,10 @@
 
 .typeprops {
   & .typeprop-root {
-    border: 1px solid hsla(var(--prop-color) / 0.6);
+    border: 1px solid hsl(var(--prop-color) / 0.6);
 
     &:hover {
-      border: 1px solid hsla(var(--prop-color));
+      border: 1px solid hsl(var(--prop-color));
 
       & .type-datatype {
         opacity: 1;
@@ -180,21 +180,21 @@
 
 html.dark .typeprops {
   & .typeprop-root {
-    border: 1px solid hsla(var(--prop-color) / 0.3);
+    border: 1px solid hsl(var(--prop-color) / 0.3);
 
     &:hover,
     &:target {
-      border: 1px solid hsla(var(--prop-color) / 0.6);
+      border: 1px solid hsl(var(--prop-color) / 0.6);
     }
   }
 }
 
 .typefuncs {
   & .typefunc-root {
-    border: 1px solid hsla(var(--func-color) / 0.6);
+    border: 1px solid hsl(var(--func-color) / 0.6);
 
     &:hover {
-      border: 1px solid hsla(var(--func-color));
+      border: 1px solid hsl(var(--func-color));
 
       & .type-datatype {
         opacity: 1;
@@ -223,21 +223,21 @@ html.dark .typeprops {
 
 html.dark .typefuncs {
   & .typefunc-root {
-    border: 1px solid hsla(var(--func-color) / 0.3);
+    border: 1px solid hsl(var(--func-color) / 0.3);
 
     &:hover,
     &:target {
-      border: 1px solid hsla(var(--func-color) / 0.6);
+      border: 1px solid hsl(var(--func-color) / 0.6);
     }
   }
 }
 
 .typesignals {
   & .typesignal-root {
-    border: 1px solid hsla(var(--signal-color) / 0.6);
+    border: 1px solid hsl(var(--signal-color) / 0.6);
 
     &:hover {
-      border: 1px solid hsla(var(--signal-color));
+      border: 1px solid hsl(var(--signal-color));
 
       & .typesignal-doclink {
         opacity: 1;
@@ -275,21 +275,21 @@ html.dark .typefuncs {
 
 html.dark .typesignals {
   & .typesignal-root {
-    border: 1px solid hsla(var(--signal-color) / 0.3);
+    border: 1px solid hsl(var(--signal-color) / 0.3);
 
     &:hover,
     &:target {
-      border: 1px solid hsla(var(--signal-color) / 0.6);
+      border: 1px solid hsl(var(--signal-color) / 0.6);
     }
   }
 }
 
 .typevariants {
   & .typevariant-root {
-    border: 1px solid hsla(var(--var-color) / 0.6);
+    border: 1px solid hsl(var(--var-color) / 0.6);
 
     &:hover {
-      border: 1px solid hsla(var(--var-color));
+      border: 1px solid hsl(var(--var-color));
 
       & .typevariant-doclink {
         opacity: 1;
@@ -314,11 +314,11 @@ html.dark .typesignals {
 
 html.dark .typevariants {
   & .typevariant-root {
-    border: 1px solid hsla(var(--var-color) / 0.3);
+    border: 1px solid hsl(var(--var-color) / 0.3);
 
     &:hover,
     &:target {
-      border: 1px solid hsla(var(--var-color) / 0.6);
+      border: 1px solid hsl(var(--var-color) / 0.6);
     }
   }
 }
@@ -335,11 +335,11 @@ html.dark .typevariants {
   .root-nav {
     & .root-nav-entry {
       display: grid;
-      grid-template-columns: 0.60fr 1.40fr;
+      grid-template-columns: 0.6fr 1.4fr;
 
       & .root-nav-desc {
         padding-left: 1rem;
-        border-left: 1px solid hsl(var(--blue) 10 15 / 0.6);
+        border-left: 1px solid hsl(var(--blue) 10% 15% / 0.6);
       }
     }
   }

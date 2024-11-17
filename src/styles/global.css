@@ -61,7 +61,7 @@ html.dark {
   background: linear-gradient(
     to right,
     transparent,
-    hsl(var(--blue) 100 59),
+    hsl(var(--blue) 100% 59%),
     transparent
   );
 }
@@ -129,7 +129,7 @@ body.overflow-toc {
 .header-spacer {
   height: 1.5rem;
   width: 2px;
-  background-color: hsla(var(--white) 40 50 / 0.3);
+  background-color: hsla(var(--white) 40% 50% / 0.3);
   display: block;
 }
 
@@ -177,22 +177,22 @@ footer {
     }
 
     &:nth-child(2) .hint {
-      color: hsl(var(--green) 30 45);
+      color: hsl(var(--green) 30% 45%);
     }
 
     &:nth-child(3) .hint {
-      color: hsl(var(--blue) 30 45);
+      color: hsl(var(--blue) 30% 45%);
     }
 
     &:hover {
       color: hsl(var(--text));
 
       &:nth-child(2) .hint {
-        color: hsl(var(--green) 60 60);
+        color: hsl(var(--green) 60% 60%);
       }
 
       &:nth-child(3) .hint {
-        color: hsl(var(--blue) 60 66);
+        color: hsl(var(--blue) 60% 66%);
       }
     }
   }
@@ -206,7 +206,7 @@ footer {
 
     & > p {
       margin-bottom: 0.2rem;
-      color: hsl(0 0 40);
+      color: hsl(0deg 0% 40%);
     }
 
     & > a {

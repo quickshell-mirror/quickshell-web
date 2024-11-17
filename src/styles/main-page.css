@@ -13,7 +13,7 @@
   }
 
   & .navy {
-    color: hsl(var(--blue) 66 60);
+    color: hsl(var(--blue) 66% 60%);
   }
 
   & .green {
@@ -24,8 +24,8 @@
 h1.gradient-text {
   background: linear-gradient(
     30deg,
-    hsl(var(--green) 80 42),
-    hsl(var(--blue) 80 49)
+    hsl(var(--green) 80% 42%),
+    hsl(var(--blue) 80% 49%)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -34,8 +34,8 @@ h1.gradient-text {
 html.dark h1.gradient-text {
   background: linear-gradient(
     30deg,
-    hsl(var(--green) 100 62),
-    hsl(var(--blue) 100 59)
+    hsl(var(--green) 100% 62%),
+    hsl(var(--blue) 100% 59%)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -54,13 +54,13 @@ html.dark h1.gradient-text {
     font-weight: 400;
     letter-spacing: 0.018rem;
     margin-bottom: 0.117rem;
-    color: hsl(var(--blue) 40 33);
+    color: hsl(var(--blue) 40% 33%);
   }
 }
 
 html.dark .main-page_hero-text {
   & h2 {
-    color: hsl(var(--blue) 100 83);
+    color: hsl(var(--blue) 100% 83%);
   }
 }
 
@@ -93,26 +93,28 @@ html.dark .main-page_hero-text {
   height: 3.67rem;
   border-radius: 9px;
   overflow: hidden;
-  border: 1px solid hsl(var(--green) 10 10);
-  transition: background-color 0.3s, border-color 0.3s;
+  border: 1px solid hsl(var(--green) 10% 10%);
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
 
-  background-color: hsl(var(--green) 38 30);
-  color: hsl(194 0 100);
+  background-color: hsl(var(--green) 38% 30%);
+  color: hsl(194deg 0% 100%);
 
   &:hover {
     cursor: pointer;
     text-decoration: none;
-    border-color: hsl(var(--green) 20 20);
-    background-color: hsl(var(--green) 48 40);
+    border-color: hsl(var(--green) 20% 20%);
+    background-color: hsl(var(--green) 48% 40%);
   }
 
   &.main-page_bluecard {
-    border-color: hsl(var(--blue) 10 10);
-    background-color: hsl(var(--blue) 38 30);
+    border-color: hsl(var(--blue) 10% 10%);
+    background-color: hsl(var(--blue) 38% 30%);
 
     &:hover {
-      border-color: hsl(var(--blue) 20 20);
-      background-color: hsl(var(--blue) 48 40);
+      border-color: hsl(var(--blue) 20% 20%);
+      background-color: hsl(var(--blue) 48% 40%);
     }
   }
 
@@ -171,18 +173,18 @@ html.dark .main-page_hero-text {
 }*/
 
 html.dark .main-page_link-card {
-  background-color: hsl(var(--green) 38 25);
-  color: hsl(194 0 100);
+  background-color: hsl(var(--green) 38% 25%);
+  color: hsl(194deg 0% 100%);
 
   &:hover {
-    background-color: hsl(var(--green) 48 35);
+    background-color: hsl(var(--green) 48% 35%);
   }
 
   &.main-page_bluecard {
-    background-color: hsl(var(--blue) 38 25);
+    background-color: hsl(var(--blue) 38% 25%);
 
     &:hover {
-      background-color: hsl(var(--blue) 48 35);
+      background-color: hsl(var(--blue) 48% 35%);
     }
   }
 }

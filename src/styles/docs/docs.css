@@ -46,7 +46,12 @@
     }
   }
 
-  & p, h1, h2, h3, h4, h5 {
+  & p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     margin-block: 0.618rem;
   }
 
@@ -144,17 +149,17 @@ ul {
 }
 
 .docs-collapsible {
-  background-color: hsl(var(--white) 40 50 / 0.1);
+  background-color: hsl(var(--white) 40% 50% / 0.1);
   border-radius: 0.618rem;
   overflow: hidden;
 
   & summary {
     padding: 1.2rem;
     user-select: none;
-    box-shadow: 0 0 0.5rem 0px rgba(0 0 0 / 0.25);
+    box-shadow: 0 0 0.5rem 0px rgba(0deg 0% 0% / 0.25);
 
     &:hover {
-      background-color: hsla(250 11 100 / 0.06);
+      background-color: hsl(250deg 11% 100% / 0.06);
       cursor: pointer;
     }
 
@@ -180,9 +185,9 @@ ul {
 
 .docs-collapsible[open]:not(.closing) {
   & summary {
-    background-color: hsla(250 11 100 / 0.03);
+    background-color: hsl(250deg 11% 100% / 0.03);
     &:hover {
-      background-color: hsla(250 11 100 / 0.06);
+      background-color: hsl(250deg 11% 100% / 0.06);
       cursor: pointer;
     }
 
