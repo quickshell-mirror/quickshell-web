@@ -11,12 +11,12 @@ const videos = [
     path: "/assets/showcase/pfaj-bdeblase.mp4",
   },
   {
-    author: '<a href="https://github.com/flick0">flicko</a>',
-    path: "/assets/showcase/flicko.mp4",
-  },
-  {
     author: '<a href="https://vaxry.net">vaxry</a>',
     path: "/assets/showcase/vaxry.mp4",
+  },
+  {
+    author: '<a href="https://github.com/flick0">flicko</a>',
+    path: "/assets/showcase/flicko.mp4",
   },
 ];
 ---
@@ -53,17 +53,16 @@ const videos = [
 
 <script>
   // marquee
-  const dataNum = 3; // last array index
+  const videoCount = 4; // last array index
   const marquee = document.getElementById("marquee-content")!;
   marquee.style.setProperty("--scroll", "0")
 
   // autoplay
-  window.addEventListener("load", autoplayInit,false);
+  window.addEventListener("load", autoplayInit, false);
   const videos = document.getElementsByClassName("marquee-item-content") as HTMLCollectionOf<HTMLVideoElement>;
 
   function autoplayInit() {
     videos[0].play();
-    videos[0].setAttribute("data-active", "");
   };
 
   const intersectionOptions = {
@@ -78,18 +77,16 @@ const videos = [
       if (!entry.isIntersecting) {
         video.pause();
         video.removeAttribute("autoplay")
-        video.removeAttribute("data-active")
         video.currentTime = 0;
       } else {
         video.play();
-        video.setAttribute("data-active","")
       }
     });
   },intersectionOptions);
 
   for (const video of videos) {
     observer.observe(video);
-    video.addEventListener("ended", onVideoEnded)
+    video.addEventListener("ended", nextVideo)
   }
 
   const onVisibilityChange = () => {
@@ -103,76 +100,20 @@ const videos = [
   }
   document.addEventListener("visibilitychange", onVisibilityChange);
 
+  function offsetCarousel(offset: number) {
+    const currentIndex = Number(marquee.getAttribute("data-media-index"));
+    let nextIndex = currentIndex + offset;
+    if (nextIndex < 0) nextIndex += videoCount;
+    nextIndex = nextIndex % videoCount;
 
-  function onVideoEnded() {
-    const currentIndex = marquee.getAttribute("data-media-index");
-    const currentIndexNum = Number(currentIndex);
-    if(currentIndexNum !== dataNum){
-      const newIndex = currentIndexNum + 1;
-      marquee.setAttribute("data-media-index", `${newIndex}`);
-      marquee.style.setProperty("--scroll", `-${newIndex*100}%`)
-    } else {
-      marquee.setAttribute("data-media-index", "0");
-      marquee.style.setProperty("--scroll", "0")
-    }
+    marquee.setAttribute("data-media-index", `${nextIndex}`);
+    marquee.style.setProperty("--scroll", `-${nextIndex*100}%`)
   }
 
+  function prevVideo() { offsetCarousel(-1) }
+  function nextVideo() { offsetCarousel(1) }
+
   // left-right buttons
-  const scrollLeft = document.getElementById("marquee-scroll-left")!;
-  const scrollRight = document.getElementById("marquee-scroll-right")!;
-  const scrollMaxPercent = dataNum*100;
-
-  scrollLeft.addEventListener("mousedown", () => {
-    const dataScroll = marquee.getAttribute("data-scroll")!;
-    const hashMap = {
-      "first": () => {
-        const scrollToLast = `-${scrollMaxPercent}%`;
-        marquee.setAttribute("data-scroll", scrollToLast);
-      },
-      "lt0": () => {
-        const oldDataScroll = marquee.getAttribute("data-scroll")!.slice(1, -1);
-        const oldNumScroll = Number(oldDataScroll)
-        const newScroll = oldNumScroll - 100;
-        newScroll <= scrollMaxPercent && newScroll > 0 ?
-          marquee.setAttribute("data-scroll",`-${newScroll.toString()}%`)
-          : marquee.setAttribute("data-scroll", "0")
-      }
-    }
-
-    hashMap[dataScroll === "0" ?
-      "first"
-      : "lt0"
-    ]()
-    const updatedScroll = marquee.getAttribute("data-scroll")!;
-    const mediaIndex = updatedScroll.indexOf("%") !== -1 ? updatedScroll.slice(1, -3) : "0";
-    marquee.setAttribute("data-media-index", mediaIndex);
-    marquee.style.setProperty("--scroll", updatedScroll)
-  })
-
-  scrollRight.addEventListener("mousedown", () => {
-    const dataScroll = marquee.getAttribute("data-scroll")!;
-    const hashMap = {
-      "last": () => {
-        const scrollToFirst = "0";
-        marquee.setAttribute("data-scroll", scrollToFirst);
-      },
-      "mt0": () => {
-        const oldDataScroll = marquee.getAttribute("data-scroll")!.slice(1, -1);
-        const oldNumScroll = Number(oldDataScroll)
-        const newScroll = oldNumScroll + 100;
-        newScroll <= scrollMaxPercent ?
-          marquee.setAttribute("data-scroll",`-${newScroll.toString()}%`)
-          : marquee.setAttribute("data-scroll", "0")
-      }
-    }
-
-    hashMap[dataScroll === `${scrollMaxPercent}` ?
-      "last"
-      : "mt0"
-    ]()
-    const updatedScroll = marquee.getAttribute("data-scroll")!;
-    const mediaIndex = updatedScroll.indexOf("%") !== -1 ? updatedScroll.slice(1, -3) : "0";
-    marquee.setAttribute("data-media-index", mediaIndex);
-    marquee.style.setProperty("--scroll", updatedScroll);
-  })
+  document.getElementById("marquee-scroll-left")!.addEventListener("mousedown", prevVideo);
+  document.getElementById("marquee-scroll-right")!.addEventListener("mousedown", nextVideo);
 </script>
