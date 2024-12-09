@@ -29,13 +29,13 @@ const sidebarFunctions =
   data.functions?.map(item => item.name) || null;
 
 const propsKeys = data.properties
-  ? Object.keys(data.properties)
+  ? Object.keys(data.properties).toSorted()
   : null;
 const signalKeys = data.signals
-  ? Object.keys(data.signals)
+  ? Object.keys(data.signals).toSorted()
   : null;
 const variantKeys = data.variants
-  ? Object.keys(data.variants)
+  ? Object.keys(data.variants).toSorted()
   : null;
 
 const sidebarData = {
