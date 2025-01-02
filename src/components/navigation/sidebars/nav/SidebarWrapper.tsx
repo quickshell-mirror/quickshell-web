@@ -18,6 +18,9 @@ const NavComponent: Component<SidebarContent> = props => {
   const { children } = props;
   let navRef: HTMLDivElement;
 
+  const [clientWidth, setClientWidth] = createSignal<number>(0);
+  const [screenWidth, setScreenWidth] = createSignal<number>(0);
+
   function toggle(e: MouseEvent) {
     e.preventDefault();
     setOpen(!open());
@@ -36,20 +39,45 @@ const NavComponent: Component<SidebarContent> = props => {
   };
 
   onMount(() => {
+    setClientWidth(document.body.clientWidth);
+    setScreenWidth(window.outerWidth);
+
     onCleanup(() => {
       window.removeEventListener("click", handleClickOutside);
     });
   });
 
   createEffect(() => {
+    if (clientWidth() !== document.body.clientWidth) {
+      setClientWidth(document.body.clientWidth);
+    }
+    if (screenWidth() !== window.outerWidth) {
+      setScreenWidth(window.outerWidth);
+    }
+
     if (open()) {
       window.addEventListener("click", handleClickOutside);
       document.body.classList.add("overflow-nav");
       document.body.classList.add("dim-content-nav");
+
+      // onsetter
+      const header = document.getElementsByClassName(
+        "header"
+      )[0]! as HTMLElement;
+      const bodyOffset = screenWidth() - clientWidth();
+      document.body.style.width = `${screenWidth() - bodyOffset}px`;
+      header.style.width = `${screenWidth() - bodyOffset}px`;
     } else {
       window.removeEventListener("click", handleClickOutside);
       document.body.classList.remove("overflow-nav");
       document.body.classList.remove("dim-content-nav");
+
+      // offsetter
+      const header = document.getElementsByClassName(
+        "header"
+      )[0]! as HTMLElement;
+      document.body.style.width = "";
+      header.style.width = "";
     }
   });
 
@@ -57,6 +85,7 @@ const NavComponent: Component<SidebarContent> = props => {
     <div
       class="nav-toggle"
       ref={navRef!}
+      id="nav-toggle"
     >
       <div onclick={e => toggle(e)}>
         <MenuToX class={`nav-icon ${open() ? "active" : ""}`} />

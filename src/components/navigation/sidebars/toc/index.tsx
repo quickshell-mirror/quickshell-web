@@ -13,6 +13,8 @@ import { buildHierarchy } from "@config/io/helpers";
 
 const TableOfContents: Component<TOCProps> = props => {
   const [open, setOpen] = createSignal<boolean>(false);
+  const [clientWidth, setClientWidth] = createSignal<number>(0);
+  const [screenWidth, setScreenWidth] = createSignal<number>(0);
   const { mobile, config, type } = props;
   let tocRef: HTMLDivElement;
 
@@ -41,20 +43,44 @@ const TableOfContents: Component<TOCProps> = props => {
   };
 
   onMount(() => {
+    setClientWidth(document.body.clientWidth);
+    setScreenWidth(window.outerWidth);
     onCleanup(() => {
       window.removeEventListener("click", handleClickOutside);
     });
   });
 
   createEffect(() => {
+    if (clientWidth() !== document.body.clientWidth) {
+      setClientWidth(document.body.clientWidth);
+    }
+    if (screenWidth() !== window.outerWidth) {
+      setScreenWidth(window.outerWidth);
+    }
+
     if (open()) {
       window.addEventListener("click", handleClickOutside);
       document.body.classList.add("overflow-toc");
       document.body.classList.add("dim-content-toc");
+
+      // onsetter
+      const header = document.getElementsByClassName(
+        "header"
+      )[0]! as HTMLElement;
+      const bodyOffset = screenWidth() - clientWidth();
+      document.body.style.width = `${screenWidth() - bodyOffset}px`;
+      header.style.width = `${screenWidth() - bodyOffset}px`;
     } else {
       window.removeEventListener("click", handleClickOutside);
       document.body.classList.remove("overflow-toc");
       document.body.classList.remove("dim-content-toc");
+
+      // offsetter
+      const header = document.getElementsByClassName(
+        "header"
+      )[0]! as HTMLElement;
+      document.body.style.width = "";
+      header.style.width = "";
     }
   });
 
@@ -62,6 +88,7 @@ const TableOfContents: Component<TOCProps> = props => {
     <div
       class="toc-toggle"
       ref={tocRef!}
+      id="toc-toggle"
     >
       <div onclick={e => toggle(e)}>
         <Article />

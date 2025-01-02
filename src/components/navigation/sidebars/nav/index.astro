@@ -13,7 +13,7 @@ export interface Props {
 
 const { mobile } = Astro.props;
 ---
-<aside class=`nav-wrapper${mobile ? "-mobile" : ""}`>
+<aside class=`nav-wrapper${mobile ? "-mobile" : ""} id="nav"`>
   { mobile ? (
     <SidebarWrapper client:load>
       <RootNav currentRoute={currentRoute} currentModule={currentModule} currentClass={currentClass}/>
