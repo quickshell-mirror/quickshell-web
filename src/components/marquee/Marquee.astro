@@ -86,7 +86,11 @@ const videos = [
 
   for (const video of videos) {
     observer.observe(video);
-    video.addEventListener("ended", nextVideo)
+
+    video.addEventListener("ended", () => {
+      // The "ended" event might just mean its buffering.
+      if (video.duration !== 0 && video.currentTime === video.duration) nextVideo();
+    });
   }
 
   const onVisibilityChange = () => {
