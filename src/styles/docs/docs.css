@@ -17,6 +17,7 @@
 
 .docslayout-inner {
   flex-grow: 1;
+  overflow-wrap: anywhere;
 }
 
 .docs {
