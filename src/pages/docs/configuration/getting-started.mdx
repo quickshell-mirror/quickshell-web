@@ -83,13 +83,16 @@ The author's personal emacs config uses `lsp-mode` and `qml-ts-mode` as follows:
   :config
   (add-to-list 'lsp-language-id-configuration '(qml-ts-mode . "qml-ts"))
   (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection "qmlls")
+   (make-lsp-client :new-connection (lsp-stdio-connection '("qmlls", "-E"))
                     :activation-fn (lsp-activate-on "qml-ts")
                     :server-id 'qmlls))
   (add-hook 'qml-ts-mode-hook (lambda ()
                                 (setq-local electric-indent-chars '(?\n ?\( ?\) ?{ ?} ?\[ ?\] ?\; ?,))
                                 (lsp-deferred))))
 ```
+
+> [!NOTE]
+> Qmlls versions prior to 6.8.2 do not require `-E`
 
 ### Neovim
 Neovim has built-in syntax highlighting for QML, however tree-sitter highlighting
@@ -98,7 +101,16 @@ using `:TSInstall qmljs`.
 
 To use the language server ([caveats below](#language-server)),
 install [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-and call `require("lspconfig").qmlljs.setup({})`.
+and the following snippet:
+
+```lua
+require("lspconfig").qmlls.setup {
+  cmd = {"qmlls", "-E"}
+}
+```
+
+> [!NOTE]
+> Qmlls versions prior to 6.8.2 do not require `-E`
 
 ## Language Server
 The QML language has an associated language server,
