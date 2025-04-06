@@ -39,17 +39,16 @@ a {
     cursor: pointer;
   }
 }
+html.dark .baselayout,
+html.dark .docslayout {
+  background-color: hsl(var(--bg-900));
+  color: hsl(var(--secondary-400));
+}
 
 html.dark {
   & .header {
     background-color: hsl(var(--secondary-900));
     color: hsl(var(--secondary-500));
-  }
-
-  & .baselayout,
-  .docslayout {
-    background-color: hsl(var(--bg-900));
-    color: hsl(var(--secondary-400));
   }
 }
 
