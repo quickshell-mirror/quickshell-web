@@ -4,7 +4,7 @@
   nix-gitignore,
 
   yarn-berry,
-  nodejs_22,
+  nodejs,
   cacert,
   quickshell-types ? null,
 }: stdenv.mkDerivation (final: let
@@ -14,7 +14,7 @@
 
     src = final.src;
 
-    nativeBuildInputs = [ nodejs_22 yarn-berry cacert ];
+    nativeBuildInputs = [ nodejs yarn-berry cacert ];
 
     configurePhase = ''
       mkdir garbage-tooling
@@ -29,13 +29,6 @@
     '';
 
     buildPhase = ''
-      # build will fail once due to missing nodejs executable
-      # linking before running this won't work, it will just delete it
-      HOME=$(pwd)/garbage-tooling yarn install || true
-
-      mkdir -p node_modules/node/bin
-      ln -s ${nodejs_22}/bin/node node_modules/node/bin/node
-
       HOME=$(pwd)/garbage-tooling yarn install
     '';
 
@@ -43,7 +36,6 @@
       # none of the cache path configs in yarnrc actually do anything
       # so we just copy node_modules manually
 
-      rm node_modules/node/bin/node # remove dep on nix package for output hash
       mv node_modules $out
     '';
 
@@ -51,7 +43,7 @@
 
     outputHashMode = "recursive";
     outputHashAlgo = "sha256";
-    outputHash = "tZ4xuA7uNnMIEpSUmQ5TAWPdvRGFJWIgWyBa1QFFWWU=";
+    outputHash = "V1sjOLi6UOb3HQLiGTcGJInDU7H28fjzdmrxYXXI0ug=";
   };
 in {
   pname = "quickshell-web";
