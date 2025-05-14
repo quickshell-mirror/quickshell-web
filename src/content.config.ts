@@ -5,6 +5,7 @@ const guide = defineCollection({
 	loader: glob({ pattern: "**/*", base: "src/guide" }),
 	schema: z.object({
 		title: z.string(),
+    index: z.number(),
 	}),
 });
 

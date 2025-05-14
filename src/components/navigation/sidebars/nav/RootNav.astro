@@ -21,7 +21,8 @@ const guidePages = await getCollection("guide");
 
 function genGuideNav(base: string): TreeEntry[] | undefined {
   const pages = guidePages
-    .filter(page => page.id.match(`^${base}[^/]*$`) !== null)
+    .filter(page => page.id.match(`^${base}[^/]*$`) !== null && page.id != "index")
+    .sort((a, b) => a.data.index - b.data.index)
     .map(page => ({
       title: page.data.title,
       link: `/docs/guide/${page.id}`,
@@ -33,7 +34,7 @@ function genGuideNav(base: string): TreeEntry[] | undefined {
 }
 
 const guide = {
-  title: "Guide",
+  title: "Usage Guide",
   link: "/docs/guide",
   current: currentRoute.startsWith("guide"),
   entries: genGuideNav(""),
