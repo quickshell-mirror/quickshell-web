@@ -38,29 +38,7 @@ export function buildHierarchy(headings: ConfigHeading[]) {
 
 export function groupRoutes(routes: RouteData[]): GroupedRoutes {
   const froutes = routes.filter(route => route.name !== "index");
-  const defaultValue = {
-    tutorials: {
-      configuration: [
-        { name: "Getting Started", type: "getting-started" },
-        { name: "Intro", type: "intro" },
-        { name: "Positioning", type: "positioning" },
-        { name: "QML Overview", type: "qml-overview" },
-      ],
-    },
-    types: {},
-  };
   return froutes.reduce<GroupedRoutes>((acc, route) => {
-    if (!acc.tutorials) {
-      acc.tutorials = {
-        configuration: [
-          { name: "Getting Started", type: "getting-started" },
-          { name: "Intro", type: "intro" },
-          { name: "Positioning", type: "positioning" },
-          { name: "QML Overview", type: "qml-overview" },
-        ],
-      };
-    }
-
     if (!acc.types) acc.types = {};
 
     if (!acc.types[route.type]) {
@@ -72,7 +50,7 @@ export function groupRoutes(routes: RouteData[]): GroupedRoutes {
       type: route.type,
     });
     return acc;
-  }, defaultValue);
+  }, { types: {} });
 }
 
 export function getQMLTypeLinkObject(unparsed: string) {

@@ -1,0 +1,30 @@
+---
+import DocsLayout from "@layouts/DocsLayout.astro";
+import TOC from "@components/navigation/sidebars/TOC.astro";
+import TOCIntersectionObserver from "@src/components/hooks/TOCIntersectionObserver.astro";
+
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const guidePages = await getCollection("guide");
+
+  return guidePages.map(page => ({
+    params: { id: page.id == "index" ? "/" : page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content, headings } = await render(page);
+---
+<DocsLayout title={page.data.title} description="" headings={headings}>
+  <div class="docs">
+    <div class="docs-content">
+      <hr>
+      <Content/>
+    </div>
+    <TOC mobile={false} headings={headings} data-pagefind-ignore/>
+  </div>
+</DocsLayout>
+
+<TOCIntersectionObserver/>

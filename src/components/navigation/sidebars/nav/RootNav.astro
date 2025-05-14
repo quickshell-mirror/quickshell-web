@@ -9,24 +9,35 @@ const { currentRoute, currentModule, currentClass } = Astro.props;
 
 import { getTypeData } from "@config/io/generateTypeData";
 import { groupRoutes } from "@config/io/helpers";
+import type { TreeEntry } from "./Tree.astro";
 import Tree from "./Tree.astro";
 import Link from "./Link.astro";
 
 const routes = await getTypeData();
 const groupedRoutes = groupRoutes(routes);
 
-const configuration = {
-  title: "Configuration",
-  link: "/docs/configuration",
-  current: currentRoute.startsWith("configuration"),
-  entries: groupedRoutes.tutorials.configuration.map(
-    ({ name, type }) => ({
-      title: name,
-      link: `/docs/configuration/${type}`,
-      current: currentModule === type,
-    })
-  ),
-};
+import { getCollection } from "astro:content";
+const guidePages = await getCollection("guide");
+
+function genGuideNav(base: string): TreeEntry[] | undefined {
+  const pages = guidePages
+    .filter(page => page.id.match(`^${base}[^/]*$`) !== null)
+    .map(page => ({
+      title: page.data.title,
+      link: `/docs/guide/${page.id}`,
+      current: currentModule === page.id,
+      entries: genGuideNav(page.id + "/"),
+    }));
+
+  return pages.length == 0 ? undefined : pages;
+}
+
+const guide = {
+  title: "Guide",
+  link: "/docs/guide",
+  current: currentRoute.startsWith("guide"),
+  entries: genGuideNav(""),
+}
 
 const types = {
   title: "Quickshell Types",
@@ -47,7 +58,7 @@ const types = {
 };
 ---
 <nav class="navtree">
-  <Tree {...configuration}/>
+  <Tree {...guide}/>
   <Tree {...types}/>
   <Link
     title="QtQuick Types"

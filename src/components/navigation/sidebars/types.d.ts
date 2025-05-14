@@ -5,7 +5,6 @@ export interface Item {
 }
 
 export interface GroupedRoutes {
-  tutorials: { [key: string]: Item[] };
   types: { [key: string]: Item[] };
 }
 
