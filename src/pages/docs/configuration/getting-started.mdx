@@ -145,7 +145,8 @@ more correct code should you chose to use it.
 
 > [!NOTE]
 > Nix users should note that qmlls will not be able to pick up qml modules
-> that are not in `QML2_IMPORT_PATH`.
+> that are not in `QML2_IMPORT_PATH`. The easiest way to ensure this is by setting
+> `qt.enable` to `true` and installing the quickshell package globally.
 
 # Next steps
 

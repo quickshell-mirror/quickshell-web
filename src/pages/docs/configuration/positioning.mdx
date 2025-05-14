@@ -6,107 +6,219 @@ import MD_Title from "@components/MD_Title.tsx"
 
 # {frontmatter.title}
 
-QtQuick has multiple ways to position components. This page has instructions for where and how
-to use them.
+> [!TIP]
+> Read the entire page, understanding this is critical to building a well designed shell.
 
-## <MD_Title titleVar={2}> Anchors </MD_Title>
+@@QtQuick.Item has two sets of size properties, actual size (@@QtQuick.Item.width and @@QtQuick.Item.height)
+and implicit / desired (@@QtQuick.Item.implicitWidth and @@QtQuick.Item.implicitHeight).
 
-Anchors can be used to position components relative to another neighboring component.
-It is faster than [manual positioning](#manual-positioning) and covers a lot of simple
-use cases.
+Container items, such as layouts and wrappers, use the implicit size of their children to determine
+their own implicit size, and their actual size to detetermine the actual size of their children.
+If managed by a container, an Item should not set its own size, and should instead allow
+the container to determine it based on its implicit size.
 
-The [Qt Documentation: Positioning with Anchors](https://doc.qt.io/qt-6/qtquick-positioning-anchors.html)
-page has comprehensive documentation of anchors.
+Put simply, implicit size should flow from children to parents, while actual size should flow from
+parent to children.
 
-## <MD_Title titleVar={2}> Layouts </MD_Title>
+In addition to size, Items also have position properties (@@QtQuick.Item.x and @@QtQuick.Item.y).
+Similarly to actual size, (actual) position should not be set directly if your item is managed
+by a container, though there is no such thing as implicit position.
 
-Layouts are useful when you have many components that need to be positioned relative to
-eachother such as a list.
+> [!WARNING]
+> Many QtQuick Items have *zero size* by default (both implicit and actual).
+>
+> An invisible zero sized item (usually a custom container without implicit size set)
+> is a common bug and often manifests as an item being laid out as if it took no space.
+>
+> Quickshell will attempt to detect zero sized items when a window is initially made visible
+> and log a warning, but it cannot detect all cases. Please be aware these exist.
 
-The [Qt Documentation: Layouts Overview](https://doc.qt.io/qt-6/qtquicklayouts-overview.html)
-page has good documentation of the basic layout types and how to use them.
-
-> [!note/Note:]
-> Layouts by default have a nonzero spacing.
-
-## <MD_Title titleVar={2}> Manual Positioning </MD_Title>
-
-If layouts and anchors can't easily fulfill your usecase, you can also manually position and size
-components by setting their @@QtQuick.Item.x, @@QtQuick.Item.y, @@QtQuick.Item.width and @@QtQuick.Item.height
-properties, which are relative to the parent component.
-
-This example puts a 100x100px blue rectangle at x=20,y=40 in the parent item. Ensure the size
-of the parent is large enough for its content or positioning based on them will break.
+## Container Items
+Below is an example container which adds a margin to a rectangle, and interacts properly
+with other container types.
 
 ```qml
 @@QtQuick.Item {
-  // make sure the component is large enough to fit its children
-  implicitWidth: childrenRect.width
-  implicitHeight: childrenRect.height
+  property real margin: 5
+  
+  // Set the implicit size of the containing item to the size of
+  // the contained item, plus the margin on each side.
+  implicitWidth: child.implicitWidth + margin * 2
+  implicitHeight: child.implicitHeight + margin * 2
 
   @@QtQuick.Rectangle {
-    color: "blue"
-    x: 20
-    y: 40
-    width: 100
-    height: 100
+    id: child
+
+    // Set the size of the child item relative to the actual size
+    // of the parent item. If the parent item is constrained
+    // or stretched the child's position and size will be similarly
+    // constrained.
+    x: parent.margin
+    y: parent.margin
+    width: parent.width - parent.margin * 2
+    height: parent.height - parent.margin * 2
+    
+    // The child's implicit / desired size, which will be respected
+    // by the container item as long as it is not constrained
+    // or stretched.
+    implicitWidth: 50
+    implicitHeight: 50
   }
 }
 ```
 
-## <MD_Title titleVar={2}> Notes </MD_Title>
-
-### <MD_Title titleVar={3}> Component Size </MD_Title>
-
-The @@QtQuick.Item.implicitHeight and @@QtQuick.Item.implicitWidth properties control the
-_base size_ of a component, before layouts are applied. These properties are _not_ the same as
-@@QtQuick.Item.height and @@QtQuick.Item.width which are the final size of the component.
-You should nearly always use the implicit size properties when creating a component,
-however using the normal width and height properties is fine if you know an
-item will never go in a layout.
-
-This example component puts a colored rectangle behind some text, and will act the same
-way in a layout as the text by itself.
-
-```qml {filename="TextWithBkgColor.qml"}
-@@QtQuick.Rectangle {
-  implicitWidth: text.implicitWidth
-  implicitHeight: text.implicitHeight
-
-  @@QtQuick.Text {
-    id: text
-    text: "hello!"
-  }
-}
-```
-
-If you want to size your component based on multiple others or use any other math you can.
-
-```qml {filename="PaddedTexts.qml"}
+If we were to write this as a reusable component, we could use @@QtQml.Binding
+to control the child item's actual size and position.
+```qml
 @@QtQuick.Item {
-  // width of both texts plus 5
-  implicitWidth: text1.implicitWidth + text2.implicitWidth + 5
-  // max height of both texts plus 5
-  implicitHeight: Math.min(text1.implicitHeight, text2.implicitHeight) + 5
+  id: wrapper
+  property real margin: 5
+  required default property Item child
 
-  @@QtQuick.Text {
-    id: text1
-    text: "text1"
-  }
+  // Set the item's visual children list to just the passed item.
+  children: [child]
 
-  @@QtQuick.Text {
-    id: text2
-    anchors.left: text1.left
-    text: "text2"
+  implicitWidth: child.implicitWidth + margin * 2
+  implicitHeight: child.implicitHeight + margin * 2
+
+  // Bind the child's position and size.
+  // Note that this syntax is exclusive to the Binding type.
+  @@QtQuick.Binding { wrapper.child.x: wrapper.margin }
+  @@QtQuick.Binding { wrapper.child.y: wrapper.margin }
+  @@QtQuick.Binding { wrapper.child.width: wrapper.width - wrapper.margin * 2 }
+  @@QtQuick.Binding { wrapper.child.height: wrapper.height - wrapper.margin * 2 }
+}
+```
+Note: @@Quickshell.Widgets.WrapperItem is a builtin component that adds margins similarly to this.
+
+### Reducing boilerplate with Anchors
+We can reduce the amount of boilerplate we have to write using
+[QtQuick Anchors](https://doc.qt.io/qt-6/qtquick-positioning-anchors.html).
+
+Anchors exist as a shorthand way to achieve many common position and size bindings.
+See the linked qt documentation for more details on how to use them.
+
+The following example is equivalent to the one above, but uses anchors instead of setting
+position and size directly. A similar change can be made to the `Binding` example.
+```qml
+@@QtQuick.Item {
+  property real margin: 5
+  
+  implicitWidth: child.implicitWidth + margin * 2
+  implicitHeight: child.implicitHeight + margin * 2
+
+  @@QtQuick.Rectangle {
+    id: child
+
+    // "Fill" the space occupied by the parent, setting width
+    anchors.fill: parent
+    // Add a margin to all anchored sides.
+    anchors.margins: parent.margin
+    
+    implicitWidth: 50
+    implicitHeight: 50
   }
 }
 ```
 
-### <MD_Title titleVar={3}> Coordinate space </MD_Title>
+### childrenRect and binding loops
+The most common mistake made when creating container items is trying to use @@QtQuick.Item.childrenRect
+to determine the size of a child item, such as in the example below:
 
-You should always position or size components relative to the closest possible
-parent. Often this is just the @@QtQuick.Item.parent property.
+```qml
+@@QtQuick.Item {
+  implicitWidth: childrenRect.width
+  implicitHeight: childrenRect.height
+  
+  @@QtQuick.Rectangle {
+    anchors.fill: parent
 
-Refrain from using things like the size of your screen to size a component,
-as this will break as soon as anything up the component hierarchy changes, such
-as adding padding to a bar.
+    implicitWidth: 50
+    implicitHeight: 50
+  }
+}
+```
+
+While the snippet above might look like it should work, it is actually hiding a nasty bug.
+
+As stated at the top of the page, an item's implicit size should be used to determine
+its parent's implicit size, and the parent's actual size should be used to determine
+the child's actual size. **`childrenRect` breaks this pattern.**
+
+`childrenRect` encompasses the geometry of all child items, meaning their *actual* geometry,
+not their *implicit* geometry. This results in the container item's size having an indirect
+dependency on itself, in what is known as a *binding loop*.
+
+If we were to try to figure out what implicitWidth is by hand, it would look something like this:
+
+*container.implicitWidth = container.childrenRect.width = child.width = container.width (via anchor)
+= container.implicitWidth = ... (repeats forever)*
+
+which isn't a valid definition.
+
+### MarginWrapper components
+To solve the boilerplate problem that often leads users to `childrenRect`, Quickshell comes with
+@@Quickshell.Widgets.MarginWrapperManager and a set of components based on it.
+
+@@Quickshell.Widgets.MarginWrapperManager automatically handles the size and position relationship
+between a container item and a single child item, skipping most of the boilerplate in the above
+examples. See its linked documentation for more information on how to use it.
+
+Rewriting the examples from the top of the page:
+```qml
+@@QtQuick.Item {
+  @@Quickshell.Widgets.MarginWrapperManager {
+    margin: 5
+    // By default, MarginWrapperManager centers the child
+    // instead of resizing it when encountering constraints.
+    resizeChild: true
+  }
+  
+  // Automatically detected by MarginWrapperManager as the
+  // primary child of the container and sized accordingly.
+  @@QtQuick.Rectangle {
+    implicitWidth: 50
+    implicitHeight: 50
+  }
+}
+```
+
+Or as a reusable component:
+```qml
+@@QtQuick.Item {
+  // A bidirectional binding to manager.margin,
+  // where the default value is set.
+  property alias margin: manager.margin
+  
+  // MarginWrapperManager tries to automatically detect
+  // the primary child of the container, but exposing the
+  // child property allows us to both access the child
+  // externally and override it if automatic detection fails.
+  property alias child: manager.margin
+
+  // MarginWrapperManager automatically manages the implicit size
+  // of the container and actual size of the child.
+  @@Quickshell.Widgets.MarginWrapperManager {
+    id: manager
+    resizeChild: true
+    margin: 5 // the default value of margin
+  }
+}
+```
+
+Quickshell bundles three of the most commonly used wrappers, which are implemented similarly
+to the example above:
+- @@Quickshell.Widgets.WrapperItem
+- @@Quickshell.Widgets.WrapperRectangle
+- @@Quickshell.Widgets.WrapperMouseArea
+
+## Layouts
+
+QtQuick comes with a set of layout types in the
+[QtQuick.Layouts](https://doc.qt.io/qt-6/qtquicklayouts-overview.html) module.
+
+Layouts, such as the Row, Column and Grid layout, are extremely useful for positioning
+items adjacent to eachother. See the linked qt documentation for more details.
+
+> [!NOTE]
+> Layouts have a default spacing of 5 pixels between items, not zero.

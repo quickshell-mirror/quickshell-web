@@ -32,7 +32,7 @@ const remarkParseAtTypes: RemarkPlugin<[]> = () => {
         const node = rawNode as Md.Literal;
 
         node.value = node.value.replace(
-          /@@((?<module>([A-Z]\w*\.)*)(?<type>([A-Z]\w*))\.?)?((?<member>[a-z]\w*)((?<function>\(\))|(?<signal>\(s\)))?)?(?=[$.,;:\s]|$)/g,
+          /@@((?<module>([A-Z]\w*\.)*)(?<type>([A-Z]\w*))\.?)?((?<member>[a-z]\w*)((?<function>\(\))|(?<signal>\(s\)))?)?(?=[$.,;:)\s]|$)/g,
           (_full, ...args) => {
             type Capture = {
               module: string | undefined;
