@@ -3,6 +3,10 @@ import { Icon } from "astro-icon/components";
 
 const videos = [
   {
+    author: '<a href="https://github.com/soramanew">soramane</a>',
+    path: "/assets/showcase/soramane.mp4",
+  },
+  {
     author: '<a href="https://outfoxxed.me">outfoxxed</a>',
     path: "/assets/showcase/outfoxxed.mp4",
   },
@@ -53,7 +57,7 @@ const videos = [
 
 <script>
   // marquee
-  const videoCount = 4; // last array index
+  const videoCount = 5; // last array index
   const marquee = document.getElementById("marquee-content")!;
   marquee.style.setProperty("--scroll", "0")
 
