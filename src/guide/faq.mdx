@@ -1,0 +1,31 @@
+---
+title: "FAQ"
+description: "Frequently Asked Questions"
+index: 1000
+---
+# {frontmatter.title}
+
+This page is being actively expanded as common questions come up again.
+
+Make sure to also read the [Item Size and Position](/docs/guide/size-position) and
+[QML Language](/docs/guide/qml-language) pages for questions related to
+
+## How do I
+
+### Make a rounded window
+Rounded windows are simply transparent square ones with a rounded rectangle
+inside of them.
+
+```qml
+@@Quickshell.PanelWindow {
+  color: "transparent"
+
+  @@QtQuick.Rectangle {
+    // match the size of the window
+    anchors.fill: parent
+
+    radius: 5
+    color: "white" // your actual color
+  }
+}
+```

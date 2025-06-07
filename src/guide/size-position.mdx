@@ -1,9 +1,7 @@
 ---
-title: "Positioning"
+title: "Item Size and Position"
 index: 2
 ---
-import MD_Title from "@components/MD_Title.tsx"
-
 # {frontmatter.title}
 
 > [!TIP]
@@ -167,12 +165,7 @@ examples. See its linked documentation for more information on how to use it.
 Rewriting the examples from the top of the page:
 ```qml
 @@QtQuick.Item {
-  @@Quickshell.Widgets.MarginWrapperManager {
-    margin: 5
-    // By default, MarginWrapperManager centers the child
-    // instead of resizing it when encountering constraints.
-    resizeChild: true
-  }
+  @@Quickshell.Widgets.MarginWrapperManager { margin: 5 }
   
   // Automatically detected by MarginWrapperManager as the
   // primary child of the container and sized accordingly.
@@ -200,7 +193,6 @@ Or as a reusable component:
   // of the container and actual size of the child.
   @@Quickshell.Widgets.MarginWrapperManager {
     id: manager
-    resizeChild: true
     margin: 5 // the default value of margin
   }
 }

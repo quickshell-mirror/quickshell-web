@@ -4,7 +4,6 @@ index: 2
 ---
 
 import Collapsible from "@components/Collapsible.astro";
-import MD_Title from "@components/MD_Title.tsx"
 
 # {frontmatter.title}
 
@@ -15,11 +14,11 @@ import MD_Title from "@components/MD_Title.tsx"
 This page will walk you through the process of creating a simple bar/panel, and
 introduce you to all the basic concepts involved.
 
-There are many links to the [QML Overview](/docs/configuration/qml-overview)
+There are many links to the [QML Overview](/docs/guide/qml-language)
 and [Type Reference](/docs/types) which you should follow if you don't
 fully understand the concepts involved.
 
-## <MD_Title titleVar={2} client:visible> Shell Files </MD_Title>
+## Shell Files
 
 Every quickshell instance starts from a shell root file, conventionally named `shell.qml`.
 The default path is `~/.config/quickshell/shell.qml`.
@@ -27,7 +26,8 @@ The default path is `~/.config/quickshell/shell.qml`.
 
 Each shell file starts with the shell root object. Only one may exist per configuration.
 
-```qml {filename="~/.config/quickshell/shell.qml"}
+```qml
+// ~/.config/quickshell/shell.qml
 import Quickshell
 
 @@Quickshell.ShellRoot {
@@ -39,42 +39,7 @@ The shell root is not a visual element but instead contains all of the visual
 and non visual objects in your shell. You can have multiple different shells
 with shared components and different shell roots.
 
-<Collapsible title="Shell search paths and manifests">
-Quickshell can be launched with configurations in locations other than the default one.
-
-The `-p` or `--path` option will launch the shell root at the given path.
-It will also accept folders with a `shell.qml` file in them.
-It can also be specified via the `QS_CONFIG_PATH` environment variable.
-
-The `-c` or `--config` option will launch a configuration from the current manifest,
-or if no manifest is specified, a subfolder of quickshell's base path.
-It can also be specified via the `QS_CONFIG_NAME` environment variable.
-
-The base path defaults to `~/.config/quickshell`, but can be changed using
-the `QS_BASE_PATH` environment variable.
-
-The `-m` or `--manifest` option specifies the quickshell manifest to read configs
-from. When used with `-c`, the config will be chosen by name from the manifest.
-It can also be specified via the `QS_MANIFEST` environment variable.
-
-The manifest path defaults to `~/.config/quickshell/manifest.conf` and is a list
-of `name = path` pairs where path can be relative or absolute.
-Lines starting with `#` are comments.
-
-```properties
-# ~/.config/quickshell/manifest.conf
-myconf1 = myconf
-myconf2 = ./myconf
-myconf3 = myconf/shell.nix
-myconf4 = ~/.config/quickshell/myconf
-```
-
-You can use `quickshell --current` to print the current values of any of these
-options and what set them.
-
-</Collapsible>
-
-## <MD_Title titleVar={2}> Creating Windows </MD_Title>
+## Creating Windows
 
 Quickshell has two main window types available,
 [PanelWindow](/docs/types/quickshell/panelwindow) for bars and widgets, and
@@ -111,7 +76,7 @@ a centered piece of [text](https://doc.qt.io/qt-6/qml-qtquick-text.html). It wil
 
 More information about available properties is available in the [type reference](/docs/types/quickshell/panelwindow).
 
-## <MD_Title titleVar={2}> Running a process </MD_Title>
+## Running a process
 
 Now that we have a piece of text, what if it did something useful?
 To start with lets make a clock. To get the time we'll use the `date` command.
@@ -170,7 +135,7 @@ import QtQuick
 }
 ```
 
-## <MD_Title titleVar={2}> Running code at an interval </MD_Title>
+## Running code at an interval
 
 With the above example, your bar should now display the time, but it isn't updating!
 Let's use a @@QtQml.Timer to fix that.
@@ -227,7 +192,7 @@ import QtQuick
 }
 ```
 
-## <MD_Title titleVar={2}> Reusable components </MD_Title>
+## Reusable components
 
 If you have multiple monitors you might have noticed that your bar
 is only on one of them. If not, you'll still want to **follow this section
@@ -520,14 +485,15 @@ import QtQuick
 }
 ```
 
-## <MD_Title titleVar={2}> Multiple files </MD_Title>
+## Multiple files
 
 In an example as small as this, it isn't a problem, but as the shell
 grows it might be preferable to separate it into multiple files.
 
 To start with, let's move the entire bar into a new file.
 
-```qml {filename="shell.qml"}
+```qml
+// shell.qml
 import Quickshell
 
 @@Quickshell.ShellRoot {
@@ -535,7 +501,8 @@ import Quickshell
 }
 ```
 
-```qml {filename="Bar.qml"}
+```qml Bar.qml
+// Bar.qml
 import Quickshell
 import Quickshell.Io
 import QtQuick
@@ -600,7 +567,8 @@ make up the actual clock, need to be dealt with.
 To start with, we can move the clock widget to a new file. For now it's just a
 single @@QtQuick.Text object but the same concepts apply regardless of complexity.
 
-```qml {filename="ClockWidget.qml"}
+```qml
+// ClockWidget.qml
 import QtQuick
 
 @@QtQuick.Text {
@@ -613,7 +581,8 @@ import QtQuick
 }
 ```
 
-```qml {filename="Bar.qml"}
+```qml
+// Bar.qml
 import Quickshell
 import Quickshell.Io
 import QtQuick
@@ -670,7 +639,8 @@ on the clock widget without cluttering the bar file.
 
 Let's deal with the clock's update logic now:
 
-```qml {filename="Time.qml"}
+```qml
+// Time.qml
 import Quickshell
 import Quickshell.Io
 import QtQuick
@@ -697,7 +667,8 @@ import QtQuick
 }
 ```
 
-```qml {filename="Bar.qml"}
+```qml
+// Bar.qml
 import Quickshell
 
 @@Quickshell.Scope {
@@ -729,7 +700,7 @@ import Quickshell
 }
 ```
 
-## <MD_Title titleVar={2}> Singletons </MD_Title>
+## Singletons
 
 Now you might be thinking, why do we need the `Time` type in
 our bar file, and the answer is we don't. We can make `Time`
@@ -738,7 +709,9 @@ a [Singleton](/docs/configuration/qml-overview/#singletons).
 A singleton object has only one instance, and is accessible from
 any scope.
 
-```qml {filename="Time.qml"}
+```qml
+// Time.qml
+
 // with this line our type becomes a singleton
 pragma Singleton
 
@@ -769,7 +742,8 @@ import QtQuick
 }
 ```
 
-```qml {filename="ClockWidget.qml"}
+```qml
+// ClockWidget.qml
 import QtQuick
 
 @@QtQuick.Text {
@@ -780,7 +754,8 @@ import QtQuick
 }
 ```
 
-```qml {filename="Bar.qml"}
+```qml
+// Bar.qml
 import Quickshell
 
 @@Quickshell.Scope {
@@ -811,7 +786,7 @@ import Quickshell
 }
 ```
 
-## <MD_Title titleVar={2}> JavaScript APIs </MD_Title>
+## JavaScript APIs
 
 In addition to calling external processes, a [limited set of javascript interfaces] is available.
 We can use this to improve our clock by using the [Date API] instead of calling `date`.
@@ -819,7 +794,8 @@ We can use this to improve our clock by using the [Date API] instead of calling 
 [limited set of javascript interfaces]: https://doc.qt.io/qt-6/qtqml-javascript-functionlist.html
 [Date API]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
 
-```qml {filename="Time.qml"}
+```qml
+// Time.qml
 pragma Singleton
 
 import Quickshell

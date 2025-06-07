@@ -61,7 +61,7 @@ sudo dnf copr enable errornointernet/quickshell
 sudo dnf install quickshell
 ```
 
-## Guix
+### Guix
 Quickshell's source repository works as a channel. Add the following to your channel list:
 
 ```scheme
@@ -79,9 +79,11 @@ You can also clone the repository and use `guix shell -f quickshell.scm` to try 
 See [BUILD.md](https://git.outfoxxed.me/quickshell/quickshell/src/branch/master/BUILD.md)
 for build instructions and configurations.
 
-See [Installation](./installation) if Quickshell isn't installed yet.
-
 ## Editor configuration
+If you want to write your own configuration, installing a QML grammar and the LSP is recommended.
+
+Read the [Usage Guide](/docs/guide) after configuring your editor.
+
 ### Emacs
 Install the [yuja/tree-sitter-qml](https://github.com/yuja/tree-sitter-qmljs) tree-sitter grammar,
 and the [xhcoding/qml-ts-mode](https://github.com/xhcoding/qml-ts-mode) mode.
@@ -128,9 +130,9 @@ require("lspconfig").qmlls.setup {
 
 ## Language Server
 The QML language has an associated language server,
-[qmlls](https://doc.qt.io/qt-6/qtqml-tooling-qmlls.html). 
-Please note that the language server, along with quickshell's support of it,
-is in development.
+[qmlls](https://doc.qt.io/qt-6/qtqml-tooling-qmlls.html).
+We recommend using it, as it will catch a lot of bad practice that may
+make your configuration harder to maintain later.
 
 We are aware of the following issues:
 - Qmlls does not work well when a file is not correctly structured.
