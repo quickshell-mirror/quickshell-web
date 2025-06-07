@@ -75,5 +75,9 @@ in {
     HOME=$(pwd)/garbage-tooling yarn build
   '';
 
-  installPhase = "mv dist $out";
+  installPhase = ''
+    mkdir -p $out
+    mv redirects.caddyfile $out
+    mv dist $out/site
+  '';
 })

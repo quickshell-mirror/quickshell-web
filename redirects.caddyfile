@@ -1,0 +1,5 @@
+redir /docs/configuration/getting-started* /docs/guide/install-setup permanent
+redir /docs/configuration/intro* /docs/guide/introduction permanent
+redir /docs/configuration/positioning* /docs/guide/size-position permanent
+redir /docs/configuration/qml-overview* /docs/guide/qml-language permanent
+redir /docs/configuration* /docs/guide permanent
