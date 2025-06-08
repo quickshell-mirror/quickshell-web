@@ -4,10 +4,12 @@ import { Icon } from "astro-icon/components";
 const videos = [
   {
     author: '<a href="https://github.com/soramanew">soramane</a>',
+    source: "https://github.com/caelestia-dots/shell",
     path: "/assets/showcase/soramane.mp4",
   },
   {
     author: '<a href="https://outfoxxed.me">outfoxxed</a>',
+    source: "https://git.outfoxxed.me/outfoxxed/nixnew/src/branch/master/modules/user/modules/quickshell",
     path: "/assets/showcase/outfoxxed.mp4",
   },
   {
@@ -20,6 +22,7 @@ const videos = [
   },
   {
     author: '<a href="https://github.com/flickowoa">flicko</a>',
+    source: "https://github.com/flickowoa/zephyr",
     path: "/assets/showcase/flicko.mp4",
   },
 ];
@@ -34,7 +37,7 @@ const videos = [
     </div>
   </div>
   <div id="marquee-content" class="marquee-content" data-scroll="0" data-media-index="0">
-    {videos.map(({ author, path }, index) => <div class="marquee-item">
+    {videos.map(({ author, source, path }, index) => <div class="marquee-item">
       <div>
         <video
           data-media-index={index}
@@ -47,7 +50,10 @@ const videos = [
         >
           <source src={path} type="video/mp4"/>
         </video>
-        <p>Configuration by <Fragment set:html={author}/></p>
+        <p>
+          Configuration by <Fragment set:html={author}/>
+          {source ? <Fragment>(<a href={source}>source code</a>)</Fragment> : null}
+        </p>
       </div>
     </div>)}
   </div>
