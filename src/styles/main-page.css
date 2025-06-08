@@ -64,6 +64,27 @@ html.dark .main-page_hero-text {
   }
 }
 
+.about {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: 0.5rem;
+  gap: 0.5rem;
+}
+
+.about-txt {
+  font-size: 1.1rem;
+}
+
+.about-break { display: none }
+
+.about-buttons {
+  display: flex;
+  gap: 0.5rem;
+  min-width: 15rem;
+}
+
 .main-page_links {
   display: flex;
   flex-direction: row;
@@ -123,55 +144,6 @@ html.dark .main-page_hero-text {
   }
 }
 
-/*html.dark .main-page_link-card {
-  background-color: transparent;
-  border-color: transparent;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    filter: blur(1.5rem) saturate(150%);
-    transition: filter 0.3s;
-    z-index: 1;
-  }
-
-  &::before {
-    background: linear-gradient(
-      115deg,
-      hsla(var(--green) 20 15 / 0.7) 25%,
-      hsla(var(--green) 25 25 / 0.8) 50%,
-      hsla(var(--green) 60 60 / 0.6) 80%
-    );
-  }
-
-  &:hover {
-    &::before {
-      filter: blur(0.9rem) saturate(200%);
-    }
-  }
-
-  &.main-page_bluecard {
-    background-color: transparent;
-    border-color: transparent;
-
-    &::before {
-      background: linear-gradient(
-        115deg,
-        hsla(var(--blue) 10 15 / 0.7) 25%,
-        hsla(var(--blue) 15 25 / 0.8) 50%,
-        hsla(var(--blue) 60 60 / 0.6) 80%
-      );
-    }
-
-    &:hover {
-      &::before {
-        filter: blur(0.9rem) saturate(200%);
-      }
-    }
-  }
-}*/
-
 html.dark .main-page_link-card {
   background-color: hsl(var(--green) 38% 25%);
   color: hsl(194deg 0% 100%);
@@ -201,6 +173,10 @@ html.dark .main-page_link-card {
   .main-page_links_set {
     flex-wrap: nowrap;
   }
+
+  .about-buttons {
+    flex-direction: row;
+  }
 }
 
 @media (min-width: 63rem) {
@@ -213,4 +189,15 @@ html.dark .main-page_link-card {
     max-width: 78rem;
     padding-inline: 1.5rem;
   }
+
+  .about {
+    flex-wrap: nowrap;
+    max-width: 78rem;
+    padding-inline: 1.5rem;
+    flex-direction: row;
+  }
+
+  .about-txt { max-width: 70% }
+  .about-break { display: unset }
+  .about-buttons { flex-direction: column }
 }
