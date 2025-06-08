@@ -12,6 +12,28 @@ Make sure to also read the [Item Size and Position](/docs/guide/size-position) a
 
 ## How do I
 
+### Reduce memory usage
+The main thing you can do to reduce the memory usage of a given configuration
+is to use loaders. Loaders can be used to create objects only when needed,
+and destroy them when not needed.
+
+- Use @@QtQuick.Loader when the component being loaded inherits from @@QtQuick.Item.
+- Use @@Quickshell.LazyLoader in other cases.
+
+### Show widgets conditionally
+The @@QtQuick.Item.visible property can be used to change the visibility of an
+Item conditionally, as well as Loaders.
+
+Note that you can change out a loader's component conditionally:
+```qml
+@@QtQuick.Loader {
+  readonly property Component thing1: ...
+  readonly property Component thing2: ...
+
+  sourceComponent: condition ? thing1 : thing2
+}
+```
+
 ### Make a rounded window
 Rounded windows are simply transparent square ones with a rounded rectangle
 inside of them.
@@ -29,3 +51,22 @@ inside of them.
   }
 }
 ```
+
+## Something is broken
+
+### There is a hole in my window
+If you set a Rectangle's color to `"transparent"` and touch its `border` property,
+you'll hit [QTBUG-137166](https://bugreports.qt.io/browse/QTBUG-137166), which
+causes everything under the transparent rectangle to become invisible.
+
+Adding a definition like `border.width: 0` seems to work around it, especially
+if the only border property you wanted to set was radius.
+
+### My window should not be opaque
+If a window is created with an opaque background color, Quickshell will use
+a window surface format that is opaque, which reduces the amount of processing
+the gpu must do to draw it. If you change the background color of your window
+between opaque and transparent colors, this may affect you.
+
+To tell Quickshell to always create a window capable of showing transparency,
+use @@Quickshell.QsWindow.surfaceFormat to set `opaque` to false.
