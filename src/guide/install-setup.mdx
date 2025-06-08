@@ -84,6 +84,9 @@ If you want to write your own configuration, installing a QML grammar and the LS
 
 Read the [Usage Guide](/docs/guide) after configuring your editor.
 
+> [!NOTE]
+> Qmlls versions prior to 6.8.2 do not require `-E`
+
 ### Emacs
 Install the [yuja/tree-sitter-qml](https://github.com/yuja/tree-sitter-qmljs) tree-sitter grammar,
 and the [xhcoding/qml-ts-mode](https://github.com/xhcoding/qml-ts-mode) mode.
@@ -107,9 +110,6 @@ The author's personal emacs config uses `lsp-mode` and `qml-ts-mode` as follows:
                                 (lsp-deferred))))
 ```
 
-> [!NOTE]
-> Qmlls versions prior to 6.8.2 do not require `-E`
-
 ### Neovim
 Neovim has built-in syntax highlighting for QML, however tree-sitter highlighting
 may work better than the built-in highlighting. You can install the grammar
@@ -117,7 +117,7 @@ using `:TSInstall qmljs`.
 
 To use the language server ([caveats below](#language-server)),
 install [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-and the following snippet:
+and the following snippet to your configuration:
 
 ```lua
 require("lspconfig").qmlls.setup {
@@ -125,8 +125,23 @@ require("lspconfig").qmlls.setup {
 }
 ```
 
-> [!NOTE]
-> Qmlls versions prior to 6.8.2 do not require `-E`
+### Helix
+Helix has built-in syntax highlighting for QML.
+
+To use the language server, add the following snippet to your configuration:
+
+```toml
+[language-server.qmlls]
+args = ["-E"]
+command = "qmlls"
+```
+
+### Vscode
+1. Install the [Official QML Support extension]
+2. Enable the `qt-qml.qmlls.useQmlImportPathEnvVar` setting.
+![](/assets/images/vscode-qml-env.png)
+
+[Official QML Support extension]: https://marketplace.visualstudio.com/items?itemName=TheQtCompany.qt-qml
 
 ## Language Server
 The QML language has an associated language server,
@@ -141,6 +156,7 @@ We are aware of the following issues:
 - Qmlls cannot handle quickshell's singletons. This means you won't see
   completions, and usages of singleton members may show a warning.
   We're still investigating this problem and how to fix it.
+- The LSP cannot provide any documentation for Quickshell types.
 
 Keeping in mind the above caveats, qmlls should be able to guide you towards
 more correct code should you chose to use it.
