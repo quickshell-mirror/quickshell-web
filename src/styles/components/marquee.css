@@ -47,7 +47,10 @@
   justify-content: center;
   padding-inline: 0.5rem;
 
-  & > div { max-width: 75rem }
+  & > div {
+    max-width: 75rem;
+    width: 100%;
+  }
 }
 
 .marquee-item-spacing {
