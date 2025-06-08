@@ -3,41 +3,27 @@ title: "Introduction"
 index: 2
 ---
 
-import Collapsible from "@components/Collapsible.astro";
-
 # {frontmatter.title}
 
-> [!NOTE]
-> This guide was created a long time ago, and is somewhat outdated.
-> Take a look at @@Quickshell.SystemClock after going through.
-
 This page will walk you through the process of creating a simple bar/panel, and
-introduce you to all the basic concepts involved.
+introduce you to all the basic concepts involved. You can use the
+[QML Language Reference](/docs/guide/qml-language) to learn about the syntax
+of the QML language.
 
-There are many links to the [QML Overview](/docs/guide/qml-language)
-and [Type Reference](/docs/types) which you should follow if you don't
-fully understand the concepts involved.
+Note that all the <a>Green Links</a> in code blocks will take you to the documentation
+for their respective types.
 
-## Shell Files
+## Config Files
+Quickshell searches the `quickshell` subfolder of every XDG standard config path
+for configs. Usually this is `~/.config/quickshell`.
 
-Every quickshell instance starts from a shell root file, conventionally named `shell.qml`.
-The default path is `~/.config/quickshell/shell.qml`.
-(where `~/.config` can be substituted with `$XDG_CONFIG_HOME` if present.)
+Each named subfolder containing a `shell.qml` file is considered to be a config.
+If the base `quickshell` folder contains a shell.qml file, subfolders will not be
+considered.
 
-Each shell file starts with the shell root object. Only one may exist per configuration.
+A specific config can be picked using the `--config` or `-c` argument to Quickshell.
 
-```qml
-// ~/.config/quickshell/shell.qml
-import Quickshell
-
-@@Quickshell.ShellRoot {
-  // ...
-}
-```
-
-The shell root is not a visual element but instead contains all of the visual
-and non visual objects in your shell. You can have multiple different shells
-with shared components and different shell roots.
+Configs at other paths, including raw qml files can be run with `--path` or `-p`.
 
 ## Creating Windows
 
@@ -48,25 +34,23 @@ Quickshell has two main window types available,
 We'll start with an example:
 
 ```qml
-import Quickshell // for ShellRoot and PanelWindow
+import Quickshell // for PanelWindow
 import QtQuick // for Text
 
-@@Quickshell.ShellRoot {
-  @@Quickshell.PanelWindow {
-    anchors {
-      top: true
-      left: true
-      right: true
-    }
+@@Quickshell.PanelWindow {
+  anchors {
+    top: true
+    left: true
+    right: true
+  }
 
-    implicitHeight: 30
+  implicitHeight: 30
 
-    @@QtQuick.Text {
-      // center the bar in its parent component (the window)
-      anchors.centerIn: parent
+  @@QtQuick.Text {
+    // center the bar in its parent component (the window)
+    anchors.centerIn: parent
 
-      text: "hello world"
-    }
+    text: "hello world"
   }
 }
 ```
@@ -74,12 +58,15 @@ import QtQuick // for Text
 The above example creates a bar/panel on your currently focused monitor with
 a centered piece of [text](https://doc.qt.io/qt-6/qml-qtquick-text.html). It will also reserve space for itself on your monitor.
 
-More information about available properties is available in the [type reference](/docs/types/quickshell/panelwindow).
+More information about available properties is available in the [type reference](/docs/types/Quickshell/PanelWindow).
 
 ## Running a process
 
 Now that we have a piece of text, what if it did something useful?
 To start with lets make a clock. To get the time we'll use the `date` command.
+
+> [!note/Note]
+> Quickshell can do more than just run processes. Read until the end for more information.
 
 We can use a [Process](/docs/types/quickshell.io/process) object to run commands
 and return their results.
@@ -98,37 +85,35 @@ import Quickshell
 import Quickshell.Io // for Process
 import QtQuick
 
-@@Quickshell.ShellRoot {
-  @@Quickshell.PanelWindow {
-    anchors {
-      top: true
-      left: true
-      right: true
-    }
+@@Quickshell.PanelWindow {
+  anchors {
+    top: true
+    left: true
+    right: true
+  }
 
-    implicitHeight: 30
+  implicitHeight: 30
 
-    @@QtQuick.Text {
-      // give the text an ID we can refer to elsewhere in the file
-      id: clock
+  @@QtQuick.Text {
+    // give the text an ID we can refer to elsewhere in the file
+    id: clock
 
-      anchors.centerIn: parent
+    anchors.centerIn: parent
 
-      // create a process management object
-      @@Quickshell.Io.Process {
-        // the command it will run, every argument is its own string
-        command: ["date"]
+    // create a process management object
+    @@Quickshell.Io.Process {
+      // the command it will run, every argument is its own string
+      command: ["date"]
 
-        // run the command immediately
-        running: true
+      // run the command immediately
+      running: true
 
-        // process the stdout stream using a SplitParser
-        // which returns chunks of output after a delimiter
-        stdout: @@Quickshell.Io.SplitParser {
-          // listen for the read signal, which returns the data that was read
-          // from stdout, then write that data to the clock's text property
-          onRead: data => clock.text = data
-        }
+      // process the stdout stream using a SplitParser
+      // which returns chunks of output after a delimiter
+      stdout: @@Quickshell.Io.SplitParser {
+        // listen for the read signal, which returns the data that was read
+        // from stdout, then write that data to the clock's text property
+        onRead: data => clock.text = data
       }
     }
   }
@@ -145,48 +130,46 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-@@Quickshell.ShellRoot {
-  @@Quickshell.PanelWindow {
-    anchors {
-      top: true
-      left: true
-      right: true
+@@Quickshell.PanelWindow {
+  anchors {
+    top: true
+    left: true
+    right: true
+  }
+
+  implicitHeight: 30
+
+  @@QtQuick.Text {
+    id: clock
+    anchors.centerIn: parent
+
+    @@Quickshell.Io.Process {
+      // give the process object an id so we can talk
+      // about it from the timer
+      id: dateProc
+
+      command: ["date"]
+      running: true
+
+      stdout: @@Quickshell.Io.SplitParser {
+        onRead: data => clock.text = data
+      }
     }
 
-    implicitHeight: 30
+    // use a timer to rerun the process at an interval
+    @@QtQml.Timer {
+      // 1000 milliseconds is 1 second
+      interval: 1000
 
-    @@QtQuick.Text {
-      id: clock
-      anchors.centerIn: parent
+      // start the timer immediately
+      running: true
 
-      @@Quickshell.Io.Process {
-        // give the process object an id so we can talk
-        // about it from the timer
-        id: dateProc
+      // run the timer again when it ends
+      repeat: true
 
-        command: ["date"]
-        running: true
-
-        stdout: @@Quickshell.Io.SplitParser {
-          onRead: data => clock.text = data
-        }
-      }
-
-      // use a timer to rerun the process at an interval
-      @@QtQml.Timer {
-        // 1000 milliseconds is 1 second
-        interval: 1000
-
-        // start the timer immediately
-        running: true
-
-        // run the timer again when it ends
-        repeat: true
-
-        // when the timer is triggered, set the running property of the
-        // process to true, which reruns it if stopped.
-        onTriggered: dateProc.running = true
-      }
+      // when the timer is triggered, set the running property of the
+      // process to true, which reruns it if stopped.
+      onTriggered: dateProc.running = true
     }
   }
 }
@@ -217,47 +200,45 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-@@Quickshell.ShellRoot {
-  @@Quickshell.Variants {
-    model: Quickshell.screens;
+@@Quickshell.Variants {
+  model: Quickshell.screens;
 
-    delegate: @@QtQml.Component {
-      @@Quickshell.PanelWindow {
-        // the screen from the screens list will be injected into this
-        // property
-        property var modelData
+  delegate: @@QtQml.Component {
+    @@Quickshell.PanelWindow {
+      // the screen from the screens list will be injected into this
+      // property
+      property var modelData
 
-        // we can then set the window's screen to the injected property
-        screen: modelData
+      // we can then set the window's screen to the injected property
+      screen: modelData
 
-        anchors {
-          top: true
-          left: true
-          right: true
+      anchors {
+        top: true
+        left: true
+        right: true
+      }
+
+      implicitHeight: 30
+
+      @@QtQuick.Text {
+        id: clock
+        anchors.centerIn: parent
+
+        @@Quickshell.Io.Process {
+          id: dateProc
+          command: ["date"]
+          running: true
+
+          stdout: @@Quickshell.Io.SplitParser {
+            onRead: data => clock.text = data
+          }
         }
 
-        implicitHeight: 30
-
-        @@QtQuick.Text {
-          id: clock
-          anchors.centerIn: parent
-
-          @@Quickshell.Io.Process {
-            id: dateProc
-            command: ["date"]
-            running: true
-
-            stdout: @@Quickshell.Io.SplitParser {
-              onRead: data => clock.text = data
-            }
-          }
-
-          @@QtQml.Timer {
-            interval: 1000
-            running: true
-            repeat: true
-            onTriggered: dateProc.running = true
-          }
+        @@QtQml.Timer {
+          interval: 1000
+          running: true
+          repeat: true
+          onTriggered: dateProc.running = true
         }
       }
     }
@@ -276,8 +257,9 @@ due to the reactive nature of the
 (See: [Reactive Bindings](/docs/configuration/qml-overview/#reactive-bindings).)
 
 Now there's an important problem you might have noticed: when the window
-is created multiple times we also make a new Process and Timer. We can fix
-this by moving the Process and Timer outside of the window.
+is created multiple times we also make a new Process and Timer, which makes the
+bar less efficient than it could be. We can fix this by moving the
+Process and Timer outside of the window using @@Quickshell.Scope.
 
 > [!caution/Error]
 > This code will not work correctly.
@@ -287,7 +269,7 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-@@Quickshell.ShellRoot {
+@@Quickshell.Scope {
   @@Quickshell.Variants {
     model: Quickshell.screens
 
@@ -338,11 +320,11 @@ _What about the `clock` that the process references?_
 If you run the above example you'll see something like this in the console every second:
 
 ```
-file:///home/name/.config/quickshell/shell.qml:33: ReferenceError: clock is not defined
-file:///home/name/.config/quickshell/shell.qml:33: ReferenceError: clock is not defined
-file:///home/name/.config/quickshell/shell.qml:33: ReferenceError: clock is not defined
-file:///home/name/.config/quickshell/shell.qml:33: ReferenceError: clock is not defined
-file:///home/name/.config/quickshell/shell.qml:33: ReferenceError: clock is not defined
+WARN scene: **/shell.qml[36:-1]: ReferenceError: clock is not defined
+WARN scene: **/shell.qml[36:-1]: ReferenceError: clock is not defined
+WARN scene: **/shell.qml[36:-1]: ReferenceError: clock is not defined
+WARN scene: **/shell.qml[36:-1]: ReferenceError: clock is not defined
+WARN scene: **/shell.qml[36:-1]: ReferenceError: clock is not defined
 ```
 
 This is because the `clock` object, even though it has an ID, cannot be referenced
@@ -362,11 +344,11 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-@@Quickshell.ShellRoot {
+@@Quickshell.Scope {
   id: root
 
   // add a property in the root
-  property string time;
+  property string time
 
   @@Quickshell.Variants {
     model: Quickshell.screens
@@ -389,7 +371,7 @@ import QtQuick
 
           anchors.centerIn: parent
 
-          // bind the text to the root's time property
+          // bind the text to the root object's time property
           text: root.time
         }
       }
@@ -427,9 +409,6 @@ above code, but we can make it more concise:
    which means we can skip the `delegate:` part of the assignment.
    We're already using the default property of @@Quickshell.ShellRoot to store our
    Variants, Process, and Timer components among other things.
-3. The ShellRoot doesn't actually need an `id` property to talk about
-   the time property, as it is the outermost object in the file which
-   has [special scoping rules](/docs/configuration/qml-overview/#property-access-scopes).
 
 This is what our shell looks like with the above (optional) cleanup:
 
@@ -438,8 +417,9 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-@@Quickshell.ShellRoot {
-  property string time;
+@@Quickshell.Scope {
+  id: root
+  property string time
 
   @@Quickshell.Variants {
     model: Quickshell.screens
@@ -458,9 +438,7 @@ import QtQuick
 
       @@QtQuick.Text {
         anchors.centerIn: parent
-
-        // now just time instead of root.time
-        text: time
+        text: root.time
       }
     }
   }
@@ -471,8 +449,7 @@ import QtQuick
     running: true
 
     stdout: @@Quickshell.Io.SplitParser {
-      // now just time instead of root.time
-      onRead: data => time = data
+      onRead: data => root.time = data
     }
   }
 
@@ -496,7 +473,7 @@ To start with, let's move the entire bar into a new file.
 // shell.qml
 import Quickshell
 
-@@Quickshell.ShellRoot {
+@@Quickshell.Scope {
   Bar {}
 }
 ```
@@ -508,7 +485,8 @@ import Quickshell.Io
 import QtQuick
 
 @@Quickshell.Scope {
-  property string time;
+  id: root
+  property string time
 
   @@Quickshell.Variants {
     model: Quickshell.screens
@@ -527,9 +505,7 @@ import QtQuick
 
       @@QtQuick.Text {
         anchors.centerIn: parent
-
-        // now just time instead of root.time
-        text: time
+        text: root.time
       }
     }
   }
@@ -540,8 +516,7 @@ import QtQuick
     running: true
 
     stdout: @@Quickshell.Io.SplitParser {
-      // now just time instead of root.time
-      onRead: data => time = data
+      onRead: data => root.time = data
     }
   }
 
@@ -589,7 +564,7 @@ import QtQuick
 
 @@Quickshell.Scope {
   id: root
-  property string time;
+  property string time
 
   @@Quickshell.Variants {
     model: Quickshell.screens
@@ -609,7 +584,6 @@ import QtQuick
       // the ClockWidget type we just created
       ClockWidget {
         anchors.centerIn: parent
-        // Warning: setting `time: time` will bind time to itself which is not what we want
         time: root.time
       }
     }
@@ -621,7 +595,7 @@ import QtQuick
     running: true
 
     stdout: @@Quickshell.Io.SplitParser {
-      onRead: data => time = data
+      onRead: data => root.time = data
     }
   }
 
@@ -646,7 +620,8 @@ import Quickshell.Io
 import QtQuick
 
 @@Quickshell.Scope {
-  property string time;
+  id: root
+  property string time
 
   @@Quickshell.Io.Process {
     id: dateProc
@@ -654,7 +629,7 @@ import QtQuick
     running: true
 
     stdout: @@Quickshell.Io.SplitParser {
-      onRead: data => time = data
+      onRead: data => root.time = data
     }
   }
 
@@ -721,6 +696,7 @@ import QtQuick
 
 // your singletons should always have Singleton as the type
 @@Quickshell.Singleton {
+  id: root
   property string time
 
   @@Quickshell.Io.Process {
@@ -729,7 +705,7 @@ import QtQuick
     running: true
 
     stdout: @@Quickshell.Io.SplitParser {
-      onRead: data => time = data
+      onRead: data => root.time = data
     }
   }
 
@@ -786,31 +762,39 @@ import Quickshell
 }
 ```
 
-## JavaScript APIs
+## Quickshell Support Libraries
+In addition to calling external processes, Quickshell comes with a large set of support libraries
+for common OS integrations and tasks. These libraries are indexed on the left sidebar.
 
-In addition to calling external processes, a [limited set of javascript interfaces] is available.
-We can use this to improve our clock by using the [Date API] instead of calling `date`.
+One of these integrations is @@Quickshell.SystemClock, which exposes the system time in an easy to
+use way.
 
-[limited set of javascript interfaces]: https://doc.qt.io/qt-6/qtqml-javascript-functionlist.html
-[Date API]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+We can use @@Quickshell.SystemClock.date to get a Date object to display. The
+@@QtQml.Qt.formatDateTime() function can be used to easily format the date
+as shown below.
+
+@@Quickshell.SystemClock.precision can be set to `Minutes` to improve battery life if you don't
+show seconds on your clock, as Quickshell will have less work to do.
 
 ```qml
 // Time.qml
 pragma Singleton
 
 import Quickshell
-import Quickshell.Io
 import QtQuick
 
 @@Quickshell.Singleton {
-  property var date: new Date()
-  property string time: date.toLocaleString(Qt.locale())
+  id: root
+  // an expression can be broken across multiple lines using {}
+  readonly property string time: {
+    // The passed format string matches the default output of
+    // the `date` command.
+    Qt.formatDateTime(clock.date, "ddd MMM d hh:mm:ss AP t yyyy")
+  }
 
-  @@QtQml.Timer {
-    interval: 1000
-    running: true
-    repeat: true
-    onTriggered: date = new Date()
+  @@Quickshell.SystemClock {
+    id: clock
+    precision: SystemClock.Seconds
   }
 }
 ```
