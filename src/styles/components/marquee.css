@@ -26,8 +26,10 @@
 }
 .marquee {
   position: relative;
+  display: flex;
   width: 100%;
   margin-block: 1.618rem;
+  justify-content: center;
 }
 
 .marquee-content {
@@ -44,14 +46,12 @@
   display: flex;
   justify-content: center;
   padding-inline: 0.5rem;
+
+  & > div { max-width: 75rem }
 }
 
 .marquee-item-spacing {
-  width: calc(100svw - 12rem);
-  max-width: 75rem;
-  aspect-ratio: 16 / 9;
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
 }
 
 .marquee-item-content {
@@ -61,8 +61,10 @@
 .marquee-scroll {
   position: absolute;
   width: 100%;
+  max-width: 85rem;
+  height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   transition:
     background-color 0.3s,
@@ -81,7 +83,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 
   & > div {
     width: 2.5rem;
@@ -101,12 +102,10 @@
   }
 }
 
-#marquee-scroll-left {
-  left: -4rem;
-}
-
-#marquee-scroll-right {
-  right: -4rem;
+.marquee-arrow-spacing {
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
 @media not (min-width: 40rem) {
@@ -117,17 +116,27 @@
 
   .marquee-scroll-arrow {
     height: unset;
+  }
+}
+
+/* nasty mismatch w/ not but matches main-page.css */
+@media (min-width: 63rem) {
+  .marquee-item {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media not (min-width: 83rem) {
+  .marquee-scroll-arrow {
+    height: unset;
     & > div {
       background-color: #55555580;
       border-radius: 0.2rem;
     }
   }
 
-  #marquee-scroll-left {
-    left: 1rem;
-  }
-
-  #marquee-scroll-right {
-    right: 1rem;
+  .marquee-scroll {
+    width: 92%;
+    align-items: center;
   }
 }
