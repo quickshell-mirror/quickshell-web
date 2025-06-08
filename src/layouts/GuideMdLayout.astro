@@ -1,0 +1,17 @@
+---
+import GuideLayout from "@layouts/GuideLayout.astro";
+import type { ConfigHeading } from "@src/components/navigation/sidebars/types";
+
+export interface Props {
+  headings: ConfigHeading[];
+  frontmatter: {
+    title: string;
+    description?: string;
+  }
+}
+
+const { headings, frontmatter: { title, description } } = Astro.props;
+---
+<GuideLayout title={title} description={description ?? ""} headings={headings}>
+  <slot/>
+</GuideLayout>

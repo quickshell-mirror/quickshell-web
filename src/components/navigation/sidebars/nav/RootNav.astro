@@ -1,8 +1,8 @@
 ---
 export interface Props {
-  currentRoute: string;
-  currentModule: string;
-  currentClass: string;
+  currentRoute?: string;
+  currentModule?: string;
+  currentClass?: string;
 }
 
 const { currentRoute, currentModule, currentClass } = Astro.props;
@@ -36,14 +36,14 @@ function genGuideNav(base: string): TreeEntry[] | undefined {
 const guide = {
   title: "Usage Guide",
   link: "/docs/guide",
-  current: currentRoute.startsWith("guide"),
+  current: currentRoute?.startsWith("guide") ?? false,
   entries: genGuideNav(""),
 }
 
 const types = {
   title: "Quickshell Types",
   link: "/docs/types",
-  current: currentRoute.startsWith("types"),
+  current: currentRoute?.startsWith("types") ?? false,
   entries: Object.entries(groupedRoutes.types).map(
     ([module, items]) => ({
       title: module,
@@ -59,6 +59,11 @@ const types = {
 };
 ---
 <nav class="navtree">
+  <Link
+    title="About Quickshell"
+    link="/docs/about"
+    current={currentRoute === "about"}
+  />
   <Tree {...guide}/>
   <Tree {...types}/>
   <Link

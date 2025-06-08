@@ -1,0 +1,25 @@
+---
+import DocsLayout from "@layouts/DocsLayout.astro";
+import TOC from "@components/navigation/sidebars/TOC.astro";
+import TOCIntersectionObserver from "@src/components/hooks/TOCIntersectionObserver.astro";
+import type { ConfigHeading } from "@src/components/navigation/sidebars/types";
+
+export interface Props {
+  headings: ConfigHeading[];
+  title: string;
+  description: string;
+}
+
+const { title, description, headings } = Astro.props;
+---
+<DocsLayout title={title} description={description} headings={headings}>
+  <div class="docs">
+    <div class="docs-content">
+      <hr>
+      <slot/>
+    </div>
+    <TOC mobile={false} headings={headings} data-pagefind-ignore/>
+  </div>
+</DocsLayout>
+
+<TOCIntersectionObserver/>
