@@ -2,7 +2,6 @@
 title: "QML Language"
 index: 10
 ---
-import MD_Title from "@components/MD_Title.tsx"
 import Collapsible from "@components/Collapsible.astro";
 
 # {frontmatter.title}
@@ -15,7 +14,7 @@ This page explains what you need to know about QML to start using quickshell.
   Tutorial](https://doc.qt.io/qt-6/qml-tutorial.html)
 </span>
 
-## <MD_Title titleVar={2}> Structure </MD_Title>
+## Structure
 
 Below is a QML document showing most of the syntax.
 Keep it in mind as you read the detailed descriptions below.
@@ -87,12 +86,17 @@ import "myjs.js" as MyJs
   function dub(x: int): int {
     return x * 2
   }
+
+  // Inline component
+  component MyComponent: Object {
+    // ...
+  }
 }
 ```
 
-### <MD_Title titleVar={3}> Imports </MD_Title>
+### Imports
 
-#### <MD_Title titleVar={4}> Manual imports </MD_Title>
+#### Manual imports
 
 Every QML File begins with a list of imports.
 Import statements tell the QML engine where
@@ -130,7 +134,7 @@ import "<filename>" as <Namespace>
 Note: All _Module_ and _Namespace_ names must start with an uppercase letter.
 Attempting to use a lowercase namespace is an error.
 
-##### <MD_Title titleVar={5}> Examples </MD_Title>
+##### Examples
 
 ```qml
 import QtQuick
@@ -158,7 +162,7 @@ specifying a version at least when importing quickshell modules.
   syntax](https://doc.qt.io/qt-6/qtqml-syntax-imports.html)
 </span>
 
-#### <MD_Title titleVar={4}> Implicit imports </MD_Title>
+#### Implicit imports
 
 The QML engine will automatically import any [types](#creating-types) in neighboring files
 with names that start with an uppercase letter.
@@ -172,7 +176,7 @@ root
 In this example, `MyButton` will automatically be imported as a type usable from shell.qml
 or any other neighboring files.
 
-### <MD_Title titleVar={3}> Objects </MD_Title>
+### Objects
 
 Objects are instances of a type from an imported module.
 The name of an object must start with an uppercase letter.
@@ -191,12 +195,12 @@ Every object can contain [properties](#properties), [functions](#functions),
 and [signals](#signals). You can find out what properties are available for a type
 by looking it up in the [Type Reference](/docs/types/).
 
-#### <MD_Title titleVar={4}> Properties </MD_Title>
+#### Properties
 
 Every object may have any number of property assignments (only one per specific property).
 Each assignment binds the named property to the given expression.
 
-##### <MD_Title titleVar={5}> Property bindings </MD_Title>
+##### Property bindings
 
 Expressions are snippets of javascript code assigned to a property. The last (or only) line
 can be the return value, or an explicit return statement (multiline expressions only) can be used.
@@ -235,7 +239,7 @@ on is updated, the expression is re-evaluated and the property is updated.
 Note that it is an error to try to assign to a property that does not exist.
 (See: [property definitions](#property-definitions))
 
-##### <MD_Title titleVar={5}> Property definitions </MD_Title>
+##### Property definitions
 
 Properties can be defined inside of objects with the following syntax:
 
@@ -267,7 +271,7 @@ Properties can be defined inside of objects with the following syntax:
 Defining a property with the same name as one provided by the current object will override
 the property of the type it is derived from in the current context.
 
-##### <MD_Title titleVar={5}> The default property </MD_Title>
+##### The default property
 
 Types can have a _default property_ which must accept either an object or a list of objects.
 
@@ -302,7 +306,7 @@ would put a single object in:
 }
 ```
 
-##### <MD_Title titleVar={5}> The `id` property </MD_Title>
+##### The `id` property
 
 Every object has a special property called `id` that can be assigned to give
 the object a name it can be referred to throughout the current file. The id must be lowercase.
@@ -330,7 +334,7 @@ definition rules. The name `id` is always reserved for the id property.
 
 </Collapsible>
 
-##### <MD_Title titleVar={5}> Property access scopes </MD_Title>
+##### Property access scopes
 
 Properties are "in scope" and usable in two cases.
 
@@ -342,6 +346,9 @@ or make sure the property you are accessing is from the current object using `th
 
 The `parent` property is also defined for all objects, but may not always point to what it
 looks like it should. Use the `id` property if `parent` does not do what you want.
+
+In general, you should only access properties of the *current* object without an id. For
+all other objects, you should refer to them by id when accessing properties.
 
 ```qml
 @@QtQuick.Item {
@@ -384,7 +391,7 @@ looks like it should. Use the `id` property if `parent` does not do what you wan
   Resolution](https://doc.qt.io/qt-6/qtqml-documents-scope.html)
 </span>
 
-#### <MD_Title titleVar={4}> Functions </MD_Title>
+#### Functions
 
 Functions in QML can be declared everywhere [properties](#properties) can, and follow
 the same [scoping rules](#property-access-scopes).
@@ -424,7 +431,7 @@ In this example, every time the button is clicked, the label's count increases
 by one, as `clicks` is changed, which triggers a re-evaluation of `text` through
 `makeClicksLabel`.
 
-##### <MD_Title titleVar={5}> Lambdas </MD_Title>
+##### Lambdas
 
 Functions can also be values, and you can assign them to properties or pass them to
 other functions (callbacks). There is a shorter way to write these functions, known
@@ -485,7 +492,7 @@ An overcomplicated click counter using a lambda callback:
 }
 ```
 
-#### <MD_Title titleVar={4}> Signals </MD_Title>
+#### Signals
 
 A signal is basically an event emitter you can connect to and receive updates from.
 They can be declared everywhere [properties](#properties) and [functions](#functions)
@@ -496,7 +503,7 @@ can, and follow the same [scoping rules](#property-access-scopes).
   System](https://doc.qt.io/qt-6/qtqml-syntax-signals.html)
 </span>
 
-##### <MD_Title titleVar={5}> Signal definitions </MD_Title>
+##### Signal definitions
 
 A signal can be explicitly defined with the following syntax:
 
@@ -504,7 +511,7 @@ A signal can be explicitly defined with the following syntax:
 signal <name>(<paramname>: <type>[, ...])
 ```
 
-##### <MD_Title titleVar={5}> Making connections </MD_Title>
+##### Making connections
 
 Signals all have a `connect(<function>)` method which invokes the given function
 or signal when the signal is emitted.
@@ -544,7 +551,7 @@ When the button is clicked, the button emits the @@QtQuick.Controls.Button.click
 signal which we connected to `updateText`. The signal then invokes `updateText`
 which updates the counter and the text on the label.
 
-##### <MD_Title titleVar={5}> Signal handlers </MD_Title>
+##### Signal handlers
 
 Signal handlers are a more concise way to make a connections, and prior examples have used them.
 
@@ -576,7 +583,7 @@ this time using the implicit signal handler property to handle @@QtQuick.Control
 }
 ```
 
-##### <MD_Title titleVar={5}> Indirect signal handlers </MD_Title>
+##### Indirect signal handlers
 
 When it is not possible or not convenient to directly define a signal handler, before resorting
 to `.connect`ing the properties, a @@QtQml.Connections object can be used to access them.
@@ -600,7 +607,7 @@ This is especially useful to connect to signals of singletons.
 }
 ```
 
-##### <MD_Title titleVar={5}> Property change signals </MD_Title>
+##### Property change signals
 
 Every property has an associated signal, which powers QML's [reactive bindings](#reactive-bindings).
 The signal is named `<propertyname>Changed` and works exactly the same as any other signal.
@@ -673,7 +680,7 @@ And the function can also be inlined to an expression:
 
 You can also remove the return statement if you wish.
 
-##### <MD_Title titleVar={5}> Attached objects </MD_Title>
+##### Attached objects
 
 Attached objects are additional objects that can be associated with an object
 as decided by internal library code. The documentation for a type will
@@ -695,7 +702,7 @@ which is attached to every object and often used to run code when an object init
 
 In this example, the text property is set inside the `Component.onCompleted` attached signal handler.
 
-#### <MD_Title titleVar={4}> Creating types </MD_Title>
+#### Creating types
 
 Every QML file with an uppercase name is implicitly a type, and can be used from
 neighboring files or imported (See [Imports](#imports).)
@@ -741,7 +748,35 @@ are not visible outside the file.
 }
 ```
 
-##### <MD_Title titleVar={5}> Singletons </MD_Title>
+##### Inline Components
+
+Inline components work the same as any other type, but are created inside
+another QML file. These components only work within the file, and can reference
+IDs inside the file.
+
+While inline components can be created anywhere inside a QML file, they are
+scoped to the file itself and cannot be nested.
+
+Example of an inline component:
+```qml
+@@QtQuick.Layouts.ColumnLayout {
+  id: layout
+  property real textPointSize: 10
+
+  MyText { text: "Thing 1" }
+  MyText { text: "Thing 2" }
+  MyText { text: "Thing 3" }
+
+  component MyText: @@QtQuick.Text {
+    // applied to all MyText instances
+    color: "red"
+    // references an id outside of the component
+    font.pointSize: layout.textPointSize
+  }
+}
+```
+
+##### Singletons
 
 QML Types can be easily made into a singleton, meaning there is only one instance
 of the type.
@@ -762,9 +797,9 @@ import ...
 once a type is a singleton, its members can be accessed by name from neighboring
 files.
 
-## <MD_Title titleVar={2}> Concepts </MD_Title>
+## Concepts
 
-### <MD_Title titleVar={3}> Reactive bindings </MD_Title>
+### Reactive bindings
 
 <span class="small">
   This section assumes knowledge of: [Properties](#properties),
@@ -779,7 +814,7 @@ are then re-evaluated and so forth.
 
 Bindings can be created in two different ways:
 
-##### <MD_Title titleVar={5}> Automatic bindings </MD_Title>
+##### Automatic bindings
 
 A reactive binding occurs automatically when you use one or more properties in the definition
 of another property. .
@@ -798,7 +833,7 @@ of another property. .
 In this example, the button's @@QtQuick.Controls.Button.text property is re-evaluated
 every time the button is clicked, because the `clicks` property has changed.
 
-###### <MD_Title titleVar={6}> Avoiding creation </MD_Title>
+###### Avoiding creation
 
 To avoid creating a binding, do not use any other properties in the definition of a property.
 
@@ -816,7 +851,7 @@ as assignments to properties do not create binding.
 }
 ```
 
-##### <MD_Title titleVar={5}> Manual bindings </MD_Title>
+##### Manual bindings
 
 Sometimes (not often) you need to create a binding inside of a function, signal, or expression.
 If you need to change or attach a binding at runtime, the `Qt.binding` function can be used to
@@ -848,7 +883,7 @@ In this example, `boundText`'s `text` property is bound to the button's pressed 
 when the button is first clicked. When you press or unpress the button the text will
 be updated.
 
-##### <MD_Title titleVar={5}> Removing bindings </MD_Title>
+##### Removing bindings
 
 To remove a binding, just assign a new value to the property without using `Qt.binding`.
 
@@ -871,7 +906,7 @@ When the button is first pressed, the text will be updated, but once `onClicked`
 the text will be unbound, and even though it contains a reference to the `pressed` property,
 it will not be updated further by the binding.
 
-### <MD_Title titleVar={3}> Lazy loading </MD_Title>
+### Lazy loading
 
 Often not all of your interface needs to load immediately. By default the QML
 engine initializes every object in the scene before showing anything onscreen.
@@ -879,7 +914,7 @@ For parts of the interface you don't need to be immediately visible, load them
 asynchronously using a @@Quickshell.LazyLoader.
 See its documentation for more information.
 
-#### <MD_Title titleVar={4}> Components </MD_Title>
+#### Components
 
 Another delayed loading mechanism is the @@QtQml.Component type.
 This type can be used to create multiple instances of objects or lazily load them. It's used by types such
