@@ -3,19 +3,22 @@ import TableOfContents from "./toc";
 import type { ConfigHeading, TypeTOC } from "./types.d.ts";
 
 export interface Props {
+  title?: string;
   headings?: ConfigHeading[];
   types?: TypeTOC;
   mobile: boolean;
 }
 
-const { headings, types, mobile } = Astro.props;
+const { title, headings, types, mobile } = Astro.props;
 ---
-
-<div id="toc" aria-mobile={mobile} class=`toc-wrapper${mobile ? "-mobile":""}`>
-  <TableOfContents
-    config={headings}
-    type={types}
-    mobile={mobile}
-    client:idle
-  />
-</div>
+{((headings?.length ?? 0) != 0 || types) &&
+  <div id="toc" aria-mobile={mobile} class=`toc-wrapper${mobile ? "-mobile":""}`>
+    <TableOfContents
+      title={title}
+      config={headings}
+      type={types}
+      mobile={mobile}
+      client:idle
+    />
+  </div>
+}

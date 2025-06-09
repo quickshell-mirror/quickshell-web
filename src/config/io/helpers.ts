@@ -28,9 +28,16 @@ export function buildHierarchy(headings: ConfigHeading[]) {
     if (heading.depth === 1) {
       toc.push(heading);
     } else {
-      parentHeadings
-        .get(heading.depth - 1)
-        .subheadings.push(heading);
+      let depth = heading.depth - 1;
+      let parent = null;
+
+      while (!parent && depth != 0) {
+        parent = parentHeadings.get(depth);
+        depth -= 1;
+      }
+
+      if (parent) parent.subheadings.push(heading);
+      else toc.push(heading);
     }
   }
   return toc;

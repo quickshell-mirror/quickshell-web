@@ -17,6 +17,7 @@ export interface TreeProps {
 
 // Right
 export interface TOCProps {
+  title?: string;
   config?: ConfigHeading[];
   type?: TypeTableProps;
   mobile: boolean;

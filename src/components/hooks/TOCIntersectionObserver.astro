@@ -4,7 +4,7 @@
   window.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        const heading = entry.target.querySelector('h2, h3, h4, h5, h6')
+        const heading = entry.target.querySelector('h1, h2, h3, h4, h5, h6')
         if(heading) {
           const id = heading.id
           if (entry.intersectionRatio > 0) {

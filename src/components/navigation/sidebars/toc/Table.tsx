@@ -11,15 +11,19 @@ import {
 import { Heading } from "./Heading";
 
 export const Table: Component<{
+  title?: string;
   typeTOC?: TypeTOC;
   configTOC?: ConfigTOC[];
 }> = props => {
-  const { typeTOC, configTOC } = props;
+  const { title, typeTOC, configTOC } = props;
 
   if (configTOC) {
     return (
       <div class="toc-content">
-        <p>Contents</p>
+        {title && <>
+          <p>{title}</p>
+          <hr/>
+        </>}
         <For each={configTOC}>
           {heading => (
             <Heading

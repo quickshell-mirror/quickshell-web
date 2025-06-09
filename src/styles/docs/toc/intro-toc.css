@@ -22,8 +22,8 @@
     margin: 0;
     margin-block: 0.618rem;
 
-    & * {
-      margin-left: 0.348rem;
+    & li {
+      margin-left: 0.618rem;
     }
   }
 }

@@ -17,6 +17,11 @@
   background-color: transparent;
 }
 
+.toc-content > p {
+  margin-top: calc(0.94rem - 6px);
+  margin-bottom: 0.318rem;
+}
+
 .toc-toggle {
   --width: 80svw;
   display: block;
@@ -132,8 +137,8 @@
       margin: 0;
       margin-block: 0.618rem;
 
-      & * {
-        margin-left: 0.348rem;
+      & li {
+        margin-left: 0.618rem;
       }
     }
   }

@@ -15,7 +15,7 @@ const TableOfContents: Component<TOCProps> = props => {
   const [open, setOpen] = createSignal<boolean>(false);
   const [clientWidth, setClientWidth] = createSignal<number>(0);
   const [screenWidth, setScreenWidth] = createSignal<number>(0);
-  const { mobile, config, type } = props;
+  const { mobile, title, config, type } = props;
   let tocRef: HTMLDivElement;
 
   function toggle(e: MouseEvent) {
@@ -27,9 +27,10 @@ const TableOfContents: Component<TOCProps> = props => {
     return type ? (
       <Table typeTOC={type} />
     ) : (
-      <Table configTOC={buildHierarchy(config!)} />
+      <Table title={title} configTOC={buildHierarchy(config!)} />
     );
   }
+
   const handleClickOutside = (event: MouseEvent) => {
     const isLink = "href" in (event.target || {});
     const isInBody = document.body.contains(event.target as Node);
@@ -97,7 +98,7 @@ const TableOfContents: Component<TOCProps> = props => {
         {type ? (
           <Table typeTOC={type} />
         ) : (
-          <Table configTOC={buildHierarchy(config!)} />
+          <Table title={title} configTOC={buildHierarchy(config!)} />
         )}
       </div>
     </div>

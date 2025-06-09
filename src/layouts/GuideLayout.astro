@@ -5,8 +5,8 @@ import TOCIntersectionObserver from "@src/components/hooks/TOCIntersectionObserv
 import type { ConfigHeading } from "@src/components/navigation/sidebars/types";
 
 export interface Props {
-  headings: ConfigHeading[];
   title: string;
+  headings: ConfigHeading[];
   description: string;
 }
 
@@ -15,11 +15,12 @@ const { title, description, headings } = Astro.props;
 <DocsLayout title={title} description={description} headings={headings}>
   <div class="docs">
     <div class="docs-content">
-      <hr>
+      <hr/>
+      <h1>{title}</h1>
       <slot/>
     </div>
-    <TOC mobile={false} headings={headings} data-pagefind-ignore/>
   </div>
+  <TOC slot="alongside-content" mobile={false} title={title} headings={headings} data-pagefind-ignore/>
 </DocsLayout>
 
 <TOCIntersectionObserver/>

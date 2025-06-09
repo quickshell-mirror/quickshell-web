@@ -52,7 +52,7 @@ const videos = [
         </video>
         <p>
           Configuration by <Fragment set:html={author}/>
-          {source ? <Fragment>(<a href={source}>source code</a>)</Fragment> : null}
+          {source && <>(<a href={source}>source code</a>)</>}
         </p>
       </div>
     </div>)}

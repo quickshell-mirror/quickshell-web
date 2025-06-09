@@ -39,25 +39,21 @@ if (!data) {
   sidebarData = undefined;
 }
 
-const { headings } = Astro.props;
+const {
+  title = null,
+  headings = [],
+} = Astro.props;
 ---
 <div class="header">
   <div class="header-item header-left">
-    {url.length > 2 ?
-      <Nav mobile={true}/>
-      <div class="nav-collapsed-spacer header-spacer"/>
-    : null}
+    <Nav mobile={true}/>
     <h3 class="header-title">
       <a href="/">Quickshell</a>
     </h3>
   </div>
   <div class="header-item header-right">
     <Search/>
-    <div class="header-spacer"/>
     <ThemeSelect client:load />
-    {url.length > 2 ?
-			<div class="toc-collapsed-spacer header-spacer"/>
-      <TOC headings={headings} types={sidebarData} mobile={true}/>
-    : null}
+    <TOC title={title} headings={headings} types={sidebarData} mobile={true}/>
   </div>
 </div>
