@@ -1,0 +1,35 @@
+---
+title: "Distributing Configurations"
+index: 9
+---
+If you plan to distribute your configuration to a lot of users, you should keep
+a couple things in mind:
+
+### API Breaks
+Quickshell will have API breaks in future versions.
+You should have a way to track specific revisions with your distribution
+to avoid breakage if a user updates quickshell before you can update your configuration.
+
+With Nix this should be as simple as tracking a specific revision.
+For Arch, and other distributions without a mechanism to do this, you may
+want to include a package that builds a specific Quickshell revision with
+your configuration.
+
+### Configuration Paths
+Quickshell can load configurations from a number of different paths.
+The ideal path depends on how you distribute your config.
+
+#### As dotfiles
+If you distribute your config as a set of dotfiles, you should place
+the config in `$XDG_CONFIG_HOME/quickshell/<name>` (usually `~/.config/quickshell/<name>`).
+Named configurations can be used in the quickshell command by specifying `--config` or `-c`
+(`qs -c <name>`).
+
+You should not use the bare `$XDG_CONFIG_HOME/quickshell` directory as that will
+make it harder for users to have any other configuration.
+
+#### As a package
+Some configurations are distributed as distro packages. These packages should use a
+path in `$XDG_CONFIG_DIRS`, usually `/etc/xdg` for their files.
+
+As with dotfiles, named configurations should be used (`$CONFIG_DIR/quickshell/<name>`).
