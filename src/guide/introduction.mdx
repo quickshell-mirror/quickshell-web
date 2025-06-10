@@ -66,11 +66,10 @@ To start with lets make a clock. To get the time we'll use the `date` command.
 > Quickshell can do more than just run processes. Read until the end for more information.
 
 We can use a [Process](/docs/types/quickshell.io/process) object to run commands
-and return their results.
+and a @@Quickshell.Io.StdioCollector to read their output.
 
-We'll listen to the @@Quickshell.Io.DataStreamParser.read(s) signal emitted by
-@@Quickshell.Io.SplitParser using a
-[signal handler](/docs/configuration/qml-overview/#signal-handlers)
+We'll listen to the @@Quickshell.Io.StdioCollector.streamFinished(s) signal with
+a [signal handler](/docs/configuration/qml-overview/#signal-handlers)
 to update the text on the clock.
 
 > [!note/Note]
@@ -105,12 +104,13 @@ import QtQuick
       // run the command immediately
       running: true
 
-      // process the stdout stream using a SplitParser
-      // which returns chunks of output after a delimiter
-      stdout: @@Quickshell.Io.SplitParser {
-        // listen for the read signal, which returns the data that was read
-        // from stdout, then write that data to the clock's text property
-        onRead: data => clock.text = data
+      // process the stdout stream using a StdioCollector
+      // Use StdioCollector to retrieve the text the process sends
+      // to stdout.
+      stdout: @@Quickshell.Io.StdioCollector {
+        // Listen for the streamFinished signal, which is sent
+        // when the process closes stdout or exits.
+        onStreamFinished: clock.text = this.text // `this` can be omitted
       }
     }
   }
@@ -148,8 +148,8 @@ import QtQuick
       command: ["date"]
       running: true
 
-      stdout: @@Quickshell.Io.SplitParser {
-        onRead: data => clock.text = data
+      stdout: @@Quickshell.Io.StdioCollector {
+        onStreamFinished: clock.text = this.text
       }
     }
 
@@ -226,8 +226,8 @@ import QtQuick
           command: ["date"]
           running: true
 
-          stdout: @@Quickshell.Io.SplitParser {
-            onRead: data => clock.text = data
+          stdout: @@Quickshell.Io.StdioCollector {
+            onStreamFinished: clock.text = this.text
           }
         }
 
@@ -296,8 +296,8 @@ import QtQuick
     command: ["date"]
     running: true
 
-    stdout: @@Quickshell.Io.SplitParser {
-      onRead: data => clock.text = data
+    stdout: @@Quickshell.Io.StdioCollector {
+      onStreamFinished: clock.text = this.text
     }
   }
 
@@ -380,9 +380,9 @@ import QtQuick
     command: ["date"]
     running: true
 
-    stdout: @@Quickshell.Io.SplitParser {
+    stdout: @@Quickshell.Io.StdioCollector {
       // update the property instead of the clock directly
-      onRead: data => root.time = data
+      onStreamFinished: root.time = this.text
     }
   }
 
@@ -445,8 +445,8 @@ import QtQuick
     command: ["date"]
     running: true
 
-    stdout: @@Quickshell.Io.SplitParser {
-      onRead: data => root.time = data
+    stdout: @@Quickshell.Io.StdioCollector {
+      onStreamFinished: root.time = this.text
     }
   }
 
@@ -512,8 +512,8 @@ import QtQuick
     command: ["date"]
     running: true
 
-    stdout: @@Quickshell.Io.SplitParser {
-      onRead: data => root.time = data
+    stdout: @@Quickshell.Io.StdioCollector {
+      onStreamFinished: root.time = this.text
     }
   }
 
@@ -591,8 +591,8 @@ import QtQuick
     command: ["date"]
     running: true
 
-    stdout: @@Quickshell.Io.SplitParser {
-      onRead: data => root.time = data
+    stdout: @@Quickshell.Io.StdioCollector {
+      onStreamFinished: root.time = this.text
     }
   }
 
@@ -625,8 +625,8 @@ import QtQuick
     command: ["date"]
     running: true
 
-    stdout: @@Quickshell.Io.SplitParser {
-      onRead: data => root.time = data
+    stdout: @@Quickshell.Io.StdioCollector {
+      onStreamFinished: root.time = this.text
     }
   }
 
@@ -701,8 +701,8 @@ import QtQuick
     command: ["date"]
     running: true
 
-    stdout: @@Quickshell.Io.SplitParser {
-      onRead: data => root.time = data
+    stdout: @@Quickshell.Io.StdioCollector {
+      onStreamFinished: root.time = this.text
     }
   }
 
