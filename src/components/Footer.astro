@@ -1,5 +1,6 @@
 ---
 import matrixLogo from "@icons/matrix-logo.svg?raw";
+import discordLogo from "@icons/discord-logo.svg?raw";
 import gitLogo from "@icons/git-logo.svg?raw";
 
 interface Props {
@@ -20,6 +21,9 @@ const props = Astro.props;
   <section class="socials">
     <a href="https://matrix.to/#/#quickshell:outfoxxed.me" target="_blank" aria-label="Join our matrix space">
       <Fragment set:html={matrixLogo}/>
+    </a>
+    <a href="https://discord.gg/UtZeT3xNyT" target="_blank" aria-label="Join our discord">
+      <Fragment set:html={discordLogo}/>
     </a>
     <a href="https://git.outfoxxed.me/quickshell/quickshell" target="_blank" aria-label="Visit our git server">
       <Fragment set:html={gitLogo}/>
