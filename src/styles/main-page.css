@@ -1,3 +1,11 @@
+.main-page-banner {
+  width: 100%;
+  text-align: center;
+  background-color: hsl(var(--green) 48% 40%);
+  color: white;
+  padding: 0.5rem 0;
+}
+
 .main-page_hero {
   position: relative;
   display: flex;

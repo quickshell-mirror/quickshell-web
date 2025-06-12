@@ -13,7 +13,8 @@ All packages currently track quickshell's master branch. This may change in the 
 ### Nix
 The Quickshell repo has an embedded flake.
 You can use either `git+https://git.outfoxxed.me/outfoxxed/quickshell`
-or `github:quickshell-mirror/quickshell`.
+or `github:quickshell-mirror/quickshell`. Use `?ref=` to specify a tag
+if you want a tagged release.
 
 ```nix
 {
@@ -21,7 +22,8 @@ or `github:quickshell-mirror/quickshell`.
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
     quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      # remove ?ref=v0.1.0 to track the master branch
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell?ref=v0.1.0";
 
       # THIS IS IMPORTANT
       # Mismatched system dependencies will lead to crashes and other issues.
@@ -35,11 +37,13 @@ The package is available as `quickshell.packages.<system>.default`, which you ca
 `environment.systemPackages` or `home.packages` if you use home-manager.
 
 ### Arch
-Quickshell is available from the aur by [mcgoth] under
-the [quickshell](https://aur.archlinux.org/packages/quickshell) package.
+Quickshell is available from the aur under
+the [quickshell](https://aur.archlinux.org/packages/quickshell) package for the latest release,
+or the [quickshell-git](https://aur.archlinux.org/packages/quickshell-git) package
+which tracks the master branch.
 
 > [!WARNING]
-> When using the AUR package, quickshell may break any time Qt is updated.
+> When using an AUR package, quickshell may break any time Qt is updated.
 > The AUR gives us no way to actually fix this, but Quickshell will attempt to
 > warn you if it detects a breakage when updating. If warned of a breakage,
 > please reinstall the package
@@ -47,17 +51,25 @@ the [quickshell](https://aur.archlinux.org/packages/quickshell) package.
 Install using the command below:
 ```sh
 yay -S quickshell
+# or
+yay -S quickshell-git
 ```
 (or your AUR helper of choice)
 
 ### Fedora
-Quickshell is available from [errornointernet](https://github.com/errornointernet/)'s
-Fedora COPR as [errornointernet/quickshell](https://copr.fedorainfracloud.org/coprs/errornointernet/quickshell).
+Quickshell is available from the [errornointernet/quickshell] COPR, as either
+`quickshell` which tracks the latest release or `quickshell-git` which tracks
+the master branch.
+
+[errornointernet/quickshell]: https://copr.fedorainfracloud.org/coprs/errornointernet/quickshell
 
 Install using the command below:
 ```sh
 sudo dnf copr enable errornointernet/quickshell
+
 sudo dnf install quickshell
+# or
+sudo dnf install quickshell-git
 ```
 
 ### Guix
