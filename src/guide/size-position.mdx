@@ -211,4 +211,21 @@ Layouts, such as the Row, Column and Grid layout, are extremely useful for posit
 items adjacent to eachother. See the linked qt documentation for more details.
 
 > [!NOTE]
-> Layouts have a default spacing of 5 pixels between items, not zero.
+> - Layouts have a default spacing of 5 pixels between items, not zero.
+> - Items in a Layout will be pixel-aligned.
+
+### Layouts vs. Row and Column
+
+In addition to the @@QtQuick.Layouts.RowLayout and @@QtQuick.Layouts.ColumnLayout types,
+QtQuick has similarly named @@QtQuick.Row and @@QtQuick.Column types.
+
+The Layout types are generally much more flexible and enable the usage of the
+@@QtQuick.Layouts.Layout attached object.
+
+In contrast, the @@QtQuick.Row and @@QtQuick.Column types are not part of Qt's Layout
+system and do not have access to the @@QtQuick.Layouts.Layout attached object.
+In addition, Row and Column do not pixel-align members, meaning if you have a member
+with a fractional size, it will break the pixel alignment of members following it.
+
+In general, RowLayout and ColumnLayout should be used over Row and Column outside
+of cases where pixel alignment is intentially broken.
