@@ -3,40 +3,43 @@ title: "Item Size and Position"
 index: 2
 ---
 > [!TIP]
-> Read the entire page, understanding this is critical to building a well designed shell.
+> Read the entire page, as understanding this is critical to building a well designed shell.
 
-@@QtQuick.Item has two sets of size properties, actual size (@@QtQuick.Item.width and @@QtQuick.Item.height)
-and implicit / desired (@@QtQuick.Item.implicitWidth and @@QtQuick.Item.implicitHeight).
+An @@QtQuick.Item (and its subclasses) has two sets of size properties:
+- actual size (@@QtQuick.Item.width and @@QtQuick.Item.height)
+- implicit/desired size (@@QtQuick.Item.implicitWidth and @@QtQuick.Item.implicitHeight)
 
-Container items, such as layouts and wrappers, use the implicit size of their children to determine
-their own implicit size, and their actual size to detetermine the actual size of their children.
-If managed by a container, an Item should not set its own size, and should instead allow
-the container to determine it based on its implicit size.
+Container items, such as layouts and wrappers, use the implicit size of their children
+to determine their own implicit size. They use their actual size to determine the sizes
+of their children.
 
-Put simply, implicit size should flow from children to parents, while actual size should flow from
-parent to children.
+If an Item is managed by a container, it should not set its own size. Instead, it should
+allow the container to determine its size based on its implicit size.
 
-In addition to size, Items also have position properties (@@QtQuick.Item.x and @@QtQuick.Item.y).
-Similarly to actual size, (actual) position should not be set directly if your item is managed
-by a container, though there is no such thing as implicit position.
+In other words, implicit size should flow from children to parent, while actual size
+should flow from parent to children.
+
+In addition to size, Items also have positional properties (@@QtQuick.Item.x and @@QtQuick.Item.y).
+Similar to actual size, the actual position should not be set directly if the item is managed by
+a container, though there is no such thing as implicit position.
 
 > [!WARNING]
 > Many QtQuick Items have *zero size* by default (both implicit and actual).
 >
-> An invisible zero sized item (usually a custom container without implicit size set)
+> An invisible, zero-sized item, which is usually a custom container without implicit size set,
 > is a common bug and often manifests as an item being laid out as if it took no space.
 >
-> Quickshell will attempt to detect zero sized items when a window is initially made visible
-> and log a warning, but it cannot detect all cases. Please be aware these exist.
+> Quickshell will attempt to detect zero-sized items when a window is initially made visible
+> and log a warning, but it cannot detect all cases. Please be aware that these exist.
 
 ## Container Items
-Below is an example container which adds a margin to a rectangle, and interacts properly
+Below is an example container that adds a margin to its child rectangle and interacts properly
 with other container types.
 
 ```qml
 @@QtQuick.Item {
   property real margin: 5
-  
+
   // Set the implicit size of the containing item to the size of
   // the contained item, plus the margin on each side.
   implicitWidth: child.implicitWidth + margin * 2
@@ -53,7 +56,7 @@ with other container types.
     y: parent.margin
     width: parent.width - parent.margin * 2
     height: parent.height - parent.margin * 2
-    
+
     // The child's implicit / desired size, which will be respected
     // by the container item as long as it is not constrained
     // or stretched.
@@ -85,7 +88,10 @@ to control the child item's actual size and position.
   @@QtQuick.Binding { wrapper.child.height: wrapper.height - wrapper.margin * 2 }
 }
 ```
-Note: @@Quickshell.Widgets.WrapperItem is a builtin component that adds margins similarly to this.
+
+> [!TIP]
+> Quickshell has a builtin component @@Quickshell.Widgets.WrapperItem
+> that adds margins similar to the behavior above.
 
 ### Reducing boilerplate with Anchors
 We can reduce the amount of boilerplate we have to write using
@@ -99,7 +105,7 @@ position and size directly. A similar change can be made to the `Binding` exampl
 ```qml
 @@QtQuick.Item {
   property real margin: 5
-  
+
   implicitWidth: child.implicitWidth + margin * 2
   implicitHeight: child.implicitHeight + margin * 2
 
@@ -110,7 +116,7 @@ position and size directly. A similar change can be made to the `Binding` exampl
     anchors.fill: parent
     // Add a margin to all anchored sides.
     anchors.margins: parent.margin
-    
+
     implicitWidth: 50
     implicitHeight: 50
   }
@@ -125,7 +131,7 @@ to determine the size of a child item, such as in the example below:
 @@QtQuick.Item {
   implicitWidth: childrenRect.width
   implicitHeight: childrenRect.height
-  
+
   @@QtQuick.Rectangle {
     anchors.fill: parent
 
@@ -139,11 +145,11 @@ While the snippet above might look like it should work, it is actually hiding a 
 
 As stated at the top of the page, an item's implicit size should be used to determine
 its parent's implicit size, and the parent's actual size should be used to determine
-the child's actual size. **`childrenRect` breaks this pattern.**
+the child's actual size. The **`childrenRect` breaks this pattern.**
 
-`childrenRect` encompasses the geometry of all child items, meaning their *actual* geometry,
-not their *implicit* geometry. This results in the container item's size having an indirect
-dependency on itself, in what is known as a *binding loop*.
+The `childrenRect` property represents the *actual* geometry of all child items, not their
+*implicit* geometry. This results in the container item's size having an indirect dependency
+on itself, which is known as a *binding loop*.
 
 If we were to try to figure out what implicitWidth is by hand, it would look something like this:
 
@@ -153,7 +159,7 @@ If we were to try to figure out what implicitWidth is by hand, it would look som
 which isn't a valid definition.
 
 ### MarginWrapper components
-To solve the boilerplate problem that often leads users to `childrenRect`, Quickshell comes with
+To solve the boilerplate problem, which often leads users to use `childrenRect`, Quickshell comes with
 @@Quickshell.Widgets.MarginWrapperManager and a set of components based on it.
 
 @@Quickshell.Widgets.MarginWrapperManager automatically handles the size and position relationship
@@ -164,7 +170,7 @@ Rewriting the examples from the top of the page:
 ```qml
 @@QtQuick.Item {
   @@Quickshell.Widgets.MarginWrapperManager { margin: 5 }
-  
+
   // Automatically detected by MarginWrapperManager as the
   // primary child of the container and sized accordingly.
   @@QtQuick.Rectangle {
@@ -180,7 +186,7 @@ Or as a reusable component:
   // A bidirectional binding to manager.margin,
   // where the default value is set.
   property alias margin: manager.margin
-  
+
   // MarginWrapperManager tries to automatically detect
   // the primary child of the container, but exposing the
   // child property allows us to both access the child
@@ -207,8 +213,8 @@ to the example above:
 QtQuick comes with a set of layout types in the
 [QtQuick.Layouts](https://doc.qt.io/qt-6/qtquicklayouts-overview.html) module.
 
-Layouts, such as the Row, Column and Grid layout, are extremely useful for positioning
-items adjacent to eachother. See the linked qt documentation for more details.
+Layouts, such as the Row, Column, and Grid layout, are extremely useful for positioning
+items adjacent to each other. See the linked Qt documentation for more details.
 
 > [!NOTE]
 > - Layouts have a default spacing of 5 pixels between items, not zero.

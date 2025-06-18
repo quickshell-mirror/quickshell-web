@@ -7,25 +7,28 @@ introduce you to all the basic concepts involved. You can use the
 [QML Language Reference](/docs/guide/qml-language) to learn about the syntax
 of the QML language.
 
-Note that all the <a>Green Links</a> in code blocks will take you to the documentation
-for their respective types.
+> [!NOTE]
+> All the <a>Green Links</a> in code blocks will take you to the documentation,
+> listing their respective types.
 
 ## Config Files
 Quickshell searches the `quickshell` subfolder of every XDG standard config path
-for configs. Usually this is `~/.config/quickshell`.
+for configs. Usually, this is `~/.config/quickshell`.
 
 Each named subfolder containing a `shell.qml` file is considered to be a config.
-If the base `quickshell` folder contains a shell.qml file, subfolders will not be
-considered.
+If the base `quickshell` folder contains a `shell.qml` file, subfolders will
+not be considered.
 
-A specific config can be picked using the `--config` or `-c` argument to Quickshell.
+A specific configuration can be picked using the `--config` or `-c` argument to Quickshell.
 
-Configs at other paths, including raw qml files can be run with `--path` or `-p`.
+Configs located at other paths outside XDG standard, including raw qml files,
+can be run with `--path` or `-p`.
 
 ## Creating Windows
 
-Quickshell has two main window types available, @@Quickshell.PanelWindow for bars
-and widgets, and @@Quickshell.FloatingWindow for standard desktop windows.
+Quickshell has two main window types available:
+- @@Quickshell.PanelWindow for bars, widgets, and overlays
+- @@Quickshell.FloatingWindow for standard desktop windows
 
 We'll start with an example:
 
@@ -52,14 +55,15 @@ import QtQuick // for Text
 ```
 
 The above example creates a bar/panel on your currently focused monitor with
-a centered piece of [text](https://doc.qt.io/qt-6/qml-qtquick-text.html). It will also reserve space for itself on your monitor.
+a centered piece of [text](https://doc.qt.io/qt-6/qml-qtquick-text.html).
+It will also reserve space for itself on your monitor.
 
 More information about available properties is available in the [type reference](/docs/types/Quickshell/PanelWindow).
 
 ## Running a process
 
 Now that we have a piece of text, what if it did something useful?
-To start with lets make a clock. To get the time we'll use the `date` command.
+To start with, let's make a clock. To get the time, we'll use the `date` command.
 
 > [!note/Note]
 > Quickshell can do more than just run processes. Read until the end for more information.
@@ -173,13 +177,12 @@ import QtQuick
 
 ## Reusable components
 
-If you have multiple monitors you might have noticed that your bar
+If you have multiple monitors, you might have noticed that your bar
 is only on one of them. If not, you'll still want to **follow this section
 to make sure your bar doesn't disappear if your monitor disconnects**.
 
-We can use a @@Quickshell.Variants object to create instances of _non widget items_.
-(See @@QtQuick.Repeater for doing
-something similar with visual items.)
+We can use a @@Quickshell.Variants object to create instances of _non-widget items_.
+(See @@QtQuick.Repeater for doing something similar with visual items.)
 
 The @@Quickshell.Variants type creates instances of a @@QtQml.Component based on
 a data model you supply. (A component is a re-usable tree of objects.)
@@ -248,12 +251,11 @@ import QtQuick
 </span>
 
 With this example, bars will be created and destroyed as you plug and unplug them,
-due to the reactive nature of the
-@@Quickshell.Quickshell.screens property.
+due to the reactive nature of the @@Quickshell.Quickshell.screens property.
 (See: [Reactive Bindings](/docs/configuration/qml-overview/#reactive-bindings).)
 
 Now there's an important problem you might have noticed: when the window
-is created multiple times we also make a new Process and Timer, which makes the
+is created multiple times, we also make a new Process and Timer, which makes the
 bar less efficient than it could be. We can fix this by moving the
 Process and Timer outside of the window using @@Quickshell.Scope.
 
@@ -309,11 +311,10 @@ import QtQuick
 }
 ```
 
-However there is a problem with naively moving the Process and Timer
-out of the component.
+However, there is a problem with naively moving the Process and Timer out of the component.
 _What about the `clock` that the process references?_
 
-If you run the above example you'll see something like this in the console every second:
+If you run the above example, you'll see something like this in the console every second:
 
 ```
 WARN scene: **/shell.qml[36:-1]: ReferenceError: clock is not defined
@@ -394,8 +395,8 @@ import QtQuick
 }
 ```
 
-Now we've fixed the problem so there's nothing actually wrong with the
-above code, but we can make it more concise:
+Now we've fixed the problem, so there's nothing actually wrong with the
+above code; however, we can make it more concise:
 
 1. `Component`s can be defined implicitly, meaning we can remove the
    component wrapping the window and place the window directly into the
@@ -532,11 +533,11 @@ We can bring in other folders as well using
 [import statements](/docs/configuration/qml-overview/#explicit-imports).
 
 Now what about breaking out the clock? This is a bit more complex because
-the clock component in the bar, as well as the process and timer that
-make up the actual clock, need to be dealt with.
+the clock component in the bar need to be dealt with, as well as the necessary
+processes that make up the actual clock.
 
-To start with, we can move the clock widget to a new file. For now it's just a
-single @@QtQuick.Text object but the same concepts apply regardless of complexity.
+To start with, we can move the clock widget to a new file. For now, it's just a
+single @@QtQuick.Text object, but the same concepts apply regardless of complexity.
 
 ```qml
 // ClockWidget.qml
@@ -683,7 +684,7 @@ any scope.
 ```qml
 // Time.qml
 
-// with this line our type becomes a singleton
+// with this line our type becomes a Singleton
 pragma Singleton
 
 import Quickshell
