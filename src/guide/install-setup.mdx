@@ -2,19 +2,23 @@
 title: "Installation & Setup"
 index: 0
 ---
-> [!NOTE]
+> [!WARNING]
 > Quickshell is still in a somewhat early stage of development.
 > There will be breaking changes before 1.0, however a migration guide will be provided.
 
 ## Installation
 
-All packages currently track quickshell's master branch. This may change in the future.
+Since Quickshell 0.1 has been released, you can now choose whether to install by tracking
+the master branch, or install by latest release.
 
 ### Nix
-The Quickshell repo has an embedded flake.
-You can use either `git+https://git.outfoxxed.me/outfoxxed/quickshell`
-or `github:quickshell-mirror/quickshell`. Use `?ref=` to specify a tag
-if you want a tagged release.
+The Quickshell repo has an embedded flake. You can use either of the two:
+
+- `git+https://git.outfoxxed.me/outfoxxed/quickshell`
+- `github:quickshell-mirror/quickshell`
+
+> [!NOTE]
+> You can use `?ref=` to specify a tag if you want a tagged release.
 
 ```nix
 {
@@ -33,20 +37,19 @@ if you want a tagged release.
 }
 ```
 
-The package is available as `quickshell.packages.<system>.default`, which you can add to
-`environment.systemPackages` or `home.packages` if you use home-manager.
+The package is available as `quickshell.packages.<system>.default`, which you can then add to
+your `environment.systemPackages` or `home.packages` if you use home-manager.
 
 ### Arch
-Quickshell is available from the aur under
-the [quickshell](https://aur.archlinux.org/packages/quickshell) package for the latest release,
-or the [quickshell-git](https://aur.archlinux.org/packages/quickshell-git) package
-which tracks the master branch.
+Quickshell is available from the aur under:
+- the [quickshell](https://aur.archlinux.org/packages/quickshell) package for the latest release
+- the [quickshell-git](https://aur.archlinux.org/packages/quickshell-git) package that tracks the master branch
 
 > [!WARNING]
-> When using an AUR package, quickshell may break any time Qt is updated.
+> When using the AUR package, Quickshell may break whenever Qt is updated.
 > The AUR gives us no way to actually fix this, but Quickshell will attempt to
 > warn you if it detects a breakage when updating. If warned of a breakage,
-> please reinstall the package
+> please reinstall the package.
 
 Install using the command below:
 ```sh
@@ -57,9 +60,9 @@ yay -S quickshell-git
 (or your AUR helper of choice)
 
 ### Fedora
-Quickshell is available from the [errornointernet/quickshell] COPR, as either
-`quickshell` which tracks the latest release or `quickshell-git` which tracks
-the master branch.
+Quickshell is available from the [errornointernet/quickshell] COPR, as either:
+- `quickshell` that tracks the latest release
+- `quickshell-git` that tracks the master branch
 
 [errornointernet/quickshell]: https://copr.fedorainfracloud.org/coprs/errornointernet/quickshell
 
@@ -82,7 +85,8 @@ Quickshell's source repository works as a channel. Add the following to your cha
   (branch "master"))
 ```
 
-Then, you can install the package via `guix install quickshell-git` or by adding `quickshell-git` to your system or home definition.
+Then, you can install the package via `guix install quickshell-git` or by adding `quickshell-git`
+to your system or home definition.
 
 You can also clone the repository and use `guix shell -f quickshell.scm` to try out the package.
 
@@ -164,19 +168,19 @@ We are aware of the following issues:
 - Qmlls does not work well when a file is not correctly structured.
   This means that completions and lints won't work unless braces are closed
   correctly and such.
-- Qmlls cannot handle quickshell's singletons. This means you won't see
-  completions, and usages of singleton members may show a warning.
-  We're still investigating this problem and how to fix it.
+- Qmlls cannot handle Quickshell's @@Quickshell.Singleton, which means you won't see
+  completions, and usages of Singleton members may show a warning. We're still investigating
+  this problem and how to fix it.
 - The LSP cannot provide any documentation for Quickshell types.
 
-Keeping in mind the above caveats, qmlls should be able to guide you towards
-more correct code should you chose to use it.
+Keeping in mind the above caveats, qmlls should be able to guide you towards a
+more correct code should you choose to use it.
 
 > [!NOTE]
 > Nix users should note that qmlls will not be able to pick up qml modules
 > that are not in `QML2_IMPORT_PATH`. The easiest way to ensure this is by setting
 > `qt.enable` to `true` and installing the quickshell package globally.
 
-# Next steps
+## Next steps
 
 Create your first configuration by reading the [Intro](/docs/configuration/intro).
