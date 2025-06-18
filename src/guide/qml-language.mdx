@@ -5,7 +5,7 @@ index: 10
 import Collapsible from "@components/Collapsible.astro";
 
 Quickshell is configured using the Qt Modeling Language, or QML.
-This page explains what you need to know about QML to start using quickshell.
+This page explains what you need to know about QML to start using Quickshell.
 
 <span class="small">
   See also: [Qt Documentation: QML
@@ -97,8 +97,8 @@ import "myjs.js" as MyJs
 #### Manual imports
 
 Every QML File begins with a list of imports.
-Import statements tell the QML engine where
-to look for types you can create [objects](#objects) from.
+Import statements inform the QML engine about the
+locations of types that are used to create objects.
 
 A module import statement looks like this:
 
@@ -129,8 +129,9 @@ import "<filename>" as <Namespace>
 - `Namespace` is the namespace functions and variables from the javascript
   file will be made available under.
 
-Note: All _Module_ and _Namespace_ names must start with an uppercase letter.
-Attempting to use a lowercase namespace is an error.
+> [!NOTE]
+> All _Module_ and _Namespace_ names must start with an uppercase letter.
+> Attempting to use a lowercase namespace will result in an error.
 
 ##### Examples
 
@@ -142,21 +143,21 @@ import QtQuick.Layouts 6.0 as L
 import "jsfile.js" as JsFile
 ```
 
-<Collapsible title="When no module version">
+<Collapsible title="When should I specify a module version?">
 
 By default, when no module version is requested, the QML engine will pick
 the latest available version of the module. Requesting a specific version
 can help ensure you get a specific version of the module's types, and as a
-result your code doesn't break across Qt or quickshell updates.
+result your code doesn't break across Qt or Quickshell updates.
 
-While Qt's types usually don't majorly change across versions, quickshell's
+While Qt's types usually don't majorly change across versions, Quickshell's
 are much more likely to break. To put off dealing with the breakage we suggest
-specifying a version at least when importing quickshell modules.
+specifying a version at least when importing Quickshell modules.
 
 </Collapsible>
 
 <span class="small">
-  [Qt Documentation: Import
+  See also: [Qt Documentation: Import
   syntax](https://doc.qt.io/qt-6/qtqml-syntax-imports.html)
 </span>
 
@@ -171,7 +172,7 @@ root
 |-shell.qml
 ```
 
-In this example, `MyButton` will automatically be imported as a type usable from shell.qml
+In this example, `MyButton` will automatically be imported as a type usable from `shell.qml`
 or any other neighboring files.
 
 ### Objects
@@ -195,13 +196,14 @@ by looking it up in the [Type Reference](/docs/types/).
 
 #### Properties
 
-Every object may have any number of property assignments (only one per specific property).
-Each assignment binds the named property to the given expression.
+Every object may have any number of property assignment, with only one assignment per specific property.
+Each assignment binds the named property to the given value/expression.
 
 ##### Property bindings
 
-Expressions are snippets of javascript code assigned to a property. The last (or only) line
-can be the return value, or an explicit return statement (multiline expressions only) can be used.
+Expressions are snippets of javascript code assigned to a property.
+The last line, or the only line, can serve as the return value.
+Alternatively, an explicit return statement can also be used for multi-line expressions.
 
 ```qml
 @@QtQuick.Item {
@@ -226,16 +228,14 @@ can be the return value, or an explicit return statement (multiline expressions 
 }
 ```
 
-Semicolons are optional and allowed on any line of a single or multiline expression,
+Semicolons, while optional, can be included on any line of a single or multi-line expression,
 including the last line.
 
-All property bindings are [_reactive_](#reactive-bindings), which means when any property the expression depends
-on is updated, the expression is re-evaluated and the property is updated.
+All property bindings are [_reactive_](#reactive-bindings). This means that whenever any
+property the expression depends on is updated, the expression is re-evaluated and the property
+is updated accordingly.
 
-<span class="small">See: [Reactive bindings](#reactive-bindings)</span>
-
-Note that it is an error to try to assign to a property that does not exist.
-(See: [property definitions](#property-definitions))
+<span class="small">See also [Reactive bindings](#reactive-bindings) for more information</span>
 
 ##### Property definitions
 
@@ -268,6 +268,8 @@ Properties can be defined inside of objects with the following syntax:
 
 Defining a property with the same name as one provided by the current object will override
 the property of the type it is derived from in the current context.
+
+Trying to assign to a property that does not exist is an error.
 
 ##### The default property
 
@@ -307,7 +309,8 @@ would put a single object in:
 ##### The `id` property
 
 Every object has a special property called `id` that can be assigned to give
-the object a name it can be referred to throughout the current file. The id must be lowercase.
+the object a name that it can be referred to throughout the current file.
+The id must be lowercase.
 
 ```qml
 @@QtQuick.Layouts.ColumnLayout {
@@ -323,7 +326,7 @@ the object a name it can be referred to throughout the current file. The id must
 }
 ```
 
-<Collapsible title="The `id` property compared to normal properties">
+<Collapsible title="How is the `id` property compared to normal properties?">
 
 The `id` property isn't really a property, and doesn't do anything other than
 expose the object to the current file. It is only called a property because it
@@ -385,14 +388,14 @@ all other objects, you should refer to them by id when accessing properties.
 ```
 
 <span class="small">
-  [Qt Documentation: Scope and Naming
+  See also: [Qt Documentation: Scope and Naming
   Resolution](https://doc.qt.io/qt-6/qtqml-documents-scope.html)
 </span>
 
 #### Functions
 
-Functions in QML can be declared everywhere [properties](#properties) can, and follow
-the same [scoping rules](#property-access-scopes).
+Functions in QML can be declared everywhere [properties](#properties) can be declared in,
+and follow the same [scoping rules](#property-access-scopes).
 
 Function definition syntax:
 
@@ -426,7 +429,7 @@ every expression depending on the function is also re-evaluated.
 ```
 
 In this example, every time the button is clicked, the label's count increases
-by one, as `clicks` is changed, which triggers a re-evaluation of `text` through
+by one as the value of `clicks` is changed, triggering a re-evaluation of `text` through
 `makeClicksLabel`.
 
 ##### Lambdas
@@ -497,7 +500,7 @@ They can be declared everywhere [properties](#properties) and [functions](#funct
 can, and follow the same [scoping rules](#property-access-scopes).
 
 <span class="small">
-  [Qt Documentation: Signal and Handler Event
+  See also: [Qt Documentation: Signal and Handler Event
   System](https://doc.qt.io/qt-6/qtqml-syntax-signals.html)
 </span>
 
@@ -541,24 +544,24 @@ or signal when the signal is emitted.
 
 <span class="small">
   `Component.onCompleted` will be addressed later in [Attached
-  Properties](#attached-properties) but for now just know that it runs
+  Properties](#attached-properties), but for now, just know that it runs
   immediately once the object is fully initialized.
 </span>
 
 When the button is clicked, the button emits the @@QtQuick.Controls.Button.clicked(s)
-signal which we connected to `updateText`. The signal then invokes `updateText`
+signal, which we connected to `updateText`. The signal then invokes `updateText`,
 which updates the counter and the text on the label.
 
 ##### Signal handlers
 
-Signal handlers are a more concise way to make a connections, and prior examples have used them.
+Signal handlers are a more concise way to make connections, and prior examples have used them.
 
-When creating an object, for every signal present on its type there is a corresponding `on<Signal>`
-property implicitly defined which can be set to a function. (Note that the first letter of the
-signal's name it capitalized.)
+When creating an object, there is a corresponding `on<Signal>` property implicitly defined for every
+signal present on its type, which can be set to a function. Do note that the first letter of the
+signal's name is capitalized.
 
-Below is the same example as in [Making Connections](#making-connections),
-this time using the implicit signal handler property to handle @@QtQuick.Controls.Button.clicked(s).
+Below is the same example from [Making Connections](#making-connections), but this time,
+using the implicit signal handler property to handle @@QtQuick.Controls.Button.clicked(s).
 
 ```qml
 @@QtQuick.Layouts.ColumnLayout {
@@ -583,10 +586,10 @@ this time using the implicit signal handler property to handle @@QtQuick.Control
 
 ##### Indirect signal handlers
 
-When it is not possible or not convenient to directly define a signal handler, before resorting
-to `.connect`ing the properties, a @@QtQml.Connections object can be used to access them.
+Before resorting to `.connect`ing the properties, a @@QtQml.Connections object can be used to access them
+when it is not possible or inconvenient to directly define a signal handler.
 
-This is especially useful to connect to signals of singletons.
+This is especially useful to connect to signals within a Singleton.
 
 ```qml
 @@QtQuick.Item {
@@ -611,7 +614,7 @@ Every property has an associated signal, which powers QML's [reactive bindings](
 The signal is named `<propertyname>Changed` and works exactly the same as any other signal.
 
 Whenever the property is re-evaluated, its change signal is emitted. This is used internally
-to update dependent properties, but can be directly used, usually with a signal handler.
+to update dependent properties but can also be directly used, which is usually with a signal handler.
 
 ```qml
 @@QtQuick.Layouts.ColumnLayout {
@@ -634,10 +637,10 @@ to update dependent properties, but can be directly used, usually with a signal 
 }
 ```
 
-In this example we listen for changes to the @@QtQuick.Controls.CheckBox.checkState property of the CheckBox
+In this example, we listen for changes to the @@QtQuick.Controls.CheckBox.checkState property of the CheckBox
 using its change signal, `checkStateChanged` with the signal handler `onCheckStateChanged`.
 
-Since text is also a property we can do the same thing more concisely:
+Since text is also a property, we can do the same thing more concisely:
 
 ```qml
 @@QtQuick.Layouts.ColumnLayout {
@@ -685,10 +688,12 @@ as decided by internal library code. The documentation for a type will
 tell you if it can be used as an attached object and how.
 
 Attached objects are accessed in the form `<Typename>.<member>` and can have
-properties, functions and signals.
+properties, functions, and signals.
 
 A good example is the @@QtQml.Component type,
 which is attached to every object and often used to run code when an object initializes.
+
+In this example, the text property is set inside the `Component.onCompleted` attached signal handler.
 
 ```qml
 @@QtQuick.Text {
@@ -698,12 +703,10 @@ which is attached to every object and often used to run code when an object init
 }
 ```
 
-In this example, the text property is set inside the `Component.onCompleted` attached signal handler.
-
 #### Creating types
 
 Every QML file with an uppercase name is implicitly a type, and can be used from
-neighboring files or imported (See [Imports](#imports).)
+neighboring files or imported. (See [Imports](#imports).)
 
 A type definition is just a normal object. All properties defined for the root object
 are visible to the consumer of the type. Objects identified by [id properties](#the-id-property)
@@ -776,12 +779,12 @@ Example of an inline component:
 
 ##### Singletons
 
-QML Types can be easily made into a singleton, meaning there is only one instance
+QML Types can be easily made into a @@Quickshell.Singleton, meaning there is only one instance
 of the type.
 
-To make a type a singleton, put `pragma Singleton` at the top of the file.
-To ensure it behaves correctly with quickshell you should also make
-@@Quickshell.Singleton the root item of your type.
+To make a type a Singleton, put `pragma Singleton` at the top of the file.
+To ensure it behaves correctly with Quickshell, you should also make the
+Singleton the root item of your type.
 
 ```qml
 pragma Singleton
@@ -792,7 +795,7 @@ import ...
 }
 ```
 
-once a type is a singleton, its members can be accessed by name from neighboring
+Once a type is a Singleton, its members can be accessed by name from neighboring
 files.
 
 ## Concepts
@@ -806,7 +809,7 @@ files.
 </span>
 
 Reactivity is when a property is updated based on updates to another property.
-Every time one of the properties in a binding change, the binding is re-evaluated
+Every change in one of the properties in a binding, the binding is re-evaluated
 and the bound property takes the new result. Any bindings that depend on that property
 are then re-evaluated and so forth.
 
@@ -815,7 +818,7 @@ Bindings can be created in two different ways:
 ##### Automatic bindings
 
 A reactive binding occurs automatically when you use one or more properties in the definition
-of another property. .
+of another property.
 
 ```qml
 @@QtQuick.Item {
@@ -828,7 +831,7 @@ of another property. .
 }
 ```
 
-In this example, the button's @@QtQuick.Controls.Button.text property is re-evaluated
+In this example, the @@QtQuick.Controls.Button's @@QtQuick.Controls.Button.text property is re-evaluated
 every time the button is clicked, because the `clicks` property has changed.
 
 ###### Avoiding creation
@@ -851,7 +854,7 @@ as assignments to properties do not create binding.
 
 ##### Manual bindings
 
-Sometimes (not often) you need to create a binding inside of a function, signal, or expression.
+Sometimes, but not often, you need to create a binding inside of a function, signal, or expression.
 If you need to change or attach a binding at runtime, the `Qt.binding` function can be used to
 create one.
 
@@ -906,11 +909,10 @@ it will not be updated further by the binding.
 
 ### Lazy loading
 
-Often not all of your interface needs to load immediately. By default the QML
-engine initializes every object in the scene before showing anything onscreen.
-For parts of the interface you don't need to be immediately visible, load them
-asynchronously using a @@Quickshell.LazyLoader.
-See its documentation for more information.
+Often, not all of your interface needs to load immediately. By default, the QML engine
+initializes every object in the scene before showing anything onscreen. For parts of
+the interface you don't need to be immediately visible, load them asynchronously using
+a @@Quickshell.LazyLoader. See its documentation for more information.
 
 #### Components
 
