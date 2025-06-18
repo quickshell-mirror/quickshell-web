@@ -6,30 +6,34 @@ If you plan to distribute your configuration to a lot of users, you should keep
 a couple things in mind:
 
 ### API Breaks
-Quickshell will have API breaks in future versions.
-You should have a way to track specific revisions with your distribution
-to avoid breakage if a user updates quickshell before you can update your configuration.
+As Quickshell is still in a somewhat early stage of development, Quickshell will
+have API breaks for future versions.
 
-With Nix this should be as simple as tracking a specific revision.
-For Arch, and other distributions without a mechanism to do this, you may
+You should have a way to track specific revisions with your distribution to avoid
+breakage if a user updates Quickshell before you can update your configuration.
+
+With Nix, this should be as simple as tracking a specific revision.
+
+For Arch, or any other distributions without a mechanism to do this, you may
 want to include a package that builds a specific Quickshell revision with
 your configuration.
 
 ### Configuration Paths
-Quickshell can load configurations from a number of different paths.
-The ideal path depends on how you distribute your config.
+The ideal configuration path depends on how you distribute your config.
+This is because Quickshell can load configs from a number of different paths.
 
 #### As dotfiles
-If you distribute your config as a set of dotfiles, you should place
-the config in `$XDG_CONFIG_HOME/quickshell/<name>` (usually `~/.config/quickshell/<name>`).
-Named configurations can be used in the quickshell command by specifying `--config` or `-c`
-(`qs -c <name>`).
+If you distribute your config as a set of dotfiles, you should place it in
+`$XDG_CONFIG_HOME/quickshell/<name>` (usually `~/.config/quickshell/<name>`).
 
-You should not use the bare `$XDG_CONFIG_HOME/quickshell` directory as that will
-make it harder for users to have any other configuration.
+You should name your config and refrain from using the bare `$XDG_CONFIG_HOME/quickshell`
+directory, as that will make it harder for users to have any other configuration.
+
+Any of the named configurations present in the directory can then be used using the Quickshell
+command by specifying `--config` or `-c`, like so: `qs -c <name>`.
 
 #### As a package
-Some configurations are distributed as distro packages. These packages should use a
+Some configurations are distributed as distro packages. These packages should use the
 path in `$XDG_CONFIG_DIRS`, usually `/etc/xdg` for their files.
 
 As with dotfiles, named configurations should be used (`$CONFIG_DIR/quickshell/<name>`).
