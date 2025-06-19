@@ -11,7 +11,9 @@ index: 0
 All packages currently track quickshell's master branch. This may change in the future.
 
 ### Nix
-The Quickshell repo has an embedded flake.
+Quickshell releases are packaged in nixpkgs as `quickshell`.
+
+The Quickshell repo also has an embedded flake.
 You can use either `git+https://git.outfoxxed.me/outfoxxed/quickshell`
 or `github:quickshell-mirror/quickshell`. Use `?ref=` to specify a tag
 if you want a tagged release.
@@ -22,8 +24,8 @@ if you want a tagged release.
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
     quickshell = {
-      # remove ?ref=v0.1.0 to track the master branch
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell?ref=v0.1.0";
+      # add ?ref=<tag> to track a tag
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
 
       # THIS IS IMPORTANT
       # Mismatched system dependencies will lead to crashes and other issues.
