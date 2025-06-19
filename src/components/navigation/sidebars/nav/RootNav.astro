@@ -57,8 +57,18 @@ const types = {
     })
   ),
 };
+
+const masterBranch = import.meta.env.MASTER_BRANCH;
 ---
 <nav class="navtree">
+  {masterBranch && <Link
+    title="Docs Version: Master Branch (Switch)"
+    link=`https://quickshell.outfoxxed.me${Astro.url.pathname}`
+  />}
+  {!masterBranch && <Link
+    title="Docs Version: Release 0.1.0 (Switch)"
+    link=`https://quickshell-master.outfoxxed.me${Astro.url.pathname}`
+  />}
   <Link
     title="About Quickshell"
     link="/docs/about"
