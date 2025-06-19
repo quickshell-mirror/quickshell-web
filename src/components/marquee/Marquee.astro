@@ -47,6 +47,7 @@ const videos = [
           muted
           controls
           playsinline
+          preload="metadata"
         >
           <source src={path} type="video/mp4"/>
         </video>
@@ -60,18 +61,35 @@ const videos = [
 </div>
 
 <script>
-  // marquee
   const videoCount = 5; // last array index
   const marquee = document.getElementById("marquee-content")!;
   marquee.style.setProperty("--scroll", "0")
 
-  // autoplay
   window.addEventListener("load", autoplayInit, false);
   const videos = document.getElementsByClassName("marquee-item-content") as HTMLCollectionOf<HTMLVideoElement>;
+  let currentVideoIndex = 0;
+  let currentVideo: HTMLVideoElement | null = null;
 
   function autoplayInit() {
-    videos[0].play();
-  };
+    setActiveVideo(0);
+    currentVideo!.play();
+  }
+
+  function setActiveVideo(index: number) {
+    currentVideo?.pause();
+
+    currentVideoIndex = index;
+    currentVideo = videos[currentVideoIndex];
+    currentVideo.currentTime = 0;
+    marquee.style.setProperty("--scroll", `-${currentVideoIndex*100}%`)
+  }
+
+  function offsetCarousel(offset: number) {
+    let nextIndex = currentVideoIndex + offset;
+    if (nextIndex < 0) nextIndex += videoCount;
+    nextIndex = nextIndex % videoCount;
+    setActiveVideo(nextIndex);
+  }
 
   const intersectionOptions = {
     root: marquee,
@@ -84,48 +102,36 @@ const videos = [
       const video = entry.target as HTMLVideoElement;
       if (!entry.isIntersecting) {
         video.pause();
-        video.removeAttribute("autoplay")
-        video.currentTime = 0;
-      } else {
+      } else if (video === currentVideo) {
         video.play();
       }
     });
-  },intersectionOptions);
+  }, intersectionOptions);
 
   for (const video of videos) {
     observer.observe(video);
 
     video.addEventListener("ended", () => {
       // The "ended" event might just mean its buffering.
-      if (video.duration !== 0 && video.currentTime === video.duration) nextVideo();
+      if (video == currentVideo && video.duration !== 0 && video.currentTime === video.duration) {
+        offsetCarousel(1);
+      }
     });
   }
 
-  const onVisibilityChange = () => {
-    for(const video of videos){
-      if(document.hidden){
-        video.pause();
-      } else {
-        video.play();
+  let wasPaused = false;
+  document.addEventListener("visibilitychange", () => {
+    if (currentVideo) {
+      if (document.hidden) {
+        wasPaused = currentVideo.paused;
+        currentVideo.pause();
+      } else if (!wasPaused) {
+        currentVideo.play();
       }
     }
-  }
-  document.addEventListener("visibilitychange", onVisibilityChange);
-
-  function offsetCarousel(offset: number) {
-    const currentIndex = Number(marquee.getAttribute("data-media-index"));
-    let nextIndex = currentIndex + offset;
-    if (nextIndex < 0) nextIndex += videoCount;
-    nextIndex = nextIndex % videoCount;
-
-    marquee.setAttribute("data-media-index", `${nextIndex}`);
-    marquee.style.setProperty("--scroll", `-${nextIndex*100}%`)
-  }
-
-  function prevVideo() { offsetCarousel(-1) }
-  function nextVideo() { offsetCarousel(1) }
+  });
 
   // left-right buttons
-  document.getElementById("marquee-scroll-left")!.addEventListener("mousedown", prevVideo);
-  document.getElementById("marquee-scroll-right")!.addEventListener("mousedown", nextVideo);
+  document.getElementById("marquee-scroll-left")!.addEventListener("mousedown", () => offsetCarousel(-1));
+  document.getElementById("marquee-scroll-right")!.addEventListener("mousedown", () => offsetCarousel(1));
 </script>
