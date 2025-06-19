@@ -3,9 +3,9 @@ title: "Introduction"
 index: 2
 ---
 This page will walk you through the process of creating a simple bar/panel, and
-introduce you to all the basic concepts involved. If you want to learn about the
-syntax of the QML language first, then take a look at the
-[QML Language Reference](/docs/guide/qml-language).
+introduce you to all the basic concepts involved. You can use the
+[QML Language Reference](/docs/guide/qml-language) to learn about the syntax
+of the QML language.
 
 > [!NOTE]
 > All the <a>Green Links</a> in code blocks will take you to the documentation,
@@ -16,7 +16,7 @@ Quickshell searches the `quickshell` subfolder of every XDG standard config path
 for configs. Usually, this is `~/.config/quickshell`.
 
 Each named subfolder containing a `shell.qml` file is considered to be a config.
-But if the base `quickshell` folder contains a `shell.qml` file, subfolders will
+If the base `quickshell` folder contains a `shell.qml` file, subfolders will
 not be considered.
 
 A specific configuration can be picked using the `--config` or `-c` argument to Quickshell.
@@ -27,7 +27,7 @@ can be run with `--path` or `-p`.
 ## Creating Windows
 
 Quickshell has two main window types available:
-- @@Quickshell.PanelWindow for bars and widgets
+- @@Quickshell.PanelWindow for bars, widgets, and overlays
 - @@Quickshell.FloatingWindow for standard desktop windows
 
 We'll start with an example:
@@ -533,8 +533,8 @@ We can bring in other folders as well using
 [import statements](/docs/configuration/qml-overview/#explicit-imports).
 
 Now what about breaking out the clock? This is a bit more complex because
-the clock component in the bar need to be dealt with, as well as the process
-and timer that make up the actual clock.
+the clock component in the bar need to be dealt with, as well as the necessary
+processes that make up the actual clock.
 
 To start with, we can move the clock widget to a new file. For now, it's just a
 single @@QtQuick.Text object, but the same concepts apply regardless of complexity.
@@ -678,7 +678,7 @@ Now you might be thinking, why do we need the `Time` type in
 our bar file, and the answer is we don't. We can make `Time`
 a [Singleton](/docs/configuration/qml-overview/#singletons).
 
-A Singleton object has only one instance, and is accessible from
+A singleton object has only one instance, and is accessible from
 any scope.
 
 ```qml
@@ -691,7 +691,7 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
-// your Singletons should always have Singleton as the type
+// your singletons should always have Singleton as the type
 @@Quickshell.Singleton {
   id: root
   property string time

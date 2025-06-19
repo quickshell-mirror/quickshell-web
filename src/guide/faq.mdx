@@ -30,17 +30,19 @@ single process.
 ## How do I
 
 ### Make a rounded window
-Rounded windows are simply transparent, square window with an opaque/translucent,
-rounded rectangle inside of them.
+Rounded windows are simply transparent, square windows, with a rounded rectangle
+inside of them.
 
 ```qml
 @@Quickshell.PanelWindow {
   color: "transparent"
 
   @@QtQuick.Rectangle {
-    color: "white" // your actual color
-    anchors.fill: parent // matches the size of the window
+    // match the size of the window
+    anchors.fill: parent
+
     radius: 5
+    color: "white" // your actual color
   }
 }
 ```
@@ -51,7 +53,7 @@ players or system tray items, you want a @@QtQuick.Repeater, which is
 usually combined with a @@QtQuick.Layouts.RowLayout or @@QtQuick.Layouts.ColumnLayout.
 
 If you have a longer list, such as a list of entries in an application launcher
-or any list that can be scrolled, you want a @@QtQuick.ListView instead.
+or a list that needs to be scrolled, you want a @@QtQuick.ListView instead.
 
 ### Run a program or script
 Use @@Quickshell.Io.Process.
@@ -65,10 +67,12 @@ e.g. a command that listens to window manager IPC commands, use
 
 ### Show widgets conditionally
 Conditionally showing widgets can be done in two ways, simply using the @@QtQuick.Item.visible property,
-or using Loaders if what you need is more complex.
+or by using a @@QtQuick.Loader.
 
-The @@QtQuick.Item (and its subclasses) has the @@QtQuick.Item.visible property.
-This can be easily used to change the visibility of an Item conditionally:
+Depending on your use case, both @@QtQuick.Loader and the @@QtQuick.Item.visible property may make sense at equal complexity.
+If you want to unload a widget tree to save memory or speed up load times, then you should use Loaders.
+
+The @@QtQuick.Item.visible property can be used to change the visibility of an Item conditionally:
 
 ```qml
 @@QtQuick.Item { // or any of its subclasses
@@ -76,7 +80,7 @@ This can be easily used to change the visibility of an Item conditionally:
 }
 ```
 
-If you want to display either one of at least two components conditionally, you can use Loaders:
+Note that you can also change out a Loader's component conditionally:
 
 ```qml
 @@QtQuick.Loader {
@@ -150,8 +154,8 @@ is to use Loaders.
 
 Loaders can be used to create objects only when needed, and destroy them when not needed.
 
-Use @@QtQuick.Loader if the component being loaded inherits from @@QtQuick.Item. Otherwise,
-you should use @@Quickshell.LazyLoader instead.
+@@QtQuick.Loader should be used if the component being loaded inherits from @@QtQuick.Item,
+otherwise, a @@Quickshell.LazyLoader should be used.
 
 ## Something is broken
 
@@ -172,4 +176,4 @@ If you change the background color of your window between opaque and transparent
 then this may affect you.
 
 To tell Quickshell that you want to create a window capable of showing transparency,
-use @@Quickshell.QsWindow.surfaceFormat, and set `opaque` to false.
+use @@Quickshell.QsWindow.surfaceFormat to set `opaque` to false.

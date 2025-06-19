@@ -2,14 +2,14 @@
 title: "Installation & Setup"
 index: 0
 ---
-> [!WARNING]
+> [!NOTE]
 > Quickshell is still in a somewhat early stage of development.
 > There will be breaking changes before 1.0, however a migration guide will be provided.
 
 ## Installation
 
-Since Quickshell 0.1 has been released, you can now choose whether to install by tracking
-the master branch, or install by latest release.
+Since Quickshell 0.1, you can now choose whether to install by tracking the master branch,
+or install by latest release.
 
 ### Nix
 The Quickshell repo has an embedded flake. You can use either of the two:
@@ -37,7 +37,7 @@ The Quickshell repo has an embedded flake. You can use either of the two:
 }
 ```
 
-The package is available as `quickshell.packages.<system>.default`, which you can then add to
+The package is available as `quickshell.packages.<system>.default`, which can be added to
 your `environment.systemPackages` or `home.packages` if you use home-manager.
 
 ### Arch
@@ -46,7 +46,7 @@ Quickshell is available from the aur under:
 - the [quickshell-git](https://aur.archlinux.org/packages/quickshell-git) package that tracks the master branch
 
 > [!WARNING]
-> When using the AUR package, Quickshell may break whenever Qt is updated.
+> When using an AUR package, Quickshell may break whenever Qt is updated.
 > The AUR gives us no way to actually fix this, but Quickshell will attempt to
 > warn you if it detects a breakage when updating. If warned of a breakage,
 > please reinstall the package.
@@ -168,8 +168,8 @@ We are aware of the following issues:
 - Qmlls does not work well when a file is not correctly structured.
   This means that completions and lints won't work unless braces are closed
   correctly and such.
-- Qmlls cannot handle Quickshell's @@Quickshell.Singleton, which means you won't see
-  completions, and usages of Singleton members may show a warning. We're still investigating
+- Qmlls cannot handle Quickshell's Singleton, which means you won't see completions,
+  and usages of Singleton members may show a warning. We're still investigating
   this problem and how to fix it.
 - The LSP cannot provide any documentation for Quickshell types.
 
@@ -181,6 +181,6 @@ more correct code should you choose to use it.
 > that are not in `QML2_IMPORT_PATH`. The easiest way to ensure this is by setting
 > `qt.enable` to `true` and installing the quickshell package globally.
 
-## Next steps
+# Next steps
 
 Create your first configuration by reading the [Intro](/docs/configuration/intro).

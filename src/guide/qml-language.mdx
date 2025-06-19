@@ -97,8 +97,8 @@ import "myjs.js" as MyJs
 #### Manual imports
 
 Every QML File begins with a list of imports.
-Import statements inform the QML engine about the
-locations of types that are used to create objects.
+Import statements tell the QML engine where
+to look for types you can create [objects](#objects) from.
 
 A module import statement looks like this:
 
@@ -142,19 +142,6 @@ import Quickshell as QS
 import QtQuick.Layouts 6.0 as L
 import "jsfile.js" as JsFile
 ```
-
-<Collapsible title="When should I specify a module version?">
-
-By default, when no module version is requested, the QML engine will pick
-the latest available version of the module. Requesting a specific version
-can help ensure you get a specific version of the module's types, and as a
-result your code doesn't break across Qt or Quickshell updates.
-
-While Qt's types usually don't majorly change across versions, Quickshell's
-are much more likely to break. To put off dealing with the breakage we suggest
-specifying a version at least when importing Quickshell modules.
-
-</Collapsible>
 
 <span class="small">
   See also: [Qt Documentation: Import
@@ -202,7 +189,7 @@ Each assignment binds the named property to the given value/expression.
 ##### Property bindings
 
 Expressions are snippets of javascript code assigned to a property.
-The last line, or the only line, can serve as the return value.
+The last line can serve as the return value.
 Alternatively, an explicit return statement can also be used for multi-line expressions.
 
 ```qml
@@ -326,7 +313,7 @@ The id must be lowercase.
 }
 ```
 
-<Collapsible title="How is the `id` property compared to normal properties?">
+<Collapsible title="How is the `id` property different from normal properties?">
 
 The `id` property isn't really a property, and doesn't do anything other than
 expose the object to the current file. It is only called a property because it
@@ -394,7 +381,7 @@ all other objects, you should refer to them by id when accessing properties.
 
 #### Functions
 
-Functions in QML can be declared everywhere [properties](#properties) can be declared in,
+Functions in QML can be declared everywhere [properties](#properties),
 and follow the same [scoping rules](#property-access-scopes).
 
 Function definition syntax:
@@ -586,10 +573,10 @@ using the implicit signal handler property to handle @@QtQuick.Controls.Button.c
 
 ##### Indirect signal handlers
 
-Before resorting to `.connect`ing the properties, a @@QtQml.Connections object can be used to access them
-when it is not possible or inconvenient to directly define a signal handler.
+Signal handlers should be preferred, but there are times where it is not possible or inconvenient to define one.
+In those cases, before resorting to `.connect`ing the properties, a @@QtQml.Connections object can be used to access them.
 
-This is especially useful to connect to signals within a Singleton.
+This is especially useful to connect to signals of a Singleton.
 
 ```qml
 @@QtQuick.Item {
@@ -613,8 +600,8 @@ This is especially useful to connect to signals within a Singleton.
 Every property has an associated signal, which powers QML's [reactive bindings](#reactive-bindings).
 The signal is named `<propertyname>Changed` and works exactly the same as any other signal.
 
-Whenever the property is re-evaluated, its change signal is emitted. This is used internally
-to update dependent properties but can also be directly used, which is usually with a signal handler.
+When it is not possible or inconvenient to directly define a signal handler, before resorting
+to `.connect`ing the properties, a @@QtQml.Connections object can be used to access them.
 
 ```qml
 @@QtQuick.Layouts.ColumnLayout {
@@ -779,12 +766,11 @@ Example of an inline component:
 
 ##### Singletons
 
-QML Types can be easily made into a @@Quickshell.Singleton, meaning there is only one instance
-of the type.
+QML Types can be easily made into a Singleton, meaning there is only one instance of the type.
 
-To make a type a Singleton, put `pragma Singleton` at the top of the file.
+To make a type of a Singleton, put `pragma Singleton` at the top of the file.
 To ensure it behaves correctly with Quickshell, you should also make the
-Singleton the root item of your type.
+@@Quickshell.Singleton the root item of your type.
 
 ```qml
 pragma Singleton
@@ -809,7 +795,7 @@ files.
 </span>
 
 Reactivity is when a property is updated based on updates to another property.
-Every change in one of the properties in a binding, the binding is re-evaluated
+Every time one of the properties in a binding change, the binding is re-evaluated
 and the bound property takes the new result. Any bindings that depend on that property
 are then re-evaluated and so forth.
 
@@ -831,7 +817,7 @@ of another property.
 }
 ```
 
-In this example, the @@QtQuick.Controls.Button's @@QtQuick.Controls.Button.text property is re-evaluated
+In this example, the button's @@QtQuick.Controls.Button.text property is re-evaluated
 every time the button is clicked, because the `clicks` property has changed.
 
 ###### Avoiding creation
@@ -854,7 +840,7 @@ as assignments to properties do not create binding.
 
 ##### Manual bindings
 
-Sometimes, but not often, you need to create a binding inside of a function, signal, or expression.
+Occasionally, a binding might need to be created inside of a function, signal, or expression.
 If you need to change or attach a binding at runtime, the `Qt.binding` function can be used to
 create one.
 
