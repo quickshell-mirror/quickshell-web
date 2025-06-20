@@ -22,7 +22,7 @@ const { funcData } = Astro.props;
       let genericType:string|undefined;
       let genericTypeLink:string|undefined;
       return (
-        <li id={item.name} class="typedata-root typefunc-root">
+        <li id={ `func-${item.name}` } class="typedata-root typefunc-root">
           <TypeTitle
             typekind="func"
             typename={item.name}
