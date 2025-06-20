@@ -49,7 +49,7 @@ export const Table: Component<{
               <li class="types-item props-item">
                 <a
                   class="type-anchor"
-                  href={`#${prop}`}
+                  href={`#prop-${prop}`}
                 >
                   <Tag />
                   {prop}
@@ -66,7 +66,7 @@ export const Table: Component<{
               <li class="types-item func-item">
                 <a
                   class="type-anchor"
-                  href={`#${func}`}
+                  href={`#func-${func}`}
                 >
                   <RoundBrackets />
                   {func}
@@ -83,7 +83,7 @@ export const Table: Component<{
               <li class="types-item signals-item">
                 <a
                   class="type-anchor"
-                  href={`#${signal}`}
+                  href={`#signal-${signal}`}
                 >
                   <PowerCord />
                   {signal}
@@ -100,7 +100,7 @@ export const Table: Component<{
               <li class="types-item vars-item">
                 <a
                   class="type-anchor"
-                  href={`#${variant}`}
+                  href={`#variant-${variant}`}
                 >
                   <FourDiamonds />
                   {variant}
