@@ -66,8 +66,12 @@ e.g. a command that listens to window manager IPC commands, use
 @@Quickshell.Io.SplitParser to return each datum as it arrives.
 
 ### Show widgets conditionally
-The @@QtQuick.Item.visible property can be used to change the visibility of an
-Item conditionally.
+Conditionally showing widgets can be done in two ways, simply using the @@QtQuick.Item.visible property,
+or by using a @@QtQuick.Loader.
+
+Depending on your use case, both the @@QtQuick.Loader and the @@QtQuick.Item.visible property
+may make sense at equal complexity. If you want to unload a widget tree to save memory or
+speed up load times, then you should use Loaders.
 
 Note that you can also change out a Loader's component conditionally:
 
