@@ -10,6 +10,12 @@ index: 0
 
 All packages currently track quickshell's master branch. This may change in the future.
 
+Note that you may want to install some additional packages (names vary by distro):
+- `qtsvg`: support for SVG image loading (bundled with most packages)
+- `qtimageformats`: support for WEBP images as well as some less common ones
+- `qtmultimedia`: support for playing videos, audio, etc
+- `qt5compat`: extra visual effects, notably gaussian blur. @@QtQuick.Effects.MultiEffect is usually preferable
+
 ### Nix
 Quickshell releases are packaged in nixpkgs as `quickshell`.
 
