@@ -82,7 +82,18 @@ sudo dnf install quickshell-git
 ```
 
 ### Guix
-Quickshell's source repository works as a channel. Add the following to your channel list:
+Release versions of Quickshell are available from the standard Guix repository
+as `quickshell` from the `(gnu packages wm)` module.
+
+Install using the command below:
+```sh
+guix install quickshell
+```
+
+You can also add `quickshell` to your Guix system configuration or Guix Home configuration.
+
+For the git version, Quickshell's source repository works as a channel.
+Add the following to your channel list:
 
 ```scheme
 (channel
@@ -91,10 +102,9 @@ Quickshell's source repository works as a channel. Add the following to your cha
   (branch "master"))
 ```
 
-Then, you can install the package via `guix install quickshell-git` or by adding `quickshell-git`
-to your system or home definition.
-
-You can also clone the repository and use `guix shell -f quickshell.scm` to try out the package.
+However, since the package definition is located in the source repository, it cannot be used
+as a channel out of the box. You can clone the repository and use `guix shell -f quickshell.scm`
+to use the git version of the package.
 
 ### Manual build
 See [BUILD.md](https://git.outfoxxed.me/quickshell/quickshell/src/branch/master/BUILD.md)
