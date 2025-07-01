@@ -37,7 +37,7 @@ const { propsKeys, propsData } = Astro.props;
         genericTypeLink = getQMLTypeLink(propData.type.of)
       }
       return (
-        <li id={ item } class="typedata-root typeprop-root">
+        <li id={ `prop-${item}` } class="typedata-root typeprop-root">
           <TypeTitle
             typekind="prop"
             typename={item}

@@ -19,7 +19,7 @@ const { signalKeys, signalsData } = Astro.props;
       let genericType:string|undefined;
       let genericTypeLink:string|undefined;
       return (
-        <li id={ item } class="typedata-root typesignal-root">
+        <li id={ `signal-${item}` } class="typedata-root typesignal-root">
           <TypeTitle
             typekind="signal"
             typename={item}
