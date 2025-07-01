@@ -110,45 +110,69 @@ html:not(.dark) .feature-showcase .shiki span {
   height: 100%;
   min-height: 20rem;
   margin-bottom: 1rem;
-  animation: spin 40s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .cloud-center {
+    position: absolute;
+    z-index: 2;
+  }
+  & .cloud-center img {
+    width: 80px;
+    height: 80px;
+  }
+
+  & .cloud-items-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: spin 40s linear infinite;
+  }
 
   & .cloud-item {
     position: absolute;
+    left: 50%;
+    height: 50%;
+    transform-origin: center bottom;
+    transform: translateX(-50%);
+
+    & > div {
+      transform: rotate(0deg);
+      animation: counter-spin 40s linear infinite;
+      & .feature-icon {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
     &.wayland {
-      transform: translate(-50%, 0);
+      transform: translate(-50%, 0) rotate(0deg);
     }
     &.hyprland {
       transform: translate(-50%, 0) rotate(72deg);
-      & > div {
+      & .feature-icon {
         transform: rotate(-72deg);
       }
     }
     &.pipewire {
       transform: translate(-50%, 0) rotate(144deg);
-      & > div {
+      & .feature-icon {
         transform: rotate(-144deg);
       }
     }
     &.x-org {
       transform: translate(-50%, 0) rotate(216deg);
-      & > div {
+      & .feature-icon {
         transform: rotate(-216deg);
       }
     }
     &.sway {
       transform: translate(-50%, 0) rotate(288deg);
-      & > div {
+      & .feature-icon {
         transform: rotate(-288deg);
       }
     }
-    & img,
-    svg {
-      animation: counter-spin 40s linear infinite;
-      width: 80px;
-      height: 80px;
-    }
-    left: 50%;
-    height: 100%;
   }
 }
 
@@ -194,7 +218,6 @@ html:not(.dark) .feature-showcase .shiki span {
   }
   .featurelist-item {
     width: 100%;
-    padding: unset;
     padding: 1.217rem;
     justify-content: space-between;
     flex-direction: row;

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.4/schema.json",
   "formatter": {
     "enabled": true,
     "formatWithErrors": true,
@@ -9,15 +9,12 @@
     "lineWidth": 66,
     "attributePosition": "multiline"
   },
-  "organizeImports": {
-    "enabled": true
-  },
+  "plugins": [],
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "style": {
-        "noVar": "error",
         "useConst": "error"
       },
       "suspicious": {
@@ -56,7 +53,7 @@
   },
   "overrides": [
     {
-      "include": [
+      "includes": [
         "**/*.ts",
         "**/*.tsx"
       ],
@@ -83,7 +80,7 @@
       }
     },
     {
-      "include": [
+      "includes": [
         "*.astro"
       ],
       "linter": {
