@@ -3,12 +3,12 @@ title: "Graphical Effects"
 index: 7
 ---
 
-Everyone wants effects in their rice right? Well look no further, @@QtQuick.Effects.MultiEffect
-is here!
+@@QtQuick.Effects.MultiEffect lets you apply multiple visual effects—like blur, shadow,
+and color adjustments—in a single, easy-to-use QML component.
 
 # Qt 6 MultiEffect
 
-Now how do I use this you ask? Well, this guide provides a few examples for common uses of
+Now, how do I use this you ask? Well, this guide provides a few examples for common uses of
 effects such as drop shadows, colourisation, masks and blurring.
 
 First and foremost (and arguably the most commonly used), drop shadows! To create a drop shadow,
@@ -217,6 +217,41 @@ For example, the snippet below applies colourisation, shadow and blur:
   blurEnabled: true
   blur: 1
   blurMax: 32
+}
+```
+
+### Using MultiEffect as a layer effect
+
+The @@QtQuick.Effects.MultiEffect component can also be used as a layer effect instead of a
+separate visual item. For example, you can replicate the previous using a layer effect:
+
+> [!NOTE]
+> The source component should be visible and have @@QtQuick.Item.layer.enabled set to `true`.
+> Additionally, the @@QtQuick.Effects.MultiEffect does not need to have a size or the
+> @@QtQuick.Effects.MultiEffect.source property set.
+
+```qml
+@@QtQuick.Image {
+  id: img
+
+  source: "/path/to/img"
+
+  layer.enabled: true
+  layer.effect: @@QtQuick.Effects.MultiEffect {
+    // Apply colourisation
+    colorization: 1
+    colorizationColor: "#abc4d3"
+
+    // Apply shadow
+    shadowEnabled: true
+    shadowBlur: 1
+    shadowColor: "#000000"
+
+    // Apply blur (`blurMax` also affects shadow)
+    blurEnabled: true
+    blur: 1
+    blurMax: 32
+  }
 }
 ```
 
