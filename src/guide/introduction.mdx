@@ -24,6 +24,13 @@ A specific configuration can be picked using the `--config` or `-c` argument to 
 Configs located at other paths outside XDG standard, including raw qml files,
 can be run with `--path` or `-p`.
 
+> [!CAUTION]
+> Many users use root imports, in the form `import "root:/path/to/module"`. These are an old
+> Quickshell feature that will break the LSP and singletons. Keep that in mind if you decide
+> to use them.
+>
+> A replacement without these issues is planned.
+
 ## Creating Windows
 
 Quickshell has two main window types available:
