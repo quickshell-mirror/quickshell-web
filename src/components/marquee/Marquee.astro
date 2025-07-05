@@ -6,6 +6,13 @@ const videos = [
     author: '<a href="https://github.com/soramanew">soramane</a>',
     source: "https://github.com/caelestia-dots/shell",
     path: "/assets/showcase/soramane.mp4",
+    installable: true,
+  },
+  {
+    author: '<a href="https://github.com/end-4">end_4</a>',
+    source: "https://github.com/end-4/dots-hyprland",
+    path: "/assets/showcase/end4.mp4",
+    installable: true,
   },
   {
     author: '<a href="https://outfoxxed.me">outfoxxed</a>',
@@ -37,7 +44,7 @@ const videos = [
     </div>
   </div>
   <div id="marquee-content" class="marquee-content" data-scroll="0" data-media-index="0">
-    {videos.map(({ author, source, path }, index) => <div class="marquee-item">
+    {videos.map(({ author, source, installable, path }, index) => <div class="marquee-item">
       <div>
         <video
           data-media-index={index}
@@ -53,7 +60,8 @@ const videos = [
         </video>
         <p>
           Configuration by <Fragment set:html={author}/>
-          {source && <>(<a href={source}>source code</a>)</>}
+          {source && !installable && <>(<a href={source}>source code</a>)</>}
+          {source && installable && <>(<a href={source}>install</a>)</>}
         </p>
       </div>
     </div>)}
@@ -61,7 +69,7 @@ const videos = [
 </div>
 
 <script>
-  const videoCount = 5; // last array index
+  const videoCount = 6; // last array index
   const marquee = document.getElementById("marquee-content")!;
   marquee.style.setProperty("--scroll", "0")
 
