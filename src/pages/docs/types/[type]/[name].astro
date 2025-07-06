@@ -83,29 +83,33 @@ const details = data.details
             <subheading class="typedocs-subheading">
               {details ? <span class="parsedMD" set:html={details}/> : (<span class="toparse">{data.description}</span>)}
             </subheading>
-            { data.properties && propsKeys ? (
+            { data.properties && propsKeys && propsKeys.length > 0 && (
+              <h2>Properties <a href="/docs/guide/qml-language#properties">[?]</a></h2>
               <Properties
                 propsData={data.properties}
                 propsKeys={propsKeys!}
               />
-            ): null}
-            { data.functions && data.functions.length > 0 ? (
+            )}
+            { data.functions && data.functions.length > 0 && (
+              <h2>Functions <a href="/docs/guide/qml-language#functions">[?]</a></h2>
               <Functions
                 funcData={data.functions}
               />
-            ): null}
-            { data.signals && signalKeys ? (
+            )}
+            { data.signals && signalKeys && signalKeys.length > 0 && (
+              <h2>Signals <a href="/docs/guide/qml-language#signals">[?]</a></h2>
               <Signals
                 signalsData={data.signals}
                 signalKeys={signalKeys}
               />
-            ):null}
-            { data.variants && variantKeys ? (
+            )}
+            { data.variants && variantKeys && variantKeys.length > 0 && (
+              <h2>Variants</h2>
               <Variants
                 variantsData={data.variants}
                 variantKeys={variantKeys}
               />
-            ):null}
+            )}
           </section>
         ) : null
       }
