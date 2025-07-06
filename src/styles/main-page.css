@@ -14,18 +14,28 @@
   justify-content: flex-start;
   align-items: center;
 
-  & h1 {
-    position: relative;
-    font-size: 4.618rem;
-    margin-top: 1rem;
-  }
-
   & .navy {
     color: hsl(var(--blue) 66% 60%);
   }
 
   & .green {
     color: hsl(var(--accent-400));
+  }
+}
+
+.titlebox {
+  position: relative;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+
+  & img {
+    height: 3.4rem;
+  }
+
+  & h1 {
+    font-size: 3.618rem;
+    margin-left: 1rem;
   }
 }
 
@@ -178,6 +188,17 @@ html.dark .main-page_link-card {
 }
 
 @media (min-width: 40rem) {
+  .titlebox {
+    & img {
+      height: 4.4rem;
+    }
+
+    & h1 {
+      font-size: 4.618rem;
+      margin-left: 1rem;
+    }
+  }
+
   .main-page_links_set {
     flex-wrap: nowrap;
   }
