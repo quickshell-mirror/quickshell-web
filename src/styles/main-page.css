@@ -52,8 +52,8 @@ h1.gradient-text {
 html.dark h1.gradient-text {
   background: linear-gradient(
     30deg,
-    hsl(var(--green) 100% 62%),
-    hsl(var(--blue) 100% 59%)
+    #42b96b,
+    #4281b9
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
