@@ -213,7 +213,7 @@ import QtQuick
     @@Quickshell.PanelWindow {
       // the screen from the screens list will be injected into this
       // property
-      property var modelData
+      required property var modelData
 
       // we can then set the window's screen to the injected property
       screen: modelData
@@ -280,7 +280,7 @@ import QtQuick
 
     delegate: @@QtQml.Component {
       @@Quickshell.PanelWindow {
-        property var modelData
+        required property var modelData
         screen: modelData
 
         anchors {
@@ -359,7 +359,7 @@ import QtQuick
 
     delegate: @@QtQml.Component {
       @@Quickshell.PanelWindow {
-        property var modelData
+        required property var modelData
         screen: modelData
 
         anchors {
@@ -429,7 +429,7 @@ import QtQuick
     model: Quickshell.screens
 
     @@Quickshell.PanelWindow {
-      property var modelData
+      required property var modelData
       screen: modelData
 
       anchors {
@@ -496,7 +496,7 @@ import QtQuick
     model: Quickshell.screens
 
     @@Quickshell.PanelWindow {
-      property var modelData
+      required property var modelData
       screen: modelData
 
       anchors {
@@ -574,7 +574,7 @@ import QtQuick
     model: Quickshell.screens
 
     @@Quickshell.PanelWindow {
-      property var modelData
+      required property var modelData
       screen: modelData
 
       anchors {
@@ -658,7 +658,7 @@ import Quickshell
     model: Quickshell.screens
 
     @@Quickshell.PanelWindow {
-      property var modelData
+      required property var modelData
       screen: modelData
 
       anchors {
@@ -745,7 +745,7 @@ import Quickshell
     model: Quickshell.screens
 
     @@Quickshell.PanelWindow {
-      property var modelData
+      required property var modelData
       screen: modelData
 
       anchors {
