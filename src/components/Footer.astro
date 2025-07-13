@@ -10,23 +10,28 @@ interface Props {
 const props = Astro.props;
 ---
 <footer class=`${props.class ?? ""}`>
-  <section class="credits">
+  <div class="credits">
     <p class="hint">Brought to you by:</p>
     <a href="https://outfoxxed.me" target="_blank">outfoxxed - <span class="hint">Lead Developer</span></a>
     <a href="https://xanazf.github.io" target="_blank">xanazf - <span class="hint">Website Developer / Designer</span></a>
     <a href="https://github.com/quickshell-mirror/quickshell/graphs/contributors" target="_blank">
       and our contributors
     </a>
-  </section>
-  <section class="socials">
-    <a href="https://matrix.to/#/#quickshell:outfoxxed.me" target="_blank" aria-label="Join our matrix space">
-      <Fragment set:html={matrixLogo}/>
-    </a>
-    <a href="https://discord.gg/UtZeT3xNyT" target="_blank" aria-label="Join our discord">
-      <Fragment set:html={discordLogo}/>
-    </a>
-    <a href="https://git.outfoxxed.me/quickshell/quickshell" target="_blank" aria-label="Visit our git server">
-      <Fragment set:html={gitLogo}/>
-    </a>
-  </section>
+  </div>
+  <div class="socials-changelog">
+    <section class="socials">
+      <a href="https://matrix.to/#/#quickshell:outfoxxed.me" target="_blank" aria-label="Join our matrix space">
+        <Fragment set:html={matrixLogo}/>
+      </a>
+      <a href="https://discord.gg/UtZeT3xNyT" target="_blank" aria-label="Join our discord">
+        <Fragment set:html={discordLogo}/>
+      </a>
+      <a href="https://git.outfoxxed.me/quickshell/quickshell" target="_blank" aria-label="Visit our git server">
+        <Fragment set:html={gitLogo}/>
+      </a>
+    </section>
+    <section class="changelog">
+      <a href="/changelog">Changelog</a>
+    </section>
+  </div>
 </footer>

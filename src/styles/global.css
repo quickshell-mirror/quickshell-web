@@ -8,6 +8,7 @@
 
 @import "./docs/nav/nav.css";
 @import "./docs/toc/toc.css";
+@import "./docs/nav/version-select.css";
 @import "./docs/docs.css";
 @import "./docs/collapsible.css";
 
@@ -223,8 +224,12 @@ footer {
     align-items: flex-start;
     font-size: 2.5rem;
 
+  }
+  & .changelog {
+    display: flex;
     & a {
-      display: flex;
+      text-decoration: none;
+      margin-inline: auto;
     }
   }
 }

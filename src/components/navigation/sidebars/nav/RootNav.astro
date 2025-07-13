@@ -12,6 +12,7 @@ import { groupRoutes } from "@config/io/helpers";
 import type { TreeEntry } from "./Tree.astro";
 import Tree from "./Tree.astro";
 import Link from "./Link.astro";
+import VersionSelector from "./VersionSelector.astro"
 
 const routes = await getTypeData();
 const groupedRoutes = groupRoutes(routes);
@@ -21,7 +22,7 @@ const guidePages = await getCollection("guide");
 
 function genGuideNav(base: string): TreeEntry[] | undefined {
   const pages = guidePages
-    .filter(page => page.id.match(`^${base}[^/]*$`) !== null && page.id != "index")
+    .filter(page => page.id.match(`^${base}[^/]*$`) !== null && page.id !== "index")
     .sort((a, b) => a.data.index - b.data.index)
     .map(page => ({
       title: page.data.title,
@@ -30,7 +31,7 @@ function genGuideNav(base: string): TreeEntry[] | undefined {
       entries: genGuideNav(page.id + "/"),
     }));
 
-  return pages.length == 0 ? undefined : pages;
+  return pages.length === 0 ? undefined : pages;
 }
 
 const guide = {
@@ -58,20 +59,12 @@ const types = {
   ),
 };
 
-const masterBranch = import.meta.env.MASTER_BRANCH;
 ---
 <nav class="navtree">
-  {masterBranch && <Link
-    title="Docs Version: Master Branch (Switch)"
-    link=`https://quickshell.outfoxxed.me${Astro.url.pathname}`
-  />}
-  {!masterBranch && <Link
-    title="Docs Version: Release 0.1.0 (Switch)"
-    link=`https://quickshell-master.outfoxxed.me${Astro.url.pathname}`
-  />}
+  <VersionSelector title="Versions" link=`${Astro.currentLocale}` current/>
   <Link
     title="About Quickshell"
-    link="/docs/about"
+    link="/about"
     current={currentRoute === "about"}
   />
   <Tree {...guide}/>

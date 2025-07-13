@@ -1,0 +1,17 @@
+{
+  "default": "master",
+  "versions": [
+    {
+      "name": "master",
+      "types": "./modules"
+    },
+    {
+      "name": "0.2.0",
+      "types": "./modules"
+    },
+    {
+      "name": "0.1.0",
+      "types": "./modules"
+    }
+  ]
+}

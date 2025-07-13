@@ -1,0 +1,24 @@
+.version-collapsible {
+  position: relative;
+  overflow: hidden;
+  & summary div {
+    display: flex;
+    justify-content: center;
+  }
+  & .nav-link {
+    max-width: max-content;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0.118rem;
+    border: 1px solid white;
+    border-radius: 0.618rem;
+    opacity: 0.15;
+  }
+}
+.version-select-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
