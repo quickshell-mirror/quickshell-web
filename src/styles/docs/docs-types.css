@@ -53,7 +53,7 @@
 }
 
 .typedocs-data {
-  & subheading {
+  & .typedocs-subheading {
     display: flex;
     flex-direction: column;
     gap: 0.618rem;
@@ -156,6 +156,7 @@
 
 .type-generic {
   position: absolute;
+  width: max-content;
   left: 0.845rem;
   top: 1.217rem;
 }
