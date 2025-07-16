@@ -19,7 +19,7 @@ const { variantKeys, variantsData } = Astro.props;
         ? variantData.params.map(param => param.name)
         : [];
       return (
-        <li id={ item } class="typedata-root typevariant-root">
+        <li id={ `variant-${item}` } class="typedata-root typevariant-root">
           <TypeTitle 
             typekind="variant"
             typename={item}
