@@ -88,6 +88,16 @@ export interface RouteData {
   data: QuickshellData;
 }
 
+export interface VersionData {
+  name: string;
+  modules: RouteData[];
+}
+
+export interface VersionsData {
+  default: string;
+  versions: VersionData[];
+}
+
 export interface dirData {
   fullpath: string;
   filename: string;

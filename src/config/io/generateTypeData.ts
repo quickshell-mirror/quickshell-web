@@ -3,20 +3,8 @@ import path from "node:path";
 
 import type { RouteData, dirData } from "./types";
 
-function modulesPath() {
-  const modulesPath = import.meta.env.SECRET_MODULES_PATH;
-
-  if (!modulesPath || modulesPath === "") {
-    throw new Error(
-      "Cannot generate types, missing SECRET_MODULES_PATH"
-    );
-  }
-
-  return modulesPath;
-}
-
-async function readSubdir(subdir: string): Promise<dirData[]> {
-  const fullpath = path.join(modulesPath(), subdir);
+async function readSubdir(basePath: string, subdir: string): Promise<dirData[]> {
+  const fullpath = path.join(basePath, subdir);
   const filenames = await fs.readdir(fullpath);
 
   const data = await Promise.all(
@@ -42,16 +30,14 @@ async function readSubdir(subdir: string): Promise<dirData[]> {
   return data;
 }
 
-async function generateTypeData(): Promise<RouteData[]> {
-  const mainDir = modulesPath();
-
-  const subdirs = await fs.readdir(mainDir, {
+async function generateTypeData(basePath: string): Promise<RouteData[]> {
+  const subdirs = await fs.readdir(basePath, {
     withFileTypes: true,
   });
   const routes: RouteData[] = [];
 
   for (const subdir of subdirs) {
-    const data = await readSubdir(subdir.name);
+    const data = await readSubdir(basePath, subdir.name);
     const returnValue = data.map(entry => {
       return {
         type: entry.category,
@@ -65,12 +51,40 @@ async function generateTypeData(): Promise<RouteData[]> {
   return routes;
 }
 
-let globalTypeData: Promise<RouteData[]>;
+async function generateVersionsData(): Promise<VersionsData> {
+  const versionsPath = import.meta.env.VERSION_FILE_PATH;
 
-export function getTypeData(): Promise<RouteData[]> {
-  if (!globalTypeData) {
-    globalTypeData = generateTypeData();
+  if (!versionsPath || versionsPath === "") {
+    throw new Error(
+      "Cannot generate types, missing VERSION_FILE_PATH"
+    );
   }
 
-  return globalTypeData;
+  const content = await fs.readFile(versionsPath, "utf8");
+  const data = JSON.parse(content);
+
+  const versions = await Promise.all(data.versions.map(async d => ({
+    name: d.name,
+    modules: await generateTypeData(d.types),
+  })))
+
+  return {
+    versions,
+    default: data.default,
+  }
+}
+
+let globalVersionsData: Promise<VersionsData>;
+
+export function getVersionsData(): Promise<VersionsData> {
+  if (!globalVersionsData) {
+    globalVersionsData = generateVersionsData();
+  }
+
+  return globalVersionsData;
+}
+
+export async function getTypeData(): RouteData[] {
+  const versions = await getVersionsData();
+  return versions.versions.find(v => v.name == versions.default).modules;
 }
