@@ -2,11 +2,6 @@
 import SidebarWrapper from "./SidebarWrapper.tsx";
 import RootNav from "./RootNav.astro";
 
-const url = Astro.url.pathname.split("/");
-const currentRoute = url[2];
-const currentModule = url[3];
-const currentClass = url[4];
-
 export interface Props {
   mobile: boolean;
 }
@@ -16,9 +11,9 @@ const { mobile } = Astro.props;
 <aside class=`nav-wrapper${mobile ? "-mobile" : ""} id="nav"`>
   { mobile ? (
     <SidebarWrapper client:load>
-      <RootNav currentRoute={currentRoute} currentModule={currentModule} currentClass={currentClass}/>
+      <RootNav/>
     </SidebarWrapper>
   ) : (
-    <RootNav currentRoute={currentRoute} currentModule={currentModule} currentClass={currentClass}/>
+    <RootNav/>
   )}
 </aside>

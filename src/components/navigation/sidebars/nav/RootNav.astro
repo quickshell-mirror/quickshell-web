@@ -5,8 +5,6 @@ export interface Props {
   currentClass?: string;
 }
 
-const { currentRoute, currentModule, currentClass } = Astro.props;
-
 import { getModulesData } from "@config/io/generateTypeData";
 import type { TreeEntry } from "./Tree.astro";
 import Tree from "./Tree.astro";
@@ -18,42 +16,56 @@ const modules = await getModulesData();
 import { getCollection } from "astro:content";
 const guidePages = await getCollection("guide");
 
-function genGuideNav(base: string): TreeEntry[] | undefined {
+interface NavTree {
+  title: string,
+  slug: string,
+  entries?: NavTree[],
+}
+
+const currentPath = Astro.url.pathname.slice(1).split('/');
+
+function mkTree(mount: string, pathIdx: number, { title, slug, entries }: NavTree): TreeEntry {
+  const link = `${mount}/${slug}`;
+
+  return {
+    title,
+    link,
+    current: currentPath[pathIdx] === slug,
+    entries: entries?.map(entry => mkTree(link, pathIdx + 1, entry)),
+  };
+}
+
+function genGuideNav(base: string): NavTree[] | undefined {
   const pages = guidePages
     .filter(page => page.id.match(`^${base}[^/]*$`) !== null && page.id !== "index")
     .sort((a, b) => a.data.index - b.data.index)
     .map(page => ({
       title: page.data.title,
-      link: `/docs/guide/${page.id}`,
-      current: currentModule === page.id,
+      slug: page.id,
       entries: genGuideNav(page.id + "/"),
     }));
 
   return pages.length === 0 ? undefined : pages;
 }
 
-const guide = {
+const guide = mkTree("/docs", 1, {
   title: "Usage Guide",
-  link: "/docs/guide",
-  current: currentRoute?.startsWith("guide") ?? false,
+  slug: "guide",
   entries: genGuideNav(""),
-}
+});
 
-const types = {
+const types = mkTree("/docs", 1, {
   title: "Quickshell Types",
-  link: "/docs/types",
-  current: currentRoute?.startsWith("types") ?? false,
+  slug: "types",
   entries: modules.map(module => ({
     title: module.name,
-    link: `/docs/types/${module.name}`,
-    current: currentModule === module.name,
+    slug: module.name,
     entries: module.types.map(type => ({
       title: type.name,
-      link: `/docs/types/${module.name}/${type.name}`,
-      current: currentClass === type.name,
+      slug: type.name,
     }))
   }))
-};
+});
 
 ---
 <nav class="navtree">
@@ -61,7 +73,7 @@ const types = {
   <Link
     title="About Quickshell"
     link="/about"
-    current={currentRoute === "about"}
+    current={Astro.url.pathname === "/about"}
   />
   <Tree {...guide}/>
   <Tree {...types}/>
