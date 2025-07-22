@@ -1,57 +1,41 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-import type { RouteData, dirData } from "./types";
+import type { VersionsData, ModuleData } from "./types";
 
-async function readSubdir(basePath: string, subdir: string): Promise<dirData[]> {
-  const fullpath = path.join(basePath, subdir);
-  const filenames = await fs.readdir(fullpath);
+async function readModulesData(basePath: string): Promise<ModuleData[]> {
+  const moduleDirs = await fs.readdir(basePath);
 
-  const data = await Promise.all(
-    filenames.map(async filename => {
-      const filepath = path.join(fullpath, filename);
-      const content = await fs.readFile(filepath, "utf8");
-      const data = JSON.parse(content);
-      if (typeof data.module === "undefined") {
-        data.module = "index";
-        data.contains = filenames
-          .filter(filename => filename !== "index.json")
-          .map(filename => filename.replace(".json", ""));
-      }
-      const returnValue = {
-        fullpath: path.join(fullpath, filename),
-        filename: filename.replace(".json", ""),
-        category: subdir,
-        data: data,
-      };
-      return returnValue;
-    })
-  );
-  return data;
-}
+  const modules = await Promise.all(moduleDirs.map(async moduleDir => {
+    const modulePath = path.join(basePath, moduleDir);
 
-async function generateTypeData(basePath: string): Promise<RouteData[]> {
-  const subdirs = await fs.readdir(basePath, {
-    withFileTypes: true,
-  });
-  const routes: RouteData[] = [];
+    const indexPromise = async () => {
+      const indexPath = path.join(modulePath, "index.json");
+      const indexContent = await fs.readFile(indexPath, "utf8");
+      return JSON.parse(indexContent);
+    };
 
-  for (const subdir of subdirs) {
-    const data = await readSubdir(basePath, subdir.name);
-    const returnValue = data.map(entry => {
-      return {
-        type: entry.category,
-        name: entry.filename,
-        path: entry.fullpath,
-        data: entry.data,
-      };
+    const typeNames = (await fs.readdir(modulePath)).filter(name => name !== "index.json");
+    const typePromises = typeNames.map(async fileName => {
+      const typePath = path.join(modulePath, fileName);
+      const fileContent = await fs.readFile(typePath, "utf8");
+      return JSON.parse(fileContent);
     });
-    routes.push(...returnValue);
-  }
-  return routes;
+
+    const [index, ...types] = await Promise.all([indexPromise(), ...typePromises]);
+
+    return {
+      name: index.name,
+      description: index.description,
+      details: index.details,
+      types,
+    }
+  }));
+
+  return modules;
 }
 
-async function generateVersionsData(): Promise<VersionsData> {
+async function readVersionsData(): Promise<VersionsData> {
   const versionsPath = import.meta.env.VERSION_FILE_PATH;
 
   if (!versionsPath || versionsPath === "") {
@@ -63,9 +47,9 @@ async function generateVersionsData(): Promise<VersionsData> {
   const content = await fs.readFile(versionsPath, "utf8");
   const data = JSON.parse(content);
 
-  const versions = await Promise.all(data.versions.map(async d => ({
+  const versions = await Promise.all(data.versions.map(async (d: { name: string, types: any }) => ({
     name: d.name,
-    modules: await generateTypeData(d.types),
+    modules: await readModulesData(d.types),
   })))
 
   return {
@@ -78,13 +62,13 @@ let globalVersionsData: Promise<VersionsData>;
 
 export function getVersionsData(): Promise<VersionsData> {
   if (!globalVersionsData) {
-    globalVersionsData = generateVersionsData();
+    globalVersionsData = readVersionsData();
   }
 
   return globalVersionsData;
 }
 
-export async function getTypeData(): RouteData[] {
+export async function getModulesData(): Promise<ModuleData[]> {
   const versions = await getVersionsData();
-  return versions.versions.find(v => v.name == versions.default).modules;
+  return versions.versions.find(v => v.name == versions.default)!.modules;
 }

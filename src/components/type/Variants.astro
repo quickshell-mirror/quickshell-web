@@ -1,28 +1,25 @@
 ---
 import type { QuickshellVariant } from "@config/io/types";
-import { FourDiamonds } from "../icons";
 import TypeDetails from "./TypeDetails.astro";
 import TypeTitle from "./TypeTitle.astro";
 
 export interface Props {
-  variantKeys: string[];
-  variantsData: QuickshellVariant;
+  variants: QuickshellVariant;
 }
 
-const { variantKeys, variantsData } = Astro.props;
+const { variants } = Astro.props;
 ---
 <ul class="typedata typevariants">
   {
-    variantKeys.map(item => {
-      const variantData = variantsData[item];
+    Object.entries(variants).map(([name, variantData]) => {
       const paramKeys = variantData.params && variantData.params.length > 0
         ? variantData.params.map(param => param.name)
         : [];
       return (
-        <li id={ item } class="typedata-root typevariant-root">
+        <li id={ name } class="typedata-root typevariant-root">
           <TypeTitle 
             typekind="variant"
-            typename={item}
+            typename={name}
             typelink=""
             typelink_text=""
           />

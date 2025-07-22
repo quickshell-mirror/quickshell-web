@@ -4,22 +4,20 @@ import type {
   QMLTypeLinkObject,
   QuickshellProps,
 } from "@config/io/types";
-import { Tag, Flag } from "@icons";
+import { Tag } from "@icons";
 import TypeTitle from "./TypeTitle.astro";
 
 import TypeDetails from "./TypeDetails.astro";
 
 export interface Props {
-  propsKeys: string[];
-  propsData: QuickshellProps;
+  props: QuickshellProps;
 }
 
-const { propsKeys, propsData } = Astro.props;
+const { props } = Astro.props;
 ---
 <ul class="typedata typeprops">
   {
-    propsKeys.map(item => {
-      const propData = propsData[item]
+    Object.entries(props).map(([name, propData]) => {
       let typeLink:string;
       let linkText:string;
       let genericType:string|undefined;
@@ -37,10 +35,10 @@ const { propsKeys, propsData } = Astro.props;
         genericTypeLink = getQMLTypeLink(propData.type.of)
       }
       return (
-        <li id={ item } class="typedata-root typeprop-root">
+        <li id={ name } class="typedata-root typeprop-root">
           <TypeTitle
             typekind="prop"
-            typename={item}
+            typename={name}
             typelink={typeLink}
             typelink_text={linkText}
             typename_generic={genericType}

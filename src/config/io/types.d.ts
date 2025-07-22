@@ -61,9 +61,7 @@ export interface QuickshellVariant {
   };
 }
 
-export interface QuickshellData {
-  type: string;
-  module: string;
+export interface TypeData {
   name: string;
   description: string;
   details: string;
@@ -77,32 +75,21 @@ export interface QuickshellData {
   subtypes?: QuickshellData[];
 }
 
-export interface RouteData {
-  // priority 1: Quickshell, Quickshell.Io, etc.
-  type: string;
-  // priority 1.1: entry name (e.g. DataStreamParser)
+export interface ModuleData {
   name: string;
-  // path to json
-  path: string;
-  // data content of the route
-  data: QuickshellData;
+  description: string;
+  details: string;
+  types: TypeData[];
 }
 
 export interface VersionData {
   name: string;
-  modules: RouteData[];
+  modules: ModuleData[];
 }
 
 export interface VersionsData {
   default: string;
   versions: VersionData[];
-}
-
-export interface dirData {
-  fullpath: string;
-  filename: string;
-  category: string;
-  data: QuickshellData;
 }
 // --
 
@@ -124,8 +111,9 @@ export type {
   QuickshellFunction,
   QuickshellSignal,
   QuickshellVariant,
-  QuickshellData,
-  RouteData,
-  dirData,
+  TypeData,
+  ModuleData,
+  VersionData,
+  VersionsData,
   QMLTypeLinkObject,
 };

@@ -1,48 +1,18 @@
 ---
 import { ThemeSelect } from "@components/hooks/ThemeSwitch";
-import { getTypeData } from "@config/io/generateTypeData";
+import type { TypeData } from "@config/io/types";
 import Nav from "@components/navigation/sidebars/nav/index.astro";
 import TOC from "@components/navigation/sidebars/TOC.astro";
-import type { TypeTOC } from "./navigation/sidebars/types";
+import type { ConfigHeading } from "@components/navigation/sidebars/types";
 import Search from "./navigation/Search.astro";
 
-const routes = await getTypeData();
-
-const url = Astro.url.pathname.split("/");
-const currentClass = url[4];
-const currentData = routes.find(
-  item => item.name === currentClass
-);
-
-const data = currentData?.data;
-const tocFunctions =
-  data?.functions?.map(item => item.name) || null;
-
-const propsKeys = data?.properties
-  ? Object.keys(data.properties)
-  : null;
-const signalKeys = data?.signals
-  ? Object.keys(data.signals)
-  : null;
-const variantKeys = data?.variants
-  ? Object.keys(data.variants)
-  : null;
-
-let sidebarData: TypeTOC | undefined = {
-  properties: propsKeys,
-  functions: tocFunctions,
-  signals: signalKeys,
-  variants: variantKeys,
-};
-
-if (!data) {
-  sidebarData = undefined;
+interface Props {
+  title?: string;
+  headings?: ConfigHeading[];
+  type?: TypeData;
 }
 
-const {
-  title = null,
-  headings = [],
-} = Astro.props;
+const { title, headings, type } = Astro.props;
 ---
 <div class="header">
   <div class="header-item header-left">
@@ -54,6 +24,6 @@ const {
   <div class="header-item header-right">
     <Search/>
     <ThemeSelect client:load />
-    <TOC title={title} headings={headings} types={sidebarData} mobile={true}/>
+    <TOC title={title} headings={headings} type={type} mobile={true}/>
   </div>
 </div>

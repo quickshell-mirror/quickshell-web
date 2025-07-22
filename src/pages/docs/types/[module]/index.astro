@@ -1,0 +1,44 @@
+---
+import DocsLayout from "@layouts/DocsLayout.astro";
+import { getModulesData } from "@config/io/generateTypeData";
+import { processMarkdown } from "@src/config/io/markdown";
+
+export async function getStaticPaths() {
+  const modules = await getModulesData();
+  return modules.map(module => ({
+    params: { module: module.name },
+    props: { module },
+  }));
+}
+
+const { module } = Astro.props;
+const details = module.details
+  ? await processMarkdown(module.details)
+  : null;
+---
+
+<DocsLayout
+  title={module.name + " Module Types"}
+  description="Quickshell Type Documentation"
+>
+  <div class="docs-content">
+    <hr />
+    <h2 class="typedocs-title">{module.name} Definitions</h2>
+    <section>
+      <span>{module.description}</span>
+      <div class="root-nav" data-pagefind-ignore>
+        {module.types.map(type => 
+          (
+          <div class="root-nav-entry">
+            <a class="root-nav-link" href={`/docs/types/${module.name}/${type.name}`}>
+              {type.name}
+            </a>
+            <span class="root-nav-desc">{type.description}</span>
+          </div>
+          )
+        )}
+      </div>
+      {details && <span class="parsedMD" set:html={details}/>}
+    </section>
+  </div>
+</DocsLayout>

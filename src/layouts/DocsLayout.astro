@@ -9,14 +9,16 @@ import Head from "@config/Head.astro";
 import Nav from "@components/navigation/sidebars/nav/index.astro";
 import type { ConfigHeading } from "@src/components/navigation/sidebars/types";
 import Footer from "@src/components/Footer.astro";
+import type { TypeData } from "@config/io/types";
 
 interface Props {
   title: string;
   description: string;
   headings?: ConfigHeading[];
+  type?: TypeData
 }
 
-const { title, description, headings } = Astro.props;
+const { title, description, headings, type } = Astro.props;
 const url = Astro.url.pathname.split("/");
 
 const customBreadcrumbs = [
@@ -59,7 +61,7 @@ if (url[2]) {
     <CreateCopyButtons />
   </head>
   <body class="docslayout">
-    <Header title={title} headings={headings}/>
+    <Header title={title} headings={headings} type={type}/>
     <div class="docslayout-root">
       <Nav mobile={false}/>
       <div class="docslayout-inner" data-pagefind-body>

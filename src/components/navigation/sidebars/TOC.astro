@@ -1,15 +1,23 @@
 ---
 import TableOfContents from "./toc";
 import type { ConfigHeading, TypeTOC } from "./types.d.ts";
+import type { TypeData } from "@config/io/types";
 
 export interface Props {
   title?: string;
   headings?: ConfigHeading[];
-  types?: TypeTOC;
+  type?: TypeData;
   mobile: boolean;
 }
 
-const { title, headings, types, mobile } = Astro.props;
+const { title, headings, type, mobile } = Astro.props;
+
+const types: TypeTOC | null = type ? {
+  properties: Object.keys(type.properties ?? {}),
+  functions: (type.functions ?? []).map(f => f.name),
+  signals: Object.keys(type.signals ?? {}),
+  variants: Object.keys(type.variants ?? {}),
+} : null;
 ---
 {((headings?.length ?? 0) != 0 || types) &&
   <div id="toc" aria-mobile={mobile} class=`toc-wrapper${mobile ? "-mobile":""}`>

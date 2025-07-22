@@ -9,9 +9,8 @@ import {
 import type {
   ConfigHeading,
   ConfigTOC,
-  GroupedRoutes,
 } from "@components/navigation/sidebars/types";
-import type { QMLTypeLinkObject, RouteData } from "./types";
+import type { QMLTypeLinkObject } from "./types";
 
 export function buildHierarchy(headings: ConfigHeading[]) {
   const toc: ConfigTOC[] = [];
@@ -41,23 +40,6 @@ export function buildHierarchy(headings: ConfigHeading[]) {
     }
   }
   return toc;
-}
-
-export function groupRoutes(routes: RouteData[]): GroupedRoutes {
-  const froutes = routes.filter(route => route.name !== "index");
-  return froutes.reduce<GroupedRoutes>((acc, route) => {
-    if (!acc.types) acc.types = {};
-
-    if (!acc.types[route.type]) {
-      acc.types[route.type] = [];
-    }
-
-    acc.types[route.type].push({
-      name: route.name,
-      type: route.type,
-    });
-    return acc;
-  }, { types: {} });
 }
 
 export function getQMLTypeLinkObject(unparsed: string) {
