@@ -13,12 +13,13 @@ export interface Props {
 }
 
 const { funcData } = Astro.props;
+const { version } = Astro.params;
 ---
 <ul class="typedata typefuncs">
   {
     funcData.map(item => {
       const functionParams = item.params.length > 0 ? item.params.map((funcparam,index) => `${funcparam.name}${index !== item.params.length -1 ? ", ":""}`) : undefined
-      const retTypeLink = getQMLTypeLink(item.ret as unknown as QMLTypeLinkObject)
+      const retTypeLink = getQMLTypeLink(version!, item.ret as unknown as QMLTypeLinkObject)
       let genericType:string|undefined;
       let genericTypeLink:string|undefined;
       return (
@@ -37,7 +38,7 @@ const { funcData } = Astro.props;
               <p class="typedata-params typefunc-params">
                 {
                   item.params.map(param => {
-                    const paramTypeLink = getQMLTypeLink(param.type);
+                    const paramTypeLink = getQMLTypeLink(version!, param.type);
                     return (
                       <span class="typedata-param typefunc-param">
                         <Tag client:idle/>

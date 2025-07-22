@@ -50,7 +50,7 @@ async function readVersionsData(): Promise<VersionsData> {
   const versions = await Promise.all(data.versions.map(async (d: { name: string, types: any }) => ({
     name: d.name,
     modules: await readModulesData(d.types),
-  })))
+  })));
 
   return {
     versions,
@@ -70,5 +70,5 @@ export function getVersionsData(): Promise<VersionsData> {
 
 export async function getModulesData(): Promise<ModuleData[]> {
   const versions = await getVersionsData();
-  return versions.versions.find(v => v.name == versions.default)!.modules;
+  return versions.versions.find(v => v.name === versions.default)!.modules;
 }

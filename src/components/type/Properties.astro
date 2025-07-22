@@ -14,6 +14,7 @@ export interface Props {
 }
 
 const { props } = Astro.props;
+const { version } = Astro.params;
 ---
 <ul class="typedata typeprops">
   {
@@ -27,12 +28,12 @@ const { props } = Astro.props;
         typeLink = "#"
         linkText = `[${Object.keys(gadget).toString()}]`
       } else {
-        typeLink = getQMLTypeLink(propData.type)
+        typeLink = getQMLTypeLink(version!, propData.type)
         linkText = propData.type.name || propData.type.type
       }
       if (propData.type.of) {
         genericType = propData.type.of.name;
-        genericTypeLink = getQMLTypeLink(propData.type.of)
+        genericTypeLink = getQMLTypeLink(version!, propData.type.of)
       }
       return (
         <li id={ name } class="typedata-root typeprop-root">
@@ -54,7 +55,7 @@ const { props } = Astro.props;
                     return (
                       <span class="typedata-param typefunc-param">
                         <Tag client:idle/>
-                        {key}:<span><a href=`${getQMLTypeLink(gadgetData as unknown as QMLTypeLinkObject)}`>{gadgetData.name}</a></span>
+                        {key}:<span><a href={getQMLTypeLink(version!, gadgetData as unknown as QMLTypeLinkObject)}>{gadgetData.name}</a></span>
                       </span>
                     )
                   })

@@ -3,6 +3,8 @@ import Footer from "@src/components/Footer.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Marquee from "@components/marquee/Marquee.astro";
 import FeatureList from "@src/components/featurelist/FeatureList.astro";
+import { getVersionsData } from "@config/io/generateTypeData";
+const defaultVersion = (await getVersionsData()).default;
 
 const title = "Quickshell";
 ---
@@ -28,10 +30,10 @@ const title = "Quickshell";
         </p>
       </div>
       <div class="about-buttons">
-        <a href="/docs/guide/install-setup" class="main-page_link-card">
+        <a href={`/docs/${defaultVersion}/guide/install-setup`} class="main-page_link-card">
           <h3>Install</h3>
         </a>
-        <a href="/docs/types" class="main-page_link-card main-page_bluecard">
+        <a href={`/docs/${defaultVersion}/types`} class="main-page_link-card main-page_bluecard">
           <h3>Documentation</h3>
         </a>
       </div>

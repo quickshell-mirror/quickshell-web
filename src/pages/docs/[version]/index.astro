@@ -1,0 +1,20 @@
+---
+import DocsLayout from "@layouts/DocsLayout.astro";
+import { getVersionsData } from "@config/io/generateTypeData";
+
+export async function getStaticPaths() {
+  return (await getVersionsData()).versions.map(version => ({
+    params: { version: version.name },
+    props: { version },
+  }));
+}
+
+const { version } = Astro.props;
+---
+<DocsLayout title="Quickshell Docs" description="Quickshell Documentation">
+  <h2>Docs</h2>
+  <div class="root-nav">
+    <h3><a href={`/docs/${version.name}/guide`}>Usage Guide</a></h3>
+    <h3><a href={`/docs/${version.name}/types`}>Type Definitions</a></h3>
+  </div>
+</DocsLayout>

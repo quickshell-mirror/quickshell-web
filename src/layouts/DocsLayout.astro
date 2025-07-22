@@ -19,38 +19,30 @@ interface Props {
 }
 
 const { title, description, headings, type } = Astro.props;
-const url = Astro.url.pathname.split("/");
+let url = Astro.url.pathname.split("/").filter(s => s !== "");
 
-const customBreadcrumbs = [
-  {
-    index: 0,
-    text: "custom",
-    href: "/",
-  },
-  {
-    text: url[1].slice(0, 1)[0].toUpperCase() + url[1].slice(1),
-    href: `/${url[1]}`,
-  },
-];
+const breadcrumbs = [{
+  text: "custom",
+  href: "/",
+}];
 
-if (url[2]) {
-  customBreadcrumbs.push({
-    text: url[2].slice(0, 1)[0].toUpperCase() + url[2].slice(1),
-    href: `/${url[1]}/${url[2]}`,
+let linkPath = "";
+if (url[0] === "docs") {
+  const { version } = Astro.params;
+  linkPath = `/docs/${version}`;
+  breadcrumbs.push({
+    text: `Docs (${version})`,
+    href: linkPath,
   });
-  if (url[3]) {
-    customBreadcrumbs.push({
-      text: url[3].slice(0, 1)[0].toUpperCase() + url[3].slice(1),
-      href: `/${url[1]}/${url[2]}/${url[3]}`,
-    });
-    if (url[4]) {
-      customBreadcrumbs.filter((_, index) => index !== 4);
-      customBreadcrumbs.push({
-        text: url[4],
-        href: `/${url[1]}/${url[2]}/${url[3]}/${url[4]}`,
-      });
-    }
-  }
+  url = url.slice(2);
+}
+
+for (const segment of url) {
+  linkPath += `/${segment}`;
+  breadcrumbs.push({
+    text: segment[0].toUpperCase() + segment.slice(1),
+    href: linkPath,
+  });
 }
 ---
 
@@ -65,7 +57,7 @@ if (url[2]) {
     <div class="docslayout-root">
       <Nav mobile={false}/>
       <div class="docslayout-inner" data-pagefind-body>
-        <Breadcrumbs  crumbs={customBreadcrumbs} linkTextFormat="sentence" truncated={true} data-pagefind-ignore>
+        <Breadcrumbs crumbs={breadcrumbs} linkTextFormat="sentence" truncated={true} data-pagefind-ignore>
           <svg
             slot="index"
             xmlns="http://www.w3.org/2000/svg"

@@ -1,0 +1,27 @@
+---
+import GuideLayout from "@layouts/GuideLayout.astro";
+import { getVersionsData } from "@config/io/generateTypeData";
+import { processMarkdown } from "@config/io/markdown";
+
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const { versions } = await getVersionsData();
+  const guidePages = await getCollection("guide");
+
+  // versioned guides unhandled for now
+  return versions.flatMap(version => guidePages.map(page => ({
+    params: { version: version.name, id: page.id == "index" ? "/" : page.id },
+    props: { version, page },
+  })));
+}
+
+const { version, page } = Astro.props;
+const { headings } = await render(page);
+
+// we can't use 'Content' because there isn't a way to pass in a version
+const html = await processMarkdown(version.name, page.body!);
+---
+<GuideLayout title={page.data.title} description="" headings={headings}>
+  <Fragment set:html={html}/>
+</GuideLayout>

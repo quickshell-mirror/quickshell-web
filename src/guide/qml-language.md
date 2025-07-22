@@ -7,10 +7,7 @@ import Collapsible from "@components/Collapsible.astro";
 Quickshell is configured using the Qt Modeling Language, or QML.
 This page explains what you need to know about QML to start using Quickshell.
 
-<span class="small">
-  See also: [Qt Documentation: QML
-  Tutorial](https://doc.qt.io/qt-6/qml-tutorial.html)
-</span>
+See also: [Qt Documentation: QML Tutorial](https://doc.qt.io/qt-6/qml-tutorial.html)
 
 ## Structure
 
@@ -143,10 +140,7 @@ import QtQuick.Layouts 6.0 as L
 import "jsfile.js" as JsFile
 ```
 
-<span class="small">
-  See also: [Qt Documentation: Import
-  syntax](https://doc.qt.io/qt-6/qtqml-syntax-imports.html)
-</span>
+See also: [Qt Documentation: Import syntax](https://doc.qt.io/qt-6/qtqml-syntax-imports.html)
 
 #### Implicit imports
 
@@ -222,7 +216,7 @@ All property bindings are [_reactive_](#reactive-bindings). This means that when
 property the expression depends on is updated, the expression is re-evaluated and the property
 is updated accordingly.
 
-<span class="small">See also [Reactive bindings](#reactive-bindings) for more information</span>
+See also [Reactive bindings](#reactive-bindings) for more information
 
 ##### Property definitions
 
@@ -374,10 +368,7 @@ all other objects, you should refer to them by id when accessing properties.
 }
 ```
 
-<span class="small">
-  See also: [Qt Documentation: Scope and Naming
-  Resolution](https://doc.qt.io/qt-6/qtqml-documents-scope.html)
-</span>
+See also: [Qt Documentation: Scope and Naming Resolution](https://doc.qt.io/qt-6/qtqml-documents-scope.html)
 
 #### Functions
 
@@ -486,10 +477,7 @@ A signal is basically an event emitter you can connect to and receive updates fr
 They can be declared everywhere [properties](#properties) and [functions](#functions)
 can, and follow the same [scoping rules](#property-access-scopes).
 
-<span class="small">
-  See also: [Qt Documentation: Signal and Handler Event
-  System](https://doc.qt.io/qt-6/qtqml-syntax-signals.html)
-</span>
+See also: [Qt Documentation: Signal and Handler Event System](https://doc.qt.io/qt-6/qtqml-syntax-signals.html)
 
 ##### Signal definitions
 
@@ -529,11 +517,8 @@ or signal when the signal is emitted.
 }
 ```
 
-<span class="small">
-  `Component.onCompleted` will be addressed later in [Attached
-  Properties](#attached-properties), but for now, just know that it runs
-  immediately once the object is fully initialized.
-</span>
+`Component.onCompleted` will be addressed later in [Attached Properties](#attached-properties),
+but for now, just know that it runs immediately once the object is fully initialized.
 
 When the button is clicked, the button emits the @@QtQuick.Controls.Button.clicked(s)
 signal, which we connected to `updateText`. The signal then invokes `updateText`,
@@ -788,11 +773,9 @@ files.
 
 ### Reactive bindings
 
-<span class="small">
-  This section assumes knowledge of: [Properties](#properties),
-  [Signals](#signals), and [Functions](#functions). See also the [Qt
-  documentation](https://doc.qt.io/qt-6/qtqml-syntax-propertybinding.html).
-</span>
+This section assumes knowledge of: [Properties](#properties), [Signals](#signals),
+and [Functions](#functions).
+See also the [Qt documentation](https://doc.qt.io/qt-6/qtqml-syntax-propertybinding.html).
 
 Reactivity is when a property is updated based on updates to another property.
 Every time one of the properties in a binding change, the binding is re-evaluated

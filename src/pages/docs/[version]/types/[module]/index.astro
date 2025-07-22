@@ -1,19 +1,20 @@
 ---
 import DocsLayout from "@layouts/DocsLayout.astro";
-import { getModulesData } from "@config/io/generateTypeData";
+import { getVersionsData } from "@config/io/generateTypeData";
 import { processMarkdown } from "@src/config/io/markdown";
 
 export async function getStaticPaths() {
-  const modules = await getModulesData();
-  return modules.map(module => ({
-    params: { module: module.name },
-    props: { module },
-  }));
+  return (await getVersionsData()).versions.flatMap(version => {
+    return version.modules.map(module => ({
+      params: { version: version.name, module: module.name },
+      props: { version, module },
+    }));
+  });
 }
 
-const { module } = Astro.props;
+const { version, module } = Astro.props;
 const details = module.details
-  ? await processMarkdown(module.details)
+  ? await processMarkdown(version.name, module.details)
   : null;
 ---
 
@@ -30,7 +31,7 @@ const details = module.details
         {module.types.map(type => 
           (
           <div class="root-nav-entry">
-            <a class="root-nav-link" href={`/docs/types/${module.name}/${type.name}`}>
+            <a class="root-nav-link" href={`/docs/${version.name}/types/${module.name}/${type.name}`}>
               {type.name}
             </a>
             <span class="root-nav-desc">{type.description}</span>

@@ -5,15 +5,18 @@ export interface Props {
   currentClass?: string;
 }
 
-import { getModulesData } from "@config/io/generateTypeData";
+import { getVersionsData } from "@config/io/generateTypeData";
 import type { TreeEntry } from "./Tree.astro";
 import Tree from "./Tree.astro";
 import Link from "./Link.astro";
-import VersionSelector from "./VersionSelector.astro"
-
-const modules = await getModulesData();
-
 import { getCollection } from "astro:content";
+
+const versions = await getVersionsData();
+const versionName = Astro.params.version;
+const modules = versions.versions.find(version => version.name === versionName)?.modules;
+
+const currentPath = Astro.url.pathname.split('/').filter(s => s !== "");
+
 const guidePages = await getCollection("guide");
 
 interface NavTree {
@@ -21,8 +24,6 @@ interface NavTree {
   slug: string,
   entries?: NavTree[],
 }
-
-const currentPath = Astro.url.pathname.slice(1).split('/');
 
 function mkTree(mount: string, pathIdx: number, { title, slug, entries }: NavTree): TreeEntry {
   const link = `${mount}/${slug}`;
@@ -48,43 +49,67 @@ function genGuideNav(base: string): NavTree[] | undefined {
   return pages.length === 0 ? undefined : pages;
 }
 
-const guide = mkTree("/docs", 1, {
-  title: "Usage Guide",
-  slug: "guide",
-  entries: genGuideNav(""),
-});
+let versionedEntries;
+let versionsTree;
 
-const types = mkTree("/docs", 1, {
-  title: "Quickshell Types",
-  slug: "types",
-  entries: modules.map(module => ({
-    title: module.name,
-    slug: module.name,
-    entries: module.types.map(type => ({
-      title: type.name,
-      slug: type.name,
-    }))
-  }))
-});
+if (versionName) {
+  versionedEntries = {
+    guide: mkTree(`/docs/${versionName}`, 2, {
+      title: "Usage Guide",
+      slug: "guide",
+      entries: genGuideNav(""),
+    }),
+    types: mkTree(`/docs/${versionName}`, 2, {
+      title: "Quickshell Types",
+      slug: "types",
+      entries: modules!.map(module => ({
+        title: module.name,
+        slug: module.name,
+        entries: module.types.map(type => ({
+          title: type.name,
+          slug: type.name,
+        }))
+      }))
+    }),
+  };
 
+  versionsTree = {
+    title: `Switch Version (${versionName})`,
+    link: "#",
+    entries: versions.versions.map(version => ({
+      title: version.name,
+      link: `/docs/${version.name}${Astro.url.pathname.slice(6 + versionName.length)}`,
+      current: version.name == versionName,
+    })),
+  };
+}
 ---
 <nav class="navtree">
-  <VersionSelector title="Versions" link=`${Astro.currentLocale}` current/>
   <Link
-    title="About Quickshell"
+    title="About"
     link="/about"
-    current={Astro.url.pathname === "/about"}
+    current={currentPath.length === 1 && currentPath[0] === "about"}
   />
-  <Tree {...guide}/>
-  <Tree {...types}/>
-  <Link
-    title="QtQuick Types"
-    link="https://doc.qt.io/qt-6/qtquick-qmlmodule.html"
-    showIcon={true}
-  />
-  <Link
-    title="Quickshell Examples"
-    link="https://git.outfoxxed.me/outfoxxed/quickshell-examples"
-    showIcon={true}
-  />
+  { versionedEntries && <Tree {...versionsTree as TreeEntry}/>}
+  <hr/>
+  { versionedEntries && (
+    <Tree {...versionedEntries.guide}/>
+    <Tree {...versionedEntries.types}/>
+    <Link
+      title="QtQuick Types"
+      link="https://doc.qt.io/qt-6/qtquick-qmlmodule.html"
+      showIcon={true}
+    />
+    <Link
+      title="Quickshell Examples"
+      link="https://git.outfoxxed.me/outfoxxed/quickshell-examples"
+      showIcon={true}
+    />
+  )}
+  { !versionedEntries && versions.versions.map(version => (
+    <Link
+      title={`Quickshell Documentation (${version.name})`}
+      link={`/docs/${version.name}/guide`}
+    />
+  ))}
 </nav>

@@ -96,7 +96,7 @@ export function getQMLTypeLinkObject(unparsed: string) {
   return hashMap[index]();
 }
 
-export function getQMLTypeLink({
+export function getQMLTypeLink(version: string, {
   type,
   module,
   name,
@@ -107,7 +107,7 @@ export function getQMLTypeLink({
     return "#unknown";
   }
   const qtStart = "https://doc.qt.io/qt-6/";
-  const localStart = "/docs/types";
+  const localStart = `/docs/${version}/types`;
 
   const hashMap = {
     local: () => {

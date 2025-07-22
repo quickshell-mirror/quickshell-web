@@ -6,8 +6,9 @@ export interface Props {
 }
 
 const { markdown } = Astro.props;
+const { version } = Astro.params;
 
-const html = markdown ? await processMarkdown(markdown) : null;
+const html = markdown ? await processMarkdown(version!, markdown) : null;
 ---
 <section class="typedata-details">
   {html ? <div class="typedata-detailsdata" set:html={html} /> : <em>No details provided</em>}

@@ -3,3 +3,6 @@ redir /docs/configuration/intro* /docs/guide/introduction permanent
 redir /docs/configuration/positioning* /docs/guide/size-position permanent
 redir /docs/configuration/qml-overview* /docs/guide/qml-language permanent
 redir /docs/configuration* /docs/guide permanent
+
+@unversioned_docs path_regexp ^/docs/((guide|types).*)$
+redir @unversioned_docs /docs/v0.1.0/{re.1}

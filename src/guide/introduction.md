@@ -4,7 +4,7 @@ index: 2
 ---
 This page will walk you through the process of creating a simple bar/panel, and
 introduce you to all the basic concepts involved. You can use the
-[QML Language Reference](/docs/guide/qml-language) to learn about the syntax
+[QML Language Reference](@docs/guide/qml-language) to learn about the syntax
 of the QML language.
 
 > [!NOTE]
@@ -65,7 +65,7 @@ The above example creates a bar/panel on your currently focused monitor with
 a centered piece of [text](https://doc.qt.io/qt-6/qml-qtquick-text.html).
 It will also reserve space for itself on your monitor.
 
-More information about available properties is available in the [type reference](/docs/types/Quickshell/PanelWindow).
+More information about available properties is available in the [type reference](@docs/types/Quickshell/PanelWindow).
 
 ## Running a process
 
@@ -75,11 +75,11 @@ To start with, let's make a clock. To get the time, we'll use the `date` command
 > [!note/Note]
 > Quickshell can do more than just run processes. Read until the end for more information.
 
-We can use a [Process](/docs/types/quickshell.io/process) object to run commands
+We can use a [Process](@docs/types/quickshell.io/process) object to run commands
 and a @@Quickshell.Io.StdioCollector to read their output.
 
 We'll listen to the @@Quickshell.Io.StdioCollector.streamFinished(s) signal with
-a [signal handler](/docs/configuration/qml-overview/#signal-handlers)
+a [signal handler](@docs/guide/qml-language/#signal-handlers)
 to update the text on the clock.
 
 > [!note/Note]
@@ -252,14 +252,12 @@ import QtQuick
 }
 ```
 
-<span class="small">
-  See also: [Property Bindings](/docs/configuration/qml-overview/#property-bindings),
-  [Array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
-</span>
+See also: [Property Bindings](@docs/guide/qml-language#property-bindings),
+[Array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 
 With this example, bars will be created and destroyed as you plug and unplug them,
 due to the reactive nature of the @@Quickshell.Quickshell.screens property.
-(See: [Reactive Bindings](/docs/configuration/qml-overview/#reactive-bindings).)
+(See: [Reactive Bindings](@docs/guide/qml-language#reactive-bindings).)
 
 Now there's an important problem you might have noticed: when the window
 is created multiple times, we also make a new Process and Timer, which makes the
@@ -336,10 +334,10 @@ outside of its component. Remember, components can be created _any number of tim
 including zero, so `clock` may not exist or there may be more than one, meaning
 there isn't an object to refer to from here.
 
-We can fix it with a [Property Definition](/docs/configuration/qml-overview/#property-definitions).
+We can fix it with a [Property Definition](@docs/guide/qml-language#property-definitions).
 
 We can define a property inside of the ShellRoot and reference it from the clock
-text instead. Due to QML's [Reactive Bindings](/docs/configuration/qml-overview/#reactive-bindings),
+text instead. Due to QML's [Reactive Bindings](@docs/guide/qml-language#reactive-bindings),
 the clock text will be updated when we update the property for every clock that
 currently exists.
 
@@ -409,7 +407,7 @@ above code; however, we can make it more concise:
    component wrapping the window and place the window directly into the
    `delegate` property.
 2. The @@Quickshell.Variants.delegate property is a
-   [Default Property](/docs/configuration/qml-overview/#the-default-property),
+   [Default Property](@docs/guide/qml-language#the-default-property),
    which means we can skip the `delegate:` part of the assignment.
    We're already using the default property of @@Quickshell.ShellRoot to store our
    Variants, Process, and Timer components among other things.
@@ -533,11 +531,11 @@ import QtQuick
 }
 ```
 
-<span class="small">See also: [Scope](/docs/types/Quickshell/Scope/)</span>
+See also: @@Quickshell.Scope
 
 Any qml file that starts with an uppercase letter can be referenced this way.
 We can bring in other folders as well using
-[import statements](/docs/configuration/qml-overview/#explicit-imports).
+[import statements](@docs/guide/qml-language#explicit-imports).
 
 Now what about breaking out the clock? This is a bit more complex because
 the clock component in the bar need to be dealt with, as well as the necessary
@@ -683,7 +681,7 @@ import Quickshell
 
 Now you might be thinking, why do we need the `Time` type in
 our bar file, and the answer is we don't. We can make `Time`
-a [Singleton](/docs/configuration/qml-overview/#singletons).
+a [Singleton](@docs/guide/qml-language#singletons).
 
 A singleton object has only one instance, and is accessible from
 any scope.

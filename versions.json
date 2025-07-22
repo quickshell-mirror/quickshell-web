@@ -1,16 +1,16 @@
 {
-  "default": "master",
+  "default": "v0.2.0",
   "versions": [
     {
       "name": "master",
       "types": "./modules"
     },
     {
-      "name": "0.2.0",
+      "name": "v0.2.0",
       "types": "./modules"
     },
     {
-      "name": "0.1.0",
+      "name": "v0.1.0",
       "types": "./modules"
     }
   ]

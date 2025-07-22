@@ -6,8 +6,7 @@
   yarn-berry,
   nodejs,
   cacert,
-  quickshell-types ? null,
-  masterBranch ? false,
+  versions ? null,
 }: stdenv.mkDerivation (final: let
   nodeModules = stdenv.mkDerivation {
     pname = "${final.pname}-node_modules";
@@ -70,8 +69,7 @@ in {
   '';
 
   PRODUCTION = true;
-  MASTER_BRANCH = masterBranch;
-  SECRET_MODULES_PATH = if quickshell-types == null then "" else quickshell-types;
+  VERSION_FILE_PATH = versions;
 
   buildPhase = ''
     HOME=$(pwd)/garbage-tooling yarn build

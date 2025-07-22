@@ -1,7 +1,7 @@
 ---
 import { getQMLTypeLink } from "@config/io/helpers";
 import { processMarkdown } from "@config/io/markdown";
-import { getModulesData } from "@config/io/generateTypeData";
+import { getVersionsData } from "@config/io/generateTypeData";
 import DocsLayout from "@layouts/DocsLayout.astro";
 import TOC from "@components/navigation/sidebars/TOC.astro";
 import Properties from "@components/type/Properties.astro";
@@ -11,19 +11,22 @@ import Variants from "@components/type/Variants.astro";
 import Badge from "@components/Badge.astro";
 
 export async function getStaticPaths() {
-  const modules = await getModulesData();
-  return modules.flatMap(module => module.types.map(type => ({
-    params: { module: module.name, type: type.name },
-    props: { module, type }
-  })));
+  return (await getVersionsData()).versions.flatMap(version => {
+    return version.modules.flatMap(module => {
+      return module.types.map(type => ({
+        params: { version: version.name, module: module.name, type: type.name },
+        props: { version, module, type },
+      }));
+    });
+  });
 }
 
-const { module, type } = Astro.props;
+const { version, module, type } = Astro.props;
 
-const superLink = type.super ? getQMLTypeLink(type.super) : null;
+const superLink = type.super ? getQMLTypeLink(version.name, type.super) : null;
 
 const details = type.details
-  ? await processMarkdown(type.details)
+  ? await processMarkdown(version.name, type.details)
   : null;
 ---
 <DocsLayout title={`${module.name} - ${type.name}`} description={type.description ?? ""} type={type}>
@@ -57,17 +60,17 @@ const details = type.details
           {details ? <span class="parsedMD" set:html={details}/> : (<span class="toparse">{type.description}</span>)}
         </subheading>
         { Object.keys(type.properties ?? {}).length != 0 && (
-          <h2>Properties <a href="/docs/guide/qml-language#properties">[?]</a></h2>
+          <h2>Properties <a href={`/docs/${version.name}/guide/qml-language#properties`}>[?]</a></h2>
           <Properties props={type.properties!}/>
         )}
         { (type.functions?.length ?? 0) != 0 && (
-          <h2>Functions <a href="/docs/guide/qml-language#functions">[?]</a></h2>
+          <h2>Functions <a href={`/docs/${version.name}guide/qml-language#functions`}>[?]</a></h2>
           <Functions
             funcData={type.functions!}
           />
         )}
         { Object.keys(type.signals ?? {}).length != 0 && (
-          <h2>Signals <a href="/docs/guide/qml-language#signals">[?]</a></h2>
+          <h2>Signals <a href={`/docs/${version.name}guide/qml-language#signals`}>[?]</a></h2>
           <Signals
             signals={type.signals!}
           />

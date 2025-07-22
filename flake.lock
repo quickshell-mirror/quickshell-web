@@ -2,11 +2,11 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1730785428,
-        "narHash": "sha256-Zwl8YgTVJTEum+L+0zVAWvXAGbWAuXHax3KzuejaDyo=",
+        "lastModified": 1752950548,
+        "narHash": "sha256-NS6BLD0lxOrnCiEOcvQCDVPXafX1/ek1dfJHX1nUIzc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4aa36568d413aca0ea84a1684d2d46f55dbabad7",
+        "rev": "c87b95e25065c028d31a94f06a62927d18763fdf",
         "type": "github"
       },
       "original": {
@@ -15,52 +15,9 @@
         "type": "indirect"
       }
     },
-    "quickshell": {
-      "inputs": {
-        "nixpkgs": [
-          "quickshell-docs",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1747564942,
-        "narHash": "sha256-XBs7dhqsY3vdrtukt9Qwcqz8CSixMnm/XvpqD+kn+TA=",
-        "ref": "refs/heads/master",
-        "rev": "823456b58e83880e8f6bfaa785ac949975817d2a",
-        "revCount": 529,
-        "type": "git",
-        "url": "https://git.outfoxxed.me/quickshell/quickshell"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.outfoxxed.me/quickshell/quickshell"
-      }
-    },
-    "quickshell-docs": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "quickshell": "quickshell"
-      },
-      "locked": {
-        "lastModified": 1747388043,
-        "narHash": "sha256-/iJ+Q2Z4rvwWCMHhUXeuGD86NqYLwEVrA+WRlIPTJnA=",
-        "ref": "refs/heads/master",
-        "rev": "82a47eae2403c54909cf0249deaddbbba29ba661",
-        "revCount": 100,
-        "type": "git",
-        "url": "https://git.outfoxxed.me/quickshell/quickshell-docs"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.outfoxxed.me/quickshell/quickshell-docs"
-      }
-    },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
-        "quickshell-docs": "quickshell-docs"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

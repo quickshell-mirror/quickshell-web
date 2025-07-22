@@ -2,7 +2,6 @@
 import "@pagefind/default-ui/css/ui.css";
 import magnifierIcon from "@icons/magnifier.svg?raw"
 ---
-
 <site-search class="search-wrapper">
   <button
     data-open-modal
@@ -52,7 +51,6 @@ import magnifierIcon from "@icons/magnifier.svg?raw"
 
 <script>
 import { getQMLTypeLinkObject, getQMLTypeLink, getIconForLink } from '@src/config/io/helpers';
-
 	class SiteSearch extends HTMLElement {
 		constructor() {
 			super();
@@ -107,7 +105,7 @@ import { getQMLTypeLinkObject, getQMLTypeLink, getIconForLink } from '@src/confi
         if (match.length > 0){
           for (const matching of match) {
             const linkObject = getQMLTypeLinkObject(matching[1]);
-            const link = getQMLTypeLink(linkObject);
+            const link = getQMLTypeLink("NOVERSION", linkObject);
             const icon = linkObject.mtype ? getIconForLink(linkObject.mtype, false) : null;
 
             // for signal
