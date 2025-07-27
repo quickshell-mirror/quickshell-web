@@ -173,7 +173,7 @@ Name {
 
 Every object can contain [properties](#properties), [functions](#functions),
 and [signals](#signals). You can find out what properties are available for a type
-by looking it up in the [Type Reference](/docs/types/).
+by looking it up in the [Type Reference](@docs/types/).
 
 #### Properties
 

@@ -7,8 +7,8 @@ index: 1000
 > [!NOTE]
 > This page is being actively expanded upon as more common questions come up.
 >
-> Make sure to also read the [Item Size and Position](/docs/guide/size-position) and
-> [QML Language](/docs/guide/qml-language) pages for questions related to
+> Make sure to also read the [Item Size and Position](@docs/guide/size-position) and
+> [QML Language](@docs/guide/qml-language) pages for questions related to
 > item sizing/positioning and QML in general.
 
 ## Misc
@@ -100,7 +100,7 @@ its contained item.
 }
 ```
 
-[MarginWrapper]: /docs/guide/size-position#marginwrapper-components
+[MarginWrapper]: @docs/guide/size-position#marginwrapper-components
 
 ### Reference images and resources
 By default, paths passed to components such as @@QtQuick.Image or

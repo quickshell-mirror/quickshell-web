@@ -3,13 +3,13 @@ title: "Usage Guide"
 description: "Configuring the shell"
 index: -1
 ---
-See the [Installation and Setup](/docs/guide/install-setup) page to get started.
+See the [Installation and Setup](@docs/guide/install-setup) page to get started.
 
 To write a Quickshell config, start by following the
-[Guided Introduction](/docs/guide/introduction), and skimming the
-[QML Language Overview](/docs/guide/qml-language).
+[Guided Introduction](@docs/guide/introduction), and skimming the
+[QML Language Overview](@docs/guide/qml-language).
 
-After that, read the [Item Size and Position](/docs/guide/size-position) page before
+After that, read the [Item Size and Position](@docs/guide/size-position) page before
 continuing on your own to learn how to lay out elements in QML. Laying out elements
 in QML is significantly different from many other layout systems such as CSS.
 
@@ -24,7 +24,7 @@ considerably over time and most configs don't reflect current best practice.
 
 [Official Examples]: https://git.outfoxxed.me/quickshell/quickshell-examples
 
-See also the [FAQ](/docs/guide/faq) page, and the [Matrix Space] or [Discord Server] (bridged) for help.
+See also the [FAQ](@docs/guide/faq) page, and the [Matrix Space] or [Discord Server] (bridged) for help.
 
 [Matrix Space]: https://matrix.to/#/#quickshell:outfoxxed.me
 [Discord Server]: https://discord.gg/UtZeT3xNyT

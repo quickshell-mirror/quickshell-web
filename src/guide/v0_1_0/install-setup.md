@@ -114,7 +114,7 @@ for build instructions and configurations.
 ## Editor configuration
 If you want to write your own configuration, installing a QML grammar and the LSP is recommended.
 
-Read the [Usage Guide](/docs/guide) after configuring your editor.
+Read the [Usage Guide](@docs/guide) after configuring your editor.
 
 > [!NOTE]
 > Qmlls versions prior to 6.8.2 do not require `-E`
@@ -190,6 +190,7 @@ We are aware of the following issues:
   this problem and how to fix it.
 - The LSP cannot provide any documentation for Quickshell types.
 - `root:` imports cannot be resolved by the LSP.
+- `PanelWindow` in particular cannot be resolved.
 
 Keeping in mind the above caveats, qmlls should be able to guide you towards a
 more correct code should you choose to use it.
@@ -201,4 +202,4 @@ more correct code should you choose to use it.
 
 # Next steps
 
-Create your first configuration by reading the [Intro](/docs/configuration/intro).
+Create your first configuration by reading the [Intro](@docs/guide/introduction).
