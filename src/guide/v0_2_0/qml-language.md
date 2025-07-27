@@ -116,6 +116,20 @@ import "<directory>" [as <Namespace>]
 - `directory` is the directory to import, relative to the current file.
 - `Namespace` is an optional namespace to import types from the folder under.
 
+A Quickshell module import (new in v0.2.0) looks like this:
+
+```qml
+import qs.<path> [as <Namespace>]
+```
+
+- `path` is the path to the directory to import, relative to the folder `shell.qml` is in.
+`qs` can be used to import the shell root folder. Dotted paths can be used to access nested
+subfolders, e.g. `qs.foo.bar`.
+- `Namepsace` is an optional namespace to import types from the module under.
+
+> [!TIP]
+> Quickshell module imports are preferable to relative path imports as they are much more LSP friendly.
+
 A javascript import statement looks like this:
 
 ```qml
