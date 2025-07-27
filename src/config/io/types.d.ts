@@ -84,6 +84,7 @@ export interface ModuleData {
 
 export interface VersionData {
   name: string;
+  changelog?: string;
   modules: ModuleData[];
 }
 

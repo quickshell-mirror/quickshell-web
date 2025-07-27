@@ -90,6 +90,11 @@ if (versionName) {
     link="/about"
     current={currentPath.length === 1 && currentPath[0] === "about"}
   />
+  <Link
+    title="Changelog"
+    link="/changelog"
+    current={currentPath.length === 1 && currentPath[0] === "changelog"}
+  />
   { versionedEntries && <Tree {...versionsTree as TreeEntry}/>}
   <hr/>
   { versionedEntries && (

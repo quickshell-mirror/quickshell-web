@@ -47,8 +47,9 @@ async function readVersionsData(): Promise<VersionsData> {
   const content = await fs.readFile(versionsPath, "utf8");
   const data = JSON.parse(content);
 
-  const versions = await Promise.all(data.versions.map(async (d: { name: string, types: any }) => ({
+  const versions = await Promise.all(data.versions.map(async (d: { name: string, changelog?: string, types: any }) => ({
     name: d.name,
+    changelog: d.changelog ? await fs.readFile(d.changelog, "utf8") : undefined,
     modules: await readModulesData(d.types),
   })));
 

@@ -1,0 +1,28 @@
+---
+import GuideLayout from "@layouts/GuideLayout.astro";
+import { getVersionsData } from "@config/io/generateTypeData";
+import { processMarkdown } from "@config/io/markdown";
+
+const { versions } = await getVersionsData();
+
+const versionsMd = await Promise.all(versions.filter(version => version.changelog).map(async version => ({
+  version,
+  changelog: await processMarkdown(version.name, version.changelog!)
+})));
+
+const headings = versionsMd.map(({ version }) => ({
+  text: version.name,
+  slug: version.name,
+  depth: 1,
+}));
+---
+<GuideLayout title="Changelog" description="" headings={headings}>
+  {versionsMd.map(({ version, changelog }) => (
+    <div style="display: flex; justify-content: space-between">
+      <h2 id={version.name}>{version.name}</h2>
+      <h2><a href={`/docs/${version.name}/guide`}>Documentation</a></h2>
+    </div>
+    <hr/>
+    <Fragment set:html={changelog}/>
+  ))}
+</GuideLayout>
