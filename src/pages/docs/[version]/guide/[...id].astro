@@ -1,19 +1,24 @@
 ---
 import GuideLayout from "@layouts/GuideLayout.astro";
 import { getVersionsData } from "@config/io/generateTypeData";
+import { getGuideCollection } from "@config/io/guides";
 import { processMarkdown } from "@config/io/markdown";
 
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 
 export async function getStaticPaths() {
   const { versions } = await getVersionsData();
-  const guidePages = await getCollection("guide");
 
-  // versioned guides unhandled for now
-  return versions.flatMap(version => guidePages.map(page => ({
-    params: { version: version.name, id: page.id == "index" ? "/" : page.id },
-    props: { version, page },
-  })));
+  let pages = await Promise.all(versions.map(async version => {
+    const pages = await getGuideCollection(version.name);
+
+    return pages.map(page => ({
+      params: { version: version.name, id: page.id === "index" ? "/" : page.id },
+      props: { version, page },
+    }));
+  }));
+
+  return pages.flat();
 }
 
 const { version, page } = Astro.props;

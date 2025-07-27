@@ -6,10 +6,10 @@ export interface Props {
 }
 
 import { getVersionsData } from "@config/io/generateTypeData";
+import { getGuideCollection } from "@config/io/guides";
 import type { TreeEntry } from "./Tree.astro";
 import Tree from "./Tree.astro";
 import Link from "./Link.astro";
-import { getCollection } from "astro:content";
 
 const versions = await getVersionsData();
 const versionName = Astro.params.version;
@@ -17,7 +17,7 @@ const modules = versions.versions.find(version => version.name === versionName)?
 
 const currentPath = Astro.url.pathname.split('/').filter(s => s !== "");
 
-const guidePages = await getCollection("guide");
+const guidePages = await getGuideCollection(versionName ?? "");
 
 interface NavTree {
   title: string,
