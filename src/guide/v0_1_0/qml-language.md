@@ -2,7 +2,6 @@
 title: "QML Language"
 index: 10
 ---
-import Collapsible from "@components/Collapsible.astro";
 
 Quickshell is configured using the Qt Modeling Language, or QML.
 This page explains what you need to know about QML to start using Quickshell.
@@ -307,14 +306,10 @@ The id must be lowercase.
 }
 ```
 
-<Collapsible title="How is the `id` property different from normal properties?">
-
 The `id` property isn't really a property, and doesn't do anything other than
 expose the object to the current file. It is only called a property because it
 uses very similar syntax to one, and is the only exception to standard property
 definition rules. The name `id` is always reserved for the id property.
-
-</Collapsible>
 
 ##### Property access scopes
 
