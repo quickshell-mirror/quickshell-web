@@ -188,4 +188,4 @@ more correct code should you choose to use it.
 
 # Next steps
 
-Create your first configuration by reading the [Intro](@docs/configuration/intro).
+Create your first configuration by reading the [Intro](@docs/guide/introduction).
