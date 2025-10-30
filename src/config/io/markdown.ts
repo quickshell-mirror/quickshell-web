@@ -33,35 +33,33 @@ const remarkParseAtTypes: RemarkPlugin<[]> = () => (root: Md.Root): Md.Root => {
       const node = rawNode as Md.Literal;
 
       node.value = node.value.replace(
-        /@@((?<module>([A-Z]\w*\.)*)(?<type>([A-Z]\w*))(\.(?!\s|$))?)?((?<member>[a-z]\w*)((?<function>\(\))|(?<signal>\(s\)))?)?(?=[$.,;:)\s]|$)/g,
+        /@@(?<path>([A-Z]\w*\.)+)((?<member>[a-z]\w*)((?<function>\(\))|(?<signal>\(s\)))?)?(?=[$.,;:)\s]|$)/g,
         (_full, ...args) => {
           type Capture = {
-            module: string | undefined;
-            type: string | undefined;
+            path: string | undefined;
             member: string | undefined;
             function: string | undefined;
             signal: string | undefined;
           };
 
           const groups = args.pop() as Capture;
+          const pathp = (groups.path ?? "").split('.').filter(Boolean);
+          let type = (pathp.length >= 1 ? pathp.pop() : "");
+          let module = pathp.join('_');
 
-          if (groups.module) {
-            groups.module = groups.module.substring(
-              0,
-              groups.module.length - 1
-            );
-            const isQs = groups.module.startsWith("Quickshell");
-            groups.module = `99M${isQs ? "QS" : "QT_qml"}_${groups.module.replace(".", "_")}`;
-          } else groups.module = ""; // WARNING: rehype parser can't currently handle intra-module links
+          if (module) {
+            const isQs = module.startsWith("Quickshell");
+            module = `99M${isQs ? "QS" : "QT_qml"}_${module}`;
+          } else module = ""; // WARNING: rehype parser can't currently handle intra-module links
 
-          groups.type = groups.type ? `99N${groups.type}` : "";
+          type = type ? `99N${type}` : "";
           groups.member = groups.member
             ? `99V${groups.member}`
             : "";
-          const type = groups.member
+          const typep = groups.member
             ? `99T${groups.function ? "func" : groups.signal ? "signal" : "prop"}`
             : "";
-          return `TYPE${groups.module}${groups.type}${groups.member}${type}99TYPE`;
+          return `TYPE${module}${type}${groups.member}${typep}99TYPE`;
         }
       );
     }
