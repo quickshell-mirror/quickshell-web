@@ -9,7 +9,7 @@
   margin-inline: 0.618rem;
   margin-top: 3.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: safe center;
   flex-direction: row;
   flex-grow: 1;
   transition: filter 0.3s;
