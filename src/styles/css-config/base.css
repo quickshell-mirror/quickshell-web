@@ -1,5 +1,6 @@
 html {
-  font-family: "Rubik Variable", Inter, system-ui, Avenir, Helvetica, Arial,
+  font-family:
+    "Rubik Variable", Inter, system-ui, Avenir, Helvetica, Arial,
     sans-serif;
   font-size: 14px;
   line-height: 1.272;
@@ -112,7 +113,6 @@ html.dark {
   --var-link-color: 190deg 85% 60%;
   --inner-param-color: 215deg 60% 70%;
   --inner-param-border-color: 215deg 26% 46%;
-  --inner-param-color: 215deg 60% 70%;
   --nav-hovered-bkg: var(--blue) 40% 10%;
   --nav-hovered-weak-bkg: var(--blue) 35% 8%;
   --nav-selected-bkg: var(--blue) 40% 13%;

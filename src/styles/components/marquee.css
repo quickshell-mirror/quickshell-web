@@ -2,10 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2.217rem;
-  font-size: 1.874rem;
+  gap: var(--xl);
+  font-size: var(--lg);
   font-weight: 600;
-  margin-inline: 0.618rem;
+  margin-inline: var(--sm);
 }
 
 .marquee-button {
@@ -20,15 +20,16 @@
     left: 2px;
     right: 2px;
     height: 3px;
-    background-color: hsl(var(--accent-400) / 0.3);
+    background-color: hsla(var(--accent-400) / 0.3);
     z-index: -1;
   }
 }
+
 .marquee {
   position: relative;
   display: flex;
   width: 100%;
-  margin-block: 1.618rem;
+  margin-block: var(--lg);
   justify-content: center;
 }
 
@@ -40,16 +41,25 @@
 }
 
 .marquee-item {
+  position: relative;
   flex: 1 0 100%;
   transition: transform 0.3s cubic-bezier(0.46, 0.03, 0.52, 0.96);
   transform: translateX(var(--scroll));
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--md);
   padding-inline: 0.5rem;
 
-  & > div {
+  &>* {
+    z-index: 11;
+  }
+
+  & video {
+    position: relative;
     max-width: 75rem;
-    width: 100%;
+
+    box-shadow: var(--shadow-md);
   }
 }
 
@@ -58,7 +68,7 @@
 }
 
 .marquee-item-content {
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
 }
 
 .marquee-scroll {
@@ -68,7 +78,6 @@
   height: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   transition:
     background-color 0.3s,
     opacity 0.3s;
@@ -87,7 +96,7 @@
   flex-direction: column;
   justify-content: center;
 
-  & > div {
+  &>div {
     width: 2.5rem;
     aspect-ratio: 1 / 1;
     display: flex;
@@ -95,11 +104,13 @@
     justify-content: center;
     opacity: 0.5;
     transition: opacity 0.3s ease;
+    backdrop-filter: blur(var(--2xs));
   }
 
   &:hover {
     cursor: pointer;
-    & > div {
+
+    &>div {
       opacity: 0.9;
     }
   }
@@ -132,9 +143,10 @@
 @media not (min-width: 83rem) {
   .marquee-scroll-arrow {
     height: unset;
-    & > div {
+
+    &>div {
       background-color: #55555580;
-      border-radius: 0.2rem;
+      border-radius: var(--radius-xs);
     }
   }
 

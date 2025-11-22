@@ -2,7 +2,6 @@
 import { Breadcrumbs } from "astro-breadcrumbs";
 import "astro-breadcrumbs/breadcrumbs.css";
 
-import CreateCopyButtons from "@components/hooks/CreateCopyButtons.astro";
 import PreTheme from "@config/PreTheme.astro";
 import Header from "@components/Header.astro";
 import Head from "@config/Head.astro";
@@ -52,7 +51,6 @@ for (const segment of url) {
   <head>
     <Head description={description} title={title} />
     <PreTheme />
-    <CreateCopyButtons />
   </head>
   <body class="docslayout">
     <Header title={title} headings={headings} type={type}/>

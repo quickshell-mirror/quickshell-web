@@ -12,22 +12,21 @@
 .featurelist-item {
   position: relative;
   display: flex;
-  gap: 0.618rem;
+  gap: var(--xs);
   flex-direction: column;
   align-items: center;
-  margin-block: 0.618rem;
-  border-radius: 9px;
+  margin-block: var(--xs);
+  border-radius: var(--radius-md);
   background-color: hsl(var(--blue) 60% 98%);
   padding: 0.618rem;
   border: 1px solid hsl(var(--blue) 9% 75%);
+
   &::before {
     content: "";
     position: absolute;
-    inset: 0.618rem;
-    background-image: radial-gradient(
-      hsl(var(--blue) 9% 75%) 1px,
-      transparent 1px
-    );
+    inset: var(--xs);
+    background-image: radial-gradient(hsl(var(--blue) 9% 75%) 1px,
+        transparent 1px);
     background-position: 50% 50%;
     background-size: 1.1rem 1.1rem;
   }
@@ -38,20 +37,20 @@ html.dark .featurelist-item {
   border-color: hsl(0deg 0% 100% / 0.05);
 
   &::before {
-    background-image: radial-gradient(
-      hsl(0deg 0% 100% / 0.1) 1px,
-      transparent 1px
-    );
+    background-image: radial-gradient(hsl(0deg 0% 100% / 0.1) 1px,
+        transparent 1px);
   }
 }
 
 .feature-text {
-  margin: 1rem 0;
+  margin: var(--sm) 0;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.2em;
+
   & .feature-title {
     margin-bottom: 0.517rem;
   }
+
   & .feature-subtitle {
     color: #303030;
   }
@@ -72,7 +71,8 @@ html.dark .feature-text {
   & video {
     width: 100%;
     aspect-ratio: 16 / 9;
-    border-radius: 0.681rem;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
   }
 
   & .shiki {
@@ -80,6 +80,7 @@ html.dark .feature-text {
     width: 100%;
     height: 100%;
     /*font-size: 0.55rem;*/
+    box-shadow: var(--shadow-md);
   }
 
   & .showcase-desktop {
@@ -118,6 +119,7 @@ html:not(.dark) .feature-showcase .shiki span {
     position: absolute;
     z-index: 2;
   }
+
   & .cloud-center img {
     width: 80px;
     height: 80px;
@@ -137,9 +139,10 @@ html:not(.dark) .feature-showcase .shiki span {
     transform-origin: center bottom;
     transform: translateX(-50%);
 
-    & > div {
+    &>div {
       transform: rotate(0deg);
       animation: counter-spin 40s linear infinite;
+
       & .feature-icon {
         width: 80px;
         height: 80px;
@@ -149,26 +152,34 @@ html:not(.dark) .feature-showcase .shiki span {
     &.wayland {
       transform: translate(-50%, 0) rotate(0deg);
     }
+
     &.hyprland {
       transform: translate(-50%, 0) rotate(72deg);
+
       & .feature-icon {
         transform: rotate(-72deg);
       }
     }
+
     &.pipewire {
       transform: translate(-50%, 0) rotate(144deg);
+
       & .feature-icon {
         transform: rotate(-144deg);
       }
     }
+
     &.x-org {
       transform: translate(-50%, 0) rotate(216deg);
+
       & .feature-icon {
         transform: rotate(-216deg);
       }
     }
+
     &.sway {
       transform: translate(-50%, 0) rotate(288deg);
+
       & .feature-icon {
         transform: rotate(-288deg);
       }
@@ -180,6 +191,7 @@ html:not(.dark) .feature-showcase .shiki span {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -189,6 +201,7 @@ html:not(.dark) .feature-showcase .shiki span {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(-360deg);
   }
@@ -213,33 +226,42 @@ html:not(.dark) .feature-showcase .shiki span {
     width: auto;
     align-items: center;
   }
+
   .feature-text {
     margin: 0 2.218rem;
   }
+
   .featurelist-item {
     width: 100%;
     padding: 1.217rem;
     justify-content: space-between;
     flex-direction: row;
   }
+
   .featurelist-item.right {
     flex-direction: row-reverse;
   }
+
   .feature-showcase {
     height: 22rem;
   }
+
   .feature-text {
     text-align: left;
   }
+
   .feature-showcase {
     width: auto;
     aspect-ratio: 16 / 9;
+
     & video {
       scale: 1;
     }
+
     & .shiki {
       font-size: 0.93rem;
     }
+
     .feature-cloud {
       margin-bottom: 0;
     }

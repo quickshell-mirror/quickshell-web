@@ -46,8 +46,8 @@ const videos = [
     </div>
   </div>
   <div id="marquee-content" class="marquee-content" data-scroll="0" data-media-index="0">
-    {videos.map(({ author, source, installable, path }, index) => <div class="marquee-item">
-      <div>
+    {videos.map(({ author, source, installable, path }, index) =>
+      <div class="marquee-item">
         <video
           data-media-index={index}
           data-media-author={author}
@@ -65,18 +65,17 @@ const videos = [
           {source && !installable && <>(<a href={source}>source code</a>)</>}
           {source && installable && <>(<a href={source}>install</a>)</>}
         </p>
-      </div>
     </div>)}
   </div>
 </div>
 
 <script>
-  const videoCount = 6; // last array index
   const marquee = document.getElementById("marquee-content")!;
   marquee.style.setProperty("--scroll", "0")
 
   window.addEventListener("load", autoplayInit, false);
   const videos = document.getElementsByClassName("marquee-item-content") as HTMLCollectionOf<HTMLVideoElement>;
+  const videoCount = videos.length;
   let currentVideoIndex = 0;
   let currentVideo: HTMLVideoElement | null = null;
 
