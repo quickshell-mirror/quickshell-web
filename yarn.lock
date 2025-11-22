@@ -3736,7 +3736,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hastscript@npm:^9.0.0":
+"hastscript@npm:^9.0.0, hastscript@npm:^9.0.1":
   version: 9.0.1
   resolution: "hastscript@npm:9.0.1"
   dependencies:
@@ -5557,6 +5557,7 @@ __metadata:
     astro-breadcrumbs: "npm:^3.3.1"
     astro-icon: "npm:^1.1.5"
     hast-util-from-html: "npm:^2.0.3"
+    hastscript: "npm:^9.0.1"
     jsonc-parser: "npm:^3.3.1"
     pagefind: "npm:^1.4.0"
     rehype: "npm:^13.0.2"

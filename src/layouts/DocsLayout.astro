@@ -15,16 +15,18 @@ interface Props {
   title: string;
   description: string;
   headings?: ConfigHeading[];
-  type?: TypeData
+  type?: TypeData;
 }
 
 const { title, description, headings, type } = Astro.props;
 let url = Astro.url.pathname.split("/").filter(s => s !== "");
 
-const breadcrumbs = [{
-  text: "custom",
-  href: "/",
-}];
+const breadcrumbs = [
+  {
+    text: "custom",
+    href: "/",
+  },
+];
 
 let linkPath = "";
 if (url[0] === "docs") {
@@ -90,4 +92,33 @@ for (const segment of url) {
     <Footer/>
   </body>
 </html>
-
+<script>
+  // FIXME: need to make this work properly, or fold into the markdown processor
+let headings = document.getElementsByClassName("heading")
+if (headings.length > 0) {
+  for (const heading of headings) {
+    let button = heading.querySelector("h2")
+    if (button) {
+      button.onclick = () => {
+        let link = window.location.href.split("#")[0];
+        link += `#${button.textContent?.trimEnd().replaceAll(" ", "-").toLowerCase()}`;
+        window.location.href = link
+        navigator.clipboard.writeText(link);
+        heading.classList.toggle("copied")
+        setTimeout(() => heading.classList.remove("copied"), 1000);
+      }
+    }
+    let spanButton =  heading.querySelector("span")
+    if (spanButton) {
+      spanButton.onclick = () => {
+        let link = window.location.href.split("#")[0];
+        link += `#${spanButton.textContent?.trim().replaceAll(" ", "-").toLowerCase()}`;
+        window.location.href = link
+        navigator.clipboard.writeText(link);
+        spanButton.classList.toggle("copied")
+        setTimeout(() => heading.classList.remove("copied"), 1000);
+      }
+    }
+  }
+}
+</script>

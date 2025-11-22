@@ -14,12 +14,14 @@ import { remarkAlert } from "remark-github-blockquote-alert";
 import rehypeShiki from "@shikijs/rehype";
 import sectionize from "@hbsnow/rehype-sectionize";
 import type { ShikiTransformer } from "shiki";
+import { h } from "hastscript";
 
 import {
   getQMLTypeLinkObject,
   getQMLTypeLink,
   getIconForLink,
 } from "./helpers.ts";
+import type { CopyButtonOptions } from "@_types";
 
 let currentVersion = "NOVERSION";
 
@@ -155,7 +157,54 @@ const shikiRewriteTypelinks: ShikiTransformer = {
   },
 };
 
-export const markdownConfig: AstroMarkdownOptions = {
+const shikiCopyButton: ShikiTransformer = {
+  name: "copy-button",
+  pre(node) {
+    const options: CopyButtonOptions = {
+      duration: 3000,
+    };
+    const button = h(
+      "button",
+      {
+        class: "copy-button",
+        role: "button",
+        "aria-label": "Copy to clipboard",
+        "alia-live": "polite",
+        // "data-code": removeCodeAnnotations(this.source),
+        onclick: `
+                navigator.clipboard.writeText(this.dataset.code);
+                this.classList.add('copied');
+                this.setAttribute('aria-pressed', 'true');
+                setTimeout(() => { this.classList.remove('copied'); this.setAttribute('aria-pressed', 'false');}, ${options.duration})
+                `,
+      },
+      [
+        h("span", { class: "ready" }),
+        h("span", { class: "success" }),
+        h(
+          "svg",
+          {
+            class: "copy-icon",
+            role: "icon",
+            xmlns: "http://www.w3.org/2000/svg",
+            width: "1em",
+            height: "1em",
+            viewBox: "0 0 256 256",
+          },
+          [
+            h("path", {
+              fill: "currentColor",
+              d: "M200 32h-36.26a47.92 47.92 0 0 0-71.48 0H56a16 16 0 0 0-16 16v168a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16m-72 0a32 32 0 0 1 32 32H96a32 32 0 0 1 32-32m72 184H56V48h26.75A47.9 47.9 0 0 0 80 64v8a8 8 0 0 0 8 8h80a8 8 0 0 0 8-8v-8a47.9 47.9 0 0 0-2.75-16H200Z",
+            }),
+          ]
+        ),
+      ]
+    );
+    node.children.splice(0, 0, button);
+  },
+};
+
+const markdownConfig: AstroMarkdownOptions = {
   syntaxHighlight: false,
   remarkPlugins: [
     remarkParseAtTypes,
@@ -182,7 +231,7 @@ export const markdownConfig: AstroMarkdownOptions = {
         },
         defaultColor: false,
         wrap: true,
-        transformers: [shikiRewriteTypelinks],
+        transformers: [shikiRewriteTypelinks, shikiCopyButton],
       },
     ],
     // FIXME: incompatible types between unified/Plugin and Astro/RehypePlugin
@@ -206,7 +255,7 @@ async function getMarkdownProcessor(): Promise<MarkdownProcessor> {
   return globalMarkdownProcessor;
 }
 
-export async function processMarkdown(
+async function processMarkdown(
   version: string,
   markdown: string
 ): Promise<string> {
@@ -217,3 +266,5 @@ export async function processMarkdown(
   currentVersion = "NOVERSION";
   return r;
 }
+
+export { markdownConfig, processMarkdown };

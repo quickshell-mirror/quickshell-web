@@ -50,6 +50,7 @@ const RAW_RUNTIME_STATE =
           ["astro-breadcrumbs", "virtual:a9b1222052dffa20c83605ac26b64fd717aa2982dc89da74b78301a8333c50a120c12db3f68c240302341b52215e986347cefceb71633b5918936083bd9430ce#npm:3.3.1"],\
           ["astro-icon", "npm:1.1.5"],\
           ["hast-util-from-html", "npm:2.0.3"],\
+          ["hastscript", "npm:9.0.1"],\
           ["jsonc-parser", "npm:3.3.1"],\
           ["pagefind", "npm:1.4.0"],\
           ["quickshell-docs", "workspace:."],\
@@ -6380,6 +6381,7 @@ const RAW_RUNTIME_STATE =
           ["astro-breadcrumbs", "virtual:a9b1222052dffa20c83605ac26b64fd717aa2982dc89da74b78301a8333c50a120c12db3f68c240302341b52215e986347cefceb71633b5918936083bd9430ce#npm:3.3.1"],\
           ["astro-icon", "npm:1.1.5"],\
           ["hast-util-from-html", "npm:2.0.3"],\
+          ["hastscript", "npm:9.0.1"],\
           ["jsonc-parser", "npm:3.3.1"],\
           ["pagefind", "npm:1.4.0"],\
           ["quickshell-docs", "workspace:."],\

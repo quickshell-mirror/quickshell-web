@@ -7,10 +7,13 @@ export interface Props {
   frontmatter: {
     title: string;
     description?: string;
-  }
+  };
 }
 
-const { headings, frontmatter: { title, description } } = Astro.props;
+const {
+  headings,
+  frontmatter: { title, description },
+} = Astro.props;
 ---
 <GuideLayout title={title} description={description ?? ""} headings={headings}>
   <slot/>

@@ -13,6 +13,7 @@ import type {
   VersionsData,
 } from "./module";
 import type { SearchLists } from "./search";
+import type { CopyButtonOptions } from "./codeblock";
 
 export type {
   QMLTypeLinkObject,
@@ -28,4 +29,5 @@ export type {
   VersionData,
   VersionsData,
   SearchLists,
+  CopyButtonOptions,
 };
