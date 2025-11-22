@@ -5,10 +5,17 @@ import { processMarkdown } from "@config/io/markdown";
 
 const { versions } = await getVersionsData();
 
-const versionsMd = await Promise.all(versions.filter(version => version.changelog).map(async version => ({
-  version,
-  changelog: await processMarkdown(version.name, version.changelog!)
-})));
+const versionsMd = await Promise.all(
+  versions
+    .filter(version => version.changelog)
+    .map(async version => ({
+      version,
+      changelog: await processMarkdown(
+        version.name,
+        version.changelog ?? ""
+      ),
+    }))
+);
 
 const headings = versionsMd.map(({ version }) => ({
   text: version.name,

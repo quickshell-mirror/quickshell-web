@@ -1,15 +1,3 @@
-//# FIXME: fuseConfig.ts
-// --
-
-// generateSearchLists.ts
-interface SearchLists {
-  slug: string;
-  link: string;
-  summary: string;
-}
-// --
-
-// generateTypeData.ts
 interface QuickshellBase {
   type: string;
   module: string;
@@ -72,7 +60,8 @@ interface TypeData {
   functions?: QuickshellFunction[];
   signals?: QuickshellSignal;
   variants?: QuickshellVariant;
-  subtypes?: QuickshellData[];
+  // FIXME: QuickshellData[]
+  subtypes?: any[];
 }
 
 interface ModuleData {
@@ -92,17 +81,6 @@ interface VersionsData {
   default: string;
   versions: VersionData[];
 }
-// --
-
-// helpers.ts
-interface QMLTypeLinkObject {
-  type: string;
-  module?: string;
-  name?: string;
-  mtype?: string;
-  mname?: string;
-}
-// --
 
 export type {
   QuickshellBase,
@@ -116,5 +94,4 @@ export type {
   ModuleData,
   VersionData,
   VersionsData,
-  QMLTypeLinkObject,
 };

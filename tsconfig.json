@@ -34,6 +34,12 @@
       ],
       "@styles/*": [
         "./src/styles/*"
+      ],
+      "@_types": [
+        "./src/config/_types/index.ts"
+      ],
+      "@_types/*": [
+        "./src/config/_types/*"
       ]
     }
   }

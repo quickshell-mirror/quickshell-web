@@ -1,0 +1,49 @@
+:root {
+  --scaleFactor: 1.618;
+  --wholestep: 1.618;
+  --halfstep: 1.272;
+  --quarterstep: 1.128;
+  --eighthstep: 1.062;
+
+  --wholestep-dec: 0.618;
+  --halfstep-dec: 0.272;
+  --quarterstep-dec: 0.128;
+  --eighthstep-dec: 0.062;
+
+  --md: 1em;
+  --sm: calc(1em / var(--scaleFactor));
+  --xs: calc(var(--sm) / var(--scaleFactor));
+  --2xs: calc(var(--xs) / var(--scaleFactor));
+  --3xs: calc(var(--2xs) / var(--scaleFactor));
+  --lg: calc(1em * var(--scaleFactor));
+  --xl: calc(var(--lg) * var(--scaleFactor));
+  --2xl: calc(var(--xl) * var(--scaleFactor));
+  --3xl: calc(var(--2xl) * var(--scaleFactor));
+  --4xl: calc(var(--3xl) * var(--scaleFactor));
+
+  /* Unitless sizes; required for adhoc calculations (division and multiplication in calc() require unitless numbers */
+  /* NOTE: in calc() with multiplication or division the right side must be a unitless number */
+
+  --sm-unitless: calc(1 / var(--scaleFactor));
+  --xs-unitless: calc(var(--sm-unitless) / var(--scaleFactor));
+  --2xs-unitless: calc(var(--xs-unitless) / var(--scaleFactor));
+  --lg-unitless: calc(1 * var(--scaleFactor));
+  --xl-unitless: calc(var(--lg-unitless) * var(--scaleFactor));
+  --2xl-unitless: calc(var(--xl-unitless) * var(--scaleFactor));
+
+  --radius-xs: var(--xs);
+  --radius-sm: var(--sm);
+  --radius-md: var(--md);
+  --radius-lg: var(--lg);
+  --radius-xl: var(--xl);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}

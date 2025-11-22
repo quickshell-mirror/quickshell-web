@@ -1,9 +1,6 @@
 @import "remark-github-blockquote-alert/alert.css";
-@import "./css-config/base.css";
-@import "./css-config/animations.css";
-@import "./css-config/code.css";
-@import "./css-config/colors.css";
 
+@import "./css-config/entry.css";
 @import "./main-page.css";
 
 @import "./docs/nav/nav.css";
@@ -40,6 +37,7 @@ a {
     cursor: pointer;
   }
 }
+
 html.dark .baselayout,
 html.dark .docslayout {
   background-color: hsl(var(--bg-900));
@@ -58,13 +56,12 @@ html.dark {
   width: 75%;
   height: 1px;
   margin-block: 0.618rem;
-  background: linear-gradient(
-    to right,
-    transparent,
-    hsl(var(--blue) 100% 59%),
-    transparent
-  );
+  background: linear-gradient(to right,
+      transparent,
+      hsl(var(--blue) 100% 59%),
+      transparent);
 }
+
 .unset {
   all: unset;
 }
@@ -160,12 +157,10 @@ footer {
     left: -1rem;
     height: 1px;
     width: calc(100% + 1rem);
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      hsl(var(--footer-bkg-border)) 50%,
-      transparent 100%
-    );
+    background: linear-gradient(90deg,
+        transparent 0%,
+        hsl(var(--footer-bkg-border)) 50%,
+        transparent 100%);
   }
 
   & a {
@@ -204,12 +199,12 @@ footer {
     gap: 0.2rem;
     color: hsl(var(--text-dark));
 
-    & > p {
+    &>p {
       margin-bottom: 0.2rem;
       color: hsl(0deg 0% 40%);
     }
 
-    & > a {
+    &>a {
       text-decoration: none;
     }
   }
@@ -225,8 +220,10 @@ footer {
     font-size: 2.5rem;
 
   }
+
   & .changelog {
     display: flex;
+
     & a {
       text-decoration: none;
       margin-inline: auto;
@@ -238,7 +235,7 @@ footer {
   footer {
     padding-inline: 0.75rem;
 
-    & .credits > a {
+    & .credits>a {
       padding: 0.2rem 0;
     }
   }

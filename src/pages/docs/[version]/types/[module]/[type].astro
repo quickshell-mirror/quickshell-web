@@ -14,7 +14,11 @@ export async function getStaticPaths() {
   return (await getVersionsData()).versions.flatMap(version => {
     return version.modules.flatMap(module => {
       return module.types.map(type => ({
-        params: { version: version.name, module: module.name, type: type.name },
+        params: {
+          version: version.name,
+          module: module.name,
+          type: type.name,
+        },
         props: { version, module, type },
       }));
     });
@@ -23,7 +27,9 @@ export async function getStaticPaths() {
 
 const { version, module, type } = Astro.props;
 
-const superLink = type.super ? getQMLTypeLink(version.name, type.super) : null;
+const superLink = type.super
+  ? getQMLTypeLink(version.name, type.super)
+  : null;
 
 const details = type.details
   ? await processMarkdown(version.name, type.details)

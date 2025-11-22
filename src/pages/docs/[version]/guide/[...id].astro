@@ -9,14 +9,19 @@ import { render } from "astro:content";
 export async function getStaticPaths() {
   const { versions } = await getVersionsData();
 
-  let pages = await Promise.all(versions.map(async version => {
-    const pages = await getGuideCollection(version.name);
+  const pages = await Promise.all(
+    versions.map(async version => {
+      const pages = await getGuideCollection(version.name);
 
-    return pages.map(page => ({
-      params: { version: version.name, id: page.id === "index" ? "/" : page.id },
-      props: { version, page },
-    }));
-  }));
+      return pages.map(page => ({
+        params: {
+          version: version.name,
+          id: page.id === "index" ? "/" : page.id,
+        },
+        props: { version, page },
+      }));
+    })
+  );
 
   return pages.flat();
 }

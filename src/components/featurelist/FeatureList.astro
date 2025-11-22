@@ -1,7 +1,9 @@
 ---
 import { processMarkdown } from "@config/io/markdown";
 
-const codeDesktop = await processMarkdown("N/A", `\`\`\`qml
+const codeDesktop = await processMarkdown(
+  "N/A",
+  `\`\`\`qml
 // a standard desktop window
 FloatingWindow {
   Timer {
@@ -19,9 +21,12 @@ FloatingWindow {
   // change the window's color when timer.invert changes
   color: timer.invert ? "purple" : "green"
 }
-\`\`\``);
+\`\`\``
+);
 
-const codeMobile = await processMarkdown("N/A", `\`\`\`qml
+const codeMobile = await processMarkdown(
+  "N/A",
+  `\`\`\`qml
 // a standard desktop window
 FloatingWindow {
   Timer {
@@ -47,7 +52,8 @@ FloatingWindow {
     ? "purple"
     : "green"
 }
-\`\`\``);
+\`\`\``
+);
 ---
 <ul class="featurelist">
   <li class="featurelist-item hot-reloading left">

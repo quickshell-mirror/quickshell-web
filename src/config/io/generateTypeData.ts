@@ -1,7 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-import type { VersionsData, ModuleData } from "./types";
+import type { VersionsData, ModuleData } from "@_types";
 
 async function readModulesData(
   basePath: string
