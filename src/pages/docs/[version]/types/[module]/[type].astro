@@ -64,13 +64,13 @@ const details = type.details
           <Properties props={type.properties!}/>
         )}
         { (type.functions?.length ?? 0) != 0 && (
-          <h2>Functions <a href={`/docs/${version.name}guide/qml-language#functions`}>[?]</a></h2>
+          <h2>Functions <a href={`/docs/${version.name}/guide/qml-language#functions`}>[?]</a></h2>
           <Functions
             funcData={type.functions!}
           />
         )}
         { Object.keys(type.signals ?? {}).length != 0 && (
-          <h2>Signals <a href={`/docs/${version.name}guide/qml-language#signals`}>[?]</a></h2>
+          <h2>Signals <a href={`/docs/${version.name}/guide/qml-language#signals`}>[?]</a></h2>
           <Signals
             signals={type.signals!}
           />
