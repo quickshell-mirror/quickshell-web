@@ -1,0 +1,448 @@
+---
+title: "Graphical Effects"
+index: 7
+---
+
+@@QtQuick.Effects.MultiEffect lets you apply multiple visual effects—like blur, shadow,
+and color adjustments—in a single, easy-to-use QML component.
+
+# Qt 6 MultiEffect
+
+This guide provides a few examples for common uses of effects such as drop shadows,
+colourisation, masks and blurring.
+
+### Shadows
+
+To create a drop shadow, the [QtQuick.Effects](https://doc.qt.io/qt-6/qtquick-effects-qmlmodule.html)
+module provides two components that you can use: @@QtQuick.Effects.RectangularShadow and
+@@QtQuick.Effects.MultiEffect.
+
+The simplest way to create a rectangular drop shadow is with the @@QtQuick.Effects.RectangularShadow
+component. This component essentially creates a rectangle with blurred edges to act as a shadow. To
+use this component, you would typically create one below the source component of the shadow. To position
+a component beneath another, you can either simply create it before the other component, or use the
+@@QtQuick.Item.z property to visually position it below the other component.
+
+For example:
+
+```qml
+@@QtQuick.Effects.RectangularShadow {
+  anchors.fill: rect  // Fill the source rect
+  radius: rect.radius  // Have the same rounding as the source rect
+  blur: 15  // The blur/radius of the shadow
+  spread: 2  // The number of pixels from the edges of the rect the shadow extends from
+  color: "#000000"  // The colour of the shadow
+}
+
+@@QtQuick.Rectangle {
+  id: rect
+
+  implicitWidth: 100
+  implicitHeight: 200
+  radius: 30
+}
+```
+
+For more complex shapes, you can use the @@QtQuick.Effects.MultiEffect with the
+@@QtQuick.Effects.MultiEffect.shadowEnabled property set to `true`. You can then modify the
+following properties to tweak the drop shadow to your liking:
+
+- @@QtQuick.Effects.MultiEffect.shadowBlur - A real between 0 and 1 describing the amount of blur
+- @@QtQuick.Effects.MultiEffect.shadowScale - Essentially the same as @@QtQuick.Effects.RectangularShadow.spread
+  but as a multiplier of the source's size
+- @@QtQuick.Effects.MultiEffect.blurMax - Affects the radius of the shadow (`radius = blurMax * shadowBlur`)
+- @@QtQuick.Effects.MultiEffect.blurMultiplier - A multiplier to apply to the blur
+- @@QtQuick.Effects.MultiEffect.shadowHorizontalOffset - Positions the shadow horizontally
+- @@QtQuick.Effects.MultiEffect.shadowVerticalOffset - Positions the shadow vertically
+- @@QtQuick.Effects.MultiEffect.shadowOpacity - Affects the opacity of the shadow (multiplied with the alpha of
+  @@QtQuick.Effects.MultiEffect.shadowColor)
+- @@QtQuick.Effects.MultiEffect.shadowColor - The colour of the shadow
+
+Here's a simple example:
+
+```qml
+@@QtQuick.Rectangle {
+  implicitWidth: 100
+  implicitHeight: 200
+  radius: 100
+
+  layer.enabled: true  // This can be set to false to disable the effect (also unloads the MultiEffect to save memory)
+  layer.effect: @@QtQuick.Effects.MultiEffect {
+    shadowEnabled: true  // This must be true for the shadow work
+    blurMax: 32
+    shadowScale: 1
+    shadowColor: "#000000"
+  }
+}
+```
+
+### Simple effects
+
+For simple effects like colourisation, brightness, contrast and saturation, @@QtQuick.Effects.MultiEffect
+provides them as properties that can be easily animated.
+
+```qml
+@@QtQuick.Image {
+  source: "/path/to/img"
+
+  layer.enabled: true
+  layer.effect: @@QtQuick.Effects.MultiEffect {
+    colorization: 1  // The amount of colourisation as a real between 0 and 1 (0 is no colourisation)
+    colorizationColor: "#ab35a3"  // The colour of the colourisation to apply
+    brightness: 0.3  // The brightness to apply as a real between -1 and 1 (0 is no change)
+    contrast: 0.5  // The contrast to apply as a real between -1 and 1 (0 is no change)
+    saturation: 6  // The saturation to apply as a real greater than -1 (0 is no change)
+  }
+}
+```
+
+### Masking
+
+@@QtQuick.Effects.MultiEffect can also do masking.
+
+> [!NOTE]
+> The component you use as the mask source NEEDS to have @@QtQuick.Item.layer.enabled set to `true`
+> if it is not a @@QtQuick.ShaderEffectSource or texture provider such as @@QtQuick.Image.
+>
+> Additionally, the mask source will be scaled to the size of the @@QtQuick.Effects.MultiEffect,
+> so you must wrap it in another component for it to be positioned and sized correctly.
+
+For example:
+
+```qml
+@@QtQuick.Item {
+  id: mask
+
+  visible: false  // The mask should not be visible if used only as a mask
+  layer.enabled: true
+
+  @@QtQuick.Rectangle {
+    anchors.centerIn: parent
+    implicitWidth: 200
+    implicitHeight: 240
+  }
+}
+
+@@QtQuick.Image {
+  source: "/path/to/img"
+
+  layer.enabled: true
+  layer.effect: @@QtQuick.Effects.MultiEffect {
+    maskSource: mask
+    maskEnabled: true  // This must be true for the mask to work
+    maskInverted: false  // You can use this to invert the masked area
+
+    // These provide antialiasing for the edges of the mask and make it look much better
+    maskSpreadAtMin: 1
+    maskThresholdMin: 0.5
+  }
+}
+```
+
+### Blurring
+
+Blurring is also done using the @@QtQuick.Effects.MultiEffect component. It is done similarly
+to shadows, however instead of setting the @@QtQuick.Effects.MultiEffect.shadowEnabled
+property to `true`, you set the @@QtQuick.Effects.MultiEffect.blurEnabled property to `true`.
+The blur effect can be customised with the following properties:
+
+- @@QtQuick.Effects.MultiEffect.blur - The same as @@QtQuick.Effects.MultiEffect.shadowBlur mentioned above
+- @@QtQuick.Effects.MultiEffect.blurMax - The same as mentioned above, except `radius = blurMax * blur` (not `shadowBlur`)
+- @@QtQuick.Effects.MultiEffect.blurMultiplier - The same as mentioned above
+
+For example:
+
+```qml
+@@QtQuick.Image {
+  source: "/path/to/img"
+
+  layer.enabled: true
+  layer.effect: @@QtQuick.Effects.MultiEffect {
+    blurEnabled: true
+    blur: 1  // This affects the radius of the blur (a real between 0 and 1)
+    blurMax: 32  // This affects the max radius of the blur (i.e. the radius when `blur` is 1)
+    blurMultiplier: 1  // A multiplier for the blur radius (0 is not multiplied)
+  }
+}
+```
+
+### Stacking effects
+
+A useful feature of @@QtQuick.Effects.MultiEffect is that you can apply multiple effects to a
+component in a single pass. You can do this by simply setting that effect's corresponding enabled
+property to `true` and configuring it as shown previously.
+
+For example, the snippet below applies colourisation, shadow and blur:
+
+```qml
+@@QtQuick.Image {
+  source: "/path/to/img"
+
+  layer.enabled: true
+  layer.effect: @@QtQuick.Effects.MultiEffect {
+    // Apply colourisation
+    colorization: 1
+    colorizationColor: "#abc4d3"
+
+    // Apply shadow
+    shadowEnabled: true
+    shadowBlur: 1
+    shadowColor: "#000000"
+
+    // Apply blur (`blurMax` also affects shadow)
+    blurEnabled: true
+    blur: 1
+    blurMax: 32
+  }
+}
+```
+
+### Using MultiEffect as a separate component
+
+The @@QtQuick.Effects.MultiEffect component can also be used as a separate visual item instead of a
+layer effect. This is useful for more complex effects when you need to manually position/size the
+@@QtQuick.Effects.MultiEffect instead having the same position/size as the source component (which is
+the case when using it as a layer effect).
+
+For example, you can replicate the previous example using the @@QtQuick.Effects.MultiEffect as a separate
+component:
+
+> [!NOTE]
+> @@QtQuick.Effects.MultiEffect renders a new visual item alongside the source component when not used
+> as a layer effect, meaning displaying the source component as well as the @@QtQuick.Effects.MultiEffect
+> is unecessary and wastes CPU cycles. To avoid this, you should either set `visible: false` or `opacity: 0`
+> on the source component. The first will prevent it from receiving mouse events while the second won't.
+
+```qml
+@@QtQuick.Image {
+  id: img
+
+  source: "/path/to/img"
+  visible: false
+}
+
+@@QtQuick.Effects.MultiEffect {
+  anchors.fill: img
+  source: img
+
+  // Apply colourisation
+  colorization: 1
+  colorizationColor: "#abc4d3"
+
+  // Apply shadow
+  shadowEnabled: true
+  shadowBlur: 1
+  shadowColor: "#000000"
+
+  // Apply blur (`blurMax` also affects shadow)
+  blurEnabled: true
+  blur: 1
+  blurMax: 32
+}
+```
+
+# Migrating from Qt5Compat
+
+As of May 26 2025, Qt 5 reached the End of Support state. However, the Qt 5 Core APIs
+that were removed in Qt 6 are still available via the [Qt5Compat](https://doc.qt.io/qt-6/qtcore5-index.html)
+module. This means that the core APIs (mainly
+[Qt5Compat.GraphicalEffects](https://doc.qt.io/qt-6/qtgraphicaleffects5-index.html)) are still
+available to use in Qt 6, though new code should use the
+[QtQuick.Effects](https://doc.qt.io/qt-6/qtquick-effects-qmlmodule.html) module instead.
+
+## Differences
+
+The [Qt5Compat.GraphicalEffects](https://doc.qt.io/qt-6/qtgraphicaleffects5-index.html)
+module contains many useful effects such as @@Qt5Compat.GraphicalEffects.DropShadow,
+@@Qt5Compat.GraphicalEffects.FastBlur and @@Qt5Compat.GraphicalEffects.OpacityMask. These
+do not exist in the [QtQuick.Effects](https://doc.qt.io/qt-6/qtquick-effects-qmlmodule.html)
+module, instead they are available using a single @@QtQuick.Effects.MultiEffect component.
+
+## Why should I migrate?
+
+Firstly, the [Qt5Compat.GraphicalEffects](https://doc.qt.io/qt-6/qtgraphicaleffects5-index.html)
+module is included in Qt 6 primarily for compatibility with Qt 5 applications and it is
+recommended to use the [QtQuick.Effects](https://doc.qt.io/qt-6/qtquick-effects-qmlmodule.html)
+module in new code instead.
+
+Additionally, @@QtQuick.Effects.MultiEffect can apply multiple effects on an object in a
+single pass, compared to the effects in the
+[Qt5Compat.GraphicalEffects](https://doc.qt.io/qt-6/qtgraphicaleffects5-index.html) module.
+This means it is more efficient for having multiple effects compared to the old module.
+
+## Replicating Qt5 Effects in Qt6
+
+Below is a list of examples of how to replicate effects from the
+[Qt5Compat.GraphicalEffects](https://doc.qt.io/qt-6/qtgraphicaleffects5-index.html) module
+using the [QtQuick.Effects](https://doc.qt.io/qt-6/qtquick-effects-qmlmodule.html) module.
+
+### Colourisation/Brightness/Contrast/Saturation
+
+The @@QtQuick.Effects.MultiEffect component provides all these effects as properties
+(@@QtQuick.Effects.MultiEffect.colorization, @@QtQuick.Effects.MultiEffect.brightness,
+@@QtQuick.Effects.MultiEffect.contrast, @@QtQuick.Effects.MultiEffect.saturation).
+
+Comparatively, the [Qt5Compat.GraphicalEffects](https://doc.qt.io/qt-6/qtgraphicaleffects5-index.html)
+module provides these effects as separate effects (@@Qt5Compat.GraphicalEffects.Colorize,
+@@Qt5Compat.GraphicalEffects.BrightnessContrast, @@Qt5Compat.GraphicalEffects.HueSaturation).
+
+### Shadows
+
+To create shadows for rectangular objects, the
+[QtQuick.Effects](https://doc.qt.io/qt-6/qtquick-effects-qmlmodule.html) module provides
+a useful component called @@QtQuick.Effects.RectangularShadow. This creates a rectangular
+shadow with a configurable size, radius/spread and colour.
+
+For other shapes, you must use a @@QtQuick.Effects.MultiEffect instead.
+
+For example, using a @@Qt5Compat.GraphicalEffects.DropShadow:
+
+```qml
+@@QtQuick.Rectangle {
+  implicitWidth: 100
+  implicitHeight: 200
+  radius: 30
+
+  layer.enabled: true
+  layer.effect: @@Qt5Compat.GraphicalEffects.DropShadow {
+    radius: 8
+    samples: 1 + radius * 2
+    color: "#000000"
+  }
+}
+```
+
+You can replicate this using a @@QtQuick.Effects.RectangularShadow or a @@QtQuick.Effects.MultiEffect.
+You should use @@QtQuick.Effects.RectangularShadow over @@QtQuick.Effects.MultiEffect
+when you are able to as they are easier to use and more efficient.
+
+A (relatively) equivalent example to the previous @@Qt5Compat.GraphicalEffects.DropShadow example
+using a @@QtQuick.Effects.RectangularShadow:
+
+```qml
+@@QtQuick.Effects.RectangularShadow {
+  anchors.fill: rect
+  radius: rect.radius
+  blur: 6
+  spread: 1
+  color: "#000000"
+}
+
+@@QtQuick.Rectangle {
+  id: rect
+
+  implicitWidth: 100
+  implicitHeight: 200
+  radius: 30
+}
+```
+
+Also (relatively) equivalent, using a @@QtQuick.Effects.MultiEffect:
+
+```qml
+@@QtQuick.Rectangle {
+  implicitWidth: 100
+  implicitHeight: 200
+  radius: 30
+
+  layer.enabled: true
+  layer.effect: @@QtQuick.Effects.MultiEffect {
+    shadowEnabled: true
+    blurMax: 32
+    shadowBlur: 0.5
+    shadowColor: "#000000"
+  }
+}
+```
+
+### Blurring
+
+Previously in Qt 5, you would use a @@Qt5Compat.GraphicalEffects.FastBlur or
+@@Qt5Compat.GraphicalEffects.GaussianBlur to blur components. In Qt 6, you should
+use a @@QtQuick.Effects.MultiEffect instead. However, it is not possible to replicate
+@@Qt5Compat.GraphicalEffects.GaussianBlur using @@QtQuick.Effects.MultiEffect. Instead,
+you must use a custom shader with a @@QtQuick.ShaderEffect.
+
+Using a @@Qt5Compat.GraphicalEffects.FastBlur:
+
+```qml
+@@QtQuick.Image {
+  source: "path/to/image"
+
+  layer.enabled: true
+  layer.effect: @@Qt5Compat.GraphicalEffects.FastBlur {
+    radius: 32
+  }
+}
+```
+
+Using a @@QtQuick.Effects.MultiEffect:
+
+```qml
+@@QtQuick.Image {
+  source: "path/to/image"
+
+  layer.enabled: true
+  layer.effect: @@QtQuick.Effects.MultiEffect {
+    blurEnabled: true
+    blur: 1
+    blurMax: 34
+  }
+}
+```
+
+### Masking
+
+Previously in Qt 5, you would use an @@Qt5Compat.GraphicalEffects.OpacityMask to mask components. In Qt 6, you
+should use a @@QtQuick.Effects.MultiEffect with the @@QtQuick.Effects.MultiEffect.maskEnabled property instead.
+
+Using an @@Qt5Compat.GraphicalEffects.OpacityMask:
+
+```qml
+@@QtQuick.Text {
+  id: mask
+
+  text: "hi"
+  font.pointSize: 31
+  font.bold: true
+  visible: false
+}
+
+@@QtQuick.Image {
+  source: "path/to/image"
+
+  layer.enabled: true
+  layer.effect: @@Qt5Compat.GraphicalEffects.OpacityMask {
+    maskSource: mask
+  }
+}
+```
+
+Using a @@QtQuick.Effects.MultiEffect:
+
+```qml
+@@QtQuick.Image {
+  source: "path/to/image"
+
+  layer.enabled: true
+  layer.effect: @@QtQuick.Effects.MultiEffect {
+    maskSource: mask
+    maskEnabled: true
+
+    // These make the mask edges antialiased (like OpacityMask does)
+    maskSpreadAtMin: 1
+    maskThresholdMin: 0.5
+  }
+}
+
+@@QtQuick.Text {
+  id: mask
+
+  text: "hi"
+  font.pointSize: 31
+  font.bold: true
+
+  layer.enabled: true  // This is important! The component you use as the mask source NEEDS to have this set to true if not a ShaderEffectSource or Image
+  visible: false
+}
+```
