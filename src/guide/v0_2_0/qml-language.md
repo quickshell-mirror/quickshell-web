@@ -2,7 +2,6 @@
 title: "QML Language"
 index: 10
 ---
-import Collapsible from "@components/Collapsible.astro";
 
 Quickshell is configured using the Qt Modeling Language, or QML.
 This page explains what you need to know about QML to start using Quickshell.
