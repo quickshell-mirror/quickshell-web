@@ -30,7 +30,9 @@
   display: flex;
   width: 100%;
   margin-block: var(--lg);
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  scroll-snap-type: x mandatory;
 }
 
 .marquee-content {
@@ -43,15 +45,15 @@
 .marquee-item {
   position: relative;
   flex: 1 0 100%;
-  transition: transform 0.3s cubic-bezier(0.46, 0.03, 0.52, 0.96);
-  transform: translateX(var(--scroll));
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: left 0.3s var(--ease-in-out);
+  left: var(--scroll);
   gap: var(--md);
   padding-inline: 0.5rem;
 
-  &>* {
+  & > * {
     z-index: 11;
   }
 
@@ -81,7 +83,7 @@
   transition:
     background-color 0.3s,
     opacity 0.3s;
-  z-index: 10;
+  z-index: 20;
   user-select: none;
   align-items: stretch;
   pointer-events: none;
@@ -96,7 +98,7 @@
   flex-direction: column;
   justify-content: center;
 
-  &>div {
+  & > div {
     width: 2.5rem;
     aspect-ratio: 1 / 1;
     display: flex;
@@ -110,7 +112,7 @@
   &:hover {
     cursor: pointer;
 
-    &>div {
+    & > div {
       opacity: 0.9;
     }
   }
@@ -144,7 +146,7 @@
   .marquee-scroll-arrow {
     height: unset;
 
-    &>div {
+    & > div {
       background-color: #55555580;
       border-radius: var(--radius-xs);
     }
@@ -152,6 +154,6 @@
 
   .marquee-scroll {
     width: 92%;
-    align-items: center;
+    left: 4%;
   }
 }

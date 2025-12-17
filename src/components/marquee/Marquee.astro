@@ -1,40 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-
-const videos = [
-  {
-    author: '<a href="https://github.com/soramanew">soramane</a>',
-    source: "https://github.com/caelestia-dots/shell",
-    path: "/assets/showcase/soramane.mp4",
-    installable: true,
-  },
-  {
-    author: '<a href="https://github.com/end-4">end_4</a>',
-    source: "https://github.com/end-4/dots-hyprland",
-    path: "/assets/showcase/end4.mp4",
-    installable: true,
-  },
-  {
-    author: '<a href="https://outfoxxed.me">outfoxxed</a>',
-    source:
-      "https://git.outfoxxed.me/outfoxxed/nixnew/src/branch/master/modules/user/modules/quickshell",
-    path: "/assets/showcase/outfoxxed.mp4",
-  },
-  {
-    author:
-      '<a href="https://github.com/pfaj/">pfaj</a> and <a href="https://github.com/bdebiase">bdebiase</a>',
-    path: "/assets/showcase/pfaj-bdeblase.mp4",
-  },
-  {
-    author: '<a href="https://github.com/flickowoa">flicko</a>',
-    source: "https://github.com/flickowoa/zephyr",
-    path: "/assets/showcase/flicko.mp4",
-  },
-  {
-    author: '<a href="https://vaxry.net">vaxry</a>',
-    path: "/assets/showcase/vaxry.mp4",
-  },
-];
+import MarqueeContent from "./MarqueeContent.astro";
 ---
 <div class="marquee">
   <div class="marquee-scroll">
@@ -45,52 +11,38 @@ const videos = [
       <div><Icon name="caret-right"/></div>
     </div>
   </div>
-  <div id="marquee-content" class="marquee-content" data-scroll="0" data-media-index="0">
-    {videos.map(({ author, source, installable, path }, index) =>
-      <div class="marquee-item">
-        <video
-          data-media-index={index}
-          data-media-author={author}
-          id="showcase-video"
-          class="marquee-item-spacing marquee-item-content"
-          muted
-          controls
-          playsinline
-          preload="metadata"
-        >
-        <source src={path} type="video/mp4"/>
-        </video>
-        <p>
-          Configuration by <Fragment set:html={author}/>
-          {source && !installable && <>(<a href={source}>source code</a>)</>}
-          {source && installable && <>(<a href={source}>install</a>)</>}
-        </p>
-    </div>)}
-  </div>
+  <MarqueeContent/>
 </div>
 
 <script>
   const marquee = document.getElementById("marquee-content")!;
   marquee.style.setProperty("--scroll", "0")
+  marquee.style.setProperty("--mult", "1")
 
   window.addEventListener("load", autoplayInit, false);
   const videos = document.getElementsByClassName("marquee-item-content") as HTMLCollectionOf<HTMLVideoElement>;
   const videoCount = videos.length;
+  const lastVideoIndex = videos[videos.length - 1]
   let currentVideoIndex = 0;
   let currentVideo: HTMLVideoElement | null = null;
 
   function autoplayInit() {
     setActiveVideo(0);
-    currentVideo!.play();
+    currentVideo.play();
+    currentVideo.style.animationPlayState = "running";
   }
 
   function setActiveVideo(index: number) {
-    currentVideo?.pause();
+    if (currentVideo) {
+      currentVideo.pause();
+    }
 
     currentVideoIndex = index;
     currentVideo = videos[currentVideoIndex];
+
     currentVideo.currentTime = 0;
     marquee.style.setProperty("--scroll", `-${currentVideoIndex*100}%`)
+    marquee.style.setProperty("--mult", `${currentVideoIndex + 1}`)
   }
 
   function offsetCarousel(offset: number) {
@@ -103,19 +55,59 @@ const videos = [
   const intersectionOptions = {
     root: marquee,
     rootMargin: "0px",
-    threshold: 0.0,
+    threshold: 0.1,
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       const video = entry.target as HTMLVideoElement;
+
       if (!entry.isIntersecting) {
         video.pause();
+
+        video.style.animationName = "none";
+        void video.offsetWidth;
+
+        video.style.animationName = "fade";
+        video.style.animationDuration = "0.3s";
+        video.style.animationTimingFunction = "ease-in-out";
+        video.style.animationFillMode = "forwards";
+        video.style.animationDirection = "reverse";
       } else if (video === currentVideo) {
         video.play();
+
+        video.style.animationName = "none";
+        void video.offsetWidth;
+
+        video.style.animationName = "fade";
+        video.style.animationDuration = "0.3s";
+        video.style.animationTimingFunction = "ease-in-out";
+        video.style.animationFillMode = "forwards";
+        video.style.animationPlayState = "running";
+        video.style.animationDirection = "normal";
+      }
+      if (entry.isIntersecting && video === lastVideoIndex) {
+        addNextVideo();
       }
     });
   }, intersectionOptions);
+  function addNextVideo() {
+    const firstVideo = videos[0];
+    if (!firstVideo) return;
+
+    const newVideo = firstVideo.cloneNode(true) as HTMLVideoElement;
+
+    // IMPORTANT: Reset the state of the new video
+    newVideo.pause();
+    newVideo.currentTime = 0;
+    newVideo.style.animationName = "none"; // Reset any lingering animation styles
+
+    // append to the marquee
+    marquee.appendChild(newVideo);
+
+    // observe the new video
+    observer.observe(newVideo);
+  }
 
   for (const video of videos) {
     observer.observe(video);

@@ -1,4 +1,4 @@
-:root {
+html {
   --scaleFactor: 1.618;
   --wholestep: 1.618;
   --halfstep: 1.272;
@@ -21,8 +21,13 @@
   --3xl: calc(var(--2xl) * var(--scaleFactor));
   --4xl: calc(var(--3xl) * var(--scaleFactor));
 
-  /* Unitless sizes; required for adhoc calculations (division and multiplication in calc() require unitless numbers */
-  /* NOTE: in calc() with multiplication or division the right side must be a unitless number */
+  /* INFO: Unitless sizes;
+      required for adhoc calculations
+      (division and multiplication in calc() require unitless numbers)
+  */
+  /* NOTE:
+      in calc() with (x*y) or (x/y) the "y" must be a unitless number
+  */
 
   --sm-unitless: calc(1 / var(--scaleFactor));
   --xs-unitless: calc(var(--sm-unitless) / var(--scaleFactor));
