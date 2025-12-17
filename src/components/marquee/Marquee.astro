@@ -20,7 +20,7 @@ import MarqueeContent from "./MarqueeContent.astro";
   marquee.style.setProperty("--mult", "1")
 
   window.addEventListener("load", autoplayInit, false);
-  const videos = document.getElementsByClassName("marquee-item-content") as HTMLCollectionOf<HTMLVideoElement>;
+  let videos = document.getElementsByClassName("marquee-item-content") as HTMLCollectionOf<HTMLVideoElement>;
   const videoCount = videos.length;
   const lastVideoIndex = videos[videos.length - 1]
   let currentVideoIndex = 0;
@@ -38,6 +38,24 @@ import MarqueeContent from "./MarqueeContent.astro";
     }
 
     currentVideoIndex = index;
+    if (index === videos.length - 1) {
+      console.log("shift")
+
+      const shifted = videos.item(0);
+      marquee.firstElementChild.remove()
+      const video_div = document.createElement("div");
+
+      video_div.classList.add("marquee-item");
+      console.log("shift: ",video_div.classList.toString())
+
+      shifted.setAttribute("data-media-index", (index+1).toString())
+
+      video_div.appendChild(shifted);
+      marquee.appendChild(video_div);
+      videos = document.getElementsByClassName("marquee-item-content") as HTMLCollectionOf<HTMLVideoElement>;
+      currentVideoIndex = index - 1;
+      console.log("shift", marquee)
+    }
     currentVideo = videos[currentVideoIndex];
 
     currentVideo.currentTime = 0;
@@ -47,8 +65,8 @@ import MarqueeContent from "./MarqueeContent.astro";
 
   function offsetCarousel(offset: number) {
     let nextIndex = currentVideoIndex + offset;
-    if (nextIndex < 0) nextIndex += videoCount;
-    nextIndex = nextIndex % videoCount;
+    // if (nextIndex < 0) nextIndex += videoCount;
+    // nextIndex = nextIndex % videoCount;
     setActiveVideo(nextIndex);
   }
 
@@ -57,6 +75,7 @@ import MarqueeContent from "./MarqueeContent.astro";
     rootMargin: "0px",
     threshold: 0.1,
   };
+  const mult = marquee.style.getPropertyValue("--mult") ?? 0;
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -86,28 +105,8 @@ import MarqueeContent from "./MarqueeContent.astro";
         video.style.animationPlayState = "running";
         video.style.animationDirection = "normal";
       }
-      if (entry.isIntersecting && video === lastVideoIndex) {
-        addNextVideo();
-      }
     });
   }, intersectionOptions);
-  function addNextVideo() {
-    const firstVideo = videos[0];
-    if (!firstVideo) return;
-
-    const newVideo = firstVideo.cloneNode(true) as HTMLVideoElement;
-
-    // IMPORTANT: Reset the state of the new video
-    newVideo.pause();
-    newVideo.currentTime = 0;
-    newVideo.style.animationName = "none"; // Reset any lingering animation styles
-
-    // append to the marquee
-    marquee.appendChild(newVideo);
-
-    // observe the new video
-    observer.observe(newVideo);
-  }
 
   for (const video of videos) {
     observer.observe(video);

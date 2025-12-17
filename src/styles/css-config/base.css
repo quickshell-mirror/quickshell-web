@@ -19,6 +19,7 @@ html {
   position: relative;
   margin: 0;
   padding: 0;
+  transition: all 0.3s var(--ease-in-out);
 }
 
 body {

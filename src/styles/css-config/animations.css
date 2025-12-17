@@ -138,15 +138,20 @@
 }
 
 @keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  0% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 
   50% {
-    transform: none;
+    transform: translateY(-12%);
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    color: hsla(var(--green) 100 69 / 0.75);
+  }
+
+  100% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }
 }
 
@@ -166,5 +171,6 @@
   --animate-spin: spin 1s linear infinite;
   --animate-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
   --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-bounce: bounce 1s infinite;
+  --animate-bounce: bounce 0.6s var(--ease-out) forwards;
+  --animate-fade: fade 0.3s cubic-bezier(0.4, 0, 0.6, 1);
 }

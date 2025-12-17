@@ -1,12 +1,12 @@
 pre.shiki {
-  margin-block: 1.618rem;
+  margin-block: var(--lg);
 }
 
 :where(p, li):has(> code) code {
-  padding-inline: 0.272rem;
-  border-radius: 0.272rem;
-  color: hsl(var(--blue) 100% 69%);
-  background-color: hsl(var(--blue) 85% 35% / 0.1);
+  padding-inline: var(--2xl);
+  border-radius: var(--2xl);
+  color: hsl(var(--blue) 100 69);
+  background-color: hsla(var(--blue) 85 35 / 0.1);
 }
 
 .shiki,
@@ -26,6 +26,9 @@ pre {
   border-radius: 0.618rem;
   overflow: hidden;
   text-wrap: wrap;
+  transition:
+    background-color 0.3s var(--ease-in-out),
+    color 0.3s var(--ease-in-out);
 
   & .copy-button {
     all: unset;
@@ -41,18 +44,29 @@ pre {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: hsl(var(--blue) 100% 69%);
-    background-color: hsl(var(--blue) 85% 35% / 0.1);
+    color: hsla(var(--blue) 100 69 / 0.33);
+    background-color: hsla(var(--blue) 85 35 / 0.01);
     cursor: pointer;
-    transition: color 0.25s;
+    transition:
+      background-color 0.3s var(--ease-in-out),
+      color 0.3s var(--ease-in-out);
     z-index: 10;
 
     &:hover {
-      color: hsl(var(--blue) 100% 75%);
+      color: hsla(var(--blue) 100 75 / 0.75);
+      background-color: hsla(var(--blue) 85 35 / 0.1);
     }
 
     &.copied {
-      animation: pulseGreen 0.5s cubic-bezier(0, 1, 0.6, 1);
+      animation: var(--animate-bounce);
+    }
+  }
+
+  &.shiki {
+    box-shadow: var(--shadow-xl);
+
+    &:hover .copy-button {
+      background-color: hsla(var(--blue) 85 35 / 0.07);
     }
   }
 }
