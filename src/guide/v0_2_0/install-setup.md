@@ -18,7 +18,7 @@ Note that you may want to install some additional packages (names vary by distro
 - `qt5compat`: extra visual effects, notably gaussian blur. @@QtQuick.Effects.MultiEffect is usually preferable
 
 ### Nix
-Release versions of Quickshell are available from Nixpkgs under the `quickshell` package.
+Release versions of Quickshell are available from Nixpkgs as `quickshell`.
 
 The Quickshell repo also has an embedded flake which can be used from either mirror:
 - `git+https://git.outfoxxed.me/outfoxxed/quickshell`
@@ -51,9 +51,14 @@ When using the flake, additional QML packages can be added to Quickshell's envir
 `<package>.withModules [ <extra modules> ]`.
 
 ### Arch
-Quickshell is available from the aur under:
-- the [quickshell](https://aur.archlinux.org/packages/quickshell) package for the latest release
-- the [quickshell-git](https://aur.archlinux.org/packages/quickshell-git) package that tracks the master branch
+Release versions of Quickshell are available in the Archlinux package repository as `quickshell`.
+
+```sh
+pacman -S quickshell
+```
+
+Unreleased changes on the master branch are available from the [quickshell-git](https://aur.archlinux.org/packages/quickshell-git)
+AUR package.
 
 > [!WARNING]
 > When using an AUR package, Quickshell may break whenever Qt is updated.
@@ -63,14 +68,13 @@ Quickshell is available from the aur under:
 
 Install using the command below:
 ```sh
-yay -S quickshell
-# or
 yay -S quickshell-git
 ```
 (or your AUR helper of choice)
 
 ### Fedora
-Quickshell is available from the [errornointernet/quickshell] COPR, as either:
+Quickshell is available in Fedora Rawhide as [`quickshell`](https://packages.fedoraproject.org/pkgs/quickshell/quickshell/),
+or from the [errornointernet/quickshell] COPR, as either:
 - `quickshell` that tracks the latest release
 - `quickshell-git` that tracks the master branch
 
@@ -84,6 +88,31 @@ sudo dnf install quickshell
 # or
 sudo dnf install quickshell-git
 ```
+
+### OpenSUSE / Debian
+Quickshell is packaged on the Open Build Service in the [`home:AvengeMedia:danklinux`] repository and is available as
+- `quickshell` for the latest release - [Install Instructions](https://software.opensuse.org//download.html?project=home%3AAvengeMedia%3Adanklinux&package=quickshell)
+- `quickshell-git` for the master branch - [Install Instructions](https://software.opensuse.org//download.html?project=home%3AAvengeMedia%3Adanklinux&package=quickshell-git)
+
+[`home:AvengeMedia:danklinux`]: https://build.opensuse.org/project/show/home:AvengeMedia:danklinux
+
+### Ubuntu
+Quickshell is packaged in the [`avengemedia/danklinux`] PPA, which provides
+- `quickshell` which tracks the latest release
+- `quickshell-git` which tracks the master branch
+
+To install:
+```sh
+# Add DankLinux PPA
+sudo add-apt-repository ppa:avengemedia/danklinux
+sudo apt update
+
+sudo apt install quickshell
+# OR
+sudo apt install quickshell-git
+```
+
+[`avengemedia/danklinux`]: https://launchpad.net/~avengemedia/+archive/ubuntu/danklinux
 
 ### Guix
 Release versions of Quickshell are available from the standard Guix repository
