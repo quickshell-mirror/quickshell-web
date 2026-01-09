@@ -73,8 +73,15 @@ yay -S quickshell-git
 (or your AUR helper of choice)
 
 ### Fedora
-Quickshell is available in Fedora Rawhide as [`quickshell`](https://packages.fedoraproject.org/pkgs/quickshell/quickshell/),
-or from the [errornointernet/quickshell] COPR, as either:
+Release versions of Quickshell are available in Fedora Rawhide as [`quickshell`](https://packages.fedoraproject.org/pkgs/quickshell/quickshell/),
+
+To install:
+```sh
+sudo dnf install quickshell
+```
+
+#### Fedora COPR
+Release and development versions of Quickshell are available from the [errornointernet/quickshell] COPR, as either:
 - `quickshell` that tracks the latest release
 - `quickshell-git` that tracks the master branch
 
