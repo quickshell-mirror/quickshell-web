@@ -44,18 +44,21 @@ const videos = [
   {videos.map(({ author, source, installable, path }, index) => {
     return (
       <div class=`marquee-item`>
-        <video
-          data-media-index={index}
-          data-media-author={author}
-          id="showcase-video"
-          class="marquee-item-spacing marquee-item-content"
-          muted
-          controls
-          playsinline
-          preload="metadata"
-        >
-        <source src={path} type="video/mp4"/>
-      </video>
+        <div class="marquee-item-spacing marquee-item-content video-wrapper">
+          <video
+            data-media-index={index}
+            data-media-author={author}
+            id="showcase-video"
+            muted
+            controls
+            playsinline
+            preload="metadata"
+            style="opacity: 0; transition: opacity 0.5s"
+            onloadeddata="this.style.opacity='1'"
+          >
+            <source src={path} type="video/mp4"/>
+          </video>
+        </div>
       <p>
         Configuration by <Fragment set:html={author}/>
         {source && !installable && <>(<a href={source}>source code</a>)</>}
