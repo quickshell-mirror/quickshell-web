@@ -66,6 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const updateDimensions = () => {
+    // capture item width
+    const oldItemWidth = itemWidth;
     itemWidth = container.clientWidth;
     if (itemWidth === 0) return;
 
@@ -79,9 +81,15 @@ document.addEventListener("DOMContentLoaded", () => {
       item.style.maxWidth = `${itemWidth}px`;
     });
 
-    targetScrollX =
-      bufferSize * sequenceWidth +
-      (targetScrollX % sequenceWidth);
+    if (oldItemWidth > 0) {
+      const scrollRatio = targetScrollX / oldItemWidth;
+      const relativeScroll = scrollRatio % originalCount;
+      targetScrollX =
+        (bufferSize * originalCount + relativeScroll) * itemWidth;
+    } else {
+      targetScrollX = bufferSize * sequenceWidth;
+    }
+
     currentScrollX = targetScrollX;
     scroller.style.transform = `translateX(-${currentScrollX}px)`;
   };

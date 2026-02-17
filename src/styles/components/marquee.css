@@ -95,7 +95,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 85rem;
+  max-width: 80rem;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -127,6 +127,8 @@
     opacity: 0.5;
     transition: opacity 0.3s ease;
     backdrop-filter: blur(var(--2xs));
+    border-radius: var(--radius-xs);
+    background-color: #55555580;
   }
 
   &:hover {
@@ -162,13 +164,18 @@
   }
 }
 
+@media (min-width: 83rem) {
+  .marquee-scroll {
+    min-width: 88rem;
+    max-width: 90rem;
+  }
+}
 @media not (min-width: 83rem) {
   .marquee-scroll-arrow {
     height: unset;
 
     & > div {
       background-color: #55555580;
-      border-radius: var(--radius-xs);
     }
   }
 }
