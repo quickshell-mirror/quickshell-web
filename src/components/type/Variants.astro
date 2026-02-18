@@ -1,5 +1,5 @@
 ---
-import type { QuickshellVariant } from "@config/io/types";
+import type { QuickshellVariant } from "@config/_types";
 import TypeDetails from "./TypeDetails.astro";
 import TypeTitle from "./TypeTitle.astro";
 
@@ -9,17 +9,20 @@ export interface Props {
 
 const { variants } = Astro.props;
 ---
+
 <ul class="typedata typevariants">
-  {
-    Object.entries(variants).map(([name, variantData]) => {
+  {(Object.entries(variants) as [
+    keyof QuickshellVariant,
+    QuickshellVariant[keyof QuickshellVariant],
+  ][]).map(([name, variantData]) => {
       const paramKeys = variantData.params && variantData.params.length > 0
         ? variantData.params.map(param => param.name)
         : [];
       return (
-        <li id={ name } class="typedata-root typevariant-root">
+        <li id={ name.toString() } class="typedata-root typevariant-root">
           <TypeTitle 
             typekind="variant"
-            typename={name}
+            typename={ name.toString() }
             typelink=""
             typelink_text=""
           />
@@ -36,7 +39,5 @@ const { variants } = Astro.props;
           <TypeDetails markdown={variantData.details} />
         </li>
       )
-    })
-  }
+    })}
 </ul>
-

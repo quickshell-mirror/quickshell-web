@@ -20,10 +20,12 @@ export const Table: Component<{
   if (configTOC) {
     return (
       <div class="toc-content">
-        {title && <>
-          <p>{title}</p>
-          <hr/>
-        </>}
+        {title && (
+          <>
+            <p>{title}</p>
+            <hr />
+          </>
+        )}
         <For each={configTOC}>
           {heading => (
             <Heading

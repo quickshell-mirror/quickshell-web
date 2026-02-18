@@ -12,30 +12,48 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="generator" content={Astro.generator} />
-<link rel="canonical" href={Astro.url} />
-<link rel="sitemap" href="/sitemap-index.xml" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content={Astro.generator}>
+<link rel="canonical" href={Astro.url}>
+<link rel="sitemap" href="/sitemap-index.xml">
 
 <title>{title}</title>
-<meta name="description" content={description} />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="description" content={description}>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<script is:inline>
+  const theme = (() => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
+  })();
+
+  if (theme === "dark") {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+</script>
 
 <!-- Open Graph Meta Tags -->
-<meta name="og:type" content="website" />
-<meta name="og:site_name" content="quickshell" />
-<meta name="og:url" content={Astro.url} />
-<meta name="og:title" content={title} />
-<meta name="og:description" content={description} />
+<meta name="og:type" content="website">
+<meta name="og:site_name" content="quickshell">
+<meta name="og:url" content={Astro.url}>
+<meta name="og:title" content={title}>
+<meta name="og:description" content={description}>
 <!-- <meta name="og:image" content={image} /> -->
 
 <!-- Twitter Meta Tags -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:domain" content="quickshell.outfoxxed.me" />
-<meta name="twitter:url" content={Astro.url} />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:domain" content="quickshell.outfoxxed.me">
+<meta name="twitter:url" content={Astro.url}>
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
 <!-- <meta name="twitter:image" content={image} /> -->
 
-<Analytics/>
+<Analytics />

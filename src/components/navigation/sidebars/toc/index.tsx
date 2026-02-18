@@ -6,7 +6,7 @@ import {
   type Component,
 } from "solid-js";
 
-import { Article } from "@icons";
+import { Article, MenuToX } from "@icons";
 import { Table } from "./Table";
 import type { TOCProps } from "../types";
 import { buildHierarchy } from "@config/io/helpers";
@@ -27,7 +27,10 @@ const TableOfContents: Component<TOCProps> = props => {
     return type ? (
       <Table typeTOC={type} />
     ) : (
-      <Table title={title} configTOC={buildHierarchy(config!)} />
+      <Table
+        title={title}
+        configTOC={buildHierarchy(config!)}
+      />
     );
   }
 
@@ -37,6 +40,7 @@ const TableOfContents: Component<TOCProps> = props => {
     if (
       isLink ||
       !isInBody ||
+      //@ts-expect-error
       (isInBody && !tocRef.contains(event.target as Node))
     ) {
       setOpen(false);
@@ -92,13 +96,17 @@ const TableOfContents: Component<TOCProps> = props => {
       id="toc-toggle"
     >
       <div onclick={e => toggle(e)}>
-        <Article />
+        <Article class={`toc-icon ${!open() ? "active" : ""}`} />
+        <MenuToX class={`toc-icon ${open() ? "active" : ""}`} />
       </div>
       <div class={`toc-mobile ${open() ? "shown" : ""}`}>
         {type ? (
           <Table typeTOC={type} />
         ) : (
-          <Table title={title} configTOC={buildHierarchy(config!)} />
+          <Table
+            title={title}
+            configTOC={buildHierarchy(config!)}
+          />
         )}
       </div>
     </div>

@@ -9,6 +9,7 @@ interface Props {
 }
 const { title, link, current } = Astro.props;
 ---
+
 <Accordion class=`nav-component nav-collapsible ${current ? "nav-current" : ""}` {...(current ? { open: "_" } : {})}>
   <div slot="header">
     <a class=`nav-link ${current ? "nav-current" : ""}` href={link}>{title}</a>
@@ -16,5 +17,5 @@ const { title, link, current } = Astro.props;
       <Fragment set:html={navMarker}/>
     </div>
   </div>
-  <slot>
+  <slot />
 </Accordion>

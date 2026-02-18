@@ -1,6 +1,8 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "include": ["src/**/*", "**/**.d.ts", "pagefind.ts"],
   "compilerOptions": {
+    "lib": ["es2023"],
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"
@@ -9,32 +11,25 @@
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "verbatimModuleSyntax": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@*": [
-        "./*"
-      ],
-      "@/*": [
-        "./src/*"
-      ],
-      "@config/*": [
-        "./src/config/*"
-      ],
-      "@icons": [
-        "./src/components/icons.tsx"
-      ],
-      "@icons/*": [
-        "./src/icons/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@layouts/*": [
-        "./src/layouts/*"
-      ],
-      "@styles/*": [
-        "./src/styles/*"
-      ]
-    }
+      "@*": ["./*"],
+      "@/*": ["./src/*"],
+      "@config/*": ["./src/config/*"],
+      "@icons": ["./src/components/icons.tsx"],
+      "@icons/*": ["./src/icons/*"],
+      "@components/*": ["./src/components/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@_types": ["./src/config/_types/index.ts"],
+      "@_types/*": ["./src/config/_types/*"]
+    },
+    "types": ["astro/client"]
   }
 }

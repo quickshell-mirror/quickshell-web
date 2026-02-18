@@ -10,6 +10,7 @@ interface Props {
 
 const { title, link, current, showIcon } = Astro.props;
 ---
+
 <a class=`nav-component nav-item nav-link ${current ? "nav-current" : ""}` href={link}>
   { showIcon ? (
     <div>

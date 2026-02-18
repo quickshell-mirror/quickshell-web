@@ -12,12 +12,13 @@
   --search-corners: calc(0.3125rem * var(--pagefind-ui-scale));
   --search-page-icon-size: calc(1.875rem * var(--pagefind-ui-scale));
   --search-page-icon-inline-start: calc(
-    (var(--search-result-pad-inline-start) - var(--search-page-icon-size)) / 2
+    (var(--search-result-pad-inline-start) - var(--search-page-icon-size)) /
+    2
   );
   --search-tree-diagram-size: calc(2.5rem * var(--pagefind-ui-scale));
   --search-tree-diagram-inline-start: calc(
     (var(--search-result-pad-inline-start) - var(--search-tree-diagram-size)) /
-      2
+    2
   );
 }
 
@@ -57,9 +58,11 @@
 
 #qs_search .pagefind-ui__search-clear::before {
   content: "";
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
+  -webkit-mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
     center / 50% no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
+  mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
     center / 50% no-repeat;
   background-color: hsl(0deg 25% 45%);
   display: block;
@@ -166,9 +169,11 @@
   inset-inline-start: var(--search-tree-diagram-inline-start);
   width: var(--search-tree-diagram-size);
   background: hsl(var(--blue) 10% 30%);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
+  -webkit-mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
     0% 0% / 100% no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
+  mask:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
     0% 0% / 100% no-repeat;
 }
 
@@ -204,9 +209,11 @@
     inset-inline-start: var(--search-tree-diagram-inline-start);
     width: var(--search-tree-diagram-size);
     background: hsl(var(--blue) 10% 30%);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m'/%3E%3C/svg%3E")
+    -webkit-mask:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m'/%3E%3C/svg%3E")
       0% 0% / 100% no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m'/%3E%3C/svg%3E")
+    mask:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m'/%3E%3C/svg%3E")
       0% 0% / 100% no-repeat;
   }
 }
@@ -219,7 +226,8 @@
 
 /* default styles */
 site-search {
-  --shadow-lg: 0px 25px 7px hsl(0deg, 0%, 0%, 0.03),
+  --shadow-lg:
+    0px 25px 7px hsl(0deg, 0%, 0%, 0.03),
     0px 16px 6px hsl(0deg, 0%, 0%, 0.1), 0px 9px 5px hsl(223deg, 13%, 10%, 0.33),
     0px 4px 4px hsl(0deg, 0%, 0%, 0.75), 0px 4px 2px hsl(0deg, 0%, 0%, 0.25);
   display: contents;
@@ -275,7 +283,8 @@ button > kbd {
   background-color: hsl(var(--blue) 15% 80%);
 }
 
-html.dark button > kbd {
+html.dark button > kbd,
+html:has(input#theme-manual-toggle:checked) button > kbd {
   background-color: hsl(var(--blue) 5% 20% / 0.5);
 }
 
@@ -368,7 +377,8 @@ button[data-close-modal] {
     }
   }
 
-  html.dark button[data-open-modal] {
+  html.dark button[data-open-modal],
+  html:has(input#theme-manual-toggle:checked) button[data-open-modal] {
     background-color: hsla(var(--blue) 15% 15% / 0.5);
     color: hsl(var(--blue) 40% 65%);
 

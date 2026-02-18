@@ -1,6 +1,6 @@
 ---
 import { getQMLTypeLink } from "@config/io/helpers";
-import type { QuickshellSignal } from "@config/io/types";
+import type { QuickshellSignal } from "@config/_types";
 import { Tag } from "@icons";
 import TypeDetails from "./TypeDetails.astro";
 import TypeTitle from "./TypeTitle.astro";
@@ -12,44 +12,51 @@ export interface Props {
 const { signals } = Astro.props;
 const { version } = Astro.params;
 ---
+
 <ul class="typedata typesignals">
-  {
-    Object.entries(signals).map(([name, signalData]) => {
-      const paramKeys = signalData.params.length > 0 ? signalData.params.map((param,index) => `${param.name}${index !== signalData.params.length -1 ? ", ":""}`) : []
-      let genericType:string|undefined;
-      let genericTypeLink:string|undefined;
-      return (
-        <li id={ name } class="typedata-root typesignal-root">
-          <TypeTitle
-            typekind="signal"
-            typename={name}
-            typelink="/docs/configuration/qml-overview#-signals"
-            typelink_text=""
-            typename_generic={genericType}
-            typelink_generic={genericTypeLink}
-            typedata_params={paramKeys}
-          />
-          {
-            signalData.params && signalData.params.length > 0 ? (
-              <p class="typedata-params typesignal-params">
-                {
-                  signalData.params.map((param, _) => {
-                    return (
-                    <span class="typedata-param typesignal-param">
-                      <Tag client:idle/>
-                      {param.name}<span class="type-datatype">:&nbsp;<a
-                        href={getQMLTypeLink(version!, param.type)}
-                      >{param.type.name}</a></span>
-                    </span>
-                    )
-                  })
-                }
-              </p>
-            ) : null
-          }
-          <TypeDetails markdown={signalData.details} />
-        </li>
-      )
-    })
-  }
+  {(Object.entries(signals) as [
+    keyof QuickshellSignal,
+    QuickshellSignal[keyof QuickshellSignal],
+    ][]).map(([name, signalData]) => {
+    const paramKeys = signalData.params.length > 0
+      ? signalData.params.map((param,index) => `${param.name}${
+        index !== signalData.params.length -1
+          ? ", "
+          :""
+      }`): []
+    let genericType:string|undefined;
+    let genericTypeLink:string|undefined;
+    return (
+      <li id={ name.toString() } class="typedata-root typesignal-root">
+        <TypeTitle
+          typekind="signal"
+          typename={ name.toString() }
+          typelink="/docs/configuration/qml-overview#-signals"
+          typelink_text=""
+          typename_generic={genericType}
+          typelink_generic={genericTypeLink}
+          typedata_params={paramKeys}
+        />
+        {
+          signalData.params && signalData.params.length > 0 ? (
+            <p class="typedata-params typesignal-params">
+              {
+                signalData.params.map((param, _) => {
+                  return (
+                  <span class="typedata-param typesignal-param">
+                    <Tag client:idle/>
+                    {param.name}<span class="type-datatype">:&nbsp;<a
+                      href={getQMLTypeLink(version!, param.type)}
+                    >{param.type.name}</a></span>
+                  </span>
+                  )
+                })
+              }
+            </p>
+          ) : null
+        }
+        <TypeDetails markdown={signalData.details} />
+      </li>
+    )
+  })}
 </ul>

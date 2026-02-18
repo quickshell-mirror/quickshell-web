@@ -13,19 +13,25 @@ import Link from "./Link.astro";
 
 const versions = await getVersionsData();
 const versionName = Astro.params.version;
-const modules = versions.versions.find(version => version.name === versionName)?.modules;
+const modules = versions.versions.find(
+  version => version.name === versionName
+)?.modules;
 
-const currentPath = Astro.url.pathname.split('/').filter(s => s !== "");
+const currentPath = Astro.url.pathname.split("/").filter(s => s !== "");
 
 const guidePages = await getGuideCollection(versionName ?? "");
 
 interface NavTree {
-  title: string,
-  slug: string,
-  entries?: NavTree[],
+  title: string;
+  slug: string;
+  entries?: NavTree[];
 }
 
-function mkTree(mount: string, pathIdx: number, { title, slug, entries }: NavTree): TreeEntry {
+function mkTree(
+  mount: string,
+  pathIdx: number,
+  { title, slug, entries }: NavTree
+): TreeEntry {
   const link = `${mount}/${slug}`;
 
   return {
@@ -38,7 +44,9 @@ function mkTree(mount: string, pathIdx: number, { title, slug, entries }: NavTre
 
 function genGuideNav(base: string): NavTree[] | undefined {
   const pages = guidePages
-    .filter(page => page.id.match(`^${base}[^/]*$`) !== null && page.id !== "index")
+    .filter(
+      page => page.id.match(`^${base}[^/]*$`) !== null && page.id !== "index"
+    )
     .sort((a, b) => a.data.index - b.data.index)
     .map(page => ({
       title: page.data.title,
@@ -68,8 +76,8 @@ if (versionName) {
         entries: module.types.map(type => ({
           title: type.name,
           slug: type.name,
-        }))
-      }))
+        })),
+      })),
     }),
   };
 
@@ -84,6 +92,7 @@ if (versionName) {
   };
 }
 ---
+
 <nav class="navtree">
   <Link
     title="About"
@@ -95,9 +104,9 @@ if (versionName) {
     link="/changelog"
     current={currentPath.length === 1 && currentPath[0] === "changelog"}
   />
-  { versionedEntries && <Tree {...versionsTree as TreeEntry}/>}
-  <hr/>
-  { versionedEntries && (
+  {versionedEntries && <Tree {...versionsTree as TreeEntry}/>}
+  <hr>
+  {versionedEntries && (
     <Tree {...versionedEntries.guide}/>
     <Tree {...versionedEntries.types}/>
     <Link
@@ -111,7 +120,7 @@ if (versionName) {
       showIcon={true}
     />
   )}
-  { !versionedEntries && versions.versions.map(version => (
+  {!versionedEntries && versions.versions.map(version => (
     <Link
       title={`Quickshell Documentation (${version.name})`}
       link={`/docs/${version.name}/guide`}

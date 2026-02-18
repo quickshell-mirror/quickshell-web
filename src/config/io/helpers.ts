@@ -10,7 +10,7 @@ import type {
   ConfigHeading,
   ConfigTOC,
 } from "@components/navigation/sidebars/types";
-import type { QMLTypeLinkObject } from "./types";
+import type { QMLTypeLinkObject } from "@_types";
 
 export function buildHierarchy(headings: ConfigHeading[]) {
   const toc: ConfigTOC[] = [];
@@ -30,7 +30,7 @@ export function buildHierarchy(headings: ConfigHeading[]) {
       let depth = heading.depth - 1;
       let parent = null;
 
-      while (!parent && depth != 0) {
+      while (!parent && depth !== 0) {
         parent = parentHeadings.get(depth);
         depth -= 1;
       }
@@ -96,13 +96,10 @@ export function getQMLTypeLinkObject(unparsed: string) {
   return hashMap[index]();
 }
 
-export function getQMLTypeLink(version: string, {
-  type,
-  module,
-  name,
-  mtype,
-  mname,
-}: QMLTypeLinkObject) {
+export function getQMLTypeLink(
+  version: string,
+  { type, module, name, mtype, mname }: QMLTypeLinkObject
+) {
   if (type === "unknown") {
     return "#unknown";
   }
@@ -116,7 +113,9 @@ export function getQMLTypeLink(version: string, {
       return localLink;
     },
     qt: () => {
-      const isSpecific = mname ? `#${mname}-${mtype === "func" ? "method" : mtype}` : "";
+      const isSpecific = mname
+        ? `#${mname}-${mtype === "func" ? "method" : mtype}`
+        : "";
       const qtLink = `${qtStart}${module!.toLowerCase().replace(".", "-")}-${name!.toLowerCase()}.html${isSpecific}`;
       return qtLink;
     },

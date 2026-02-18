@@ -2,6 +2,7 @@
 import matrixLogo from "@icons/matrix-logo.svg?raw";
 import discordLogo from "@icons/discord-logo.svg?raw";
 import gitLogo from "@icons/git-logo.svg?raw";
+import ThemeToggle from "./ThemeToggle.astro";
 
 interface Props {
   class?: string;
@@ -9,6 +10,7 @@ interface Props {
 
 const props = Astro.props;
 ---
+
 <footer class=`${props.class ?? ""}`>
   <div class="credits">
     <p class="hint">Brought to you by:</p>
@@ -18,6 +20,7 @@ const props = Astro.props;
       and our contributors
     </a>
   </div>
+  <ThemeToggle />
   <div class="socials-changelog">
     <section class="socials">
       <a href="https://matrix.to/#/#quickshell:outfoxxed.me" target="_blank" aria-label="Join our matrix space">

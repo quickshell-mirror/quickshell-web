@@ -2,29 +2,29 @@
 import { Breadcrumbs } from "astro-breadcrumbs";
 import "astro-breadcrumbs/breadcrumbs.css";
 
-import CreateCopyButtons from "@components/hooks/CreateCopyButtons.astro";
-import PreTheme from "@config/PreTheme.astro";
 import Header from "@components/Header.astro";
 import Head from "@config/Head.astro";
 import Nav from "@components/navigation/sidebars/nav/index.astro";
 import type { ConfigHeading } from "@src/components/navigation/sidebars/types";
 import Footer from "@src/components/Footer.astro";
-import type { TypeData } from "@config/io/types";
+import type { TypeData } from "@config/_types";
 
 interface Props {
   title: string;
   description: string;
   headings?: ConfigHeading[];
-  type?: TypeData
+  type?: TypeData;
 }
 
 const { title, description, headings, type } = Astro.props;
-let url = Astro.url.pathname.split("/").filter(s => s !== "");
+let url = Astro.url.pathname.split("/").filter((s: string) => s !== "");
 
-const breadcrumbs = [{
-  text: "custom",
-  href: "/",
-}];
+const breadcrumbs = [
+  {
+    text: "custom",
+    href: "/",
+  },
+];
 
 let linkPath = "";
 if (url[0] === "docs") {
@@ -49,16 +49,27 @@ for (const segment of url) {
 <html lang="en" class="dark">
   <head>
     <Head description={description} title={title} />
-    <PreTheme />
-    <CreateCopyButtons />
   </head>
   <body class="docslayout">
-    <Header title={title} headings={headings} type={type}/>
+    <input
+      type="checkbox"
+      id="theme-manual-toggle"
+      class="theme-toggle-input"
+      aria-label="Toggle theme (light/dark)"
+      style="display: none;"
+    >
+    <Header title={title} headings={headings} type={type} />
     <div class="docslayout-root">
-      <Nav mobile={false}/>
+      <Nav mobile={false} />
       <div class="docslayout-inner" data-pagefind-body>
-        <Breadcrumbs crumbs={breadcrumbs} linkTextFormat="sentence" truncated={true} data-pagefind-ignore>
+        <Breadcrumbs
+          crumbs={breadcrumbs}
+          linkTextFormat="sentence"
+          truncated={true}
+          data-pagefind-ignore
+        >
           <svg
+            <!-- @ts-expect-error -->
             slot="index"
             xmlns="http://www.w3.org/2000/svg"
             width="1em"
@@ -69,25 +80,61 @@ for (const segment of url) {
             <path
               fill="currentColor"
               d="m219.31 108.68l-80-80a16 16 0 0 0-22.62 0l-80 80A15.87 15.87 0 0 0 32 120v96a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-56h32v56a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-96a15.87 15.87 0 0 0-4.69-11.32M208 208h-48v-56a8 8 0 0 0-8-8h-48a8 8 0 0 0-8 8v56H48v-88l80-80l80 80Z"
-            ></path></svg
-          >
+            ></path>
+          </svg>
           <svg
+            <!-- @ts-expect-error -->
             slot="separator"
             xmlns="http://www.w3.org/2000/svg"
             width="1em"
             height="1em"
             viewBox="0 0 256 256"
-            ><path
+          >
+            <path
               fill="currentColor"
               d="m181.66 133.66l-80 80a8 8 0 0 1-11.32-11.32L164.69 128L90.34 53.66a8 8 0 0 1 11.32-11.32l80 80a8 8 0 0 1 0 11.32"
-            ></path></svg
-          >
+            ></path>
+          </svg>
         </Breadcrumbs>
-        <slot/>
+        <slot />
       </div>
-      <slot name="alongside-content"/>
+      <slot name="alongside-content" />
     </div>
-    <Footer/>
+    <Footer />
+    <script>
+      import "@config/styling/animations_helper.ts";
+      import "@config/styling/theme_persistence.ts";
+    </script>
   </body>
 </html>
-
+<script>
+  // FIXME: need to make this work properly, or fold into the markdown processor
+  let headings = document.getElementsByClassName("heading");
+  if (headings.length > 0) {
+    //@ts-expect-error
+    for (const heading of headings) {
+      let button = heading.querySelector("h2");
+      if (button) {
+        button.onclick = () => {
+          let link = window.location.href.split("#")[0];
+          link += `#${button.textContent?.trimEnd().replaceAll(" ", "-").toLowerCase()}`;
+          window.location.href = link;
+          navigator.clipboard.writeText(link);
+          heading.classList.toggle("copied");
+          setTimeout(() => heading.classList.remove("copied"), 1000);
+        };
+      }
+      let spanButton = heading.querySelector("span");
+      if (spanButton) {
+        spanButton.onclick = () => {
+          let link = window.location.href.split("#")[0];
+          link += `#${spanButton.textContent?.trim().replaceAll(" ", "-").toLowerCase()}`;
+          window.location.href = link;
+          navigator.clipboard.writeText(link);
+          spanButton.classList.toggle("copied");
+          setTimeout(() => heading.classList.remove("copied"), 1000);
+        };
+      }
+    }
+  }
+</script>

@@ -1,145 +1,18 @@
 ---
 import { Icon } from "astro-icon/components";
-
-const videos = [
-  {
-    author: '<a href="https://github.com/soramanew">soramane</a>',
-    source: "https://github.com/caelestia-dots/shell",
-    path: "/assets/showcase/soramane.mp4",
-    installable: true,
-  },
-  {
-    author: '<a href="https://github.com/end-4">end_4</a>',
-    source: "https://github.com/end-4/dots-hyprland",
-    path: "/assets/showcase/end4.mp4",
-    installable: true,
-  },
-  {
-    author: '<a href="https://outfoxxed.me">outfoxxed</a>',
-    source: "https://git.outfoxxed.me/outfoxxed/nixnew/src/branch/master/modules/user/modules/quickshell",
-    path: "/assets/showcase/outfoxxed.mp4",
-  },
-  {
-    author: '<a href="https://github.com/pfaj/">pfaj</a> and <a href="https://github.com/bdebiase">bdebiase</a>',
-    path: "/assets/showcase/pfaj-bdeblase.mp4",
-  },
-  {
-    author: '<a href="https://github.com/flickowoa">flicko</a>',
-    source: "https://github.com/flickowoa/zephyr",
-    path: "/assets/showcase/flicko.mp4",
-  },
-  {
-    author: '<a href="https://vaxry.net">vaxry</a>',
-    path: "/assets/showcase/vaxry.mp4",
-  },
-];
+import MarqueeContent from "./MarqueeContent.astro";
 ---
+
 <div class="marquee">
   <div class="marquee-scroll">
     <div id="marquee-scroll-left" class="marquee-scroll-arrow">
-      <div><Icon name="caret-left"/></div>
+      <div><Icon name="caret-left" /></div>
     </div>
     <div id="marquee-scroll-right" class="marquee-scroll-arrow">
-      <div><Icon name="caret-right"/></div>
+      <div><Icon name="caret-right" /></div>
     </div>
   </div>
-  <div id="marquee-content" class="marquee-content" data-scroll="0" data-media-index="0">
-    {videos.map(({ author, source, installable, path }, index) => <div class="marquee-item">
-      <div>
-        <video
-          data-media-index={index}
-          data-media-author={author}
-          id="showcase-video"
-          class="marquee-item-spacing marquee-item-content"
-          muted
-          controls
-          playsinline
-          preload="metadata"
-        >
-          <source src={path} type="video/mp4"/>
-        </video>
-        <p>
-          Configuration by <Fragment set:html={author}/>
-          {source && !installable && <>(<a href={source}>source code</a>)</>}
-          {source && installable && <>(<a href={source}>install</a>)</>}
-        </p>
-      </div>
-    </div>)}
-  </div>
+  <MarqueeContent />
 </div>
 
-<script>
-  const videoCount = 6; // last array index
-  const marquee = document.getElementById("marquee-content")!;
-  marquee.style.setProperty("--scroll", "0")
-
-  window.addEventListener("load", autoplayInit, false);
-  const videos = document.getElementsByClassName("marquee-item-content") as HTMLCollectionOf<HTMLVideoElement>;
-  let currentVideoIndex = 0;
-  let currentVideo: HTMLVideoElement | null = null;
-
-  function autoplayInit() {
-    setActiveVideo(0);
-    currentVideo!.play();
-  }
-
-  function setActiveVideo(index: number) {
-    currentVideo?.pause();
-
-    currentVideoIndex = index;
-    currentVideo = videos[currentVideoIndex];
-    currentVideo.currentTime = 0;
-    marquee.style.setProperty("--scroll", `-${currentVideoIndex*100}%`)
-  }
-
-  function offsetCarousel(offset: number) {
-    let nextIndex = currentVideoIndex + offset;
-    if (nextIndex < 0) nextIndex += videoCount;
-    nextIndex = nextIndex % videoCount;
-    setActiveVideo(nextIndex);
-  }
-
-  const intersectionOptions = {
-    root: marquee,
-    rootMargin: "0px",
-    threshold: 0.0,
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const video = entry.target as HTMLVideoElement;
-      if (!entry.isIntersecting) {
-        video.pause();
-      } else if (video === currentVideo) {
-        video.play();
-      }
-    });
-  }, intersectionOptions);
-
-  for (const video of videos) {
-    observer.observe(video);
-
-    video.addEventListener("ended", () => {
-      // The "ended" event might just mean its buffering.
-      if (video == currentVideo && video.duration !== 0 && video.currentTime === video.duration) {
-        offsetCarousel(1);
-      }
-    });
-  }
-
-  let wasPaused = false;
-  document.addEventListener("visibilitychange", () => {
-    if (currentVideo) {
-      if (document.hidden) {
-        wasPaused = currentVideo.paused;
-        currentVideo.pause();
-      } else if (!wasPaused) {
-        currentVideo.play();
-      }
-    }
-  });
-
-  // left-right buttons
-  document.getElementById("marquee-scroll-left")!.addEventListener("mousedown", () => offsetCarousel(-1));
-  document.getElementById("marquee-scroll-right")!.addEventListener("mousedown", () => offsetCarousel(1));
-</script>
+<script src="@config/styling/marquee.ts" />

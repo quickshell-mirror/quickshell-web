@@ -68,7 +68,9 @@
     margin-bottom: 0.618rem;
     border-radius: 12px;
     padding: 0.8rem;
-    transition: border 0.3s;
+    transition:
+      background-color var(--theme-transition),
+      border-color var(--theme-transition);
   }
 
   & .typedata-details {
@@ -164,6 +166,9 @@
 .typeprops {
   & .typeprop-root {
     border: 1px solid hsl(var(--prop-color) / 0.6);
+    transition:
+      background-color var(--theme-transition),
+      border-color var(--theme-transition);
 
     &:hover {
       border: 1px solid hsl(var(--prop-color));
@@ -175,11 +180,13 @@
 
     & .typeprop-name {
       color: hsl(var(--prop-link-color));
+      transition: color var(--theme-transition);
     }
   }
 }
 
-html.dark .typeprops {
+html.dark .typeprops,
+html:has(input#theme-manual-toggle:checked) .typeprops {
   & .typeprop-root {
     border: 1px solid hsl(var(--prop-color) / 0.3);
 
@@ -193,6 +200,9 @@ html.dark .typeprops {
 .typefuncs {
   & .typefunc-root {
     border: 1px solid hsl(var(--func-color) / 0.6);
+    transition:
+      background-color var(--theme-transition),
+      border-color var(--theme-transition);
 
     &:hover {
       border: 1px solid hsl(var(--func-color));
@@ -204,6 +214,7 @@ html.dark .typeprops {
 
     & .typefunc-name {
       color: hsl(var(--func-link-color));
+      transition: color var(--theme-transition);
     }
 
     & .typefunc-params {
@@ -222,7 +233,8 @@ html.dark .typeprops {
   }
 }
 
-html.dark .typefuncs {
+html.dark .typefuncs,
+html:has(input#theme-manual-toggle:checked) .typefuncs {
   & .typefunc-root {
     border: 1px solid hsl(var(--func-color) / 0.3);
 
@@ -236,6 +248,9 @@ html.dark .typefuncs {
 .typesignals {
   & .typesignal-root {
     border: 1px solid hsl(var(--signal-color) / 0.6);
+    transition:
+      background-color var(--theme-transition),
+      border-color var(--theme-transition);
 
     &:hover {
       border: 1px solid hsl(var(--signal-color));
@@ -249,6 +264,7 @@ html.dark .typefuncs {
       position: relative;
       width: max-content;
       color: hsl(var(--signal-link-color));
+      transition: color var(--theme-transition);
 
       & .typesignal-doclink {
         top: -12px;
@@ -274,7 +290,8 @@ html.dark .typefuncs {
   }
 }
 
-html.dark .typesignals {
+html.dark .typesignals,
+html:has(input#theme-manual-toggle:checked) .typesignals {
   & .typesignal-root {
     border: 1px solid hsl(var(--signal-color) / 0.3);
 
@@ -288,6 +305,9 @@ html.dark .typesignals {
 .typevariants {
   & .typevariant-root {
     border: 1px solid hsl(var(--var-color) / 0.6);
+    transition:
+      background-color var(--theme-transition),
+      border-color var(--theme-transition);
 
     &:hover {
       border: 1px solid hsl(var(--var-color));
@@ -301,6 +321,7 @@ html.dark .typesignals {
       position: relative;
       width: max-content;
       color: hsl(var(--var-link-color));
+      transition: color var(--theme-transition);
 
       & .typevariant-doclink {
         position: absolute;
@@ -313,7 +334,8 @@ html.dark .typesignals {
   }
 }
 
-html.dark .typevariants {
+html.dark .typevariants,
+html:has(input#theme-manual-toggle:checked) .typevariants {
   & .typevariant-root {
     border: 1px solid hsl(var(--var-color) / 0.3);
 

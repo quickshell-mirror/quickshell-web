@@ -30,6 +30,28 @@
   font-size: 1.614rem;
   max-height: 500px;
 
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  & .toc-icon {
+    opacity: 0;
+    transform: scale(0.5);
+    position: absolute;
+    transition:
+      opacity var(--theme-transition),
+      transform var(--theme-transition);
+
+    &.active {
+      opacity: 1;
+      transform: scale(1);
+      position: relative;
+    }
+  }
+
   & > svg {
     height: 100%;
     width: 24px;
@@ -61,7 +83,9 @@
       display: none;
     }
 
-    transition: width 0.3s ease, padding 0.3s ease;
+    transition:
+      width 0.3s ease,
+      padding 0.3s ease;
 
     &.shown {
       & .toc-content {
@@ -115,7 +139,7 @@
     margin-right: 1.272rem;
 
     & .toc_a {
-      transition: color 0.33s;
+      transition: color var(--theme-transition);
       color: hsl(var(--toc-link));
     }
 

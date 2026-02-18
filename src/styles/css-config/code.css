@@ -1,12 +1,12 @@
 pre.shiki {
-  margin-block: 1.618rem;
+  margin-block: var(--lg);
 }
 
 :where(p, li):has(> code) code {
-  padding-inline: 0.272rem;
-  border-radius: 0.272rem;
-  color: hsl(var(--blue) 100% 69%);
-  background-color: hsl(var(--blue) 85% 35% / 0.1);
+  padding-inline: var(--sm);
+  border-radius: var(--radius-xs);
+  color: hsl(var(--blue) 100 69);
+  background-color: hsla(var(--blue) 85 35 / 0.1);
 }
 
 .shiki,
@@ -16,7 +16,9 @@ pre.shiki {
 }
 
 html.dark .shiki,
-html.dark .shiki span {
+html.dark .shiki span,
+html:has(input#theme-manual-toggle:checked) .shiki,
+html:has(input#theme-manual-toggle:checked) .shiki span {
   color: var(--shiki-dark);
   background-color: var(--shiki-dark-bg);
 }
@@ -26,8 +28,11 @@ pre {
   border-radius: 0.618rem;
   overflow: hidden;
   text-wrap: wrap;
+  transition:
+    background-color var(--theme-transition),
+    color var(--theme-transition);
 
-  & > button {
+  & .copy-button {
     all: unset;
     width: 2rem;
     height: 2rem;
@@ -41,17 +46,51 @@ pre {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: hsl(var(--blue) 100% 69%);
-    background-color: hsl(var(--blue) 85% 35% / 0.1);
+    color: hsla(var(--blue) 100 69 / 0.33);
+    background-color: hsla(var(--blue) 85 35 / 0.01);
     cursor: pointer;
-    transition: color 0.25s;
+    transition:
+      background-color var(--theme-transition),
+      color var(--theme-transition);
+    z-index: 10;
+
+    & svg {
+      position: absolute;
+      transition:
+        transform 0.3s var(--ease-in-out),
+        opacity 0.3s var(--ease-in-out);
+    }
+
+    & .check-icon {
+      opacity: 0;
+      transform: scale(0.5);
+      color: hsl(var(--green) 100 69);
+    }
 
     &:hover {
-      color: hsl(var(--blue) 100% 75%);
+      color: hsla(var(--blue) 100 75 / 0.75);
+      background-color: hsla(var(--blue) 85 35 / 0.1);
     }
 
     &.copied {
-      animation: pulseGreen 0.5s cubic-bezier(0, 1, 0.6, 1);
+      & .copy-icon {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+
+      & .check-icon {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  &.shiki {
+    box-shadow: var(--shadow-md);
+
+    &:hover .copy-button {
+      transition: background-color var(--theme-transition);
+      background-color: hsla(var(--blue) 85 35 / 0.07);
     }
   }
 }

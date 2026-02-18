@@ -45,16 +45,15 @@ h1.gradient-text {
     hsl(var(--green) 80% 42%),
     hsl(var(--blue) 80% 49%)
   );
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-html.dark h1.gradient-text {
-  background: linear-gradient(
-    30deg,
-    #42b96b,
-    #4281b9
-  );
+html.dark h1.gradient-text,
+html:has(input#theme-manual-toggle:checked) h1.gradient-text {
+  background: linear-gradient(30deg, #42b96b, #4281b9);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -76,7 +75,8 @@ html.dark h1.gradient-text {
   }
 }
 
-html.dark .main-page_hero-text {
+html.dark .main-page_hero-text,
+html:has(input#theme-manual-toggle:checked) .main-page_hero-text {
   & h2 {
     color: hsl(var(--blue) 100% 83%);
   }
@@ -95,7 +95,9 @@ html.dark .main-page_hero-text {
   font-size: 1.1rem;
 }
 
-.about-break { display: none }
+.about-break {
+  display: none;
+}
 
 .about-buttons {
   display: flex;
@@ -130,12 +132,13 @@ html.dark .main-page_hero-text {
   align-items: center;
   width: 100%;
   height: 3.67rem;
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  border: 1px solid hsl(var(--green) 10% 10%);
+  box-shadow: var(--shadow-md);
   transition:
-    background-color 0.3s,
-    border-color 0.3s;
+    background-color var(--theme-transition),
+    box-shadow var(--theme-transition),
+    border-color var(--theme-transition);
 
   background-color: hsl(var(--green) 38% 30%);
   color: hsl(194deg 0% 100%);
@@ -143,17 +146,22 @@ html.dark .main-page_hero-text {
   &:hover {
     cursor: pointer;
     text-decoration: none;
-    border-color: hsl(var(--green) 20% 20%);
     background-color: hsl(var(--green) 48% 40%);
+    box-shadow:
+      var(--shadow-md-units-1) hsla(var(--green) 48 45 / 0.08),
+      var(--shadow-md-units-2) hsla(var(--green) 48 45 / 0.11),
+      var(--shadow-md-units-3) hsla(var(--green) 48 45 / 0.4);
   }
 
   &.main-page_bluecard {
-    border-color: hsl(var(--blue) 10% 10%);
     background-color: hsl(var(--blue) 38% 30%);
 
     &:hover {
-      border-color: hsl(var(--blue) 20% 20%);
       background-color: hsl(var(--blue) 48% 40%);
+      box-shadow:
+        var(--shadow-md-units-1) hsla(var(--blue) 48 45 / 0.08),
+        var(--shadow-md-units-2) hsla(var(--blue) 48 45 / 0.11),
+        var(--shadow-md-units-3) hsla(var(--blue) 48 45 / 0.4);
     }
   }
 
@@ -162,7 +170,8 @@ html.dark .main-page_hero-text {
   }
 }
 
-html.dark .main-page_link-card {
+html.dark .main-page_link-card,
+html:has(input#theme-manual-toggle:checked) .main-page_link-card {
   background-color: hsl(var(--green) 38% 25%);
   color: hsl(194deg 0% 100%);
 
@@ -226,7 +235,15 @@ html.dark .main-page_link-card {
     flex-direction: row;
   }
 
-  .about-txt { max-width: 70% }
-  .about-break { display: unset }
-  .about-buttons { flex-direction: column }
+  .about-txt {
+    max-width: 70%;
+  }
+
+  .about-break {
+    display: unset;
+  }
+
+  .about-buttons {
+    flex-direction: column;
+  }
 }

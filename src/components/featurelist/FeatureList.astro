@@ -1,7 +1,9 @@
 ---
 import { processMarkdown } from "@config/io/markdown";
 
-const codeDesktop = await processMarkdown("N/A", `\`\`\`qml
+const codeDesktop = await processMarkdown(
+  "N/A",
+  `\`\`\`qml
 // a standard desktop window
 FloatingWindow {
   Timer {
@@ -19,9 +21,12 @@ FloatingWindow {
   // change the window's color when timer.invert changes
   color: timer.invert ? "purple" : "green"
 }
-\`\`\``);
+\`\`\``
+);
 
-const codeMobile = await processMarkdown("N/A", `\`\`\`qml
+const codeMobile = await processMarkdown(
+  "N/A",
+  `\`\`\`qml
 // a standard desktop window
 FloatingWindow {
   Timer {
@@ -47,19 +52,22 @@ FloatingWindow {
     ? "purple"
     : "green"
 }
-\`\`\``);
+\`\`\``
+);
 ---
+
 <ul class="featurelist">
   <li class="featurelist-item hot-reloading left">
     <section class="feature-text">
       <h3 class="feature-title">See your changes in real time</h3>
       <span class="feature-subtitle">
-        Quickshell loads changes as soon as they're saved, letting you iterate as fast as you can type.
+        Quickshell loads changes as soon as they're saved, letting you iterate
+        as fast as you can type.
       </span>
     </section>
     <section class="feature-showcase">
       <video preload="metadata" controls={false} autoplay loop>
-        <source src="/assets/simple-shell-livereload.mp4" type="video/mp4"/>
+        <source src="/assets/simple-shell-livereload.mp4" type="video/mp4">
       </video>
     </section>
   </li>
@@ -67,46 +75,69 @@ FloatingWindow {
     <section class="feature-text">
       <h3 class="feature-title">Easy to use language</h3>
       <span class="feature-subtitle">
-        Quickshell is configured in QML, a simple language designed for creating flexible user interfaces.
-        It also has LSP support.
+        Quickshell is configured in QML, a simple language designed for creating
+        flexible user interfaces. It also has LSP support.
       </span>
     </section>
     <section class="feature-showcase" id="qml-showcase">
-      <div class="showcase-desktop">
-        <Fragment set:html={codeDesktop}/>
-      </div>
-      <div class="showcase-mobile">
-        <Fragment set:html={codeMobile}/>
-      </div>
+      <div class="showcase-desktop"><Fragment set :html={codeDesktop} /></div>
+      <div class="showcase-mobile"><Fragment set :html={codeMobile} /></div>
     </section>
   </li>
   <li class="featurelist-item cloud-li left">
     <section class="feature-text">
       <h3 class="feature-title">Extensive integrations</h3>
       <span class="feature-subtitle">
-        Quickshell comes with a large set of integrations, with new ones arriving all the time.
+        Quickshell comes with a large set of integrations, with new ones
+        arriving all the time.
       </span>
     </section>
     <section class="feature-showcase cloud">
       <section class="feature-cloud">
         <div class="cloud-center">
-          <img src="/favicon.svg" alt="Quickshell" />
+          <img src="/favicon.svg" alt="Quickshell">
         </div>
         <div class="cloud-items-wrapper">
           <span class="cloud-item wayland">
-            <div><img class="feature-icon" src="/assets/logos/wayland.svg" alt="Wayland" /></div>
+            <div>
+              <img
+                class="feature-icon"
+                src="/assets/logos/wayland.svg"
+                alt="Wayland"
+              >
+            </div>
           </span>
           <span class="cloud-item hyprland">
-            <div><img class="feature-icon" src="/assets/logos/hyprland.svg" alt="Hyprland" /></div>
+            <div>
+              <img
+                class="feature-icon"
+                src="/assets/logos/hyprland.svg"
+                alt="Hyprland"
+              >
+            </div>
           </span>
           <span class="cloud-item pipewire">
-            <div><img class="feature-icon" src="/assets/logos/pipewire.svg" alt="Pipewire" /></div>
+            <div>
+              <img
+                class="feature-icon"
+                src="/assets/logos/pipewire.svg"
+                alt="Pipewire"
+              >
+            </div>
           </span>
           <span class="cloud-item x-org">
-            <div><img class="feature-icon" src="/assets/logos/xorg.svg" alt="X.Org" /></div>
+            <div>
+              <img
+                class="feature-icon"
+                src="/assets/logos/xorg.svg"
+                alt="X.Org"
+              >
+            </div>
           </span>
           <span class="cloud-item sway">
-            <div><img class="feature-icon" src="/assets/logos/sway.svg" alt="Sway" /></div>
+            <div>
+              <img class="feature-icon" src="/assets/logos/sway.svg" alt="Sway">
+            </div>
           </span>
         </div>
       </section>

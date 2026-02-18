@@ -3,7 +3,8 @@ import { getQMLTypeLink } from "@config/io/helpers";
 import type {
   QMLTypeLinkObject,
   QuickshellProps,
-} from "@config/io/types";
+  QuickshellInstance,
+} from "@config/_types";
 import { Tag } from "@icons";
 import TypeTitle from "./TypeTitle.astro";
 
@@ -16,56 +17,56 @@ export interface Props {
 const { props } = Astro.props;
 const { version } = Astro.params;
 ---
+
 <ul class="typedata typeprops">
-  {
-    Object.entries(props).map(([name, propData]) => {
-      let typeLink:string;
-      let linkText:string;
-      let genericType:string|undefined;
-      let genericTypeLink:string|undefined;
-      const gadget = propData.type.gadget;
-      if (gadget) {
-        typeLink = "#"
-        linkText = `[${Object.keys(gadget).toString()}]`
-      } else {
-        typeLink = getQMLTypeLink(version!, propData.type)
-        linkText = propData.type.name || propData.type.type
-      }
-      if (propData.type.of) {
-        genericType = propData.type.of.name;
-        genericTypeLink = getQMLTypeLink(version!, propData.type.of)
-      }
-      return (
-        <li id={ name } class="typedata-root typeprop-root">
-          <TypeTitle
-            typekind="prop"
-            typename={name}
-            typelink={typeLink}
-            typelink_text={linkText}
-            typename_generic={genericType}
-            typelink_generic={genericTypeLink}
-            badges={propData.flags}
-          />
-          {
-            gadget ? (
-              <p class="typedata-params typefunc-params">
-                {
-                  Object.keys(gadget).map((key) => {
-                    const gadgetData = gadget[key]
-                    return (
-                      <span class="typedata-param typefunc-param">
-                        <Tag client:idle/>
-                        {key}:<span><a href={getQMLTypeLink(version!, gadgetData as unknown as QMLTypeLinkObject)}>{gadgetData.name}</a></span>
-                      </span>
-                    )
-                  })
-                }
-              </p>
-            ):null
-          }
-          <TypeDetails markdown={propData.details} />
-        </li>
-      )
-    })
-  }
+  {Object.keys(props).map((name) => {
+    const propData:QuickshellInstance = props[name];
+    let typeLink: string;
+    let linkText: string;
+    let genericType: string|undefined;
+    let genericTypeLink: string|undefined;
+    const gadget = propData.type.gadget;
+    if (gadget) {
+      typeLink = "#"
+      linkText = `[${Object.keys(gadget).toString()}]`
+    } else {
+      typeLink = getQMLTypeLink(version!, propData.type)
+      linkText = propData.type.name || propData.type.type
+    }
+    if (propData.type.of) {
+      genericType = propData.type.of.name;
+      genericTypeLink = getQMLTypeLink(version!, propData.type.of)
+    }
+    return (
+      <li id={ name } class="typedata-root typeprop-root">
+        <TypeTitle
+          typekind="prop"
+          typename={ name }
+          typelink={typeLink}
+          typelink_text={linkText}
+          typename_generic={genericType}
+          typelink_generic={genericTypeLink}
+          badges={propData.flags}
+        />
+        {
+          gadget ? (
+            <p class="typedata-params typefunc-params">
+              {
+                Object.keys(gadget).map((key) => {
+                  const gadgetData = gadget[key]
+                  return (
+                    <span class="typedata-param typefunc-param">
+                      <Tag client:idle/>
+                      {key}:<span><a href={getQMLTypeLink(version!, gadgetData as unknown as QMLTypeLinkObject)}>{gadgetData.name}</a></span>
+                    </span>
+                  )
+                })
+              }
+            </p>
+          ):null
+        }
+        <TypeDetails markdown={propData.details} />
+      </li>
+    )
+  })}
 </ul>

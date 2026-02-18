@@ -20,7 +20,9 @@
 .nav-item {
   display: block;
   border-radius: 6px;
-  transition: background-color 0.2s ease;
+  transition:
+    background-color var(--theme-transition),
+    color var(--theme-transition);
   padding: 0.4em;
   font-size: 1rem;
 
@@ -39,11 +41,8 @@
 }
 
 .fade {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    #000 80%,
-    transparent
-  );
+  mask-image: linear-gradient(to right, #000 80%, transparent);
+  -webkit-mask-image: linear-gradient(to right, #000 80%, transparent);
 }
 
 .nav-collapsible {
@@ -55,7 +54,9 @@
     & > div {
       & > .nav-collapse-marker,
       a {
-        transition: background-color 0.2s ease;
+        transition:
+          background-color var(--theme-transition),
+          color var(--theme-transition);
       }
 
       & > .nav-collapse-marker {

@@ -2,11 +2,11 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const guide = defineCollection({
-	loader: glob({ pattern: "**/*.md", base: "src/guide" }),
-	schema: z.object({
-		title: z.string(),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/guide" }),
+  schema: z.object({
+    title: z.string(),
     index: z.number(),
-	}),
+  }),
 });
 
 export const collections = { guide };

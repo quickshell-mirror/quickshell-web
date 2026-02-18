@@ -2,31 +2,39 @@
 import GuideLayout from "@layouts/GuideLayout.astro";
 import { getVersionsData } from "@config/io/generateTypeData";
 import { getGuideCollection } from "@config/io/guides";
-import { processMarkdown } from "@config/io/markdown";
 
 import { render } from "astro:content";
 
 export async function getStaticPaths() {
   const { versions } = await getVersionsData();
 
-  let pages = await Promise.all(versions.map(async version => {
-    const pages = await getGuideCollection(version.name);
+  const pages = await Promise.all(
+    versions.map(async version => {
+      const pages = await getGuideCollection(version.name);
 
-    return pages.map(page => ({
-      params: { version: version.name, id: page.id === "index" ? "/" : page.id },
-      props: { version, page },
-    }));
-  }));
+      return pages.map(page => ({
+        params: {
+          version: version.name,
+          id: page.id === "index" ? "/" : page.id,
+        },
+        props: { version, page },
+      }));
+    })
+  );
 
   return pages.flat();
 }
 
-const { version, page } = Astro.props;
-const { headings } = await render(page);
+const { page } = Astro.props;
+const { headings, Content } = await render(page);
 
+// xnzf: version is decided before these pages get processed
+//  V
 // we can't use 'Content' because there isn't a way to pass in a version
-const html = await processMarkdown(version.name, page.body!);
+
+// const html = await processMarkdown(version.name, page.body!);
 ---
+
 <GuideLayout title={page.data.title} description="" headings={headings}>
-  <Fragment set:html={html}/>
+  <Content />
 </GuideLayout>

@@ -75,11 +75,11 @@ To start with, let's make a clock. To get the time, we'll use the `date` command
 > [!note/Note]
 > Quickshell can do more than just run processes. Read until the end for more information.
 
-We can use a [Process](@docs/types/quickshell.io/process) object to run commands
+We can use a [Process](@docs/types/Quickshell.Io/Process) object to run commands
 and a @@Quickshell.Io.StdioCollector to read their output.
 
 We'll listen to the @@Quickshell.Io.StdioCollector.streamFinished(s) signal with
-a [signal handler](@docs/guide/qml-language/#signal-handlers)
+a [signal handler](@docs/guide/qml-language#signal-handlers)
 to update the text on the clock.
 
 > [!note/Note]

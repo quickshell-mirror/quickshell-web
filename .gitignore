@@ -27,4 +27,7 @@ modules/
 modules_old/
 
 # env
-.env*
+.env.production
+
+# module archive
+*.tar.gz

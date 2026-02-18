@@ -9,12 +9,25 @@ import Functions from "@components/type/Functions.astro";
 import Signals from "@components/type/Signals.astro";
 import Variants from "@components/type/Variants.astro";
 import Badge from "@components/Badge.astro";
+import type { ModuleData, TypeData } from "@_types";
+
+interface Props {
+  version: {
+    name: string;
+  };
+  module: ModuleData;
+  type: TypeData;
+}
 
 export async function getStaticPaths() {
   return (await getVersionsData()).versions.flatMap(version => {
     return version.modules.flatMap(module => {
       return module.types.map(type => ({
-        params: { version: version.name, module: module.name, type: type.name },
+        params: {
+          version: version.name,
+          module: module.name,
+          type: type.name,
+        },
         props: { version, module, type },
       }));
     });
@@ -33,13 +46,18 @@ const description = type.description
   ? await processMarkdown(version.name, type.description)
   : null;
 ---
-<DocsLayout title={`${module.name} - ${type.name}`} description={type.description ?? ""} type={type}>
+
+<DocsLayout
+  title={`${module.name} - ${type.name}`}
+  description={type.description ?? ""}
+  type={type}
+>
   <div class="docs">
     <div class="docs-content typedocs-content">
-      <hr />
+      <hr>
       <section class="typedocs-title">
-      <h2 class="typedocs-title-text" data-pagefind-weight="10">
-        {type.name}:
+        <h2 class="typedocs-title-text" data-pagefind-weight="10">
+          {type.name}:
           {type.super?.name ? (
             <a
               href={superLink!}
@@ -49,11 +67,10 @@ const description = type.description
             </a>
           ):(
             <span class="type-datatype" data-pagefind-ignore>{type.name}</span>
-          )
-          }
-      </h2>
-      {type.flags && (
-        <div class="type-flags" data-pagefind-ignore>{type.flags.map(flag => (
+          )}
+        </h2>
+        {type.flags && (
+        <div class="type-flags" data-pagefind-ignore>{type.flags.map((flag:string) => (
           <Badge badgeText={flag}/>
         ))}</div>
       )}
@@ -63,23 +80,23 @@ const description = type.description
         <subheading class="typedocs-subheading">
           {details ? <span class="parsedMD" set:html={details}/> : <span class="parsedMD" set:html={description}/>}
         </subheading>
-        { Object.keys(type.properties ?? {}).length != 0 && (
+        {Object.keys(type.properties ?? {}).length != 0 && (
           <h2>Properties <a href={`/docs/${version.name}/guide/qml-language#properties`}>[?]</a></h2>
           <Properties props={type.properties!}/>
         )}
-        { (type.functions?.length ?? 0) != 0 && (
-          <h2>Functions <a href={`/docs/${version.name}guide/qml-language#functions`}>[?]</a></h2>
+        {(type.functions?.length ?? 0) != 0 && (
+        <h2>Functions <a href={`/docs/${version.name}/guide/qml-language#functions`}>[?]</a></h2>
           <Functions
             funcData={type.functions!}
           />
         )}
-        { Object.keys(type.signals ?? {}).length != 0 && (
-          <h2>Signals <a href={`/docs/${version.name}guide/qml-language#signals`}>[?]</a></h2>
+        {Object.keys(type.signals ?? {}).length != 0 && (
+        <h2>Signals <a href={`/docs/${version.name}/guide/qml-language#signals`}>[?]</a></h2>
           <Signals
             signals={type.signals!}
           />
         )}
-        { Object.keys(type.variants ?? {}).length != 0 && (
+        {Object.keys(type.variants ?? {}).length != 0 && (
           <h2>Variants</h2>
           <Variants
             variants={type.variants!}
@@ -87,7 +104,6 @@ const description = type.description
         )}
       </section>
     </div>
-    <TOC mobile={false} type={type} data-pagefind-ignore/>
+    <TOC mobile={false} type={type} data-pagefind-ignore />
   </div>
 </DocsLayout>
-

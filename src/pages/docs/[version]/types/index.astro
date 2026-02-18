@@ -1,6 +1,7 @@
 ---
 import DocsLayout from "@layouts/DocsLayout.astro";
 import { getVersionsData } from "@config/io/generateTypeData";
+import type { ModuleData } from "@_types";
 
 export async function getStaticPaths() {
   return (await getVersionsData()).versions.map(version => ({
@@ -11,14 +12,18 @@ export async function getStaticPaths() {
 
 const { version } = Astro.props;
 ---
-<DocsLayout title="Quickshell Module Listing" description="Quickshell Type Documentation">
+
+<DocsLayout
+  title="Quickshell Module Listing"
+  description="Quickshell Type Documentation"
+>
   <div class="docs-content">
-    <hr/>
+    <hr>
     <h2>Module Listing</h2>
     <section>
       <span>All modules included with Quickshell</span>
       <div class="root-nav" data-pagefind-ignore>
-        {version.modules.map(module => (
+        {version.modules.map((module: ModuleData) => (
           <div class="root-nav-entry">
             <a class="root-nav-link" href={`/docs/${version.name}/types/${module.name}`}>
               {module.name}

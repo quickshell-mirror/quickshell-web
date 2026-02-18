@@ -32,6 +32,7 @@ const NavComponent: Component<SidebarContent> = props => {
     if (
       isLink ||
       !isInBody ||
+      //@ts-expect-error
       (isInBody && !navRef.contains(event.target as Node))
     ) {
       setOpen(false);

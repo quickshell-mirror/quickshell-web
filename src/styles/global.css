@@ -1,9 +1,6 @@
 @import "remark-github-blockquote-alert/alert.css";
-@import "./css-config/base.css";
-@import "./css-config/animations.css";
-@import "./css-config/code.css";
-@import "./css-config/colors.css";
 
+@import "./css-config/entry.css";
 @import "./main-page.css";
 
 @import "./docs/nav/nav.css";
@@ -15,41 +12,68 @@
 @import "./components/featurelist.css";
 @import "./components/marquee.css";
 
-.changing-theme * {
-  transition: none !important;
+.theme-toggle {
+  height: 24px;
+  font-size: 1.614rem;
+  color: hsla(var(--signal-color) / 0.7);
+
+  &:hover {
+    cursor: pointer;
+    color: hsla(var(--signal-color) / 1);
+  }
 }
 
 /* color styling */
 .header {
   background-color: hsl(var(--bg-400));
   box-shadow: 0 1px 1px 1px hsla(var(--white) 100 0 / 0.1);
+  transition:
+    background-color var(--theme-transition),
+    color var(--theme-transition),
+    box-shadow var(--theme-transition);
 }
 
 .baselayout,
 .docslayout {
   background-color: hsl(var(--background));
   color: hsl(var(--secondary-900));
+  transition:
+    background-color var(--theme-transition),
+    color var(--theme-transition);
 }
 
 a {
   color: hsl(var(--link));
   text-decoration: none;
+  transition: color var(--theme-transition);
 
   &:hover {
     text-decoration: underline;
     cursor: pointer;
   }
 }
+
 html.dark .baselayout,
-html.dark .docslayout {
+html.dark .docslayout,
+html:has(input#theme-manual-toggle:checked) .baselayout,
+html:has(input#theme-manual-toggle:checked) .docslayout {
   background-color: hsl(var(--bg-900));
   color: hsl(var(--secondary-400));
 }
 
-html.dark {
+html.dark,
+html:has(input#theme-manual-toggle:checked) {
   & .header {
     background-color: hsl(var(--secondary-900));
     color: hsl(var(--secondary-500));
+  }
+
+  & .theme-toggle {
+    color: hsla(var(--func-color) / 0.7);
+
+    &:hover {
+      color: hsla(var(--func-color) / 1);
+    }
   }
 }
 
@@ -65,6 +89,7 @@ html.dark {
     transparent
   );
 }
+
 .unset {
   all: unset;
 }
@@ -133,47 +158,63 @@ body.overflow-toc {
   display: block;
 }
 
-.theme-toggle {
-  height: 24px;
-  font-size: 1.614rem;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 footer {
   position: relative;
+  margin-top: var(--2xl);
   width: 100%;
   font-size: 0.9rem;
   display: flex;
   justify-content: space-between;
   padding: 1rem 2rem;
-  overflow: hidden;
   flex-shrink: 0;
   background: hsl(var(--footer-bkg));
+  transition:
+    background-color var(--theme-transition),
+    color var(--theme-transition);
 
   &::before {
     content: "";
     position: absolute;
     top: 0;
-    left: -1rem;
+    left: 0;
+    right: calc(50% + 1.25rem);
     height: 1px;
-    width: calc(100% + 1rem);
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(var(--footer-bkg-border)) 50%,
+      hsl(var(--footer-bkg-border)) 100%
+    );
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: calc(50% + 1.25rem);
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--footer-bkg-border)) 0%,
       transparent 100%
     );
   }
 
+  & .theme-toggle {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    height: max-content;
+  }
+
   & a {
     color: hsl(var(--text-dark));
-    transition: color 0.3s ease;
+    transition: color var(--theme-transition);
 
     & .hint {
-      transition: color 0.3s ease;
+      transition: color var(--theme-transition);
     }
 
     &:nth-child(2) .hint {
@@ -223,10 +264,11 @@ footer {
     gap: 0.373rem;
     align-items: flex-start;
     font-size: 2.5rem;
-
   }
+
   & .changelog {
     display: flex;
+
     & a {
       text-decoration: none;
       margin-inline: auto;

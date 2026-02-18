@@ -1,7 +1,7 @@
 .accordion {
   & summary {
     list-style: none;
-    transition: background-color 0.15s ease-out;
+    transition: background-color var(--theme-transition);
   }
 
   & .accordion-container {
@@ -12,7 +12,9 @@
 
   & .accordion-container.animate {
     /* this somehow breaks if both min AND max aren't animated */
-    transition: min-height 0.3s ease, max-height 0.3s ease;
+    transition:
+      min-height 0.3s ease,
+      max-height 0.3s ease;
     min-height: var(--height);
     max-height: var(--height);
   }

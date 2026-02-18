@@ -1,0 +1,50 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<label
+  class="theme-toggle icon-button standard"
+  title="Toggle theme"
+  for="theme-manual-toggle"
+>
+  <Icon
+    name="moon"
+    class="light-icon"
+    style="width: 24px; height: 24px;"
+    aria-hidden="true"
+  />
+  <Icon
+    name="sun"
+    class="dark-icon"
+    style="width: 24px; height: 24px;"
+    aria-hidden="true"
+  />
+  <div class="state-layer"></div>
+</label>
+
+<style>
+  .theme-toggle {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .light-icon {
+    display: block;
+  }
+  .dark-icon {
+    display: none;
+  }
+
+  :global(html:has(input#theme-manual-toggle:checked)) .light-icon {
+    display: none;
+  }
+
+  :global(html:has(input#theme-manual-toggle:checked)) .dark-icon {
+    display: block;
+  }
+
+  .theme-toggle:focus-within {
+    outline: 2px solid var(--accent-600);
+    border-radius: 50%;
+  }
+</style>

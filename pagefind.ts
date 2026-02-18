@@ -12,15 +12,11 @@ export default function pagefind(): AstroIntegration {
         const cwd = dirname(fileURLToPath(import.meta.url));
         const relativeDir = relative(cwd, targetDir);
         return new Promise<void>(resolve => {
-          spawn(
-            "yarn",
-            ["pagefind", "--site", relativeDir],
-            {
-              stdio: "inherit",
-              shell: true,
-              cwd,
-            }
-          ).on("close", () => resolve());
+          spawn("yarn", ["pagefind", "--site", relativeDir], {
+            stdio: "inherit",
+            shell: true,
+            cwd,
+          }).on("close", () => resolve());
         });
       },
     },

@@ -1,8 +1,5 @@
 ---
-import type {
-  QMLTypeLinkObject,
-  QuickshellFunction,
-} from "@config/io/types";
+import type { QMLTypeLinkObject, QuickshellFunction } from "@config/_types";
 import { getQMLTypeLink } from "@config/io/helpers";
 import { Tag } from "@icons";
 import TypeDetails from "./TypeDetails.astro";
@@ -15,9 +12,9 @@ export interface Props {
 const { funcData } = Astro.props;
 const { version } = Astro.params;
 ---
+
 <ul class="typedata typefuncs">
-  {
-    funcData.map(item => {
+  {funcData.map((item:QuickshellFunction) => {
       const functionParams = item.params.length > 0 ? item.params.map((funcparam,index) => `${funcparam.name}${index !== item.params.length -1 ? ", ":""}`) : undefined
       const retTypeLink = getQMLTypeLink(version!, item.ret as unknown as QMLTypeLinkObject)
       let genericType:string|undefined;
@@ -57,6 +54,5 @@ const { version } = Astro.params;
           <TypeDetails markdown={item.details} />
         </li>
       )
-    })
-  }
+    })}
 </ul>

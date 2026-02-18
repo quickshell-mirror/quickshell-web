@@ -7,12 +7,16 @@
 
 .nav-icon {
   opacity: 0;
+  transform: scale(0.5);
   position: absolute;
-  transition: opacity 0.6s;
+  transition:
+    opacity var(--theme-transition),
+    transform var(--theme-transition);
 }
 
 .nav-icon.active {
   opacity: 1;
+  transform: scale(1);
   position: relative;
 }
 
@@ -50,7 +54,9 @@
       display: none;
     }
 
-    transition: left 0.3s ease, padding 0.3s ease;
+    transition:
+      left 0.3s ease,
+      padding 0.3s ease;
 
     &.shown {
       display: flex;

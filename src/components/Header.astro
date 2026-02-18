@@ -1,6 +1,6 @@
 ---
-import { ThemeSelect } from "@components/hooks/ThemeSwitch";
-import type { TypeData } from "@config/io/types";
+import ThemeToggle from "./ThemeToggle.astro";
+import type { TypeData } from "@config/_types";
 import Nav from "@components/navigation/sidebars/nav/index.astro";
 import TOC from "@components/navigation/sidebars/TOC.astro";
 import type { ConfigHeading } from "@components/navigation/sidebars/types";
@@ -14,16 +14,15 @@ interface Props {
 
 const { title, headings, type } = Astro.props;
 ---
+
 <div class="header">
   <div class="header-item header-left">
-    <Nav mobile={true}/>
-    <h3 class="header-title">
-      <a href="/">Quickshell</a>
-    </h3>
+    <Nav mobile={true} />
+    <h3 class="header-title"><a href="/">Quickshell</a></h3>
   </div>
   <div class="header-item header-right">
-    <Search/>
-    <ThemeSelect client:load />
-    <TOC title={title} headings={headings} type={type} mobile={true}/>
+    <Search />
+    <ThemeToggle />
+    <TOC title={title} headings={headings} type={type} mobile={true} />
   </div>
 </div>

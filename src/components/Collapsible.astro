@@ -7,10 +7,11 @@ interface Props {
 }
 const { title } = Astro.props;
 ---
+
 <Accordion class="docs-collapsible">
   <div slot="header">
-    <Fragment set:html={collapsibleMarker}/>
+    <Fragment set :html={collapsibleMarker} />
     {title}
   </div>
-  <slot>
+  <slot />
 </Accordion>

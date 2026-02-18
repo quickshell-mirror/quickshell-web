@@ -1,7 +1,6 @@
 ---
 //import Header from "@components/Header.astro";
 import Head from "@config/Head.astro";
-import PreTheme from "@config/PreTheme.astro";
 
 interface Props {
   title: string;
@@ -14,10 +13,20 @@ const { title, description } = Astro.props;
 <html lang="en" class="dark">
   <head>
     <Head description={description} title={title} />
-    <PreTheme />
   </head>
   <body class="baselayout">
+    <input
+      type="checkbox"
+      id="theme-manual-toggle"
+      class="theme-toggle-input"
+      style="display: none;"
+      aria-label="Toggle theme (light/dark)"
+    >
     <!--<Header />-->
     <slot />
+    <script>
+      import "@config/styling/animations_helper.ts";
+      import "@config/styling/theme_persistence.ts";
+    </script>
   </body>
 </html>
