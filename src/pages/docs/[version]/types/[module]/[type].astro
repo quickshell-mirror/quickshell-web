@@ -1,5 +1,6 @@
 ---
 import { getQMLTypeLink } from "@config/io/helpers";
+import { getSearchWeight } from "@config/io/search";
 import { processMarkdown } from "@config/io/markdown";
 import { getVersionsData } from "@config/io/generateTypeData";
 import DocsLayout from "@layouts/DocsLayout.astro";
@@ -42,9 +43,14 @@ const details = type.details
   ? await processMarkdown(version.name, type.details)
   : null;
 
+
 const description = type.description
   ? await processMarkdown(version.name, type.description)
   : null;
+
+const searchWeight =
+  version.name != "master" ? getSearchWeight(version.name) : 999.0;
+
 ---
 
 <DocsLayout
@@ -52,12 +58,12 @@ const description = type.description
   description={type.description ?? ""}
   type={type}
 >
-  <div class="docs">
+  <div class="docs" data-pagefind-weight=`${searchWeight}` data-pagefind-meta=`version:${version.name}` data-pagefind-filter=`version:${version.name}`>
     <div class="docs-content typedocs-content">
       <hr>
       <section class="typedocs-title">
-        <h2 class="typedocs-title-text" data-pagefind-weight="10">
-          {type.name}:
+        <h2 class="typedocs-title-text" data-pagefind-weight=`${searchWeight}` data-pagefind-meta="title" >
+          {type.name}<span data-pagefind-ignore>:</span>
           {type.super?.name ? (
             <a
               href={superLink!}
