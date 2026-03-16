@@ -21,8 +21,9 @@ let url = Astro.url.pathname.split("/").filter((s: string) => s !== "");
 
 const breadcrumbs = [
   {
-    text: "custom",
+    text: "Home",
     href: "/",
+    slot: "index",
   },
 ];
 
@@ -69,7 +70,6 @@ for (const segment of url) {
           data-pagefind-ignore
         >
           <svg
-            <!-- @ts-expect-error -->
             slot="index"
             xmlns="http://www.w3.org/2000/svg"
             width="1em"
@@ -83,7 +83,6 @@ for (const segment of url) {
             ></path>
           </svg>
           <svg
-            <!-- @ts-expect-error -->
             slot="separator"
             xmlns="http://www.w3.org/2000/svg"
             width="1em"

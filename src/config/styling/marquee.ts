@@ -192,13 +192,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, observerOptions);
 
-  videos.forEach(v => {
-    videoObserver.observe(v);
-    v.addEventListener("ended", () => {
-      targetScrollX += itemWidth;
-      startAnimation();
+  const startObserving = () => {
+    const allVideos = scroller.querySelectorAll("video");
+    allVideos.forEach(v => {
+      videoObserver.observe(v);
+      v.addEventListener("ended", () => {
+        targetScrollX += itemWidth;
+        startAnimation();
+      });
     });
-  });
+  };
 
   // events
   btnLeft?.addEventListener("click", () => {
@@ -211,15 +214,15 @@ document.addEventListener("DOMContentLoaded", () => {
     startAnimation();
   });
 
-  container.addEventListener(
-    "wheel",
-    e => {
-      e.preventDefault();
-      targetScrollX += e.deltaY;
-      startAnimation();
-    },
-    { passive: false }
-  );
+  // container.addEventListener(
+  //   "wheel",
+  //   e => {
+  //     e.preventDefault();
+  //     targetScrollX += e.deltaY;
+  //     startAnimation();
+  //   },
+  //   { passive: false }
+  // );
 
   container.addEventListener("touchstart", e => {
     isDown = true;
@@ -260,6 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // init
   setupClones();
+  startObserving();
   setTimeout(() => {
     updateDimensions();
     container.classList.add("initialized");

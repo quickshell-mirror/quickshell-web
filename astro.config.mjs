@@ -11,6 +11,7 @@ import { markdownConfig } from "./src/config/io/markdown.ts";
 export default defineConfig({
   markdown: markdownConfig,
   site: "https://quickshell.org",
+  base: "/",
   integrations: [
     solidJs({
       devtools: false,
