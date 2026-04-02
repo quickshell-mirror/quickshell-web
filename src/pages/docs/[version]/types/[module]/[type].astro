@@ -28,6 +28,10 @@ const superLink = type.super ? getQMLTypeLink(version.name, type.super) : null;
 const details = type.details
   ? await processMarkdown(version.name, type.details)
   : null;
+
+const description = type.description
+  ? await processMarkdown(version.name, type.description)
+  : null;
 ---
 <DocsLayout title={`${module.name} - ${type.name}`} description={type.description ?? ""} type={type}>
   <div class="docs">
@@ -57,7 +61,7 @@ const details = type.details
       <code class="type-module" data-pagefind-ignore>import {module.name}</code>
       <section class="typedocs-data typedata">
         <subheading class="typedocs-subheading">
-          {details ? <span class="parsedMD" set:html={details}/> : (<span class="toparse">{type.description}</span>)}
+          {details ? <span class="parsedMD" set:html={details}/> : <span class="parsedMD" set:html={description}/>}
         </subheading>
         { Object.keys(type.properties ?? {}).length != 0 && (
           <h2>Properties <a href={`/docs/${version.name}/guide/qml-language#properties`}>[?]</a></h2>

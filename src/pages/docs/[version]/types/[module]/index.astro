@@ -16,6 +16,11 @@ const { version, module } = Astro.props;
 const details = module.details
   ? await processMarkdown(version.name, module.details)
   : null;
+
+const types = await Promise.all(module.types.map(async type => ({
+  description2: type.description ? await processMarkdown(version.name, type.description) : null,
+  ...type
+})));
 ---
 
 <DocsLayout
@@ -28,13 +33,13 @@ const details = module.details
     <section>
       <span>{module.description}</span>
       <div class="root-nav" data-pagefind-ignore>
-        {module.types.map(type => 
+        {types.map(type =>
           (
           <div class="root-nav-entry">
             <a class="root-nav-link" href={`/docs/${version.name}/types/${module.name}/${type.name}`}>
               {type.name}
             </a>
-            <span class="root-nav-desc">{type.description}</span>
+            {type.description2 && <span class="root-nav-desc" set:html={type.description2}/>}
           </div>
           )
         )}

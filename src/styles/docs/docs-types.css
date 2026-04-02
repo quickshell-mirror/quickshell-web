@@ -341,6 +341,9 @@ html.dark .typevariants {
       & .root-nav-desc {
         padding-left: 1rem;
         border-left: 1px solid hsl(var(--blue) 10% 15% / 0.6);
+
+        /* for processMarkdown in desc strs*/
+        & > p { margin: 0 }
       }
     }
   }
