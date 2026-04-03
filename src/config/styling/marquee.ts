@@ -176,12 +176,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // video handling
   const videos = scroller.querySelectorAll("video");
-  const observerOptions = {
+
+  const playObserverOptions = {
     root: container,
     threshold: 0.5,
   };
 
-  const videoObserver = new IntersectionObserver(entries => {
+  const playObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       const video = entry.target as HTMLVideoElement;
       if (entry.isIntersecting) {
@@ -190,12 +191,28 @@ document.addEventListener("DOMContentLoaded", () => {
         video.pause();
       }
     });
-  }, observerOptions);
+  }, playObserverOptions);
+
+  const resetObserverOptions = {
+    root: container,
+    threshold: 0.01,
+  };
+
+  const resetObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const video = entry.target as HTMLVideoElement;
+      if (!entry.isIntersecting) {
+        video.currentTime = 0;
+        video.pause();
+      }
+    });
+  }, resetObserverOptions);
 
   const startObserving = () => {
     const allVideos = scroller.querySelectorAll("video");
     allVideos.forEach(v => {
-      videoObserver.observe(v);
+      playObserver.observe(v);
+      resetObserver.observe(v);
       v.addEventListener("ended", () => {
         targetScrollX += itemWidth;
         startAnimation();
