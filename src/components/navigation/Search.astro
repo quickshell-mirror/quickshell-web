@@ -133,7 +133,10 @@ import magnifierIcon from "@icons/magnifier.svg?raw";
             //@ts-expect-error
             "@pagefind/default-ui"
           );
-          new PagefindUI({
+          const versionMatch = window.location.pathname.match(/^\/docs\/([^/]+)/);
+          const activeVersion = versionMatch?.[1];
+
+          const search = new PagefindUI({
             element: "#qs_search",
             // resetStyles: false,
             sort: { version: "desc" },
@@ -170,6 +173,10 @@ import magnifierIcon from "@icons/magnifier.svg?raw";
               });
             },
           });
+
+          if (activeVersion) {
+            search.triggerFilters({ version: activeVersion });
+          }
         });
       });
     }
