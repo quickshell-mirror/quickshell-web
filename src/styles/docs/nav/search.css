@@ -89,18 +89,8 @@
   padding: 0;
 }
 
-#qs_search .pagefind-ui__result-tag {
-  display: flex;
-  gap: var(--sm);
-  & #text:nth-child(1),
-  #text:nth-child(2) {
-    display: none;
-  }
-  background-color: transparent;
-  color: hsl(var(--accent-600));
-  border-radius: var(--radius-md);
-  outline: 1px solid hsl(var(--accent-600));
-  width: fit-content;
+#qs_search .pagefind-ui__result-tags {
+  display: none;
 }
 
 #qs_search .pagefind-ui__result-nested {
@@ -419,7 +409,7 @@ button[data-close-modal] {
     margin: 4rem auto auto;
     border-radius: 0.5rem;
     width: 90%;
-    max-width: 40rem;
+    max-width: 50rem;
     height: max-content;
     min-height: 15rem;
     max-height: calc(100% - 8rem);
