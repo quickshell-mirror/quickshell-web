@@ -3,6 +3,7 @@ import { fromHtml } from "hast-util-from-html";
 import type * as Unist from "unist";
 import type * as Html from "hast";
 import type * as Md from "mdast";
+import type { VFile } from "vfile";
 import type {
   AstroMarkdownOptions,
   MarkdownProcessor,
@@ -23,7 +24,8 @@ import {
 } from "./helpers.ts";
 import type { CopyButtonOptions } from "@_types";
 
-let currentVersion = "NOVERSION";
+// WARNING: VERY IMPORTANT! DO NOT FUCK THIS UP!
+const versionMatcher = /v\d+_\d+_\d+/;
 
 const remarkParseAtTypes: RemarkPlugin<[]> =
   () =>
@@ -74,7 +76,15 @@ const remarkParseAtTypes: RemarkPlugin<[]> =
 
 const rehypeRewriteTypelinks: RehypePlugin<[]> =
   () =>
-  (root: Html.Root): Html.Root => {
+  (root: Html.Root, file: VFile): Html.Root => {
+    const frontmatter = (file.data as any)?.astro?.frontmatter;
+    const frontmatterVersion = frontmatter?.version;
+    const pathVersion =
+      file && file.path && file.path.match(versionMatcher);
+    const version =
+      (frontmatter && frontmatterVersion) ||
+      (pathVersion && pathVersion[0]) ||
+      null;
     visit(
       root as Unist.Parent,
       "text",
@@ -88,7 +98,7 @@ const rehypeRewriteTypelinks: RehypePlugin<[]> =
 
             const linkObject = getQMLTypeLinkObject(match);
             const link = getQMLTypeLink(
-              currentVersion,
+              version ?? "",
               linkObject
             );
             const icon =
@@ -118,7 +128,15 @@ const rehypeRewriteTypelinks: RehypePlugin<[]> =
 
 const rehypeRewriteVersionedDoclinks: RehypePlugin<[]> =
   () =>
-  (root: Html.Root): Html.Root => {
+  (root: Html.Root, file: VFile): Html.Root => {
+    const frontmatter = (file.data as any)?.astro?.frontmatter;
+    const frontmatterVersion = frontmatter?.version;
+    const pathVersion =
+      file && file.path && file.path.match(versionMatcher);
+    const version =
+      (frontmatter && frontmatterVersion) ||
+      (pathVersion && pathVersion[0]) ||
+      null;
     visit(
       root as Unist.Parent,
       "element",
@@ -128,7 +146,7 @@ const rehypeRewriteVersionedDoclinks: RehypePlugin<[]> =
           !((properties.href as string) ?? "").startsWith("@docs")
         )
           return CONTINUE;
-        properties.href = `/docs/${currentVersion}/${(properties.href as string).slice(6)}`;
+        properties.href = `/docs/${version || "master"}/${(properties.href as string).slice(6)}`;
         return CONTINUE;
       }
     );
@@ -138,15 +156,21 @@ const rehypeRewriteVersionedDoclinks: RehypePlugin<[]> =
 
 const shikiRewriteTypelinks: ShikiTransformer = {
   name: "rewrite-typelinks",
-  postprocess(code, _options) {
+  postprocess(code, options) {
     // WARN: need to change the code link identifier to this
     const regExp = /TYPE99(\w+.)99TYPE/g;
     const hasTypelinks = code.search(regExp) !== -1;
+    const rawMeta = this.options.meta?.__raw || "";
+    const version = rawMeta && rawMeta.match(versionMatcher);
+    const currentVersion = version && version[0];
 
     if (hasTypelinks) {
       code.replace(regExp, (_full: string, match: string) => {
         const linkObject = getQMLTypeLinkObject(match);
-        const link = getQMLTypeLink(currentVersion, linkObject);
+        const link = getQMLTypeLink(
+          currentVersion || "",
+          linkObject
+        );
         return `<a href=${link}>${linkObject.name ?? ""}</a>`;
       });
     }
@@ -267,14 +291,12 @@ async function getMarkdownProcessor(): Promise<MarkdownProcessor> {
 }
 
 async function processMarkdown(
-  version: string,
+  _version: string,
   markdown: string
 ): Promise<string> {
-  currentVersion = version;
   const r = (
     await (await getMarkdownProcessor()).render(markdown)
   ).code;
-  currentVersion = "NOVERSION";
   return r;
 }
 

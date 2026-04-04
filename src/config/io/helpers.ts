@@ -12,7 +12,7 @@ import type {
 } from "@components/navigation/sidebars/types";
 import type { QMLTypeLinkObject } from "@_types";
 
-export function buildHierarchy(headings: ConfigHeading[]) {
+function buildHierarchy(headings: ConfigHeading[]) {
   const toc: ConfigTOC[] = [];
   const parentHeadings = new Map();
 
@@ -42,7 +42,7 @@ export function buildHierarchy(headings: ConfigHeading[]) {
   return toc;
 }
 
-export function getQMLTypeLinkObject(unparsed: string) {
+function getQMLTypeLinkObject(unparsed: string) {
   const isLocal = unparsed.startsWith("MQS_") ? "local" : false;
   const isQT = unparsed.startsWith("MQT_") ? "qt" : false;
   const index = isLocal || isQT || "self";
@@ -96,7 +96,7 @@ export function getQMLTypeLinkObject(unparsed: string) {
   return hashMap[index]();
 }
 
-export function getQMLTypeLink(
+function getQMLTypeLink(
   version: string,
   { type, module, name, mtype, mname }: QMLTypeLinkObject
 ) {
@@ -132,7 +132,7 @@ export function getQMLTypeLink(
   return hashMap[type as keyof typeof hashMap]();
 }
 
-export function getIconForLink(mtype: string, isJsx: boolean) {
+function getIconForLink(mtype: string, isJsx: boolean) {
   const TagIconString: string = `<svg
       xmlns="http://www.w3.org/2000/svg"
       width="1em"
@@ -195,3 +195,10 @@ export function getIconForLink(mtype: string, isJsx: boolean) {
 
   return map[mtype as keyof typeof map]();
 }
+
+export {
+  buildHierarchy,
+  getQMLTypeLinkObject,
+  getQMLTypeLink,
+  getIconForLink,
+};

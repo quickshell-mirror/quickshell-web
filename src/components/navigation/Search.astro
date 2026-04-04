@@ -107,8 +107,9 @@ import magnifierIcon from "@icons/magnifier.svg?raw";
         const match = [...excerpt.matchAll(linkRegex)];
         if (match.length > 0) {
           for (const matching of match) {
+            const currentVersion = import.meta.url;
             const linkObject = getQMLTypeLinkObject(matching[1]);
-            const link = getQMLTypeLink("NOVERSION", linkObject);
+            const link = getQMLTypeLink(currentVersion, linkObject);
             const icon = linkObject.mtype
               ? getIconForLink(linkObject.mtype, false)
               : null;
@@ -133,7 +134,8 @@ import magnifierIcon from "@icons/magnifier.svg?raw";
             //@ts-expect-error
             "@pagefind/default-ui"
           );
-          const versionMatch = window.location.pathname.match(/^\/docs\/([^/]+)/);
+          const versionMatch =
+            window.location.pathname.match(/^\/docs\/([^/]+)/);
           const activeVersion = versionMatch?.[1];
 
           const search = new PagefindUI({
