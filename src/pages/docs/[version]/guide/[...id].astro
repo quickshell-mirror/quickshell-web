@@ -2,6 +2,7 @@
 import GuideLayout from "@layouts/GuideLayout.astro";
 import { getVersionsData } from "@config/io/generateTypeData";
 import { getGuideCollection } from "@config/io/guides";
+import { processMarkdown } from "@config/io/markdown";
 
 import { render } from "astro:content";
 
@@ -25,16 +26,11 @@ export async function getStaticPaths() {
   return pages.flat();
 }
 
-const { page } = Astro.props;
-const { headings, Content } = await render(page);
-
-// xnzf: version is decided before these pages get processed
-//  V
-// we can't use 'Content' because there isn't a way to pass in a version
-
-// const html = await processMarkdown(version.name, page.body!);
+const { page, version } = Astro.props;
+const { headings } = await render(page);
+const html = await processMarkdown(version.name, page.body!);
 ---
 
 <GuideLayout title={page.data.title} description="" headings={headings}>
-  <Content />
+  <Fragment set:html={html} />
 </GuideLayout>
