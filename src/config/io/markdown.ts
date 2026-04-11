@@ -166,7 +166,10 @@ const shikiCopyButton: ShikiTransformer = {
         role: "button",
         "aria-label": "Copy to clipboard",
         "alia-live": "polite",
-        "data-code": this.source,
+        "data-code": this.source.replace(
+          /TYPE99(\w+.)99TYPE/g,
+          (_full: string, match: string) => getQMLTypeLinkObject(match).name,
+        ),
         onclick: `
                 navigator.clipboard.writeText(this.dataset.code);
                 this.classList.add('copied');
