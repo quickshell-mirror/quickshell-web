@@ -165,7 +165,7 @@ const shikiCopyButton: ShikiTransformer = {
         class: "copy-button",
         role: "button",
         "aria-label": "Copy to clipboard",
-        "alia-live": "polite",
+        "aria-live": "polite",
         "data-code": this.source,
         onclick: `
                 navigator.clipboard.writeText(this.dataset.code);
