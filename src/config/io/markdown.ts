@@ -166,7 +166,15 @@ const shikiCopyButton: ShikiTransformer = {
         role: "button",
         "aria-label": "Copy to clipboard",
         "alia-live": "polite",
-        "data-code": this.source,
+        "data-code": this.source.replace(
+          /TYPE99(?:M(?:QS|QT_qml)_\w+99N(\w+)99)?(?:V(\w+)99T(?:func|signal|prop)99)?TYPE/g,
+          (_full, name, mname) => {
+            if (name && mname) return `${name}.${mname}`;
+            if (name) return name;
+            if (mname) return mname;
+            return "";
+          }
+        ),
         onclick: `
                 navigator.clipboard.writeText(this.dataset.code);
                 this.classList.add('copied');
