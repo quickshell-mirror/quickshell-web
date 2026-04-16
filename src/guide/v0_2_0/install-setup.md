@@ -2,6 +2,7 @@
 title: "Installation & Setup"
 index: 0
 ---
+
 > [!NOTE]
 > Quickshell is still in a somewhat early stage of development.
 > There will be breaking changes before 1.0, however a migration guide will be provided.
@@ -12,15 +13,18 @@ Since Quickshell 0.1, you can now choose whether to install by tracking the mast
 or install by latest release.
 
 Note that you may want to install some additional packages (names vary by distro):
+
 - `qtsvg`: support for SVG image loading (bundled with most packages)
 - `qtimageformats`: support for WEBP images as well as some less common ones
 - `qtmultimedia`: support for playing videos, audio, etc
 - `qt5compat`: extra visual effects, notably gaussian blur. @@QtQuick.Effects.MultiEffect is usually preferable
 
 ### Nix
+
 Release versions of Quickshell are available from Nixpkgs as `quickshell`.
 
 The Quickshell repo also has an embedded flake which can be used from either mirror:
+
 - `git+https://git.outfoxxed.me/outfoxxed/quickshell`
 - `github:quickshell-mirror/quickshell`
 
@@ -51,6 +55,7 @@ When using the flake, additional QML packages can be added to Quickshell's envir
 `<package>.withModules [ <extra modules> ]`.
 
 ### Arch
+
 Release versions of Quickshell are available in the Archlinux package repository as `quickshell`.
 
 ```sh
@@ -67,27 +72,34 @@ AUR package.
 > please reinstall the package.
 
 Install using the command below:
+
 ```sh
 yay -S quickshell-git
 ```
+
 (or your AUR helper of choice)
 
 ### Fedora
+
 Release versions of Quickshell are available in Fedora Rawhide as [`quickshell`](https://packages.fedoraproject.org/pkgs/quickshell/quickshell/),
 
 To install:
+
 ```sh
 sudo dnf install quickshell
 ```
 
 #### Fedora COPR
+
 Release and development versions of Quickshell are available from the [errornointernet/quickshell] COPR, as either:
+
 - `quickshell` that tracks the latest release
 - `quickshell-git` that tracks the master branch
 
 [errornointernet/quickshell]: https://copr.fedorainfracloud.org/coprs/errornointernet/quickshell
 
 Install using the command below:
+
 ```sh
 sudo dnf copr enable errornointernet/quickshell
 
@@ -97,18 +109,23 @@ sudo dnf install quickshell-git
 ```
 
 ### OpenSUSE / Debian
+
 Quickshell is packaged on the Open Build Service in the [`home:AvengeMedia:danklinux`] repository and is available as
+
 - `quickshell` for the latest release - [Install Instructions](https://software.opensuse.org//download.html?project=home%3AAvengeMedia%3Adanklinux&package=quickshell)
 - `quickshell-git` for the master branch - [Install Instructions](https://software.opensuse.org//download.html?project=home%3AAvengeMedia%3Adanklinux&package=quickshell-git)
 
 [`home:AvengeMedia:danklinux`]: https://build.opensuse.org/project/show/home:AvengeMedia:danklinux
 
 ### Ubuntu
+
 Quickshell is packaged in the [`avengemedia/danklinux`] PPA, which provides
+
 - `quickshell` which tracks the latest release
 - `quickshell-git` which tracks the master branch
 
 To install:
+
 ```sh
 # Add DankLinux PPA
 sudo add-apt-repository ppa:avengemedia/danklinux
@@ -122,10 +139,12 @@ sudo apt install quickshell-git
 [`avengemedia/danklinux`]: https://launchpad.net/~avengemedia/+archive/ubuntu/danklinux
 
 ### Guix
+
 Release versions of Quickshell are available from the standard Guix repository
 as `quickshell` from the `(gnu packages wm)` module.
 
 Install using the command below:
+
 ```sh
 guix install quickshell
 ```
@@ -147,15 +166,18 @@ as a channel out of the box. You can clone the repository and use `guix shell -f
 to use the git version of the package.
 
 ### Manual build
+
 See [BUILD.md](https://git.outfoxxed.me/quickshell/quickshell/src/branch/master/BUILD.md)
 for build instructions and configurations.
 
 ## Editor configuration
+
 If you want to write your own configuration, installing a QML grammar and the LSP is recommended.
 
 Read the [Usage Guide](@docs/guide) after configuring your editor.
 
 ### Emacs
+
 Install the [yuja/tree-sitter-qml](https://github.com/yuja/tree-sitter-qmljs) tree-sitter grammar,
 and the [xhcoding/qml-ts-mode](https://github.com/xhcoding/qml-ts-mode) mode.
 
@@ -164,6 +186,7 @@ Both are packaged for nix via [outfoxxed/nix-qml-support](https://git.outfoxxed.
 Either `lsp-mode` or `eglot` should be usable for LSP ([caveats below](#language-server)).
 
 The author's personal emacs config uses `lsp-mode` and `qml-ts-mode` as follows:
+
 ```elisp
 (use-package qml-ts-mode
   :after lsp-mode
@@ -179,6 +202,7 @@ The author's personal emacs config uses `lsp-mode` and `qml-ts-mode` as follows:
 ```
 
 ### Neovim
+
 Neovim has built-in syntax highlighting for QML, however tree-sitter highlighting
 may work better than the built-in highlighting. You can install the grammar
 using `:TSInstall qmljs`.
@@ -188,20 +212,23 @@ install [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 and the following snippet to your configuration:
 
 ```lua
-require("lspconfig").qmlls.setup {}
+vim.lsp.enable("qmlls")
 ```
 
 ### Helix
+
 Helix has built-in syntax highlighting and qmlls support.
 
 ### Vscode
+
 1. Install the [Official QML Support extension]
 2. Enable the `qt-qml.qmlls.useQmlImportPathEnvVar` setting.
-![](/assets/images/vscode-qml-env.png)
+   ![](/assets/images/vscode-qml-env.png)
 
 [Official QML Support extension]: https://marketplace.visualstudio.com/items?itemName=TheQtCompany.qt-qml
 
 ## Language Server
+
 The QML language has an associated language server,
 [qmlls](https://doc.qt.io/qt-6/qtqml-tooling-qmlls.html).
 We recommend using it, as it will catch a lot of bad practice that may
@@ -213,6 +240,7 @@ You should gitignore the `.qmlls.ini` file, as its content depends on informatio
 is different on every computer.
 
 We are aware of the following issues:
+
 - Qmlls does not work well when a file is not correctly structured.
   This means that completions and lints won't work unless braces are closed
   correctly and such.
