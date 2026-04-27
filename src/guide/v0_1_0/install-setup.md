@@ -103,10 +103,6 @@ Add the following to your channel list:
   (branch "master"))
 ```
 
-However, since the package definition is located in the source repository, it cannot be used
-as a channel out of the box. You can clone the repository and use `guix shell -f quickshell.scm`
-to use the git version of the package.
-
 ### Manual build
 See [BUILD.md](https://git.outfoxxed.me/quickshell/quickshell/src/branch/master/BUILD.md)
 for build instructions and configurations.
