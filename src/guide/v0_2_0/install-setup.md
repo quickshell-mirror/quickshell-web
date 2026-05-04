@@ -96,6 +96,14 @@ sudo dnf install quickshell
 sudo dnf install quickshell-git
 ```
 
+### Debian
+Quickshell is packaged in debian unstable and testing as [`quickshell`].
+
+To install:
+```sh
+sudo apt install quickshell
+```
+
 ### OpenSUSE / Debian
 Quickshell is packaged on the Open Build Service in the [`home:AvengeMedia:danklinux`] repository and is available as
 - `quickshell` for the latest release - [Install Instructions](https://software.opensuse.org//download.html?project=home%3AAvengeMedia%3Adanklinux&package=quickshell)
@@ -121,6 +129,19 @@ sudo apt install quickshell-git
 
 [`avengemedia/danklinux`]: https://launchpad.net/~avengemedia/+archive/ubuntu/danklinux
 
+### Gentoo
+Quickshell is available in GURU as `gui-apps/quickshell`.
+
+To install:
+```sh
+# Add GURU overlay
+emerge eselect-repository
+eselect repository enable guru
+emerge --sync guru
+
+emerge gui-apps/quickshell
+```
+
 ### Guix
 Release versions of Quickshell are available from the standard Guix repository
 as `quickshell` from the `(gnu packages wm)` module.
@@ -131,20 +152,6 @@ guix install quickshell
 ```
 
 You can also add `quickshell` to your Guix system configuration or Guix Home configuration.
-
-For the git version, Quickshell's source repository works as a channel.
-Add the following to your channel list:
-
-```scheme
-(channel
-  (name quickshell)
-  (url "https://git.outfoxxed.me/outfoxxed/quickshell")
-  (branch "master"))
-```
-
-However, since the package definition is located in the source repository, it cannot be used
-as a channel out of the box. You can clone the repository and use `guix shell -f quickshell.scm`
-to use the git version of the package.
 
 ### Manual build
 See [BUILD.md](https://git.outfoxxed.me/quickshell/quickshell/src/branch/master/BUILD.md)
