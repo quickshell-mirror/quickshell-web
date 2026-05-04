@@ -168,7 +168,7 @@ const shikiCopyButton: ShikiTransformer = {
         "alia-live": "polite",
         "data-code": this.source.replace(
           /TYPE99(\w+.)99TYPE/g,
-          (_full: string, match: string) => getQMLTypeLinkObject(match).name,
+          (_full: string, match: string) => getQMLTypeLinkObject(match)!.name!,
         ),
         onclick: `
                 navigator.clipboard.writeText(this.dataset.code);
