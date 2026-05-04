@@ -90,7 +90,7 @@ to control the child item's actual size and position.
 ```
 
 > [!TIP]
-> Quickshell has a builtin component @@Quickshell.Widgets.WrapperItem
+> Quickshell has a built-in component @@Quickshell.Widgets.WrapperItem
 > that adds margins similar to the behavior above.
 
 ### Reducing boilerplate with Anchors
@@ -234,4 +234,4 @@ In addition, Row and Column do not pixel-align members, meaning if you have a me
 with a fractional size, it will break the pixel alignment of members following it.
 
 In general, RowLayout and ColumnLayout should be used over Row and Column outside
-of cases where pixel alignment is intentially broken.
+of cases where pixel alignment is intentionally broken.
