@@ -43,7 +43,7 @@
 
     outputHashMode = "recursive";
     outputHashAlgo = "sha256";
-    outputHash = "b/QWXZLKv6qq5V/wMjuGBnKdf9c8lf0LDRSU5W/LWVc=";
+    outputHash = "XQeeyWs6+7zGYK51jCa6o7sEk/CA5JnE/r/RWRpujMM=";
   };
 in {
   pname = "quickshell-web";
